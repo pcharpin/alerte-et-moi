@@ -110,12 +110,12 @@
 											<ul class="events">
 												<li ng-repeat="event in events | filter:{title: query} | orderBy:order">
 												<div class="btn-toolbar" role="toolbar">
-												  <div class="btn-group">...</div>
-												  <div class="btn-group">...</div>
+												  <div class="btn-group">{{event.title}}</div>
+												  <div class="btn-group">{{event.start |date:"dd/MM/yyyy"}}</div>
 												  <div class="btn-group">...</div>
 												</div>
-													<span>{{event.title}}</span>
-													<p>{{event.start |date:"dd/MM/yyyy"}}</p>
+													<span></span>
+													<p></p>
 												</li>
 											</ul>
 										</div>
