@@ -1,0 +1,132 @@
+<!DOCTYPE html> 
+<html lang="en" ng-app="calendarDemoApp" id="top">
+	<head>
+		<meta charset="UTF-8" >
+		<title>Planning</title>
+		<link rel="icon" href="favicon.ico" />
+		<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css">
+		<link rel="stylesheet" href="css/bootstrap.css" />
+		<link rel="stylesheet" href="css/fullcalendar.css">
+		<link rel="stylesheet" href="css/calendarDemo.css" />
+		<link rel="stylesheet" href="css/boolean.css" />
+		
+		<script src="js/jquery.js"></script>
+		<script src="js/jquery-ui.js"></script>
+		
+		<script src="js/angular.js"></script>
+		<script src="http://code.angularjs.org/1.0.8/i18n/angular-locale_fr-fr.js"></script>
+		<script src="http://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.9.0.js"></script>
+		<script src="js/fullcalendar.js"></script>
+		<script src="js/gcal.js"></script>
+		<script src="js/calendar.js"></script>
+		<script src="js/calendarDemo.js"></script>
+		
+		<!-- ngDialog -->
+		<link rel="stylesheet" href="css/ngDialog.css">
+		<link rel="stylesheet" href="css/ngDialog-theme-default.css">
+		<link rel="stylesheet" href="css/ngDialog-theme-plain.css">
+		<script src="js/ngDialog.js"></script>
+		<script src="js/ngDialogCtrl.js"></script>
+	</head>
+	
+	<body data-spy="scroll">
+		<div role="main">
+			<div class="container">
+				<section id="directives-calendar" ng-controller="CalendarCtrl">
+					<div class="page-header">
+						<h1>Alerte - ET - MOI</h1>
+					</div>
+					<div class="well">
+						<div class="row-fluid">
+							<tabset>
+							
+										<!-- #############	AFFICHAGE EN MODE CALENDRIER		############## -->
+							
+								<tab select="renderCalender(myCalendar1);">
+									<tab-heading>
+									<i class="glyphicon glyphicon-calendar"></i> Calendar One
+									</tab-heading> 
+									<div class="span4">  
+										<h3>Filtres :</h3>
+										<div class="well">
+										<h4>AngularJS Implementation</h4>
+										<p>This switch is implemented in AngularJS using a Twitter Bootstrap button and some of Damian's styling.
+										It responds correctly to truthy and falsey values.</p>
+										isTest: {{isTest}}
+										<br>
+										<span class="btn boolean" ng-click="isTest=!isTest" ng-model="isTest">
+										<span class="on btn-primary" ng-show="isTest">ON</span>
+										<span class="off btn-default" ng-hide="isTest">OFF</span>  
+										</span>
+										</div>
+									</div>  
+									<div class="span8">  
+										<div class="alert-success calAlert" ng-show="alertMessage != undefined && alertMessage != ''">
+											<h4>{{alertMessage}}</h4>
+										</div>
+										<div class="btn-toolbar">
+											<p class="pull-right lead">Calendrier</p>
+											<div class="btn-group">
+												<button class="btn btn-success" ng-click="changeView('agendaDay', myCalendar1)">Jour</button>
+												<button class="btn btn-success" ng-click="changeView('agendaWeek', myCalendar1)">Semaine</button>
+												<button class="btn btn-success" ng-click="changeView('month', myCalendar1)">Mois</button>
+											</div>
+										</div>
+										<div class="calendar" ng-model="eventSources" calendar="myCalendar1" config="uiConfig.calendar" ui-calendar="uiConfig.calendar"></div>
+									</div>
+								</tab>
+							
+								<!-- #############	AFFICHAGE EN MODE LISTE		############## -->
+							
+								<tab select="renderCalender();">
+									<tab-heading>
+										<i class="glyphicon glyphicon-list"></i> Liste des évenements
+									</tab-heading>
+									<div class="span4">  
+										<h3>Filtres :</h3>
+										<h4>Utilisateurs</h4>
+										<span class="btn boolean" ng-click="showMyCalendar(showCal)" ng-model="showCal">
+										<span class="on btn-primary" ng-show="showCal">ON</span>
+										<span class="off btn-default" ng-hide="showCal">OFF</span>  
+										</span>
+										<select ng-model="userSelected" >
+											<option ng-repeat="user in users" value="{{user}}">{{user.name}}</option>
+										</select>
+										<hr>
+										<h4>Tri</h4>
+										<input type="radio" ng-model="order" value="start">start<br>
+										<input type="radio" ng-model="order" value="title">title<br>
+										<input type="radio" ng-model="order" value="toto">toto<br>
+										<hr>
+										<h4>Recherche : </h4>
+										<span class"glyphicon glyphicon-search"></span><input ng-model="query"><br>
+										<hr>
+									</div>
+									<div class="span8">
+										<div class="alert-success calAlert" ng-show="alertMessage != undefined && alertMessage != ''">
+											<h4>{{alertMessage}}</h4>
+										</div>
+										<div>
+											<ul class="events">
+												<li ng-repeat="event in events | filter:{title: query} | orderBy:order">
+												<div class="btn-toolbar" role="toolbar">
+												  <div class="btn-group">...</div>
+												  <div class="btn-group">...</div>
+												  <div class="btn-group">...</div>
+												</div>
+													<span>{{event.title}}</span>
+													<p>{{event.start |date:"dd/MM/yyyy"}}</p>
+												</li>
+											</ul>
+										</div>
+									</div>
+								</tab>
+							</tabset>
+						</div>
+					</div>
+				</section>
+			</div>
+		</div>
+	</body>
+</html>
+
