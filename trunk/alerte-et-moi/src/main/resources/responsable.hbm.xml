@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+<!-- *****************************TABLE RESPONSABLE************************************************************ -->
+ <class name="com.objectif.informatique.alerte.model.Responsable" table="responsable">
+ 	<id name="idResp" type="java.lang.long" unsaved-value="null" column="id">
+		<generator class="assigned"/>
+	</id>
+	<property name="idProfil" column="Profil_idProf" type="java.lang.long" not-null="false"/>
+	<property name="responsable_idResp" column="Responsable_idResp" type="java.lang.string" not-null="false"/>
+	<property name="nomResp" column="nomResp" type="java.lang.string" not-null="false"/>
+	<property name="emailResp" column="emailResp" type="java.lang.string" not-null="false"/>
+	
+	<set name="evenement" cascade="all">
+		<key column="id"></key>
+		<one-to-many class="reponsable"/>
+	</set>
+</class>
+</hibernate-mapping>
