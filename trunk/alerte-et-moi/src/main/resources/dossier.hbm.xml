@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+<!-- *****************************TABLE DOSSIER************************************************************ -->
+ <class name="com.objectif.informatique.alerte.model.Dossier" table="dossier">
+ 	<id name="idDos" type="java.lang.long" unsaved-value="null" column="id">
+		<generator class="assigned"/>
+	</id>
+	<property name="nomDos" column="nomDos" type="java.lang.string" not-null="false"/>
+<property name="typeDos" column="typeDos" not-null="false">
+	<type name="org.hibernate.type.EnumType">
+		<param name="enumClass">com.objectif.informatique.alerte.model.TypeDos</param>
+		<param name="type">27</param>
+	</type>    
+</property>
+	<property name="descDos" column="descDos" type="java.lang.string" not-null="false"/>
+	<property name="evtDos" column="evtDos" type="java.lang.string" not-null="false"/>
+	<property name="priorDos" column="priorDos" type="java.lang.string" not-null="false"/>		
+	<property name="mntDos" column="mntDos" type="java.lang.string" not-null="false"/>
+	<property name="periodJourDos" column="periodJourDos" type="java.lang.boolean" not-null="false"/>
+	<property name="periodHebdoDos" column="periodHebdoDos" type="java.lang.boolean" not-null="false"/>	
+	<property name="periodMensDos" column="periodMensDos" type="java.lang.boolean" not-null="false"/>
+	<property name="periodTrimDos" column="periodTrimDos" type="java.lang.boolean" not-null="false"/>
+	<property name="periodSemestDos" column="periodSemestDos" type="java.lang.boolean" not-null="false"/>
+	<property name="periodAnuDos" column="periodAnuDos" type="java.lang.boolean" not-null="false"/>
+	<property name="periodSansDos" column="periodSansDos" type="java.lang.boolean" not-null="false"/>
+	<property name="actifDos" column="actifDos" type="java.lang.boolean" not-null="false"/>	
+	<property name="cntNomDos" column="cntNomDos" type="java.lang.string" not-null="false"/>
+	<property name="cntPrenDos" column="cntPrenDos" type="java.lang.string" not-null="false"/>
+	<property name="cntTelDos" column="cntTelDos" type="java.lang.string" not-null="false"/>
+	<property name="cntCmntDos" column="cntCmntDos" type="java.lang.string" not-null="false"/>
+	<property name="libreDos" column="libreDos" type="java.lang.string" not-null="false"/>
+</class>
+</hibernate-mapping>
