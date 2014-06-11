@@ -53,14 +53,14 @@ public class Evenement {
 	 * @param recurtEvt
 	 * @param libreEvt
 	 */
-	public Evenement(int id, int idDos, int responsable_idResp, String nomEvt,
+	public Evenement(int idEvt, int idDos, int responsable_idResp, String nomEvt,
 			String descEvt, Date dateEchEvt, int exeEvt, float mntEvt,
 			EnumModeGestionEvt modeGestionEvt, String lienGestEvt,
 			int trtEvt, Date dateTrtEvt, EnumPeriodeEvet enumPeriodeEvet,
 			int actifEvt, int recopAutoEvt, int recurtEvt,
 			String libreEvt) {
 		super();
-		this.id = id;
+		this.idEvt = idEvt;
 		this.idDos = idDos;
 		this.responsable_idResp = responsable_idResp;
 		this.nomEvt = nomEvt;
@@ -80,7 +80,7 @@ public class Evenement {
 	}
 	public Evenement(int id, String nomEvt){
 		super();
-		this.id = id;
+		this.idEvt = idEvt;
 		this.nomEvt = nomEvt;
 	}
 	/**
@@ -88,11 +88,18 @@ public class Evenement {
 	 */
 	public Evenement(){}
 	
-	public int getId() {
-		return id;
+	
+	/**
+	 * @return the idEvt
+	 */
+	public int getIdEvt() {
+		return idEvt;
 	}
-	public void setId(int id) {
-		this.id = id;
+	/**
+	 * @param idEvt the idEvt to set
+	 */
+	public void setIdEvt(int idEvt) {
+		this.idEvt = idEvt;
 	}
 	public int getIdDos() {
 		return idDos;
