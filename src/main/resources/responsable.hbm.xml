@@ -17,5 +17,6 @@
 		<key column="id"></key>
 		<one-to-many class="reponsable"/>
 	</set>
+	<one-to-one name="idProfil" column="Profil_idProf" class="Profil" cascade="all"></one-to-one>	
 </class>
 </hibernate-mapping>

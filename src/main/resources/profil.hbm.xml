@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+<!-- *****************************TABLE PROFIL************************************************************ -->
+ <class name="com.objectif.informatique.alerte.model.Profil" table="profil">
+ 	<id name="idProf" type="java.lang.long" unsaved-value="null" column="idProf">
+		<generator class="assigned"/>
+	</id>
+	<property name="typeProf" column="typeProf" not-null="false">
+            <type name="org.hibernate.type.EnumType">
+                <param name="enumClass">com.objectif.informatique.alerte.model.EnumTypeProf</param>
+                <param name="type">6</param>
+            </type>    
+    </property>
+   <property name="descProf" column="descProf" type="java.lang.string" not-null="false"/>
+   
+</class>
+</hibernate-mapping>
