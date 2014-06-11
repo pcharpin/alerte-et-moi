@@ -36,9 +36,20 @@
     <property name="recurtEvt" column="recurEvt" type="java.lang.integer" not-null="false"/>
     <property name="libreEvt" column="libreEvt" type="java.lang.string" not-null="false"/>
     
-        <set name="documents" table="evenement_document" cascade="all">
+        <!-- <set name="document" table="evenement_document" cascade="all">
             <key column="idEvt" not-null="true" />
             <many-to-many column="idDoc" class="Document" unique="true"/>
         </set>     
+         -->
+     
+    <set name="document" table="evenement_document" 
+        	inverse="false" lazy="true" fetch="select" cascade="all" >
+            <key>
+                <column name="Document_idDoc" not-null="true" />
+            </key>
+            <many-to-many entity-name="com.objectif.informatique.alerte.model.Document">
+                <column name="idEvt" not-null="true" />
+            </many-to-many>
+        </set>
 </class>
 </hibernate-mapping>

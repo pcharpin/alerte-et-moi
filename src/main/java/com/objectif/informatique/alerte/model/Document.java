@@ -3,6 +3,9 @@
  */
 package com.objectif.informatique.alerte.model;
 
+import java.util.HashSet;
+import java.util.Set;
+
 /**
  * @author vdibi
  *
@@ -12,6 +15,7 @@ public class Document {
 	private int idDoc;
 	private String accesDoc;
 	private String lienDoc;
+	private Set<Evenement> evenements = new HashSet<Evenement>(0);
 	
 	public Document(int idDoc, String accesDoc, String lienDoc) {
 		super();

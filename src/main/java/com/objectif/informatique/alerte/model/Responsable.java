@@ -12,24 +12,27 @@ import java.util.Set;
 public class Responsable {
 	
 	private int idResp;
-	private int idProfil;
+	//private int idProfil;
+	private Profil profil;
 	private String nomResp;
 	private String prenResp;
 	private String emailResp;
 	private Set<Evenement> evenements;
+	
+	
 	/**
 	 * @param idResp
-	 * @param idProfil
+	 * @param profil
 	 * @param nomResp
 	 * @param prenResp
 	 * @param emailResp
-	 * @param responsables
+	 * @param evenements
 	 */
-	public Responsable(int idResp, int idProfil, String nomResp,
+	public Responsable(int idResp, Profil profil, String nomResp,
 			String prenResp, String emailResp, Set<Evenement> evenements) {
 		super();
 		this.idResp = idResp;
-		this.idProfil = idProfil;
+		this.profil = profil;
 		this.nomResp = nomResp;
 		this.prenResp = prenResp;
 		this.emailResp = emailResp;
@@ -47,19 +50,19 @@ public class Responsable {
 	public void setIdResp(int idResp) {
 		this.idResp = idResp;
 	}
-	/**
-	 * @return the idProfil
+		/**
+	 * @return the profil
 	 */
-	public int getIdProfil() {
-		return idProfil;
+	public Profil getProfil() {
+		return profil;
 	}
 	/**
-	 * @param idProfil the idProfil to set
+	 * @param profil the profil to set
 	 */
-	public void setIdProfil(int idProfil) {
-		this.idProfil = idProfil;
+	public void setProfil(Profil profil) {
+		this.profil = profil;
 	}
-	/**
+		/**
 	 * @return the nomResp
 	 */
 	public String getNomResp() {
