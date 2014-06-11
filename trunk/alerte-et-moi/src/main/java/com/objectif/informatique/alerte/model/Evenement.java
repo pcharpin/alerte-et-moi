@@ -13,7 +13,7 @@ import javax.persistence.Enumerated;
  *
  */
 public class Evenement {
-	private int id;
+	private int idEvt;
 	private int idDos;
 	private int responsable_idResp;
 	private String nomEvt;
