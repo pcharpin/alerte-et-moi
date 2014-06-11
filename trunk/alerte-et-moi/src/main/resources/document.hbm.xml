@@ -10,9 +10,21 @@
 	</id>
 	<property name="accesDoc" column="accesDoc" type="java.lang.string" not-null="false"/>
 	<property name="lienDoc" column="lienDoc" type="java.lang.string" not-null="false"/>
-<!-- 	<many-to-one name="evenement" column="idEvt" not-null="false"/> -->
-	<!-- <many-to-one name="dossier" column="idDos" not-null="false"/> -->
 	
+ 	<!--  <many-to-one name="evenement" column="idEvt" not-null="false"/> 
+	<many-to-one name="dossier" column="idDos" not-null="false"/>  -->
+	
+	
+	 <set name="evenement" table="evenement_document" 
+        	inverse="false" lazy="true" fetch="select" cascade="all" >
+            <key>
+                <column name="Document_idDoc" not-null="true" />
+            </key>
+            <many-to-many entity-name="com.objectif.informatique.alerte.model.Evenement">
+                <column name="idDoc" not-null="true" />
+            </many-to-many>
+        </set>
+        
         <!-- <join table="evenement_document" inverse="true">
             <key column="idDoc"/>
             <many-to-one name="evenement" column="idEvt" not-null="true"/>

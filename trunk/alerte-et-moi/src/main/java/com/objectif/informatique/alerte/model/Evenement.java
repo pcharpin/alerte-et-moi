@@ -5,6 +5,8 @@ package com.objectif.informatique.alerte.model;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -37,10 +39,12 @@ public class Evenement implements Serializable{
 	private int recopAutoEvt;
 	private int recurtEvt;
 	private String libreEvt;
+	private Set<Document> documents = new HashSet<Document>(0);
+	
 	
 	
 	/**
-	 * @param id
+	 * @param idEvt
 	 * @param idDos
 	 * @param responsable_idResp
 	 * @param nomEvt
@@ -57,13 +61,14 @@ public class Evenement implements Serializable{
 	 * @param recopAutoEvt
 	 * @param recurtEvt
 	 * @param libreEvt
+	 * @param evenements
 	 */
-	public Evenement(int idEvt, int idDos, int responsable_idResp, String nomEvt,
-			String descEvt, Date dateEchEvt, int exeEvt, float mntEvt,
-			EnumModeGestionEvt modeGestionEvt, String lienGestEvt,
-			int trtEvt, Date dateTrtEvt, EnumPeriodeEvet enumPeriodeEvet,
-			int actifEvt, int recopAutoEvt, int recurtEvt,
-			String libreEvt) {
+	public Evenement(int idEvt, int idDos, int responsable_idResp,
+			String nomEvt, String descEvt, Date dateEchEvt, int exeEvt,
+			float mntEvt, EnumModeGestionEvt modeGestionEvt,
+			String lienGestEvt, int trtEvt, Date dateTrtEvt,
+			EnumPeriodeEvet enumPeriodeEvet, int actifEvt, int recopAutoEvt,
+			int recurtEvt, String libreEvt, Set<Document> documents) {
 		super();
 		this.idEvt = idEvt;
 		this.idDos = idDos;
@@ -82,6 +87,7 @@ public class Evenement implements Serializable{
 		this.recopAutoEvt = recopAutoEvt;
 		this.recurtEvt = recurtEvt;
 		this.libreEvt = libreEvt;
+		this.documents = documents;
 	}
 	public Evenement(int id, String nomEvt){
 		super();
@@ -227,5 +233,17 @@ public class Evenement implements Serializable{
 	}
 	public void setEnumPeriodeEvet(EnumPeriodeEvet enumPeriodeEvet) {
 		this.enumPeriodeEvet = enumPeriodeEvet;
+	}
+	/**
+	 * @return the evenements
+	 */
+	public Set<Document> getDocuments() {
+		return documents;
+	}
+	/**
+	 * @param evenements the evenements to set
+	 */
+	public void setEvenements(Set<Document> evenements) {
+		this.documents = documents;
 	}
 }
