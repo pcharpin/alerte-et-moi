@@ -32,5 +32,10 @@
 	<property name="cntTelDos" column="cntTelDos" type="java.lang.string" not-null="false"/>
 	<property name="cntCmntDos" column="cntCmntDos" type="java.lang.string" not-null="false"/>
 	<property name="libreDos" column="libreDos" type="java.lang.string" not-null="false"/>
+	
+	        <set name="documents" table="Dossier_Document" cascade="all">
+            <key column="idDos" not-null="true" />
+            <many-to-many column="idDoc" class="Document" unique="true"/>
+        </set>
 </class>
 </hibernate-mapping>

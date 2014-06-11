@@ -5,7 +5,7 @@
 <hibernate-mapping>
 <!-- *****************************TABLE EVENEMENT************************************************************ -->
  <class name="com.objectif.informatique.alerte.model.Evenement" table="evenement">
- 	<id name="id" type="long" unsaved-value="null" column="id">
+ 	<id name="idEvt" type="long" unsaved-value="null" column="idEvt">
 		<generator class="assigned"/>
 	</id>
 	<property name="idDos" column="Dossier_idDos" type="java.lang.string" not-null="false"/>
@@ -33,6 +33,10 @@
     <property name="recopAutoEvt" column="recopAutoEvt" type="java.lang.integer" not-null="false"/>
     <property name="recurtEvt" column="recurEvt" type="java.lang.integer" not-null="false"/>
     <property name="libreEvt" column="libreEvt" type="java.lang.string" not-null="false"/>
-     
+    
+        <set name="documents" table="evenement_document" cascade="all">
+            <key column="idEvt" not-null="true" />
+            <many-to-many column="idDoc" class="Document" unique="true"/>
+        </set>     
 </class>
 </hibernate-mapping>
