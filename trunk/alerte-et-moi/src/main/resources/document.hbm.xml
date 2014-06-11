@@ -5,10 +5,20 @@
 <hibernate-mapping>
 <!-- *****************************TABLE DOCUMENT************************************************************ -->
  <class name="com.objectif.informatique.alerte.model.Document" table="document">
- 	<id name="idDoc" type="java.lang.long" unsaved-value="null" column="id">
+ 	<id name="idDoc" type="java.lang.long" unsaved-value="null" column="idDoc">
 		<generator class="assigned"/>
 	</id>
 	<property name="accesDoc" column="accesDoc" type="java.lang.string" not-null="false"/>
 	<property name="lienDoc" column="lienDoc" type="java.lang.string" not-null="false"/>
+	
+        <join table="evenement_document" inverse="true">
+            <key column="idDoc"/>
+            <many-to-one name="evenement" column="idEvt" not-null="true"/>
+        </join>	
+        <join table="dossier_document" inverse="true">
+            <key column="idDoc"/>
+            <many-to-one name="dossier" column="idDos" not-null="true"/>
+        </join>
+	
 </class>
 </hibernate-mapping>
