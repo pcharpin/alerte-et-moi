@@ -15,11 +15,11 @@ import com.objectif.informatique.alerte.model.Evenement;
  *
  */
 public interface JdbcEvenementDAO {
-	public void create(Evenement evenement) throws SQLException;
+	public Integer create(Evenement evenement) throws SQLException;
 	public void update(Evenement evenement) throws SQLException;
 	public void delete(Evenement evenement) throws SQLException;
 	 public Evenement getEvenementByName(String name) throws SQLException;
-    public Evenement findByEvenementById(int evid) throws SQLException;
+    public Integer findByEvenementById(int evid) throws SQLException;
     public  ArrayList<String> selectedAllEvenementByName() throws SQLException;   
 
 }

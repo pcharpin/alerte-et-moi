@@ -3,6 +3,7 @@
  */
 package com.objectif.informatique.alerte.model;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.EnumType;
@@ -12,7 +13,11 @@ import javax.persistence.Enumerated;
  * @author vdibi
  *
  */
-public class Evenement {
+public class Evenement implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private int idEvt;
 	private int idDos;
 	private int responsable_idResp;

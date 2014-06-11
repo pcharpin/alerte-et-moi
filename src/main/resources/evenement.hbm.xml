@@ -8,8 +8,10 @@
  	<id name="idEvt" type="long" unsaved-value="null" column="idEvt">
 		<generator class="assigned"/>
 	</id>
-	<property name="idDos" column="Dossier_idDos" type="java.lang.string" not-null="false"/>
-	<property name="responsable_idResp" column="Responsable_idResp" type="java.lang.string" not-null="false"/>
+	<!-- <property name="idDos" column="Dossier_idDos" type="java.lang.string" not-null="false"/> -->
+	<many-to-one name="idDos" column="Dossier_idDos" not-null="false"/>
+	<!-- <property name="responsable_idResp" column="Responsable_idResp" type="java.lang.string" not-null="false"/> -->
+	<many-to-one name="responsable_idResp" column="Responsable_idResp" not-null="false"/>
 	<property name="nomEvt" column="nomEvt" type="java.lang.string" not-null="false"/>
 	<property name="descEvt" column="descEvt" type="java.lang.string"/>
 	<property name="dateEchEvt" column="dateEchEvt" type="java.lang.date" not-null="false"/>

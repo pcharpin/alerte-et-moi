@@ -10,15 +10,17 @@
 	</id>
 	<property name="accesDoc" column="accesDoc" type="java.lang.string" not-null="false"/>
 	<property name="lienDoc" column="lienDoc" type="java.lang.string" not-null="false"/>
+<!-- 	<many-to-one name="evenement" column="idEvt" not-null="false"/> -->
+	<!-- <many-to-one name="dossier" column="idDos" not-null="false"/> -->
 	
-        <join table="evenement_document" inverse="true">
+        <!-- <join table="evenement_document" inverse="true">
             <key column="idDoc"/>
-            <many-to-one name="idEvt" column="idEvt" not-null="true"/>
-        </join>	
-        <join table="dossier_document" inverse="true">
+            <many-to-one name="evenement" column="idEvt" not-null="true"/>
+        </join>	 -->
+        <!-- <join table="dossier_document" inverse="true">
             <key column="idDoc"/>
             <many-to-one name="dossier" column="idDos" not-null="true"/>
-        </join>
+        </join> -->
 	
 </class>
 </hibernate-mapping>
