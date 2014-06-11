@@ -47,8 +47,8 @@ public class TestEvement {
 //	 
 			
 		JdbcEvenementDAO jdbcEvenementDAO = (JdbcEvenementDAO) context.getBean("evenementDAO");
-		//Evenement evenement = jdbcEvenementDAO.findByEvenementById(1);
-		ArrayList<String> evenement = jdbcEvenementDAO.selectedAllEvenementByName();
+		Integer evenement = jdbcEvenementDAO.findByEvenementById(1);
+		//ArrayList<String> evenement = jdbcEvenementDAO.selectedAllEvenementByName();
 		
 //		Evenement evenement =  new Evenement(id, idDos, responsable_idResp, nomEvt, descEvt, dateEchEvt, exeEvt, mntEvt, lienGestEvt, tetEvt, dateTrtEvt, actifEvt, recopAutoEvt, recurtEvt, libreEvt)
 //		Evenement evenement = jdbcEvenementDAO.create(evenement);

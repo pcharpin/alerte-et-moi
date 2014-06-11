@@ -10,34 +10,38 @@ import org.hibernate.cfg.AnnotationConfiguration;
 
 /**
  * @author vdibi
- * HibernateUtils chargée de créer et de gérer la SessionFactory
+ * Classe HibernateUtils chargée de créer et de gérer la SessionFactory
  * La méthode getSession() de cette classe sera appelée à chaque fois que nous voudrons *
  * accéder à la base de données.
  */
 public class HibernateUtils {
 
-	private static final SessionFactory sessionFactory;
+	private static SessionFactory sessionFactory = buildSessionFactory();
 
-	// Crée une unique instance de la SessionFactory à partir de
-	// hibernate.cfg.xml
+    private static SessionFactory buildSessionFactory() {
+        try {
+            
+        	// On créé une factory de type Annotation afin de les prendre en charge
+        	sessionFactory = new AnnotationConfiguration().configure().buildSessionFactory();
+        }
+        catch (Throwable ex) {
+            System.err.println("Initial SessionFactory creation failed." + ex);
+            throw new ExceptionInInitializerError(ex);
+        }
+		return sessionFactory;
+    }
 
-	static {
-		try {
-
-			sessionFactory = new AnnotationConfiguration().configure()
-					.buildSessionFactory();
-
-		} catch (HibernateException ex) {
-
-			throw new RuntimeException("Problème de configuration : "
-					+ ex.getMessage(), ex);
-		}
-
-	}
-
-	// Renvoie une session Hibernate
-
+    public static SessionFactory getSessionFactory() {
+        return (SessionFactory) sessionFactory.openSession();
+    }
+    
+    
 	public static Session getSession() throws HibernateException {
 		return sessionFactory.openSession();
+	}
+ 
+
+	public static void closeSession() throws HibernateException {
+		sessionFactory.close();
 	}
 }

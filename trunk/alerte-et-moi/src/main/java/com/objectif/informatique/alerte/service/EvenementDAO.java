@@ -9,6 +9,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Logger;
 
+import javax.persistence.criteria.CriteriaBuilder.In;
 import javax.sql.DataSource;
 
 import com.mysql.jdbc.Connection;
@@ -33,10 +34,8 @@ public class EvenementDAO implements JdbcEvenementDAO{
 	  
 
 	@Override
-	public void create(Evenement evenement) throws SQLException {
-
-		String sql = "INSERT INTO evenement "
-                + "(login, password) VALUES (?, ?)";
+	public Integer create(Evenement evenement) throws SQLException {
+		return null;
 		
 	}
 
@@ -59,36 +58,30 @@ public class EvenementDAO implements JdbcEvenementDAO{
 	}
 
 	@Override
-	public Evenement findByEvenementById(int evid) throws SQLException {
+	public Integer findByEvenementById(int evid) throws SQLException {
 		String sql = "SELECT * FROM evenement WHERE idEvt = ?";	
+		int idEvet = 0;
 		 
-		try {
 			conn = (Connection) dataSource.getConnection();
-			PreparedStatement ps = conn.prepareStatement(sql);
-			ps.setInt(1, evid);
+			pStatement = conn.prepareStatement(sql);
+			pStatement.setInt(1, evid);
 			Evenement evenement = null;
-			ResultSet rs = ps.executeQuery();
-			if (rs.next()) {
-				evenement = new Evenement(
-					rs.getInt("idEvt"),
-					rs.getString("nomEvt")
-				);
+			ResultSet rs = pStatement.executeQuery();
+			
+			
+			 while (rs.next()) {
+				
+				idEvet = rs.getInt("idEvt");
+				 break;
 //				logger.info(" conn :" +evenement.getId());
 //				logger.info(" conn :" +evenement.getNomEvt());
 		
 			}
 			rs.close();
-			ps.close();
-			return evenement;
-		} catch (SQLException e) {
-			throw new RuntimeException(e);
-		} finally {
-			if (conn != null) {
-				try {
-				conn.close();
-				} catch (SQLException e) {}
-			}
-		}
+			pStatement.close();
+			conn.close();
+			return idEvet;
+		
 	}
 
 	@Override
