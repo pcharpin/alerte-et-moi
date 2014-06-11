@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+<!-- *****************************TABLE DOCUMENT************************************************************ -->
+ <class name="com.objectif.informatique.alerte.model.Document" table="document">
+ 	<id name="idDoc" type="java.lang.long" unsaved-value="null" column="id">
+		<generator class="assigned"/>
+	</id>
+	<property name="accesDoc" column="accesDoc" type="java.lang.string" not-null="false"/>
+	<property name="lienDoc" column="lienDoc" type="java.lang.string" not-null="false"/>
+</class>
+</hibernate-mapping>
