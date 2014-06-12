@@ -30,7 +30,7 @@ public class Document {
 	@JoinTable(
 			name="evenement_document",
 			joinColumns=@JoinColumn(name="idDoc"),
-			inverseJoinColumns=@JoinColumn(name="id")
+			inverseJoinColumns=@JoinColumn(name="idEvt")
 	)
 	private Set<Evenement> evenements = new HashSet<Evenement>();
 
@@ -44,7 +44,7 @@ public class Document {
 			joinColumns=@JoinColumn(name="idDoc"),
 			inverseJoinColumns=@JoinColumn(name="idDos")
 	)
-	private Set<Evenement> evenements = new HashSet<Evenement>();
+	private Set<Dossier> dossiers = new HashSet<Dossier>();
 	
 	public Document(int idDoc, String accesDoc, String lienDoc) {
 		super();

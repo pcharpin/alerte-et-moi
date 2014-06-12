@@ -22,7 +22,7 @@ public class Evenement implements Serializable{
 	 */
 	private static final long serialVersionUID = 1L;
 	@Id @GeneratedValue
-	@Column(name = "id")
+	@Column(name = "idEvt")
 	private int idEvt;
 	@Column(name = "idDos")
 	private int idDos;
