@@ -8,9 +8,6 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.persistence.*;
 
 /**
@@ -27,7 +24,7 @@ public class Evenement implements Serializable{
 	@Id @GeneratedValue
 	@Column(name = "id")
 	private int idEvt;
-	@Column(name = "id")
+	@Column(name = "idDos")
 	private int idDos;
 	@Column(name="responsable_idResp")
 	private int responsable_idResp;
@@ -59,7 +56,8 @@ public class Evenement implements Serializable{
 	private int recurtEvt;
 	@Column(name="libreEvt")
 	private String libreEvt;
-	private Set<Document> documents = new HashSet<Document>(0);
+	@OneToMany(mappedBy="responsable_idResp")
+	private Set<Document> documents = new HashSet<Document>();
 	
 	
 	
@@ -261,9 +259,55 @@ public class Evenement implements Serializable{
 		return documents;
 	}
 	/**
-	 * @param evenements the evenements to set
+	 * @param documents the documents to set
 	 */
-	public void setEvenements(Set<Document> evenements) {
+	public void setDocuments(Set<Document> documents) {
 		this.documents = documents;
 	}
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("Evenement [idEvt=");
+		builder.append(idEvt);
+		builder.append(", idDos=");
+		builder.append(idDos);
+		builder.append(", responsable_idResp=");
+		builder.append(responsable_idResp);
+		builder.append(", nomEvt=");
+		builder.append(nomEvt);
+		builder.append(", descEvt=");
+		builder.append(descEvt);
+		builder.append(", dateEchEvt=");
+		builder.append(dateEchEvt);
+		builder.append(", exeEvt=");
+		builder.append(exeEvt);
+		builder.append(", mntEvt=");
+		builder.append(mntEvt);
+		builder.append(", modeGestionEvt=");
+		builder.append(modeGestionEvt);
+		builder.append(", lienGestEvt=");
+		builder.append(lienGestEvt);
+		builder.append(", trtEvt=");
+		builder.append(trtEvt);
+		builder.append(", dateTrtEvt=");
+		builder.append(dateTrtEvt);
+		builder.append(", enumPeriodeEvet=");
+		builder.append(enumPeriodeEvet);
+		builder.append(", actifEvt=");
+		builder.append(actifEvt);
+		builder.append(", recopAutoEvt=");
+		builder.append(recopAutoEvt);
+		builder.append(", recurtEvt=");
+		builder.append(recurtEvt);
+		builder.append(", libreEvt=");
+		builder.append(libreEvt);
+		builder.append(", documents=");
+		builder.append(documents);
+		builder.append("]");
+		return builder.toString();
+	}
+	
 }
