@@ -5,12 +5,14 @@ package com.objectif.informatique.alerte.service;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import org.hibernate.Query;
 import org.hibernate.Session;
-import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.objectif.informatique.alerte.dao.JdbcEvenementDAO;
 import com.objectif.informatique.alerte.model.Evenement;
@@ -19,6 +21,8 @@ import com.objectif.informatique.alerte.model.Evenement;
  * @author vdibi
  *
  */
+@Transactional
+@Service("EvenementService")
 public class EvenementService implements JdbcEvenementDAO{
 	private Session session;
 
@@ -26,12 +30,9 @@ public class EvenementService implements JdbcEvenementDAO{
 	public Integer create(Evenement evenement) throws SQLException {
 		Transaction tx = null;
 		Integer idEvent = null;
-		// try{
-			 //getSession = (GetSession) factory.openSession();
-			 //session = HibernateUtils.getSessionFactory().getCurrentSession();
 			
 			session = HibernateUtils.getSession();
-			 tx = session.beginTransaction();
+			//Transaction tx = session.beginTransaction();
 			 Evenement evenement2 = new Evenement();
 			 idEvent = (Integer) session.save(evenement2);
 				System.out.println("query :" +idEvent);
@@ -48,11 +49,11 @@ public class EvenementService implements JdbcEvenementDAO{
 		Transaction tx = null;
 			session = HibernateUtils.getSession();
 			 tx = session.beginTransaction();
-			 int idEventfounded = findByEvenementById(idEvt);
-			 Evenement evenement =  new Evenement();
-			 if(evenement.getIdEvt() == idEventfounded){
-				 session.update(evenement);
-			 }			
+//			 int idEventfounded = findByEvenementById(idEvt);
+//			 Evenement evenement =  new Evenement();
+//			 if(evenement.getIdEvt() == idEventfounded){
+//				 session.update(evenement);
+//			 }			
 			session.getTransaction().commit();
 			HibernateUtils.closeSession();	
 	}
@@ -74,39 +75,82 @@ public class EvenementService implements JdbcEvenementDAO{
 	}
 
 	@Override
-	public Evenement getEvenementByName(String name) throws SQLException {
+	public String getEvenementByName(String name) throws SQLException {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public Integer findByEvenementById(int evid) throws SQLException {
-		Transaction tx = null;
+	public Evenement findByEvenementById(int evid) throws SQLException {
+		Evenement evenement = null;
 		try {
 			
 			session = HibernateUtils.getSession();
-			tx = session.beginTransaction();
-			Query query = session.createQuery(" SELECT idEvt FROM evenement WHERE idEvt = evid ");
-			System.out.println("query :" +query);
-			query.setParameter("", evid);
+			Transaction tx = session.beginTransaction();
+			//Query query = session.createQuery(" SELECT idEvt FROM evenement WHERE idEvt = evid ");
+			evenement = (Evenement) session.get(Evenement.class, evid);
+			System.out.println("e :" +evenement);
+//			query.setParameter("", evid);
+//			query.executeUpdate();
 			session.getTransaction().commit();
 			HibernateUtils.closeSession();
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
-		return evid;
+		return evenement;
 	}
 
 	@Override
 	public ArrayList<String> selectedAllEvenementByName() throws SQLException {
-		// TODO Auto-generated method stub
-		return null;
+		Transaction tx = null;
+		ArrayList<String> allEvet = new ArrayList<String>();
+		try {
+			
+			session = HibernateUtils.getSession();
+			tx = session.beginTransaction();
+			
+			Query query = (Query) session.createSQLQuery("SELECT nomEvt FROM evenement ").list();
+			query.executeUpdate();
+			for (Iterator iterator = query.iterate(); iterator.hasNext();)
+			{
+			     Evenement evenement = (Evenement) iterator.next(); 
+			     allEvet.add(evenement.toString());
+			     System.out.println("allEvet : " + allEvet);	
+			     System.out.print("First Name: " +evenement.getNomEvt()); 
+			  }
+			
+			session.getTransaction().commit();
+			HibernateUtils.closeSession();
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		return allEvet;
+	
 	}
+	
 
 	@Override
 	public List<Evenement> listEvenement() throws SQLException {
-		// TODO Auto-generated method stub
-		return null;
+		Transaction tx = null;
+		List<Evenement> evenements = null;
+		try {
+			
+			session = HibernateUtils.getSession();
+			tx = session.beginTransaction();
+			evenements = session.createQuery("SELECT nomEvt FROM evenement ").list();
+			System.out.println("evenements :" +evenements);
+			
+			for (Evenement evenement : evenements){
+				String e= evenement.getNomEvt();
+				evenements.add(evenement);
+				System.out.println("e :" + e);
+				}
+			session.getTransaction().commit();
+			HibernateUtils.closeSession();
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		return evenements;
 	}
 
 }

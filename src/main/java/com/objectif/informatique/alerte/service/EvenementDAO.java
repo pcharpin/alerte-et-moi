@@ -40,13 +40,13 @@ public class EvenementDAO implements JdbcEvenementDAO{
 
 	
 	@Override
-	public Evenement getEvenementByName(String name) throws SQLException {
+	public String getEvenementByName(String name) throws SQLException {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public Integer findByEvenementById(int evid) throws SQLException {
+	public Evenement findByEvenementById(int evid) throws SQLException {
 		String sql = "SELECT * FROM evenement WHERE idEvt = ?";	
 		int idEvet = 0;
 		 
@@ -68,7 +68,7 @@ public class EvenementDAO implements JdbcEvenementDAO{
 			rs.close();
 			pStatement.close();
 			conn.close();
-			return idEvet;
+			return evenement;
 		
 	}
 

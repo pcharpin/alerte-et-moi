@@ -67,10 +67,10 @@ public class TestMappingHibernate {
 //				enumPeriodeEvet, actifEvt, recopAutoEvt, recurtEvt, libreEvt);
 //		evenementService.create(evenement);
 		
-       evenementService.findByEvenementById(id);
-		//transaction.commit();
-		// getSession.getSession();
-
+       evenementService.findByEvenementById(1);
+//       System.out.println("o_o:" +evenementService.findByEvenementById(id) );
+	//evenementService.listEvenement();	
+	//evenementService.selectedAllEvenementByName();
 	}
 
 }
