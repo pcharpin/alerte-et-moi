@@ -7,29 +7,78 @@ import java.util.ArrayList;
 
 /**
  * @author vdibi
- *
+ * @author P0P0T3 ;)
  */
+@Entity
+@Table(name="dossier")
 public class Dossier {
+	
+	@Id @GeneratedValue
+	@Column(name = "idDos")
 	private int idDos;
+	
+	@Column(name = "nomDos")
 	private String nomDos;
-	private ArrayList<TypesDossiers> typesDossiers;
+
+	@Column(name = "typesDossiers")
+	@Enumerated(EnumType.STRING) 
+	private enum typesDossiers{
+		TOTO,TOTO,TOTO
+	}
+	
+	@Column(name = "descDoc")
 	private String descDoc;
-	private String evtDos;
+	
+	@OneToMany(mappedBy = "dossier", cascade = CascadeType.ALL)	
+	@Column(name = "evtDos")
+	private List<Evenement> evenements;
+	
+	@Column(name = "priorDos")
 	private boolean priorDos;
+	
+	@Column(name = "mntDOS")
 	private float mntDOS;
+	
+	@Column(name = "periodJourDos")
 	private boolean periodJourDos;
+	
+	@Column(name = "periodHebdoDos")
 	private boolean periodHebdoDos;
+	
+	@Column(name = "periodMensDos")
 	private boolean periodMensDos;
+	
+	@Column(name = "periodTrimDos")
 	private boolean periodTrimDos;
+	
+	@Column(name = "periodSemestDos")
 	private boolean periodSemestDos;
+	
+	@Column(name = "periodAnuDos")
 	private boolean periodAnuDos;
+	
+	@Column(name = "periodSansDos")
 	private boolean periodSansDos;
+	
+	@Column(name = "actifDos")
 	private boolean actifDos;
+	
+	@Column(name = "cntNomDos")
 	private String cntNomDos;
+	
+	@Column(name = "cntPrenomDos")
 	private String cntPrenomDos;
+	
+	@Column(name = "cntTelDos")
 	private String cntTelDos;
+	
+	@Column(name = "cntCmntDos")
 	private String cntCmntDos;
+	
+	@Column(name = "libre")
 	private String libre;
+
+
 	public Dossier(int idDos, String nomDos,
 			ArrayList<TypesDossiers> typesDossiers, String descDoc,
 			String evtDos, boolean priorDos, float mntDOS,
