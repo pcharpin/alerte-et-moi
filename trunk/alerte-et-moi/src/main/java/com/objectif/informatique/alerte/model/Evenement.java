@@ -8,6 +8,7 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 
@@ -15,6 +16,7 @@ import javax.persistence.Enumerated;
  * @author vdibi
  *
  */
+@Entity
 public class Evenement implements Serializable{
 	/**
 	 * 
