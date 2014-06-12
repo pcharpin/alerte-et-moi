@@ -11,35 +11,53 @@ import java.util.Set;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.*;
 
 /**
  * @author vdibi
  *
  */
 @Entity
+@Table(name="evenement")
 public class Evenement implements Serializable{
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	@Id @GeneratedValue
+	@Column(name = "id")
 	private int idEvt;
+	@Column(name = "id")
 	private int idDos;
+	@Column(name="responsable_idResp")
 	private int responsable_idResp;
+	@Column(name="nomEvt")
 	private String nomEvt;
+	@Column(name="descEvt")
 	private String descEvt;
+	@Column(name="dateEchEvt")
 	private Date dateEchEvt;
+	@Column(name="exeEvt")
 	private int exeEvt;
+	@Column(name="mntEvt")
 	private float mntEvt;
 	@Enumerated(EnumType.STRING)
 	private EnumModeGestionEvt modeGestionEvt;
+	@Column(name="lienGestEvt")
 	private String lienGestEvt;
+	@Column(name="trtEvt")
 	private int trtEvt;
+	@Column(name="dateTrtEvt")
 	private Date dateTrtEvt;
 	@Enumerated(EnumType.STRING)
 	private EnumPeriodeEvet enumPeriodeEvet;
+	@Column(name="actifEvt")
 	private int actifEvt;
+	@Column(name="recopAutoEvt")
 	private int recopAutoEvt;
+	@Column(name="recurtEvt")
 	private int recurtEvt;
+	@Column(name="libreEvt")
 	private String libreEvt;
 	private Set<Document> documents = new HashSet<Document>(0);
 	
