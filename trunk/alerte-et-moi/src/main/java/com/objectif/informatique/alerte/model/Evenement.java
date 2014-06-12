@@ -38,6 +38,7 @@ public class Evenement implements Serializable{
 	private int exeEvt;
 	@Column(name="mntEvt")
 	private float mntEvt;
+	@Column(name="modeGestionEvt")
 	@Enumerated(EnumType.STRING)
 	private EnumModeGestionEvt modeGestionEvt;
 	@Column(name="lienGestEvt")
@@ -46,6 +47,7 @@ public class Evenement implements Serializable{
 	private int trtEvt;
 	@Column(name="dateTrtEvt")
 	private Date dateTrtEvt;
+	@Column(name = "enumPeriodeEvet")
 	@Enumerated(EnumType.STRING)
 	private EnumPeriodeEvet enumPeriodeEvet;
 	@Column(name="actifEvt")

@@ -12,9 +12,38 @@ import java.util.Set;
  */
 public class Document {
 
+	@Id @GeneratedValue
+	@Column(name = "idDoc")
 	private int idDoc;
+	
+	@Column(name = "accesDoc")
 	private String accesDoc;
+	
+	@Column(name = "lienDoc")
 	private String lienDoc;
+
+	@ManyToMany(
+			targetEntity=Evenement.class,
+			mappedBy = "documents",
+			cascade={CascadeType.PERSIST, CascadeType.MERGE}
+	)
+	@JoinTable(
+			name="evenement_document",
+			joinColumns=@JoinColumn(name="idDoc"),
+			inverseJoinColumns=@JoinColumn(name="id")
+	)
+	private Set<Evenement> evenements = new HashSet<Evenement>();
+
+	@ManyToMany(
+			targetEntity=Dossier.class,
+			mappedBy = "documents",
+			cascade={CascadeType.PERSIST, CascadeType.MERGE}
+	)
+	@JoinTable(
+			name="dossier_document",
+			joinColumns=@JoinColumn(name="idDoc"),
+			inverseJoinColumns=@JoinColumn(name="idDos")
+	)
 	private Set<Evenement> evenements = new HashSet<Evenement>();
 	
 	public Document(int idDoc, String accesDoc, String lienDoc) {
