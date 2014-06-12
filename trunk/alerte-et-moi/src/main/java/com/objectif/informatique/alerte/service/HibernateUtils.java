@@ -20,8 +20,6 @@ public class HibernateUtils {
 
     private static SessionFactory buildSessionFactory() {
         try {
-            
-        	// On créé une factory de type Annotation afin de les prendre en charge
         	sessionFactory = new AnnotationConfiguration().configure().buildSessionFactory();
         }
         catch (Throwable ex) {
