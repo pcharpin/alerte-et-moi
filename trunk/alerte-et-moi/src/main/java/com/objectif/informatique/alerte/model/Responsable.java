@@ -5,18 +5,32 @@ package com.objectif.informatique.alerte.model;
 
 import java.util.Set;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
 /**
  * @author vdibi
  *
  */
+@Entity
+@Table(name="responsable")
 public class Responsable {
 	
+	@Id @GeneratedValue
 	private int idResp;
 	//private int idProfil;
 	private Profil profil;
+	@Column(name="nomResp")
 	private String nomResp;
+	@Column(name="prenResp")
 	private String prenResp;
+	@Column(name="emailResp")
 	private String emailResp;
+	@OneToMany(mappedBy="responsable_idResp")
 	private Set<Evenement> evenements;
 	
 	

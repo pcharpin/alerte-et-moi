@@ -15,7 +15,7 @@ public class Document {
 	private int idDoc;
 	private String accesDoc;
 	private String lienDoc;
-	private Set<Evenement> evenements = new HashSet<Evenement>(0);
+	private Set<Evenement> evenements = new HashSet<Evenement>();
 	
 	public Document(int idDoc, String accesDoc, String lienDoc) {
 		super();
@@ -46,5 +46,37 @@ public class Document {
 
 	public void setLienDoc(String lienDoc) {
 		this.lienDoc = lienDoc;
+	}
+
+	/**
+	 * @return the evenements
+	 */
+	public Set<Evenement> getEvenements() {
+		return evenements;
+	}
+
+	/**
+	 * @param evenements the evenements to set
+	 */
+	public void setEvenements(Set<Evenement> evenements) {
+		this.evenements = evenements;
+	}
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("Document [idDoc=");
+		builder.append(idDoc);
+		builder.append(", accesDoc=");
+		builder.append(accesDoc);
+		builder.append(", lienDoc=");
+		builder.append(lienDoc);
+		builder.append(", evenements=");
+		builder.append(evenements);
+		builder.append("]");
+		return builder.toString();
 	}
 }
