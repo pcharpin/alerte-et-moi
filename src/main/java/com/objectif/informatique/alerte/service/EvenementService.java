@@ -5,6 +5,7 @@ package com.objectif.informatique.alerte.service;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -43,14 +44,32 @@ public class EvenementService implements JdbcEvenementDAO{
 	}
 
 	@Override
-	public void update(Evenement evenement) throws SQLException {
-		// TODO Auto-generated method stub
-		
+	public void update(Integer idEvt) throws SQLException {
+		Transaction tx = null;
+			session = HibernateUtils.getSession();
+			 tx = session.beginTransaction();
+			 int idEventfounded = findByEvenementById(idEvt);
+			 Evenement evenement =  new Evenement();
+			 if(evenement.getIdEvt() == idEventfounded){
+				 session.update(evenement);
+			 }			
+			session.getTransaction().commit();
+			HibernateUtils.closeSession();	
 	}
 
 	@Override
-	public void delete(Evenement evenement) throws SQLException {
-		// TODO Auto-generated method stub
+	public void delete(Integer idEvtt) throws SQLException {
+		Transaction tx = null;
+		try {
+			
+			session = HibernateUtils.getSession();
+			tx = session.beginTransaction();
+			findByEvenementById(idEvtt);
+			session.getTransaction().commit();
+			HibernateUtils.closeSession();
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
 		
 	}
 
@@ -80,6 +99,12 @@ public class EvenementService implements JdbcEvenementDAO{
 
 	@Override
 	public ArrayList<String> selectedAllEvenementByName() throws SQLException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Evenement> listEvenement() throws SQLException {
 		// TODO Auto-generated method stub
 		return null;
 	}
