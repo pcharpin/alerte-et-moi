@@ -23,7 +23,7 @@ public class Document {
 	private String lienDoc;
 
 	@ManyToMany(
-			targetEntity=Evenement.class,
+		targetEntity=Evenement.class,
 			mappedBy = "documents",
 			cascade={CascadeType.PERSIST, CascadeType.MERGE}
 	)
