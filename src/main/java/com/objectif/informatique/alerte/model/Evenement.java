@@ -58,9 +58,20 @@ public class Evenement implements Serializable{
 	private int recurtEvt;
 	@Column(name="libreEvt")
 	private String libreEvt;
-	@OneToMany(mappedBy="responsable_idResp")
-	private Set<Document> documents = new HashSet<Document>();
+	@OneToMany(mappedBy="evenement", cascade = CascadeType.ALL)
+	@Column(name = "responsable_idResp")
+	private Responsable responsable;	
 	
+	@ManyToMany(targetEntity=Document.class,
+			mappedBy = "evenements",
+			cascade={CascadeType.PERSIST, CascadeType.MERGE}
+	)
+		@JoinTable(
+				name="evenement_document",
+				joinColumns=@JoinColumn(name="idEvt"),
+				inverseJoinColumns=@JoinColumn(name="idDoc")
+		)
+	private Set<Document> documents = new HashSet<Document>();
 	
 	
 	/**
