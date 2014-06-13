@@ -30,7 +30,7 @@ public class Responsable {
 	private String prenResp;
 	@Column(name="emailResp")
 	private String emailResp;
-	@OneToMany(mappedBy="responsable_idResp")
+	@OneToMany(mappedBy="responsable")
 	private Set<Evenement> evenements;
 	
 	
