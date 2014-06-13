@@ -16,6 +16,7 @@ import javax.persistence.ManyToMany;
 
 /**
  * @author vdibi
+ * @author P0P0T3
  *
  */
 public class Document {
