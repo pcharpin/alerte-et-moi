@@ -3,12 +3,12 @@
  */
 package com.objectif.informatique.alerte.tests;
 
-import java.sql.SQLException;
-
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.objectif.informatique.alerte.dao.EvenementDAO;
+import com.objectif.informatique.alerte.model.Evenement;
+import com.objectif.informatique.alerte.service.EvenementServiceImpl;
 
 /**
  * @author vdibi
@@ -18,8 +18,9 @@ public class TestEvement {
 
 	/**
 	 * @param args
+	 * @throws Exception 
 	 */
-	public static void main(String[] args)  throws SQLException{
+	public static void main(String[] args)  throws Exception{
 		ApplicationContext context = new ClassPathXmlApplicationContext("Spring-Module.xml");
 		
 		//int id, 
@@ -49,6 +50,10 @@ public class TestEvement {
 		
 //		Evenement evenement =  new Evenement(id, idDos, responsable_idResp, nomEvt, descEvt, dateEchEvt, exeEvt, mntEvt, lienGestEvt, tetEvt, dateTrtEvt, actifEvt, recopAutoEvt, recurtEvt, libreEvt)
 //		Evenement evenement = jdbcEvenementDAO.create(evenement);
+		EvenementServiceImpl evenementServiceImpl = new EvenementServiceImpl();
+		Evenement evenement = new Evenement();
+		evenement.setNomEvt("TOTO");
+		evenementServiceImpl.create(evenement);
 		System.out.println("evenement");
 		
 	}
