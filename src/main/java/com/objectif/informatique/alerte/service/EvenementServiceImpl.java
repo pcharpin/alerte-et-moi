@@ -41,6 +41,7 @@ public class EvenementServiceImpl implements EvenementDAO{
 	}
 
 	@Override
+	@PersistenceContext
 	public Integer create(Evenement evenement) throws Exception {
 		try {			
 			entityManager.persist(evenement);
