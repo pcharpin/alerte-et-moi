@@ -5,18 +5,11 @@ package com.objectif.informatique.alerte.tests;
 
 import java.util.Date;
 
-import javax.ws.rs.GET;
-
-import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
-import org.hibernate.cfg.Configuration;
 
-import com.objectif.informatique.alerte.dao.JdbcEvenementDAO;
 import com.objectif.informatique.alerte.model.EnumModeGestionEvt;
 import com.objectif.informatique.alerte.model.EnumPeriodeEvet;
-import com.objectif.informatique.alerte.model.Evenement;
-import com.objectif.informatique.alerte.service.EvenementService;
+import com.objectif.informatique.alerte.service.EvenementServiceImpl;
 import com.objectif.informatique.alerte.service.GetSession;
 import com.objectif.informatique.alerte.service.HibernateUtils;
 
@@ -43,7 +36,7 @@ public class TestMappingHibernate {
 	static int recopAutoEvt = 1;
 	static int recurtEvt = 1;
 	static String libreEvt = "test";
-	static EvenementService evenementService = new EvenementService();
+	static EvenementServiceImpl evenementService = new EvenementServiceImpl();
 	private static SessionFactory factory;
 	private static GetSession getSession;
 	private static HibernateUtils utils;
@@ -67,7 +60,7 @@ public class TestMappingHibernate {
 //				enumPeriodeEvet, actifEvt, recopAutoEvt, recurtEvt, libreEvt);
 //		evenementService.create(evenement);
 		
-       evenementService.findByEvenementById(1);
+    //   evenementService.findByEvenementById(1);
 //       System.out.println("o_o:" +evenementService.findByEvenementById(id) );
 	//evenementService.listEvenement();	
 	//evenementService.selectedAllEvenementByName();

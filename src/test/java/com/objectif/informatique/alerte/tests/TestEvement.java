@@ -4,14 +4,11 @@
 package com.objectif.informatique.alerte.tests;
 
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.Date;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-import com.objectif.informatique.alerte.dao.JdbcEvenementDAO;
-import com.objectif.informatique.alerte.model.Evenement;
+import com.objectif.informatique.alerte.dao.EvenementDAO;
 
 /**
  * @author vdibi
@@ -46,7 +43,7 @@ public class TestEvement {
 //		private String libreEvt;
 //	 
 			
-		JdbcEvenementDAO jdbcEvenementDAO = (JdbcEvenementDAO) context.getBean("evenementDAO");
+		EvenementDAO jdbcEvenementDAO = (EvenementDAO) context.getBean("evenementDAO");
 		//Integer evenement = jdbcEvenementDAO.findByEvenementById(1);
 		//ArrayList<String> evenement = jdbcEvenementDAO.selectedAllEvenementByName();
 		
