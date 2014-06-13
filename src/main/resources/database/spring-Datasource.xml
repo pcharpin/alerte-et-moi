@@ -11,7 +11,7 @@
 		<property name="password" value="vdibi" />
 	</bean>
 	
-	<bean id="evenementDAO" class="com.objectif.informatique.alerte.dao.EvenementDAO">
+	<!-- <bean id="evenementDAO" class="com.objectif.informatique.alerte.dao.EvenementDAO">
 		<property name="dataSource" ref="dataSource" />
-	</bean>
+	</bean> -->
 </beans>

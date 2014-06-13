@@ -7,6 +7,7 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.sql.DataSource;
 
 import org.springframework.stereotype.Repository;
 
@@ -22,6 +23,22 @@ import com.objectif.informatique.alerte.model.Evenement;
 public class EvenementServiceImpl implements EvenementDAO{
 	@PersistenceContext 
 	private EntityManager entityManager;
+	private DataSource dataSource;
+
+
+	/**
+	 * @param entityManager the entityManager to set
+	 */
+	public void setEntityManager(EntityManager entityManager) {
+		this.entityManager = entityManager;
+	}
+
+	/**
+	 * @param dataSource the dataSource to set
+	 */
+	public void setDataSource(DataSource dataSource) {
+		this.dataSource = dataSource;
+	}
 
 	@Override
 	public Integer create(Evenement evenement) throws Exception {
