@@ -35,22 +35,12 @@ public class Document {
 			mappedBy = "documents",
 			cascade={CascadeType.PERSIST, CascadeType.MERGE}
 	)
-	@JoinTable(
-			name="evenement_document",
-			joinColumns=@JoinColumn(name="idDoc"),
-			inverseJoinColumns=@JoinColumn(name="idEvt")
-	)
 	private Set<Evenement> evenements = new HashSet<Evenement>();
 
 	@ManyToMany(
 			targetEntity=Dossier.class,
 			mappedBy = "documents",
 			cascade={CascadeType.PERSIST, CascadeType.MERGE}
-	)
-	@JoinTable(
-			name="dossier_document",
-			joinColumns=@JoinColumn(name="idDoc"),
-			inverseJoinColumns=@JoinColumn(name="idDos")
 	)
 	private Set<Dossier> dossiers = new HashSet<Dossier>();
 	
