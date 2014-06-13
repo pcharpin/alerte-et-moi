@@ -46,14 +46,14 @@ public class Alerte implements Serializable{
 	@Column(name = "idAler")
 	private Evenement evenement;
 	
-	@ManyToMany(targetEntity=Document.class,
-			mappedBy = "evenements",
+	@ManyToMany(targetEntity=Alerte.class,
+			mappedBy = "reponsables",
 			cascade={CascadeType.PERSIST, CascadeType.MERGE}
 	)
 		@JoinTable(
 				name="responsable_alerte",
-				joinColumns=@JoinColumn(name="idResp"),
-				inverseJoinColumns=@JoinColumn(name="idAler")
+				joinColumns=@JoinColumn(name="idAler"),
+				inverseJoinColumns=@JoinColumn(name="idResp")
 		)
 	private Set<Responsable> responsables = new HashSet<Responsable>();
 
