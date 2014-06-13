@@ -91,6 +91,16 @@ public class Dossier implements Serializable{
 	@Column(name = "libre")
 	private String libre;
 
+	@ManyToMany(targetEntity=Document.class,
+			mappedBy = "dossiers",
+			cascade={CascadeType.PERSIST, CascadeType.MERGE}
+	)
+		@JoinTable(
+				name="dossier_document",
+				joinColumns=@JoinColumn(name="idDos"),
+				inverseJoinColumns=@JoinColumn(name="idDoc")
+		)
+	private Set<Document> documents = new HashSet<Document>();
 	/**
 	 * @param idDos
 	 * @param nomDos
