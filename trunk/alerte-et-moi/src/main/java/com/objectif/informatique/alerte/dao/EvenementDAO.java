@@ -26,5 +26,7 @@ public interface EvenementDAO {
 	List<Evenement> listEvenement() throws Exception;
 
 	Evenement findEvenementById(Long evenementId) throws Exception;
+	
+	List<Evenement> findAll() throws Exception;
 
 }

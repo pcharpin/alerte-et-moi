@@ -3,15 +3,6 @@
  */
 package com.objectif.informatique.alerte.tests;
 
-import java.util.Date;
-
-import org.hibernate.SessionFactory;
-
-import com.objectif.informatique.alerte.model.EnumModeGestionEvt;
-import com.objectif.informatique.alerte.model.EnumPeriodeEvet;
-import com.objectif.informatique.alerte.service.EvenementServiceImpl;
-import com.objectif.informatique.alerte.service.GetSession;
-import com.objectif.informatique.alerte.service.HibernateUtils;
 
 /**
  * @author vdibi
