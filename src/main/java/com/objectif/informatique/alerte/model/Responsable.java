@@ -43,6 +43,8 @@ public class Responsable implements Serializable{
 	 * @param emailResp
 	 * @param evenements
 	 */
+	public Responsable(){}
+	
 	public Responsable(int idResp, int profil, String nomResp,
 			String prenResp, String emailResp, Set<Evenement> evenements) {
 		super();

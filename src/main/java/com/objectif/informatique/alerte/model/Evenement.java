@@ -5,7 +5,6 @@ package com.objectif.informatique.alerte.model;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -15,9 +14,6 @@ import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -47,9 +43,11 @@ public class Evenement implements Serializable{
 	private int exeEvt;
 	@Column(name="mntEvt")
 	private float mntEvt;
+	
 	@Column(name="modeGestEvt")
 	@Enumerated(EnumType.STRING)
-	private EnumModeGestionEvt modeGestionEvt;
+    private EnumModeGestionEvt modeGestionEvt;
+	
 	@Column(name="lienGestEvt")
 	private String lienGestEvt;
 	@Column(name="trtEvt")
