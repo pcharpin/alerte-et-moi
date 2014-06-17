@@ -85,20 +85,6 @@ try {
 		return null;
 	}
 
-
-	@Override
-	public List<Evenement> selectedAllEvenementByName() throws Exception {
-		return null;
-	
-	}
-	
-
-	@Override
-	public List<Evenement> listEvenement() throws Exception {
-		return null;
-
-	}
-
 	@Override
 	public Evenement findEvenementById(Long evenementId) {
 		try {
