@@ -23,7 +23,11 @@ import com.objectif.informatique.alerte.model.Evenement;
 @Repository("EvenementDAO")
 public class EvenementDAOImpl implements EvenementDAO{
 //	@PersistenceContext 
-//	private EntityManager entityManager;
+	private EntityManager entityManager;
+	
+	public EvenementDAOImpl(EntityManager entityManager) {
+        this.entityManager= entityManager;
+    }
 //	
 	@Autowired
 	private SessionFactory sessionFactory;
@@ -41,12 +45,10 @@ public class EvenementDAOImpl implements EvenementDAO{
 
 	@Override
 	public Integer create(Evenement evenement) throws Exception {
-		try {			
-//			entityManager.getTransaction().begin();
-//			entityManager.persist(evenement);
-//			entityManager.getTransaction().commit();
-//			return evenement.getIdEvt();
-			getCurrentSession().save(evenement);
+try {
+			
+			entityManager.persist(evenement);
+			return evenement.getIdEvt();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
