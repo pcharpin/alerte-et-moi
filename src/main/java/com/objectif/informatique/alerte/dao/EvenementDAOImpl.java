@@ -7,6 +7,7 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -107,6 +108,11 @@ try {
 			e.printStackTrace();
 		}
 		return null;
+	}
+	@Override
+	public List<Evenement> findAll() throws Exception {
+	    Query query = entityManager.createQuery("SELECT e FROM Evenement e");
+	    return (List<Evenement>) query.getResultList();
 	}
 
 }
