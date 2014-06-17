@@ -15,7 +15,6 @@ import com.objectif.informatique.alerte.dao.EvenementDAOImpl;
 import com.objectif.informatique.alerte.model.Evenement;
 
 /**
- * @author choupi
  * 
  */
 @Path("/WebService")
