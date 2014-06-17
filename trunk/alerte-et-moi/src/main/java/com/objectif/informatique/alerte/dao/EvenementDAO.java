@@ -21,10 +21,6 @@ public interface EvenementDAO {
 
 	String getEvenementByName(String name) throws Exception;
 
-	List<Evenement> selectedAllEvenementByName() throws Exception;
-
-	List<Evenement> listEvenement() throws Exception;
-
 	Evenement findEvenementById(Long evenementId) throws Exception;
 	
 	List<Evenement> findAll() throws Exception;
