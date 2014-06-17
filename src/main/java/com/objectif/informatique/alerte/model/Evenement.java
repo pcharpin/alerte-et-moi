@@ -35,7 +35,7 @@ public class Evenement implements Serializable{
 	@Id @GeneratedValue
 	@Column(name = "idEvt")
 	private int idEvt;
-	@Column(name = "idDos")
+	@Column(name = "Dossier_idDos")
 	private int idDos;
 	@Column(name="nomEvt")
 	private String nomEvt;
@@ -47,7 +47,7 @@ public class Evenement implements Serializable{
 	private int exeEvt;
 	@Column(name="mntEvt")
 	private float mntEvt;
-	@Column(name="modeGestionEvt")
+	@Column(name="modeGestEvt")
 	@Enumerated(EnumType.STRING)
 	private EnumModeGestionEvt modeGestionEvt;
 	@Column(name="lienGestEvt")
@@ -56,27 +56,27 @@ public class Evenement implements Serializable{
 	private int trtEvt;
 	@Column(name="dateTrtEvt")
 	private Date dateTrtEvt;
-	@Column(name = "enumPeriodeEvet")
+	@Column(name = "periodEvt")
 	@Enumerated(EnumType.STRING)
 	private EnumPeriodeEvet enumPeriodeEvet;
 	@Column(name="actifEvt")
 	private int actifEvt;
 	@Column(name="recopAutoEvt")
 	private int recopAutoEvt;
-	@Column(name="recurtEvt")
+	@Column(name="recurEvt")
 	private int recurtEvt;
 	@Column(name="libreEvt")
 	private String libreEvt;
 	@ManyToOne(cascade = CascadeType.ALL)
 	private Responsable responsable;	
 	
-	@ManyToMany(targetEntity=Document.class)
+	/*@ManyToMany(targetEntity=Document.class)
 		@JoinTable(
 				name="evenement_document",
 				joinColumns=@JoinColumn(name="idEvt"),
 				inverseJoinColumns=@JoinColumn(name="idDoc")
 		)
-	private Set<Document> documents = new HashSet<Document>();
+	private Set<Document> documents = new HashSet<Document>();*/
 	
 	
 	/**
@@ -123,7 +123,7 @@ public class Evenement implements Serializable{
 		this.recopAutoEvt = recopAutoEvt;
 		this.recurtEvt = recurtEvt;
 		this.libreEvt = libreEvt;
-		this.documents = documents;
+//		this.documents = documents;
 	}
 	public Evenement(int id, String nomEvt){
 		super();
@@ -273,15 +273,15 @@ public class Evenement implements Serializable{
 	/**
 	 * @return the evenements
 	 */
-	public Set<Document> getDocuments() {
+/*	public Set<Document> getDocuments() {
 		return documents;
-	}
+	}*/
 	/**
 	 * @param documents the documents to set
 	 */
-	public void setDocuments(Set<Document> documents) {
+/*	public void setDocuments(Set<Document> documents) {
 		this.documents = documents;
-	}
+	}*/
 	/* (non-Javadoc)
 	 * @see java.lang.Object#toString()
 	 */
@@ -323,7 +323,7 @@ public class Evenement implements Serializable{
 		builder.append(", libreEvt=");
 		builder.append(libreEvt);
 		builder.append(", documents=");
-		builder.append(documents);
+		//builder.append(documents);
 		builder.append("]");
 		return builder.toString();
 	}

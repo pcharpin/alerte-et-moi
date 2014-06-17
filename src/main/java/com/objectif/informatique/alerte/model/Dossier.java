@@ -47,9 +47,10 @@ public class Dossier implements Serializable{
 	@Column(name = "descDoc")
 	private String descDoc;
 	
-	@OneToMany(mappedBy = "dossier", cascade = CascadeType.ALL)	
-	@Column(name = "evtDos")
-	private List<Evenement> evenements;
+	/*@OneToMany(targetEntity=Dossier.class, mappedBy = "dossier", cascade = CascadeType.ALL)*/	
+//	@Column(name = "evtDos")
+//	private Set<Evenement> evenements = new HashSet<Evenement>();
+
 	
 	@Column(name = "priorDos")
 	private boolean priorDos;
@@ -96,7 +97,7 @@ public class Dossier implements Serializable{
 	@Column(name = "libre")
 	private String libre;
 
-	@ManyToMany(
+	/*@ManyToMany(
 			targetEntity=Document.class,
 			cascade={CascadeType.PERSIST, CascadeType.MERGE}
 	)
@@ -105,7 +106,7 @@ public class Dossier implements Serializable{
 				joinColumns=@JoinColumn(name="idDos"),
 				inverseJoinColumns=@JoinColumn(name="idDoc")
 		)
-	private Set<Document> documents = new HashSet<Document>();
+	private Set<Document> documents = new HashSet<Document>();*/
 	/**
 	 * @param idDos
 	 * @param nomDos
@@ -130,7 +131,7 @@ public class Dossier implements Serializable{
 	 */
 	public Dossier(int idDos, String nomDos,
 			EnumTypesDossiers enumTypesDossiers, String descDoc,
-			List<Evenement> evenements, boolean priorDos, float mntDOS,
+			Set<Evenement> evenements, boolean priorDos, float mntDOS,
 			boolean periodJourDos, boolean periodHebdoDos,
 			boolean periodMensDos, boolean periodTrimDos,
 			boolean periodSemestDos, boolean periodAnuDos,
@@ -142,7 +143,7 @@ public class Dossier implements Serializable{
 		this.nomDos = nomDos;
 		this.enumTypesDossiers = enumTypesDossiers;
 		this.descDoc = descDoc;
-		this.evenements = evenements;
+		//this.evenements = evenements;
 		this.priorDos = priorDos;
 		this.mntDOS = mntDOS;
 		this.periodJourDos = periodJourDos;
@@ -219,16 +220,16 @@ public class Dossier implements Serializable{
 	/**
 	 * @return the evenements
 	 */
-	public List<Evenement> getEvenements() {
+/*	public Set<Evenement> getEvenements() {
 		return evenements;
-	}
+	}*/
 
 	/**
 	 * @param evenements the evenements to set
 	 */
-	public void setEvenements(List<Evenement> evenements) {
+/*	public void setEvenements(Set<Evenement> evenements) {
 		this.evenements = evenements;
-	}
+	}*/
 
 	/**
 	 * @return the priorDos
@@ -455,7 +456,7 @@ public class Dossier implements Serializable{
 		builder.append(", descDoc=");
 		builder.append(descDoc);
 		builder.append(", evenements=");
-		builder.append(evenements);
+		//builder.append(evenements);
 		builder.append(", priorDos=");
 		builder.append(priorDos);
 		builder.append(", mntDOS=");

@@ -23,7 +23,8 @@ public class Responsable implements Serializable{
 	
 	@Id @GeneratedValue
 	private int idResp;
-	private Profil profil;
+	@Column(name="Profil_idProf")
+	private int profil;
 	@Column(name="nomResp")
 	private String nomResp;
 	@Column(name="prenResp")
@@ -42,7 +43,7 @@ public class Responsable implements Serializable{
 	 * @param emailResp
 	 * @param evenements
 	 */
-	public Responsable(int idResp, Profil profil, String nomResp,
+	public Responsable(int idResp, int profil, String nomResp,
 			String prenResp, String emailResp, Set<Evenement> evenements) {
 		super();
 		this.idResp = idResp;
@@ -67,13 +68,13 @@ public class Responsable implements Serializable{
 		/**
 	 * @return the profil
 	 */
-	public Profil getProfil() {
+	public int getProfil() {
 		return profil;
 	}
 	/**
 	 * @param profil the profil to set
 	 */
-	public void setProfil(Profil profil) {
+	public void setProfil(int profil) {
 		this.profil = profil;
 	}
 		/**
