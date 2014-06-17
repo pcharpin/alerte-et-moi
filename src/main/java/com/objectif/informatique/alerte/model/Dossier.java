@@ -96,8 +96,8 @@ public class Dossier implements Serializable{
 	@Column(name = "libre")
 	private String libre;
 
-	@ManyToMany(targetEntity=Document.class,
-			mappedBy = "dossiers",
+	@ManyToMany(
+			targetEntity=Document.class,
 			cascade={CascadeType.PERSIST, CascadeType.MERGE}
 	)
 		@JoinTable(

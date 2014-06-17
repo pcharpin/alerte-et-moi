@@ -3,11 +3,10 @@
  */
 package com.objectif.informatique.alerte.tests;
 
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 
-import com.objectif.informatique.alerte.dao.EvenementDAO;
-import com.objectif.informatique.alerte.model.Document;
 import com.objectif.informatique.alerte.model.Evenement;
 import com.objectif.informatique.alerte.service.EvenementServiceImpl;
 
@@ -22,20 +21,25 @@ public class TestEvement {
 	 * @throws Exception 
 	 */
 	public static void main(String[] args)  throws Exception{
-		ApplicationContext context = new ClassPathXmlApplicationContext("Spring-Module.xml");
-		
-		//EvenementDAO jdbcEvenementDAO = (EvenementDAO) context.getBean("evenementDAO");
-		//Integer evenement = jdbcEvenementDAO.findByEvenementById(1);
-		//ArrayList<String> evenement = jdbcEvenementDAO.selectedAllEvenementByName();
-		
 		try {
-			EvenementServiceImpl evenementServiceImpl = new EvenementServiceImpl();
+		EntityManagerFactory emf = Persistence.createEntityManagerFactory("JpaALerte");
+        EntityManager em = emf.createEntityManager();
+			EvenementServiceImpl evenementServiceImpl = new EvenementServiceImpl(em);
 
 			Evenement evenement = new Evenement();
-			Document documents = new Document(1, "testaccesDoc", "ttps://www.google.fr");
+			em.getTransaction().begin();
 			evenement.setNomEvt("TOTO");
-			//evenement.setDocuments(documents);
 			evenementServiceImpl.create(evenement);
+	        em.getTransaction().commit();
+			
+	        System.out.println("--- Create and persist artist ---");
+	       
+	        
+
+
+			
+			System.out.println("resultat : " + evenementServiceImpl.create(evenement));			
+			//evenement.setDocuments(documents);
 			System.out.println("evenement : " + evenement);
 		} catch (Exception e) {
 			e.printStackTrace();

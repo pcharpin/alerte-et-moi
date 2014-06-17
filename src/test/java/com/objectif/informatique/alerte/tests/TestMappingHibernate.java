@@ -18,38 +18,16 @@ import com.objectif.informatique.alerte.service.HibernateUtils;
  * 
  */
 public class TestMappingHibernate {
-	static int id = 1;
-	static int idDos = 2;
-	static int responsable_idResp = 1;
-	static String nomEvt = "test";
-	static String descEvt = "test";
-
-	static Date dateEchEvt = new Date();
-	static int exeEvt = 1;
-	static float mntEvt = (float) 0.0;
-	static EnumModeGestionEvt enumModeGestionEvt = EnumModeGestionEvt.ENLIGNE;
-	static String lienGestEvt = "test";
-	static int trtEvt = 0;
-	static Date dateTrtEvt = new Date();
-	static EnumPeriodeEvet enumPeriodeEvet = EnumPeriodeEvet.TRIMESTRIEL;
-	static int actifEvt = 0;
-	static int recopAutoEvt = 1;
-	static int recurtEvt = 1;
-	static String libreEvt = "test";
-	static EvenementServiceImpl evenementService = new EvenementServiceImpl();
-	private static SessionFactory factory;
-	private static GetSession getSession;
-	private static HibernateUtils utils;
-
+	
 	/**
 	 * @param args
 	 */
 	public static void main(String[] args) throws Exception {
 
-		// On récupère la session Hibernate créée dans HibernateUtil
+		// On rï¿½cupï¿½re la session Hibernate crï¿½ï¿½e dans HibernateUtil
 		//Session session = (Session) utils.getSessionFactory();
 
-		// On créé une transaction pour pallier à d'éventuel problèmes lors de
+		// On crï¿½ï¿½ une transaction pour pallier ï¿½ d'ï¿½ventuel problï¿½mes lors de
 		// l'insertion des tuples dans la table
 		//Transaction transaction = session.beginTransaction();
 

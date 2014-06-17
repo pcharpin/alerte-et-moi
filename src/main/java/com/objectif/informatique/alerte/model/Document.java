@@ -3,6 +3,7 @@
  */
 package com.objectif.informatique.alerte.model;
 
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -19,7 +20,7 @@ import javax.persistence.ManyToMany;
  * @author P0P0T3
  *
  */
-public class Document {
+public class Document implements Serializable{
 
 	@Id @GeneratedValue
 	@Column(name = "idDoc")
@@ -30,19 +31,23 @@ public class Document {
 	
 	@Column(name = "lienDoc")
 	private String lienDoc;
-
-	@ManyToMany(
-		targetEntity=Evenement.class,
-			mappedBy = "documents",
-			cascade={CascadeType.PERSIST, CascadeType.MERGE}
-	)
+	
+	@ManyToMany
+		@JoinTable(
+				name="evenement_document",
+				joinColumns=@JoinColumn(name="idDoc"),
+				inverseJoinColumns=@JoinColumn(name="idEvt")
+		)
 	private Set<Evenement> evenements = new HashSet<Evenement>();
 
-	@ManyToMany(
-			targetEntity=Dossier.class,
-			mappedBy = "documents",
+	@ManyToMany(targetEntity=Dossier.class,
 			cascade={CascadeType.PERSIST, CascadeType.MERGE}
 	)
+		@JoinTable(
+				name="dossier_document",
+				joinColumns=@JoinColumn(name="idDoc"),
+				inverseJoinColumns=@JoinColumn(name="idDos")
+		)
 	private Set<Dossier> dossiers = new HashSet<Dossier>();
 	
 	public Document(int idDoc, String accesDoc, String lienDoc) {

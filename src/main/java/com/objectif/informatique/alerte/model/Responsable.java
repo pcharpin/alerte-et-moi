@@ -3,6 +3,7 @@
  */
 package com.objectif.informatique.alerte.model;
 
+import java.io.Serializable;
 import java.util.Set;
 
 import javax.persistence.Column;
@@ -18,11 +19,10 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name="responsable")
-public class Responsable {
+public class Responsable implements Serializable{
 	
 	@Id @GeneratedValue
 	private int idResp;
-	//private int idProfil;
 	private Profil profil;
 	@Column(name="nomResp")
 	private String nomResp;

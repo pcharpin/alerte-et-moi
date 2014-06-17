@@ -17,6 +17,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
+import javax.persistence.ManyToOne;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -42,12 +43,10 @@ public class Alerte implements Serializable{
 	@Column(name="dateAlerte")
 	private Date dateAlerte;
 
-	@OneToMany(mappedBy="evenement", cascade = CascadeType.ALL)
-	@Column(name = "idAler")
+	@ManyToOne(cascade = CascadeType.ALL)
 	private Evenement evenement;
 	
 	@ManyToMany(targetEntity=Alerte.class,
-			mappedBy = "reponsables",
 			cascade={CascadeType.PERSIST, CascadeType.MERGE}
 	)
 		@JoinTable(
