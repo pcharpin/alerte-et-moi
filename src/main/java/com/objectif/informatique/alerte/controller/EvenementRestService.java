@@ -3,9 +3,16 @@
  */
 package com.objectif.informatique.alerte.controller;
 
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
+
+import com.google.gson.Gson;
+import com.objectif.informatique.alerte.dao.EvenementDAOImpl;
+import com.objectif.informatique.alerte.model.Evenement;
 
 /**
  * @author choupi
@@ -17,33 +24,25 @@ public class EvenementRestService {
 	@GET
 	@Path("/GetEvent")
 	@Produces("application/json")
-	public String feed() {
-		String feeds = null;
+	public String getEvenement() {
+
+		EntityManagerFactory emf = Persistence.createEntityManagerFactory("JpaALerte");
+        EntityManager em = emf.createEntityManager();
+		 EvenementDAOImpl evenementServicDaoImpl = new EvenementDAOImpl(em);
 		try {
 			System.out.println("******************************");
-			// ArrayList<String> evenements = null;
-			// JdbcEvenementDAO evenementDAO = null;
-
-			// ArrayList<String> evenements = null;
-			// ApplicationContext context = new
-			// ClassPathXmlApplicationContext("Spring-Module.xml");
-			// JdbcEvenementDAO jdbcEvenementDAO = (JdbcEvenementDAO)
-			// context.getBean("evenementDAO");
-
-			// JdbcEvenementDAO jdbcEvenementDAO = null;
-			// ArrayList<String> evenement =
-			// jdbcEvenementDAO.selectedAllEvenementByName();
-			// System.out.println("evenement : " + evenement);
-			// //ArrayList<String> evenement =
-			// evenementDAO.selectedAllEvenementByName();
-			// Gson gson = new Gson();
-			// System.out.println(gson.toJson(evenement));
+			Evenement evenement =  new Evenement();
+			evenement.setNomEvt("testAlerte");
+			evenementServicDaoImpl.create(evenement);
+			Gson gson = new Gson();
+			gson.toJson(evenement);
 		}
 
 		catch (Exception e) {
 			System.out.println("Exception Error"); // Console
 		}
-		return feeds;
+		return null;
+
 	}
 
 }
