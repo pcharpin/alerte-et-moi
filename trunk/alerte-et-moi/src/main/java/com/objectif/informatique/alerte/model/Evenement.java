@@ -18,7 +18,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 /**
@@ -37,8 +37,6 @@ public class Evenement implements Serializable{
 	private int idEvt;
 	@Column(name = "idDos")
 	private int idDos;
-	@Column(name="responsable_idResp")
-	private int responsable_idResp;
 	@Column(name="nomEvt")
 	private String nomEvt;
 	@Column(name="descEvt")
@@ -69,14 +67,10 @@ public class Evenement implements Serializable{
 	private int recurtEvt;
 	@Column(name="libreEvt")
 	private String libreEvt;
-	@OneToMany(mappedBy="evenement", cascade = CascadeType.ALL)
-	@Column(name = "responsable_idResp")
+	@ManyToOne(cascade = CascadeType.ALL)
 	private Responsable responsable;	
 	
-	@ManyToMany(targetEntity=Document.class,
-			mappedBy = "evenements",
-			cascade={CascadeType.PERSIST, CascadeType.MERGE}
-	)
+	@ManyToMany(targetEntity=Document.class)
 		@JoinTable(
 				name="evenement_document",
 				joinColumns=@JoinColumn(name="idEvt"),
@@ -105,7 +99,7 @@ public class Evenement implements Serializable{
 	 * @param libreEvt
 	 * @param evenements
 	 */
-	public Evenement(int idEvt, int idDos, int responsable_idResp,
+	public Evenement(int idEvt, int idDos, Responsable responsable_idResp,
 			String nomEvt, String descEvt, Date dateEchEvt, int exeEvt,
 			float mntEvt, EnumModeGestionEvt modeGestionEvt,
 			String lienGestEvt, int trtEvt, Date dateTrtEvt,
@@ -114,7 +108,7 @@ public class Evenement implements Serializable{
 		super();
 		this.idEvt = idEvt;
 		this.idDos = idDos;
-		this.responsable_idResp = responsable_idResp;
+		this.responsable = responsable_idResp;
 		this.nomEvt = nomEvt;
 		this.descEvt = descEvt;
 		this.dateEchEvt = dateEchEvt;
@@ -160,11 +154,11 @@ public class Evenement implements Serializable{
 	public void setIdDos(int idDos) {
 		this.idDos = idDos;
 	}
-	public int getResponsable_idResp() {
-		return responsable_idResp;
+	public Responsable getResponsable_resp() {
+		return this.responsable;
 	}
-	public void setResponsable_idResp(int responsable_idResp) {
-		this.responsable_idResp = responsable_idResp;
+	public void setResponsable_resp(Responsable responsable_idResp) {
+		this.responsable = responsable_idResp;
 	}
 	public String getNomEvt() {
 		return nomEvt;
@@ -299,7 +293,7 @@ public class Evenement implements Serializable{
 		builder.append(", idDos=");
 		builder.append(idDos);
 		builder.append(", responsable_idResp=");
-		builder.append(responsable_idResp);
+		builder.append(responsable);
 		builder.append(", nomEvt=");
 		builder.append(nomEvt);
 		builder.append(", descEvt=");

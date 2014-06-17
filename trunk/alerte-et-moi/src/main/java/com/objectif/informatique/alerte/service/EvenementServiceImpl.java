@@ -6,10 +6,6 @@ package com.objectif.informatique.alerte.service;
 import java.util.List;
 
 import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import javax.sql.DataSource;
-
-import org.springframework.stereotype.Repository;
 
 import com.objectif.informatique.alerte.dao.EvenementDAO;
 import com.objectif.informatique.alerte.model.Evenement;
@@ -19,13 +15,13 @@ import com.objectif.informatique.alerte.model.Evenement;
  *
  */
 
-@Repository("EvenementDAO")
 public class EvenementServiceImpl implements EvenementDAO{
-	@PersistenceContext 
+
 	private EntityManager entityManager;
-	private DataSource dataSource;
 
-
+	public EvenementServiceImpl(EntityManager entityManager) {
+        this.entityManager= entityManager;
+    }
 	/**
 	 * @param entityManager the entityManager to set
 	 */
@@ -33,17 +29,10 @@ public class EvenementServiceImpl implements EvenementDAO{
 		this.entityManager = entityManager;
 	}
 
-	/**
-	 * @param dataSource the dataSource to set
-	 */
-	public void setDataSource(DataSource dataSource) {
-		this.dataSource = dataSource;
-	}
-
 	@Override
-	@PersistenceContext
 	public Integer create(Evenement evenement) throws Exception {
-		try {			
+		try {
+			
 			entityManager.persist(evenement);
 			return evenement.getIdEvt();
 		} catch (Exception e) {
