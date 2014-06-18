@@ -21,13 +21,13 @@ import com.objectif.informatique.alerte.model.Evenement;
 /**
  * 
  */
-@Path("/Alerte")
+@Path("/alerte")
 public class EvenementRestService {
 
 	@GET
-	@Path("/:id")
+	@Path("/evenement/get")
 	@Produces("application/json")
-	public String getEvenement(@PathParam(value="id") int id) {
+	public String getEvenement() {
 
 		EntityManagerFactory emf = Persistence.createEntityManagerFactory("JpaALerte");
         EntityManager em = emf.createEntityManager();
