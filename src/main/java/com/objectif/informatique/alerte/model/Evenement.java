@@ -170,6 +170,18 @@ public class Evenement implements Serializable{
 	public void setDescEvt(String descEvt) {
 		this.descEvt = descEvt;
 	}
+	/**
+	 * @return the responsable
+	 */
+	public Responsable getResponsable() {
+		return responsable;
+	}
+	/**
+	 * @param responsable the responsable to set
+	 */
+	public void setResponsable(Responsable responsable) {
+		this.responsable = responsable;
+	}
 	public Date getDateEchEvt() {
 		return dateEchEvt;
 	}

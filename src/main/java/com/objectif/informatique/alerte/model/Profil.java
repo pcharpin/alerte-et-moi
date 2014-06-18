@@ -28,6 +28,7 @@ public class Profil implements Serializable{
 	private EnumTypeProf enumTypeProf;
 	@Column(name="descProf")
 	private String descProf;
+	
 	/**
 	 * @param idProf
 	 * @param enumTypeProf
