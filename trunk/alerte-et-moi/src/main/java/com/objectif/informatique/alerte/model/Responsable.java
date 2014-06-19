@@ -55,6 +55,18 @@ public class Responsable implements Serializable{
 		this.emailResp = emailResp;
 		this.evenements = evenements;
 	}
+	
+	
+	public Responsable(int profil, String nomResp,
+			String prenResp, String emailResp, Set<Evenement> evenements) {
+		super();
+		this.profil = profil;
+		this.nomResp = nomResp;
+		this.prenResp = prenResp;
+		this.emailResp = emailResp;
+		this.evenements = evenements;
+	}
+	
 	/**
 	 * @return the idResp
 	 */
