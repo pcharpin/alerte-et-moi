@@ -6,9 +6,13 @@ package com.objectif.informatique.alerte.model;
 import java.io.Serializable;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 
 /**
@@ -16,6 +20,7 @@ import javax.persistence.ManyToMany;
  * @author P0P0T3
  *
  */
+@Entity
 public class Document implements Serializable{
 
 	/**
@@ -33,23 +38,27 @@ public class Document implements Serializable{
 	@Column(name = "lienDoc")
 	private String lienDoc;
 	
-//	@ManyToMany(mappedBy="documents")
-//	private Set<Evenement> evenements;
-	//private Set<Evenement> evenements = new HashSet<Evenement>();
+//	@ManyToMany(mappedBy="documents", cascade=CascadeType.ALL)
 
-//	@ManyToMany(targetEntity=Dossier.class,
-//			cascade={CascadeType.PERSIST, CascadeType.MERGE}
-//	)
-//		@JoinTable(
-//				name="dossier_document",
-//				joinColumns=@JoinColumn(name="idDoc"),
-//				inverseJoinColumns=@JoinColumn(name="idDos")
-//		)
-//	private Set<Dossier> dossiers = new HashSet<Dossier>();
-//	
+	@ManyToMany(cascade=CascadeType.ALL)
+	@JoinTable(
+			name="evenement_document",
+			joinColumns={@JoinColumn(name="Document_idDoc")},
+			inverseJoinColumns={@JoinColumn(name="Evenement_idEvt")}
+	)
+	private Set<Evenement> evenements;
+	
+	public Document(){}
+	
 	public Document(int idDoc, String accesDoc, String lienDoc) {
 		super();
 		this.idDoc = idDoc;
+		this.accesDoc = accesDoc;
+		this.lienDoc = lienDoc;
+	}
+	
+	public Document(String accesDoc, String lienDoc) {
+		super();
 		this.accesDoc = accesDoc;
 		this.lienDoc = lienDoc;
 	}
@@ -81,16 +90,16 @@ public class Document implements Serializable{
 	/**
 	 * @return the evenements
 	 */
-//	public Set<Evenement> getEvenements() {
-//		return evenements;
-//	}
-//
-//	/**
-//	 * @param evenements the evenements to set
-//	 */
-//	public void setEvenements(Set<Evenement> evenements) {
-//		this.evenements = evenements;
-//	}
+	public Set<Evenement> getEvenements() {
+		return evenements;
+	}
+	
+	/**
+	 * @param evenements the evenements to set
+	 */
+	public void setEvenements(Set<Evenement> evenements) {
+		this.evenements = evenements;
+	}
 
 	/* (non-Javadoc)
 	 * @see java.lang.Object#toString()
@@ -105,7 +114,7 @@ public class Document implements Serializable{
 		builder.append(", lienDoc=");
 		builder.append(lienDoc);
 		builder.append(", evenements=");
-		//builder.append(evenements);
+		builder.append(evenements);
 		builder.append("]");
 		return builder.toString();
 	}
