@@ -29,33 +29,35 @@ public class EvenementRestService {
 	@GET
 	@Path("/evenement/get")
 	//@Produces(MediaType.APPLICATION_JSON)
-	public List<Evenement> getEvenement() {
+	@Produces("application/json")
+	public String getEvenement() {
 
 		EntityManagerFactory emf = Persistence.createEntityManagerFactory("JpaALerte");
         EntityManager em = emf.createEntityManager();
 		EvenementDAOImpl evenementServicDaoImpl = new EvenementDAOImpl(em);
 		final GsonBuilder builder = new GsonBuilder();
 		final Gson gson = builder.create();
+		Gson gson1 = new Gson();
 	
 		String evenement = null;
 		List<Evenement> evenements = null;
 		try {
-			evenements =evenementServicDaoImpl.findAll();
-		for(int i=0;i<evenements.size();i++){
-			//evenement += evenements.get(i).getNomEvt();
-			evenement += evenements.get(i).getNomEvt();	
-			String json = gson.toJson(evenement);
-			System.out.println("Résultat = "+ json);
-			//gson.toJson(evenement);
-		}
+//			ArrayList<String> interests = new ArrayList<String>(); 
+//			evenements =evenementServicDaoImpl.findAll();
+//			
+			ArrayList<String> interests = new ArrayList<String>();  
+			Evenement evenement2 =  new Evenement();
+			evenement2.setNomEvt("nomEvt");
+			evenement2.setActifEvt(0);
+			interests.add(evenement);		
+			gson1 = new Gson();
+			evenement = gson1.toJson(evenement2);
+			System.out.println("Résultat = "+ gson1.toJson(evenement2));			
 	}
 
 		catch (Exception e) {
 			System.out.println("Exception Error"); // Console
 		}
-		return evenements;
-		
-
+		return evenement;
 	}
-
 }
