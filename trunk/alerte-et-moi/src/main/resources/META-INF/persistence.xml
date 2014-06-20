@@ -11,8 +11,7 @@
         <class>com.objectif.informatique.alerte.model.Dossier</class>
         <class>com.objectif.informatique.alerte.model.Evenement</class>
         <class>com.objectif.informatique.alerte.model.Profil</class>
-        <!-- TODO ajouter les class 
-        -->
+
         <properties>
         	<property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect" />
 			<property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver" />
