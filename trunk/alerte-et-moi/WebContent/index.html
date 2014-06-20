@@ -30,7 +30,8 @@
 		<script src="js/ngDialog.js"></script>
 		<script src="js/ngDialogCtrl.js"></script>
 		
-  		<script src="js/angular-resource.js"></script>
+  		<script src="js/angular-ressource.js"></script>
+  		<script src="js/services.js"></script>
 	</head>
 	
 	<body data-spy="scroll">
@@ -112,10 +113,11 @@
 										</div>
 										<div>
 											<ul class="events">
-												<li ng-repeat="event in events | filter:{title: query} | orderBy:order">
+											{{listeEvt}}
+												<li ng-repeat="event in listeEvt | filter:{title: query} | orderBy:order">
     											<div class="btn-group">
-												  <button type="button" class="btn btn-info">{{event.title}}</button>
-												  <button type="button" class="btn btn-info">{{event.start |date:"dd/MM/yyyy"}}</button>
+												  <button type="button" class="btn btn-info">{{event.idDos}}</button>
+												  <!-- <button type="button" class="btn btn-info">{{event.start |date:"dd/MM/yyyy"}}</button> -->
 												 </div>
 												 <div class="btn-group">
 												  <button type="button" class="btn btn-success">SEE</button>
