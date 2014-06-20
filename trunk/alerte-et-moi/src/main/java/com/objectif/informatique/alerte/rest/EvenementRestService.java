@@ -52,7 +52,8 @@ public class EvenementRestService {
 			interests.add(evenement);		
 			gson1 = new Gson();
 			evenement = gson1.toJson(evenement2);
-			System.out.println("Résultat = "+ gson1.toJson(evenement2));			
+			System.out.println("Rï¿½sultat = "+ gson1.toJson(evenement2));			
+			System.out.println(evenement);			
 	}
 
 		catch (Exception e) {
