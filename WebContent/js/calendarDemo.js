@@ -1,9 +1,9 @@
 /**
  * calendarDemoApp - 0.1.3
  */
-angular.module('calendarDemoApp', ['ui.calendar', 'ui.bootstrap','ngDialog']);
+angular.module('calendarDemoApp', ['ui.calendar', 'ui.bootstrap','ngDialog','ngResource']);
 
-function CalendarCtrl($scope,ngDialog) {
+function CalendarCtrl($scope,ngDialog,$resource) {
 
     var date = new Date();
     var d = date.getDate();
