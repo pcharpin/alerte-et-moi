@@ -1,9 +1,9 @@
 /**
  * calendarDemoApp - 0.1.3
  */
-angular.module('calendarDemoApp', ['ui.calendar', 'ui.bootstrap','ngDialog','ngResource']);
+angular.module('calendarDemoApp', ['ui.calendar', 'ui.bootstrap','ngDialog','calendarServices']);
 
-function CalendarCtrl($scope,ngDialog,$resource) {
+function CalendarCtrl($scope,ngDialog,Evenement) {
 
     var date = new Date();
     var d = date.getDate();
@@ -140,7 +140,13 @@ function CalendarCtrl($scope,ngDialog,$resource) {
     $scope.showMyCalendar = function(){
     	$scope.showCal=!$scope.showCal;
     	if($scope.showCal){
-    	    $scope.events = [
+    	    //$scope.events = [];
+    		console.log("tototototototot");
+    	    Evenement.get().$promise.then(function(result){
+    	    	console.log("resultat du REST ##### : ",result);
+    	    	$scope.listeEvt = result;
+    	    	});
+    	    /*[
              {title: 'All Day Event',start: new Date(y, m, 1)},
              {title: 'Long Event',start: new Date(y, m, d - 5),end: new Date(y, m, d - 2)},
              {id: 998,title: 'Repeating Event',start: new Date(y, m, d - 3, 16, 0),allDay: false},
@@ -148,12 +154,19 @@ function CalendarCtrl($scope,ngDialog,$resource) {
              {title: 'Birthday Party',start: new Date(y, m, d + 1, 19, 0),end: new Date(y, m, d + 1, 22, 30),allDay: false},
              {title: 'Click for Google',start: new Date(y, m, 28),end: new Date(y, m, 29),url: 'http://google.com/'},
              {title: 'toto a la fin?',start: new Date(y, m-1, 20)}
-           ];
+           ];*/
+    	    		
     	}else{
-    		 $scope.events = [];
+    		 $scope.listeEvt = [];
     	}
     	
     };
+    function PhoneListCtrl($scope, Evenement) {
+    	$scope.evenements = Evenement.query();
+    	$scope.select = function(evenement) {
+    	$scope.editedPhone = evenement;
+    	};
+    	}
     
     /* event sources array*/
     $scope.eventSources = [$scope.events, $scope.eventSource, $scope.eventsF];
@@ -167,6 +180,7 @@ function CalendarCtrl($scope,ngDialog,$resource) {
                    ];
     $scope.order = 'date';
     $scope.showCal=true;
+
 
 }
 
