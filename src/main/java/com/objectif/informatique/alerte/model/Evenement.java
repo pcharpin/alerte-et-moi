@@ -5,7 +5,6 @@ package com.objectif.informatique.alerte.model;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -15,9 +14,6 @@ import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -27,7 +23,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name="evenement")
-public class Evenement implements Serializable{
+public class Evenement {
 	/**
 	 * 
 	 */
@@ -72,13 +68,13 @@ public class Evenement implements Serializable{
 	@ManyToOne(cascade = CascadeType.ALL)
 	private Responsable responsable;	
 	
-	@ManyToMany(cascade=CascadeType.ALL)
-	@JoinTable(
-			name="evenement_document",
-			joinColumns={@JoinColumn(name="Evenement_idEvt")},
-			inverseJoinColumns={@JoinColumn(name="Document_idDoc")}
-	)
-	private Set<Document> documents = new HashSet<Document>();
+	/*@ManyToMany(targetEntity=Document.class)
+		@JoinTable(
+				name="evenement_document",
+				joinColumns=@JoinColumn(name="idEvt"),
+				inverseJoinColumns=@JoinColumn(name="idDoc")
+		)
+	private Set<Document> documents = new HashSet<Document>();*/
 	
 	
 	/**
@@ -129,12 +125,7 @@ public class Evenement implements Serializable{
 	}
 	public Evenement(int id, String nomEvt){
 		super();
-		this.idEvt = id;
-		this.nomEvt = nomEvt;
-	}
-	
-	public Evenement( String nomEvt){
-		super();
+		this.idEvt = idEvt;
 		this.nomEvt = nomEvt;
 	}
 	/**
@@ -292,15 +283,15 @@ public class Evenement implements Serializable{
 	/**
 	 * @return the evenements
 	 */
-	public Set<Document> getDocuments() {
+/*	public Set<Document> getDocuments() {
 		return documents;
-	}
+	}*/
 	/**
 	 * @param documents the documents to set
 	 */
-	public void setDocuments(Set<Document> documents) {
+/*	public void setDocuments(Set<Document> documents) {
 		this.documents = documents;
-	}
+	}*/
 	/* (non-Javadoc)
 	 * @see java.lang.Object#toString()
 	 */
