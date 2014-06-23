@@ -10,9 +10,7 @@ import org.hibernate.cfg.AnnotationConfiguration;
 
 /**
  * @author vdibi
- * Classe HibernateUtils chargée de créer et de gérer la SessionFactory
- * La méthode getSession() de cette classe sera appelée à chaque fois que nous voudrons *
- * accéder à la base de données.
+*
  */
 public class HibernateUtils {
 
