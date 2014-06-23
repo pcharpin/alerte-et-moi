@@ -30,7 +30,7 @@ public class TestEvement {
 		try {
 		EntityManagerFactory emf = Persistence.createEntityManagerFactory("JpaALerte");
         EntityManager em = emf.createEntityManager();
-        EvenementDAOImpl evenementServiceImpl = new EvenementDAOImpl(em);
+        /*EvenementDAOImpl evenementServiceImpl = new EvenementDAOImpl(em);
 
 			List<Evenement> evenements = evenementServiceImpl.findAll();
 			String evenement = null ;
@@ -38,7 +38,7 @@ public class TestEvement {
 			evenement = evenements.get(i).getNomEvt();	
 			String json = gson.toJson(evenement);
 				//System.out.println("evenement = "+ evenement);
-				System.out.println("Résultat = "+ json);
+				//System.out.println("Rï¿½sultat = "+ json);
 			}
 		
 			
@@ -48,7 +48,7 @@ public class TestEvement {
 			
 			//System.out.println("resultat : " + evenementServiceImpl.create(evenement));			
 			//evenement.setDocuments(documents);
-			//System.out.println("evenement : " + evenement);
+			//System.out.println("evenement : " + evenement);*/
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

@@ -7,7 +7,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
 import org.hibernate.Session;
@@ -98,9 +97,17 @@ try {
 	}
 	@Override
 	public List<Evenement> findAll() throws Exception {
-		List<Evenement> evenements=new ArrayList<Evenement>();
-	    Query query = entityManager.createQuery("SELECT e.* FROM Evenement e");
-	    evenements = query.getResultList();
+		List<Evenement> evenements = new ArrayList<Evenement>();
+		ArrayList<Integer> listId = new ArrayList<Integer>();
+	    //Query query = entityManager.createQuery("select e.idEvt,e.idDos, e.nomEvt, e.descEvt, e.dateEchEvt,e.exeEvt, e.mntEvt,e.modeGestionEvt,e.lienGestEvt,e.trtEvt,e.dateTrtEvt,e.enumPeriodeEvet,e.actifEvt,e.recopAutoEvt,e.recurtEvt,e.libreEvt from Evenement e");
+	    Query query = entityManager.createQuery("select e.idEvt from Evenement e");
+	    listId = (ArrayList<Integer>) query.getResultList();
+	    System.out.println("Résultat = " +listId);
+	    for(int i=0;i<listId.size();i++){
+	    	evenements.add(entityManager.find(Evenement.class, listId.get(i)));
+	    }
+	    System.out.println("Résultat de la liste ... = " +evenements);
+
 	    return evenements;
 	}
 

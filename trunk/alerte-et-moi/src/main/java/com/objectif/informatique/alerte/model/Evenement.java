@@ -5,6 +5,7 @@ package com.objectif.informatique.alerte.model;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -12,8 +13,12 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -23,7 +28,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name="evenement")
-public class Evenement {
+public class Evenement implements Serializable{
 	/**
 	 * 
 	 */
@@ -65,16 +70,17 @@ public class Evenement {
 	private int recurtEvt;
 	@Column(name="libreEvt")
 	private String libreEvt;
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne(cascade = CascadeType.ALL, fetch=FetchType.LAZY)
+	@JoinColumn(name="Responsable_idResp")
 	private Responsable responsable;	
 	
-	/*@ManyToMany(targetEntity=Document.class)
+	@ManyToMany(targetEntity=Document.class, fetch=FetchType.LAZY)
 		@JoinTable(
 				name="evenement_document",
-				joinColumns=@JoinColumn(name="idEvt"),
-				inverseJoinColumns=@JoinColumn(name="idDoc")
+				joinColumns={@JoinColumn(name="Evenement.idEvt")},
+				inverseJoinColumns={@JoinColumn(name="Document.idDoc")}
 		)
-	private Set<Document> documents = new HashSet<Document>();*/
+	private Set<Document> documents = new HashSet<Document>();
 	
 	
 	/**
