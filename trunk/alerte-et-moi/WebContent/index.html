@@ -115,15 +115,20 @@
 											<ul class="events">
 											{{listeEvt}}
 												<li ng-repeat="event in listeEvt | filter:{title: query} | orderBy:order">
-    											<div class="btn-group">
-												  <button type="button" class="btn btn-info">{{event.idDos}}</button>
+												{{event.nomEvt}}
+    											<!--  <div class="btn-group">
+												  <button type="button" class="btn btn-info">{{event.nomEvt}}</button>
+												  <button type="button" class="btn btn-info">{{event.Responsable_idResp}}</button>
+												  <button type="button" class="btn btn-info">{{event.dateEchEvt}}</button>
+												  <button type="button" class="btn btn-info">{{event.priorEvt}}</button>
+												  <button type="button" class="btn btn-info">{{event.nomEvt}}</button>-->
 												  <!-- <button type="button" class="btn btn-info">{{event.start |date:"dd/MM/yyyy"}}</button> -->
 												 </div>
-												 <div class="btn-group">
-												  <button type="button" class="btn btn-success">SEE</button>
-												  <button type="button" class="btn btn-warning">EDIT</button>
+												 <!-- <div class="btn-group">
+												  <button type="button" class="btn btn-success">detail</button>
+												  <button type="button" class="btn btn-warning">dossier</button>
 												  <button type="button" class="btn btn-danger">DELETE</button>
-												</div>
+												</div>-->
 												</li>
 											</ul>
 										</div>

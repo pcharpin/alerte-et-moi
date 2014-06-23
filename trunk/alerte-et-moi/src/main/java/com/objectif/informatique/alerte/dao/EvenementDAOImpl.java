@@ -3,6 +3,7 @@
  */
 package com.objectif.informatique.alerte.dao;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -97,8 +98,10 @@ try {
 	}
 	@Override
 	public List<Evenement> findAll() throws Exception {
-	    Query query = entityManager.createQuery("SELECT e FROM Evenement e");
-	    return (List<Evenement>) query.getResultList();
+		List<Evenement> evenements=new ArrayList<Evenement>();
+	    Query query = entityManager.createQuery("SELECT e.* FROM Evenement e");
+	    evenements = query.getResultList();
+	    return evenements;
 	}
 
 }
