@@ -95,15 +95,16 @@
 										<span class="off btn-default" ng-hide="showCal">OFF</span>  
 										</span>
 										<select ng-model="userSelected" >
-											<option ng-repeat="user in users" value="{{user}}">{{user.name}}</option>
+											<option value="">tous</option>
+											<option ng-repeat="user in users" value="{{user.idResp}}">{{user.prenResp}}</option>
 										</select>
 										<hr>
 										<h4>Tri</h4>
-										<input type="radio" ng-model="order" value="start">start<br>
-										<input type="radio" ng-model="order" value="title">title<br>
+										<input type="radio" ng-model="order" value="dateEchEvt">date d'échéancet<br>
+										<input type="radio" ng-model="order" value="nomEvt">nom de l'événement<br>
 										<input type="radio" ng-model="order" value="toto">toto<br>
 										<hr>
-										<h4>Recherche : </h4>
+										<h4>Recherche : </h4>(dans le nom de l'évènement)
 										<span class"glyphicon glyphicon-search"></span><input ng-model="query"><br>
 										<hr>
 									</div>
@@ -111,24 +112,23 @@
 										<div class="alert-success calAlert" ng-show="alertMessage != undefined && alertMessage != ''">
 											<h4>{{alertMessage}}</h4>
 										</div>
-										<div>
+										<div ng-repeat="month in months">
 											<ul class="events">
-											{{listeEvt}}
-												<li ng-repeat="event in listeEvt | filter:{title: query} | orderBy:order">
-												{{event.nomEvt}}
-    											<!--  <div class="btn-group">
-												  <button type="button" class="btn btn-info">{{event.nomEvt}}</button>
-												  <button type="button" class="btn btn-info">{{event.Responsable_idResp}}</button>
-												  <button type="button" class="btn btn-info">{{event.dateEchEvt}}</button>
-												  <button type="button" class="btn btn-info">{{event.priorEvt}}</button>
-												  <button type="button" class="btn btn-info">{{event.nomEvt}}</button>-->
-												  <!-- <button type="button" class="btn btn-info">{{event.start |date:"dd/MM/yyyy"}}</button> -->
-												 </div>
-												 <!-- <div class="btn-group">
+												<li ng-repeat="event in listeEvt | filter:{nomEvt: query,responsable_idResp: userSelected} | orderBy:order">
+    											{{month.nom}} ######{{event.dateEchEvt | date:"MM"}}
+    											
+    											<div class="btn-group">
+												  <button type="button" class="btn btn-info">1{{event.nomEvt}}</button>
+												  <!--  <button type="button" class="btn btn-info">2{{event.responsable_idResp}}</button>-->
+												  <button type="button" class="btn btn-info">3{{event.dateEchEvt | date:"dd/MM/yyyy"}}</button>
+												  <button type="button" class="btn btn-info">4{{event.priorEvt}}</button>
+												 </div><br>
+												 <div class="btn-group">
 												  <button type="button" class="btn btn-success">detail</button>
 												  <button type="button" class="btn btn-warning">dossier</button>
 												  <button type="button" class="btn btn-danger">DELETE</button>
-												</div>-->
+												  
+												</div>
 												</li>
 											</ul>
 										</div>
