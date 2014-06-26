@@ -1,5 +1,7 @@
 package com.objectif.informatique.alerte.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -24,5 +26,10 @@ public class EvenementServiceImpl implements EvenementService {
 			e.printStackTrace();
 			return null;
 		}
+	}
+
+	@Override
+	public List<Evenement> findAll() throws Exception {
+		return evenementDAO.findAll();
 	}
 }

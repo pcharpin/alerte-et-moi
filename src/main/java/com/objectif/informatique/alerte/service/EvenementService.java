@@ -1,5 +1,7 @@
 package com.objectif.informatique.alerte.service;
 
+import java.util.List;
+
 import com.objectif.informatique.alerte.model.Evenement;
 
 /**
@@ -10,5 +12,6 @@ import com.objectif.informatique.alerte.model.Evenement;
 public interface  EvenementService {
 	
 	public Evenement getEvenementById(int evenementId);
+	List<Evenement> findAll() throws Exception;
 
 }
