@@ -8,11 +8,13 @@ import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import org.codehaus.jackson.annotate.JsonIgnore;
+import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 
 /**
  * @author vdibi
@@ -20,6 +22,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name="responsable")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Responsable implements Serializable{
 	
 	@Id @GeneratedValue
@@ -32,6 +35,8 @@ public class Responsable implements Serializable{
 	private String prenResp;
 	@Column(name="emailResp")
 	private String emailResp;
+	
+	@JsonIgnore
 	@OneToMany(mappedBy="responsable")
 	private Set<Evenement> evenements;
 	

@@ -7,11 +7,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.objectif.informatique.alerte.model.Evenement;
@@ -23,19 +23,22 @@ import com.objectif.informatique.alerte.model.Evenement;
 
 @Repository("EvenementDAO")
 public class EvenementDAOImpl implements EvenementDAO{
-//	@PersistenceContext 
+	
+	@PersistenceContext(unitName="JpaALerte")
 	private EntityManager entityManager;
 	
 	public EvenementDAOImpl(EntityManager entityManager) {
         this.entityManager= entityManager;
     }
 //	
-	@Autowired
+//	@Autowired
 	private SessionFactory sessionFactory;
 
 	private Session getCurrentSession() {
 		return sessionFactory.getCurrentSession();
 	}
+	
+	public EvenementDAOImpl(){}
 	/**
 	 * @param entityManager the entityManager to set
 	 */
@@ -46,8 +49,7 @@ public class EvenementDAOImpl implements EvenementDAO{
 
 	@Override
 	public Integer create(Evenement evenement) throws Exception {
-try {
-			
+		try {
 			entityManager.persist(evenement);
 			return evenement.getIdEvt();
 		} catch (Exception e) {
@@ -86,11 +88,12 @@ try {
 	}
 
 	@Override
-	public Evenement findEvenementById(Long evenementId) {
+	public Evenement findEvenementById(int evenementId) {
 		try {
-		//	Evenement e = entityManager.find(Evenement.class, evenementId); 
-		//	return e;
+			Evenement e = entityManager.find(Evenement.class, evenementId); 
+			return e;
 		} catch (Exception e) {
+			//Il faut logger etc...
 			e.printStackTrace();
 		}
 		return null;
