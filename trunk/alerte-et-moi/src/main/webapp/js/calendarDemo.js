@@ -60,8 +60,6 @@ function CalendarCtrl($scope,ngDialog,Evenement) {
     		controller: 'InsideCtrl'
     		/*controller: 'SecondModalCtrl'*/
     	});
-    	
-
     };
     /* alert on Drop */
      $scope.alertOnDrop = function(event, dayDelta, minuteDelta, allDay, revertFunc, jsEvent, ui, view){
@@ -137,6 +135,8 @@ function CalendarCtrl($scope,ngDialog,Evenement) {
         eventResize: $scope.alertOnResize
       }
     };
+    
+    /* bouton ON/OFF de la liste d'evenements, remplit la liste des evenement ci-dessous*/
     $scope.showMyCalendar = function(){
     	$scope.showCal=!$scope.showCal;
     	if($scope.showCal){
@@ -189,6 +189,15 @@ function CalendarCtrl($scope,ngDialog,Evenement) {
     	}
     	
     };
+    
+    /* fenetre d'edition d'un evenement */
+    $scope.detailEvt = function(event){
+    	$scope.event = event;
+    	ngDialog.open({
+    		 template: 'editEvt.html'
+    	});
+    }
+    
     function PhoneListCtrl($scope, Evenement) {
     	$scope.evenements = Evenement.query();
     	$scope.select = function(evenement) {
