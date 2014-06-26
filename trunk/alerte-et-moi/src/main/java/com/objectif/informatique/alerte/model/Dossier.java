@@ -129,6 +129,10 @@ public class Dossier implements Serializable{
 	 * @param cntCmntDos
 	 * @param libre
 	 */
+	public Dossier(){
+		
+	}
+	
 	public Dossier(int idDos, String nomDos,
 			EnumTypesDossiers enumTypesDossiers, String descDoc,
 			Set<Evenement> evenements, boolean priorDos, float mntDOS,

@@ -141,13 +141,11 @@ function CalendarCtrl($scope,ngDialog,Evenement) {
     	$scope.showCal=!$scope.showCal;
     	if($scope.showCal){
     	    //$scope.events = [];
-    		/*
     		Evenement.get().$promise.then(function(result){
     	    	console.log("resultat du REST ##### : ",result);
     	    	$scope.listeEvt = result;
     	    	});
-    		*/
-    		$scope.listeEvt = [
+    		/*$scope.listeEvt = [
       		                   	{idEvt:'1',idDos:'1',responsable_idResp:'1',nomEvt:'GAN retraite : declaration',descEvt:'bla bla bla bla ',dateEchEvt:'2014-06-30',exeEvt:'',mntEvt:'',modeGestionEvt:'',lienGestEvt:'',trtEvt:'',dateTrtEvt:'',enumPeriodeEvet:'',actifEvt:'',recopAutoEvt:'',recurtEvt:'',libreEvt:''},
     		                   	{idEvt:'2',idDos:'1',responsable_idResp:'1',nomEvt:'GAN retraite : paiement',descEvt:'bla bla bla bla ',dateEchEvt:'2014-06-28',exeEvt:'',mntEvt:'',modeGestionEvt:'',lienGestEvt:'',trtEvt:'',dateTrtEvt:'',enumPeriodeEvet:'',actifEvt:'',recopAutoEvt:'',recurtEvt:'',libreEvt:''},
     		                   	{idEvt:'3',idDos:'1',responsable_idResp:'1',nomEvt:'Declaration URSAFF',descEvt:'bla bla bla bla ',dateEchEvt:'2014-06-25',exeEvt:'',mntEvt:'',modeGestionEvt:'',lienGestEvt:'',trtEvt:'',dateTrtEvt:'',enumPeriodeEvet:'',actifEvt:'',recopAutoEvt:'',recurtEvt:'',libreEvt:''},
@@ -173,7 +171,7 @@ function CalendarCtrl($scope,ngDialog,Evenement) {
     		                   	{idEvt:'23',idDos:'1',responsable_idResp:'1',nomEvt:'Declaration URSAFF',descEvt:'bla bla bla bla ',dateEchEvt:'2014-06-25',exeEvt:'',mntEvt:'',modeGestionEvt:'',lienGestEvt:'',trtEvt:'',dateTrtEvt:'',enumPeriodeEvet:'',actifEvt:'',recopAutoEvt:'',recurtEvt:'',libreEvt:''},
     		                   	{idEvt:'24',idDos:'1',responsable_idResp:'2',nomEvt:'Tableau de bord prévisionnel',descEvt:'bla bla bla bla ',dateEchEvt:'2014-04-25',exeEvt:'',mntEvt:'',modeGestionEvt:'',lienGestEvt:'',trtEvt:'',dateTrtEvt:'',enumPeriodeEvet:'',actifEvt:'',recopAutoEvt:'',recurtEvt:'',libreEvt:''},
 		                   	{idEvt:'25',idDos:'1',responsable_idResp:'2',nomEvt:'compte rendu du conseil d Administration',descEvt:'bla bla bla bla ',dateEchEvt:'2014-07-25',exeEvt:'',mntEvt:'',modeGestionEvt:'',lienGestEvt:'',trtEvt:'',dateTrtEvt:'',enumPeriodeEvet:'',actifEvt:'',recopAutoEvt:'',recurtEvt:'',libreEvt:''}
-    		                   ];
+    		                   ];*/
     	    /*[
              {title: 'All Day Event',start: new Date(y, m, 1)},
              {title: 'Long Event',start: new Date(y, m, d - 5),end: new Date(y, m, d - 2)},

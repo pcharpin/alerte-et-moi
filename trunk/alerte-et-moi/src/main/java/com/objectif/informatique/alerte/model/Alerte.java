@@ -66,6 +66,7 @@ public class Alerte implements Serializable{
 	 * @param evenement
 	 * @param responsables
 	 */
+	public Alerte(){}
 	public Alerte(int idAler, int idEvt, EnumConstante enumConstante,
 			Date dateAlerte, Evenement evenement, Set<Responsable> responsables) {
 		super();

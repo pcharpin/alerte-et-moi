@@ -6,15 +6,20 @@ package com.objectif.informatique.alerte.model;
 import java.io.Serializable;
 
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 /**
  * @author vdibi
  *
  */
+@Entity
+@Table(name="profil")
+
 public class Profil implements Serializable{
 
 	/**
@@ -34,6 +39,7 @@ public class Profil implements Serializable{
 	 * @param enumTypeProf
 	 * @param descProf
 	 */
+	public Profil(){}
 	public Profil(int idProf, EnumTypeProf enumTypeProf, String descProf) {
 		super();
 		this.idProf = idProf;
