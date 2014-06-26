@@ -64,26 +64,14 @@ public class EvenementRestService {
 	
 	
 	@GET
-	@Path("/evenement/getall")
-	//@Produces(MediaType.APPLICATION_JSON)
-	@Produces("application/json")
-	public List<Evenement> getAllEvenement() {
-
+	@Path("/getall")
+	@Produces(MediaType.APPLICATION_JSON+";charset=utf-8")
+	public List<Evenement> getAllEvenement() throws Exception {
+		
 		EntityManagerFactory emf = Persistence.createEntityManagerFactory("JpaALerte");
         EntityManager em = emf.createEntityManager();
 		EvenementDAOImpl evenementServicDaoImpl = new EvenementDAOImpl(em);
-	
-		List<Evenement> evenements = null;
-		try {
-			System.out.println("totototototo ");			
-			evenements = evenementServicDaoImpl.findAll();
-
-			System.out.println("Résultat = " +evenements);			
-	}
-
-		catch (Exception e) {
-			System.out.println("Exception Error"+e.getMessage()); // Console
-		}
+		List<Evenement> evenements = evenementServicDaoImpl.findAll();
 		return evenements;
 	}
 
