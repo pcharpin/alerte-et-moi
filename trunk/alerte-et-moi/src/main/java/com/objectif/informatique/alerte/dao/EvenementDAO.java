@@ -12,6 +12,7 @@ import com.objectif.informatique.alerte.model.Evenement;
  * @author vdibi
  * 
  */
+
 public interface EvenementDAO {
 	Integer create(Evenement evenement) throws Exception;
 
@@ -21,7 +22,7 @@ public interface EvenementDAO {
 
 	String getEvenementByName(String name) throws Exception;
 
-	Evenement findEvenementById(Long evenementId) throws Exception;
+	Evenement findEvenementById(int evenementId) throws Exception;
 	
 	List<Evenement> findAll() throws Exception;
 

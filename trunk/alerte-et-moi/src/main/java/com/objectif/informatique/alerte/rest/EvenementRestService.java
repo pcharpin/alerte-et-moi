@@ -10,21 +10,30 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.core.MediaType;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import com.objectif.informatique.alerte.dao.EvenementDAOImpl;
 import com.objectif.informatique.alerte.model.Evenement;
+import com.objectif.informatique.alerte.service.EvenementService;
 
 /**
  * 
  */
-@Path("/alerte")
+@Component
+@Path("/evenement")
 public class EvenementRestService {
+	
+	@Autowired
+	EvenementService service;
 
 	@GET
 	@Path("/evenement/get")
-	//@Produces(MediaType.APPLICATION_JSON)
-	@Produces("application/json")
+	@Produces(MediaType.APPLICATION_JSON)
 	public Evenement getEvenement() {
 
 		EntityManagerFactory emf = Persistence.createEntityManagerFactory("JpaALerte");
@@ -35,8 +44,7 @@ public class EvenementRestService {
 		try {
 			System.out.println("totototototo ");			
 			evenement = evenementServicDaoImpl.findAll().get(0);
-
-			System.out.println("R�sultat = " +evenement);
+			System.out.println("Résultat = " +evenement);
 			
 			
 	}
@@ -46,6 +54,14 @@ public class EvenementRestService {
 		}
 		return evenement;
 	}
+	
+	@GET
+	@Path("/{id}")
+	@Produces(MediaType.APPLICATION_JSON+";charset=utf-8")
+	public Evenement getEvenement(@PathParam("id") int id) {
+		return service.getEvenementById(id);
+	}
+	
 	
 	@GET
 	@Path("/evenement/getall")
@@ -62,7 +78,7 @@ public class EvenementRestService {
 			System.out.println("totototototo ");			
 			evenements = evenementServicDaoImpl.findAll();
 
-			System.out.println("R�sultat = " +evenements);			
+			System.out.println("Résultat = " +evenements);			
 	}
 
 		catch (Exception e) {
@@ -70,4 +86,5 @@ public class EvenementRestService {
 		}
 		return evenements;
 	}
+
 }

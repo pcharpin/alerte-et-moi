@@ -14,10 +14,19 @@
 
         <properties>
         	<property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect" />
-			<property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver" />
-            <property name="javax.persistence.jdbc.url" value="jdbc:mysql://192.168.1.101:3306/alerte"/>
-            <property name="javax.persistence.jdbc.user" value="tgosse"/>
-            <property name="javax.persistence.jdbc.password" value="tgosse"/>
+        	
+        	<property name="hibernate.connection.driver_class" value="com.mysql.jdbc.Driver" />
+        	<property name="hibernate.connection.url" value="jdbc:mysql://localhost:3306/alerte"/>
+        	<property name="hibernate.connection.username" value="root"/>
+        	<property name="hibernate.connection.password" value="admin"/>
+        	 
+<!-- 			<property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver" /> -->
+<!--             <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/alerte"/> -->
+<!--             <property name="javax.persistence.jdbc.user" value="root"/> -->
+<!--             <property name="javax.persistence.jdbc.password" value="admin"/> -->
+            
+            <property name = "hibernate.show_sql" value = "true" />
+            
         </properties>
         
     </persistence-unit>

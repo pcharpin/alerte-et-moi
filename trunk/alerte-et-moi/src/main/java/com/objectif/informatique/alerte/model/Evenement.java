@@ -22,12 +22,15 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.codehaus.jackson.annotate.JsonIgnoreProperties;
+
 /**
  * @author vdibi
  *
  */
 @Entity
 @Table(name="evenement")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Evenement implements Serializable{
 	/**
 	 * 
@@ -70,7 +73,7 @@ public class Evenement implements Serializable{
 	private int recurtEvt;
 	@Column(name="libreEvt")
 	private String libreEvt;
-	@ManyToOne(cascade = CascadeType.ALL, fetch=FetchType.LAZY)
+	@ManyToOne(cascade = CascadeType.ALL, fetch=FetchType.EAGER)
 	@JoinColumn(name="Responsable_idResp")
 	private Responsable responsable;	
 	
