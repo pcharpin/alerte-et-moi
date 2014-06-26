@@ -119,14 +119,13 @@
     											
     											<div class="btn-group">
 												  <button type="button" class="btn btn-info">1{{event.nomEvt}}</button>
-												  <!--  <button type="button" class="btn btn-info">2{{event.responsable_idResp}}</button>-->
 												  <button type="button" class="btn btn-info">3{{event.dateEchEvt | date:"dd/MM/yyyy"}}</button>
 												  <button type="button" class="btn btn-info">4{{event.priorEvt}}</button>
 												 </div><br>
 												 <div class="btn-group">
-												  <button type="button" class="btn btn-success">detail</button>
-												  <button type="button" class="btn btn-warning">dossier</button>
-												  <button type="button" class="btn btn-danger">DELETE</button>
+												  <button type="button"  ng-click="detailEvt(event)" class="btn btn-success">detail</button>
+												  <button type="button"  ng-click="detailDos(event.idDos)" class="btn btn-warning">dossier</button>
+												  <button type="button"  ng-click="deleteEvt(event.idEvt)" class="btn btn-danger">DELETE</button>
 												  
 												</div>
 												</li>
