@@ -9,6 +9,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -61,18 +62,13 @@ public class EvenementRestService {
 	public Evenement getEvenement(@PathParam("id") int id) {
 		return service.getEvenementById(id);
 	}
-	
-	
+
 	@GET
 	@Path("/getall")
 	@Produces(MediaType.APPLICATION_JSON+";charset=utf-8")
 	public List<Evenement> getAllEvenement() throws Exception {
-		
-		EntityManagerFactory emf = Persistence.createEntityManagerFactory("JpaALerte");
-        EntityManager em = emf.createEntityManager();
-		EvenementDAOImpl evenementServicDaoImpl = new EvenementDAOImpl(em);
-		List<Evenement> evenements = evenementServicDaoImpl.findAll();
+		List<Evenement> evenements = service.findAll();
 		return evenements;
 	}
-
+	
 }

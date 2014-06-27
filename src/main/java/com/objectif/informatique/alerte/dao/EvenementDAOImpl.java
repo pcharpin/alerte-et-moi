@@ -82,8 +82,15 @@ public class EvenementDAOImpl implements EvenementDAO{
 	}
 
 	@Override
-	public String getEvenementByName(String name) throws Exception {
-		// TODO Auto-generated method stub
+	public Evenement getEvenementByName(String name) throws Exception {
+		
+		try {
+			Evenement e = entityManager.find(Evenement.class, name); 
+			return e;
+		} catch (Exception e) {
+			//Il faut logger etc...
+			e.printStackTrace();
+		}
 		return null;
 	}
 

@@ -20,7 +20,7 @@ public interface EvenementDAO {
 
 	void delete(Evenement evenement) throws Exception;
 
-	String getEvenementByName(String name) throws Exception;
+	Evenement getEvenementByName(String name) throws Exception;
 
 	Evenement findEvenementById(int evenementId) throws Exception;
 	
