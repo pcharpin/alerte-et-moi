@@ -32,4 +32,15 @@ public class EvenementServiceImpl implements EvenementService {
 	public List<Evenement> findAll() throws Exception {
 		return evenementDAO.findAll();
 	}
+
+	@Override
+	public Evenement getEvenementByName(String name) {
+		try {
+		return evenementDAO.getEvenementByName(name);
+		} catch (Exception e) {
+			// il faut logger etc...
+			e.printStackTrace();
+			return null;
+		}
+}
 }
