@@ -112,6 +112,7 @@
 										<div class="alert-success calAlert" ng-show="alertMessage != undefined && alertMessage != ''">
 											<h4>{{alertMessage}}</h4>
 										</div>
+										{{listeEvt}}
 										<div ng-repeat="month in months">
 											<ul class="events">
 												<li ng-repeat="event in listeEvt | filter:{nomEvt: query,responsable_idResp: userSelected} | orderBy:order">
