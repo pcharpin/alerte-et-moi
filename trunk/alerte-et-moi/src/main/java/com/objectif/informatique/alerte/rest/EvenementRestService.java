@@ -8,12 +8,15 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -21,6 +24,7 @@ import org.springframework.stereotype.Component;
 import com.objectif.informatique.alerte.dao.EvenementDAOImpl;
 import com.objectif.informatique.alerte.model.Evenement;
 import com.objectif.informatique.alerte.service.EvenementService;
+import com.sun.jersey.api.Responses;
 
 /**
  * 
@@ -28,47 +32,55 @@ import com.objectif.informatique.alerte.service.EvenementService;
 @Component
 @Path("/evenement")
 public class EvenementRestService {
-	
+
 	@Autowired
 	EvenementService service;
 
-	@GET
-	@Path("/evenement/get")
-	@Produces(MediaType.APPLICATION_JSON)
-	public Evenement getEvenement() {
-
-		EntityManagerFactory emf = Persistence.createEntityManagerFactory("JpaALerte");
-        EntityManager em = emf.createEntityManager();
-		EvenementDAOImpl evenementServicDaoImpl = new EvenementDAOImpl(em);
-	
-		Evenement evenement = null;
-		try {
-			System.out.println("totototototo ");			
-			evenement = evenementServicDaoImpl.findAll().get(0);
-			System.out.println("Résultat = " +evenement);
-			
-			
-	}
-
-		catch (Exception e) {
-			System.out.println("Exception Error"+e.getMessage()); // Console
-		}
-		return evenement;
-	}
-	
+	/**
+	 * Retourne un evenement par son id
+	 * @param id
+	 * @return
+	 */
 	@GET
 	@Path("/{id}")
-	@Produces(MediaType.APPLICATION_JSON+";charset=utf-8")
+	@Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
 	public Evenement getEvenement(@PathParam("id") int id) {
 		return service.getEvenementById(id);
 	}
 
+	/**
+	 * Retourne tous les evenements 
+	 * @return
+	 * @throws Exception
+	 */
 	@GET
 	@Path("/getall")
-	@Produces(MediaType.APPLICATION_JSON+";charset=utf-8")
+	@Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
 	public List<Evenement> getAllEvenement() throws Exception {
 		List<Evenement> evenements = service.findAll();
 		return evenements;
+	}	
+	/**
+	 * Creer un evenement
+	 * @param evenement
+	 * @return
+	 */
+	@POST
+	@Path("/send")
+	@Consumes(MediaType.APPLICATION_JSON + ";charset=utf-8")
+	public Response add(Evenement evenement){
+		
+	evenement =  new Evenement();
+	evenement.setNomEvt("testVdibi");
+	evenement.setDescEvt("descEvt");	
+			service.create(evenement);
+			return Response.status(200).entity(evenement).build();
 	}
-	
+	@DELETE
+	@Path("/{id}")
+	@Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
+	public Response deleteEvent(@PathParam("id") int id){
+		service.delete(Evenement.class,id);
+		return Response.ok().build();
+	}
 }

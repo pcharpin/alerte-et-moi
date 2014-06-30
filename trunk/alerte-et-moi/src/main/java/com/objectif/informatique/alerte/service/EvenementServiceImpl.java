@@ -34,13 +34,20 @@ public class EvenementServiceImpl implements EvenementService {
 	}
 
 	@Override
-	public Evenement getEvenementByName(String name) {
-		try {
-		return evenementDAO.getEvenementByName(name);
-		} catch (Exception e) {
-			// il faut logger etc...
-			e.printStackTrace();
-			return null;
-		}
-}
+	public Evenement getEvenementByName(String name) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Evenement create(Evenement evenement) {
+		return evenementDAO.create(evenement);
+	}
+
+	@Override
+	public void delete(Class<Evenement> class1, int id) {
+		evenementDAO.delete(id);
+		
+	}
+
 }
