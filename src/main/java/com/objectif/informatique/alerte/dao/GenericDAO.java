@@ -1,15 +1,13 @@
 package com.objectif.informatique.alerte.dao;
 
-import java.util.List;
 
-public interface GenericDAO <TYPE, KEY>{
-
-	List<TYPE> findAll();
+public interface GenericDAO <TYPE>{
 
 	TYPE create(TYPE object);
 
 	TYPE update(TYPE object);
 
-	TYPE find(KEY id);
-	boolean delete(KEY id);
+	TYPE find(Object id);
+	
+	void delete(Object id);
 }
