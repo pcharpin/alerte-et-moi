@@ -6,17 +6,17 @@ import javax.persistence.PersistenceContext;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
-public class GenericDaoImpl<TYPE> implements GenericDAO<TYPE> {
+public class GenericDAOImpl<TYPE> implements GenericDAO<TYPE> {
 	
 	@PersistenceContext(unitName="JpaALerte")
 	public EntityManager entityManager;
 	private Class<TYPE> type;
 	
-	public GenericDaoImpl(EntityManager entityManager) {
+	public GenericDAOImpl(EntityManager entityManager) {
         this.entityManager= entityManager;
     }
 	
-	public GenericDaoImpl(){
+	public GenericDAOImpl(){
 		
 	}
 	private SessionFactory sessionFactory;
