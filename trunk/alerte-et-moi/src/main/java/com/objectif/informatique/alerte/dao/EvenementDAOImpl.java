@@ -19,7 +19,7 @@ import com.objectif.informatique.alerte.model.Evenement;
  */
 
 @Repository("EvenementDAO")
-public class EvenementDAOImpl extends GenericDaoImpl<Evenement> implements EvenementDAO{
+public class EvenementDAOImpl extends GenericDAOImpl<Evenement> implements EvenementDAO{
 	
 //	@PersistenceContext(unitName="JpaALerte")
 //	private EntityManager entityManager;
