@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.objectif.informatique.alerte.service;
+package com.objectif.informatique.alerte.utils;
 
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
