@@ -122,16 +122,10 @@
 										<div><!-- ng-repeat="month in months"  {{month.nom}} ###### -->
 											<ul class="events">
 												<li ng-repeat="event in listeEvt | filter:{nomEvt: recherche, responsable: userSelected} | orderBy:order">
-    											{{event.dateEchEvt | date:"MM"}},
-    											userSelected : {{userSelected}} 
-												?=
-												respObj : {{event.responsable}},
-    											nom : {{event.responsable.prenResp}}
     											<div class="btn-group">
-												  <button type="button" class="btn btn-info">1{{event.nomEvt}}</button>
-												  <button type="button" class="btn btn-info">3{{event.dateEchEvt | date:"dd/MM/yyyy"}}</button>
-												  <button type="button" class="btn btn-info">4{{event.priorEvt}}</button>
-												 </div><br>
+												  <button type="button" class="btn btn-info">{{event.nomEvt}}</button>
+												  <button type="button" class="btn btn-info">{{event.dateEchEvt | date:"dd/MM/yyyy"}}</button>
+												 </div>
 												 <div class="btn-group">
 												  <button type="button"  ng-click="detailEvt(event)" class="btn btn-success">detail</button>
 												  <button type="button"  ng-click="detailDos(event.idDos)" class="btn btn-warning">dossier</button>
