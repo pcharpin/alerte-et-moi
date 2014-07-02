@@ -9,12 +9,11 @@ import com.objectif.informatique.alerte.dao.DossierDAO;
 import com.objectif.informatique.alerte.model.Dossier;
 
 @Service("DossierService")
-
 public class DossierServiceImpl implements DossierService{
 		
 	public DossierServiceImpl(){}
 	
-	//@Autowired
+	@Autowired
 	private DossierDAO dossierDAO;
 
 	@Override

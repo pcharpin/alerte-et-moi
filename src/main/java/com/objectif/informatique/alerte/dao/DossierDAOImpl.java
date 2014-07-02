@@ -6,11 +6,12 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.stereotype.Repository;
 
 import com.objectif.informatique.alerte.model.Dossier;
 
-@RequestMapping("DossierDAO")
+
+@Repository("DossierDAO")
 public class DossierDAOImpl extends GenericDAOImpl<Dossier> implements DossierDAO{
 
 	public DossierDAOImpl(EntityManager entityManager) {

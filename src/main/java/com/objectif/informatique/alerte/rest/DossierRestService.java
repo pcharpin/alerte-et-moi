@@ -19,13 +19,14 @@ import com.objectif.informatique.alerte.service.DossierService;
 public class DossierRestService {
 	
 	@Autowired
-	DossierService dossierService;
+	DossierService service;
+
 	
 	@GET
 	@Path("/{id}")
 	@Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
 	public Dossier getFolder(@PathParam("id") int id) {
-		return dossierService.getDossierById(id);
+		return service.getDossierById(id);
 		//return null;	
 	}
 	
@@ -33,7 +34,7 @@ public class DossierRestService {
 	@Path("/getFolders")
 	@Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
 	public List<Dossier> getAllFolders() throws Exception {
-		List<Dossier> dossiers = dossierService.findAll();
+		List<Dossier> dossiers = service.findAll();
 		return dossiers;
 	}	
 }
