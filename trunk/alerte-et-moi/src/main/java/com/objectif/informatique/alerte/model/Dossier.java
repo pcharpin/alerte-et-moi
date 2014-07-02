@@ -34,10 +34,10 @@ public class Dossier implements Serializable{
 	@Column(name = "nomDos")
 	private String nomDos;
 
-	@Column(name = "typesDossiers")
+	@Column(name = "typeDos")
 	@Enumerated(EnumType.STRING) 
 	private EnumTypesDossiers enumTypesDossiers;
-	@Column(name = "descDoc")
+	@Column(name = "descDos")
 	private String descDoc;
 	
 	/*@OneToMany(targetEntity=Dossier.class, mappedBy = "dossier", cascade = CascadeType.ALL)	
@@ -48,7 +48,7 @@ public class Dossier implements Serializable{
 	@Column(name = "priorDos")
 	private boolean priorDos;
 	
-	@Column(name = "mntDOS")
+	@Column(name = "mntDos")
 	private float mntDOS;
 	
 	@Column(name = "periodJourDos")
@@ -78,7 +78,7 @@ public class Dossier implements Serializable{
 	@Column(name = "cntNomDos")
 	private String cntNomDos;
 	
-	@Column(name = "cntPrenomDos")
+	@Column(name = "cntPrenDos")
 	private String cntPrenomDos;
 	
 	@Column(name = "cntTelDos")
@@ -87,7 +87,7 @@ public class Dossier implements Serializable{
 	@Column(name = "cntCmntDos")
 	private String cntCmntDos;
 	
-	@Column(name = "libre")
+	@Column(name = "libreDos")
 	private String libre;
 
 	/*@ManyToMany(
