@@ -15,7 +15,7 @@ function CalendarCtrl($scope,ngDialog,evenement,evtToCal) {
 	    
     $scope.users = [
                     {idResp:"1",profil:"2",nomResp:"Korsunsky",prenResp:"Slava",emailResp:"vkorsunsky@objectif-informatique.fr"},
-                    {idResp:'2',profil:'user',nomResp:'',prenResp:'Thierry',emailResp:'ema@'},
+                    {idResp:'2',profil:'1',nomResp:'Gosse',prenResp:'Thierry',emailResp:'ema@'},
                     {idResp:'3',profil:'user',nomResp:'',prenResp:'Véronique',emailResp:'isabelle@'},
                     {idResp:'6',profil:'user',nomResp:'',prenResp:'toto',emailResp:'isabelle@'}
                    ];
@@ -54,16 +54,16 @@ function CalendarCtrl($scope,ngDialog,evenement,evtToCal) {
 	        editable: true,
 	        selectable: true,
 	        // to create evt
-			/*select: function(start, end) {
+			select: function(start, end) {
 				var title = prompt('Event Title:');
 				if (title) {
 					$scope.events.push({title: title,start: start,end: end});
 
-					//$('#calendar').fullCalendar('renderEvent', event, true); // stick? = true
+					$('#calendar').fullCalendar('renderEvent', event, true); // stick? = true
 				    
 				}
 				$('#calendar').fullCalendar('unselect');
-			},*/
+			},
 	        header:{
 	          left: 'title',
 	          center: '',
@@ -99,10 +99,13 @@ function CalendarCtrl($scope,ngDialog,evenement,evtToCal) {
           {type:'party',title: 'Click for Google',start: new Date(y, m, 28),end: new Date(y, m, 29),url: 'http://google.com/'}
         ]
     };*/
+	    
     /* alert on eventClick */
     $scope.alertOnEventClick = function( event, allDay, jsEvent, view ){
+    	console.log("eventclickÒ ##### : ");
         $scope.alertMessage = (event.title + ' was clicked ' + date);
         $scope.event = event;
+        
     	ngDialog.open({
     		template: '<div class="ngdialog-message"><h3>{{event.title}}</h3>'+
     		'<p>date de début: <code>{{event.start | date:"dd/MM/yyyy"}}</code></p><br><p>date de fin : <code> {{event.end}} </code> </p>'+
@@ -205,7 +208,13 @@ function CalendarCtrl($scope,ngDialog,evenement,evtToCal) {
     		 template: 'editEvt.html'
     	});
     }
-    
+    /* fenetre d'edition d'un evenement */
+    $scope.deleteEvt = function(event){
+    	$scope.event = event;
+    	ngDialog.open({
+    		 template: 'editEvt.html'
+    	});
+    }    
     /* event sources array*/
     //$scope.eventSources2 = [$scope.calEventsExt, $scope.eventsF, $scope.events];
 	 // liste des evenements pour le calendrier, normalement doit disparaitre
