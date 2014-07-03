@@ -3,7 +3,7 @@
  */
 angular.module('calendarDemoApp', ['ui.calendar', 'ui.bootstrap','ngDialog','calendarServices']);
 
-function CalendarCtrl($scope,ngDialog,evenement,evtToCal) {
+function CalendarCtrl($scope,ngDialog,evenements,evenement,evtToCal) {
 	
     var date = new Date();
     var d = date.getDate(); 
@@ -58,7 +58,7 @@ function CalendarCtrl($scope,ngDialog,evenement,evtToCal) {
 				var title = prompt('Event Title:');
 				if (title) {
 					$scope.events.push({title: title,start: start,end: end});
-
+					evenement.create({nomEvt: title,dateEchEvt: start});
 					$('#calendar').fullCalendar('renderEvent', event, true); // stick? = true
 				    
 				}
@@ -102,7 +102,7 @@ function CalendarCtrl($scope,ngDialog,evenement,evtToCal) {
 	    
     /* alert on eventClick */
     $scope.alertOnEventClick = function( event, allDay, jsEvent, view ){
-    	console.log("eventclickÒ ##### : ");
+    	console.log("eventclick ##### : ");
         $scope.alertMessage = (event.title + ' was clicked ' + date);
         $scope.event = event;
         
@@ -141,7 +141,7 @@ function CalendarCtrl($scope,ngDialog,evenement,evtToCal) {
     };
     /* add custom event*/
     $scope.addEvent = function() {
-		evenement.findAll().$promise.then(function(result){
+		evenements.findAll().$promise.then(function(result){
 	    	var list = evtToCal.convert(result);
 	    	for(var j=0;j<list.length;j++){
 	    		$scope.events.push(list[j]);
@@ -174,7 +174,7 @@ function CalendarCtrl($scope,ngDialog,evenement,evtToCal) {
     	if($scope.showCal){
     		
     		//calendar.fullCalendar( 'removeEvents');
-    		evenement.findAll().$promise.then(function(result){
+    		evenements.findAll().$promise.then(function(result){
     	    	console.log("resultat du REST ##### : ",result);
    	    	 $scope.events.push(evtToCal.convert(result));
    	    	 
@@ -191,7 +191,7 @@ function CalendarCtrl($scope,ngDialog,evenement,evtToCal) {
     	$scope.showCal=!$scope.showCal;
     	if($scope.showCal){
     	    //$scope.events = [];
-    		evenement.findAll().$promise.then(function(result){
+    		evenements.findAll().$promise.then(function(result){
     	    	console.log("resultat du REST ##### : ",result);
     	    	$scope.listeEvt = result;
     	    	});    	    		
