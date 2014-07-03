@@ -16,9 +16,8 @@ public class GenericDAOImpl<TYPE> implements GenericDAO<TYPE> {
         this.entityManager= entityManager;
     }
 	
-	public GenericDAOImpl(){
-		
-	}
+	public GenericDAOImpl(){}
+	
 	private SessionFactory sessionFactory;
 
 	private Session getCurrentSession() {
@@ -44,5 +43,4 @@ public class GenericDAOImpl<TYPE> implements GenericDAO<TYPE> {
 	public void delete(final Object id) {
 		this.entityManager.remove(this.entityManager.getReference(type, id));	
 	}
-
 }
