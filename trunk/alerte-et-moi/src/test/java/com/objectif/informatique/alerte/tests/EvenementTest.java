@@ -17,6 +17,7 @@ import org.junit.Test;
 
 import com.objectif.informatique.alerte.dao.EvenementDAOImpl;
 import com.objectif.informatique.alerte.model.Document;
+import com.objectif.informatique.alerte.model.Dossier;
 import com.objectif.informatique.alerte.model.Evenement;
 import com.objectif.informatique.alerte.model.Responsable;
 
@@ -77,19 +78,22 @@ protected static EntityManagerFactory emf;
 	@Test
 	public void createEvent(){
 		
-		EntityManagerFactory emf = Persistence.createEntityManagerFactory("JpaALerte");
+		//EntityManagerFactory emf = Persistence.createEntityManagerFactory("JpaALerte");
         EntityManager em = emf.createEntityManager();
         
         //EntityManager em = emf.createEntityManager(); 
              
         EvenementDAOImpl service = new EvenementDAOImpl(em);
         Responsable resp = em.find(Responsable.class, 1);
+        Dossier dossier =  em.find(Dossier.class, 2);
         
         Evenement evenement =  new Evenement();
-        evenement.setNomEvt("testVdibi");
+        evenement.setNomEvt("testVdibi1");
         evenement.setDateEchEvt(new Date());
         evenement.setResponsable(resp);
+        evenement.setDossier(dossier);
       
+        //Dossier
         //Documents
         Document doc1 = new Document("testAddEventDoc1", "http://www.objectif-informatique.fr/");
         Document doc2 = new Document("testAddEventDoc2", "http://www.objectif-informatique.fr/");

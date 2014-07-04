@@ -39,8 +39,11 @@ public class Evenement implements Serializable{
 	@Id @GeneratedValue
 	@Column(name = "idEvt")
 	private int idEvt;
-	@Column(name = "Dossier_idDos")
-	private int idDos;
+	@ManyToOne(cascade = CascadeType.ALL, fetch=FetchType.EAGER)
+	@JoinColumn(name="Dossier_idDos")
+	private Dossier dossier;
+	
+	//private int idDos;
 	@Column(name="nomEvt")
 	private String nomEvt;
 	@Column(name="descEvt")
@@ -86,36 +89,16 @@ public class Evenement implements Serializable{
 	private Set<Document> documents = new HashSet<Document>();
 	
 	
-	/**
-	 * @param idEvt
-	 * @param idDos
-	 * @param responsable_idResp
-	 * @param nomEvt
-	 * @param descEvt
-	 * @param dateEchEvt
-	 * @param exeEvt
-	 * @param mntEvt
-	 * @param modeGestionEvt
-	 * @param lienGestEvt
-	 * @param trtEvt
-	 * @param dateTrtEvt
-	 * @param enumPeriodeEvet
-	 * @param actifEvt
-	 * @param recopAutoEvt
-	 * @param recurtEvt
-	 * @param libreEvt
-	 * @param evenements
-	 */
-	public Evenement(int idEvt, int idDos, Responsable responsable_idResp,
-			String nomEvt, String descEvt, Date dateEchEvt, int exeEvt,
-			float mntEvt, EnumModeGestionEvt modeGestionEvt,
-			String lienGestEvt, int trtEvt, Date dateTrtEvt,
-			EnumPeriodeEvet enumPeriodeEvet, int actifEvt, int recopAutoEvt,
-			int recurtEvt, String libreEvt, Set<Document> documents) {
+	
+	public Evenement(int idEvt, Dossier dossier, String nomEvt, String descEvt,
+			Date dateEchEvt, int exeEvt, float mntEvt,
+			EnumModeGestionEvt modeGestionEvt, String lienGestEvt, int trtEvt,
+			Date dateTrtEvt, EnumPeriodeEvet enumPeriodeEvet, int actifEvt,
+			int recopAutoEvt, int recurtEvt, String libreEvt,
+			Responsable responsable, Set<Document> documents) {
 		super();
 		this.idEvt = idEvt;
-		this.idDos = idDos;
-		this.responsable = responsable_idResp;
+		this.dossier = dossier;
 		this.nomEvt = nomEvt;
 		this.descEvt = descEvt;
 		this.dateEchEvt = dateEchEvt;
@@ -130,7 +113,8 @@ public class Evenement implements Serializable{
 		this.recopAutoEvt = recopAutoEvt;
 		this.recurtEvt = recurtEvt;
 		this.libreEvt = libreEvt;
-//		this.documents = documents;
+		this.responsable = responsable;
+		this.documents = documents;
 	}
 	public Evenement(int id, String nomEvt){
 		super();
@@ -155,12 +139,7 @@ public class Evenement implements Serializable{
 	public void setIdEvt(int idEvt) {
 		this.idEvt = idEvt;
 	}
-	public int getIdDos() {
-		return idDos;
-	}
-	public void setIdDos(int idDos) {
-		this.idDos = idDos;
-	}
+	
 	public Responsable getResponsable_resp() {
 		return this.responsable;
 	}
@@ -289,18 +268,19 @@ public class Evenement implements Serializable{
 	public void setEnumPeriodeEvet(EnumPeriodeEvet enumPeriodeEvet) {
 		this.enumPeriodeEvet = enumPeriodeEvet;
 	}
+	
 	/**
-	 * @return the evenements
+	 * @return the dossier
 	 */
-/*	public Set<Document> getDocuments() {
-		return documents;
-	}*/
+	public Dossier getDossier() {
+		return dossier;
+	}
 	/**
-	 * @param documents the documents to set
+	 * @param dossier the dossier to set
 	 */
-/*	public void setDocuments(Set<Document> documents) {
-		this.documents = documents;
-	}*/
+	public void setDossier(Dossier dossier) {
+		this.dossier = dossier;
+	}
 	/* (non-Javadoc)
 	 * @see java.lang.Object#toString()
 	 */
@@ -309,10 +289,8 @@ public class Evenement implements Serializable{
 		StringBuilder builder = new StringBuilder();
 		builder.append("Evenement [idEvt=");
 		builder.append(idEvt);
-		builder.append(", idDos=");
-		builder.append(idDos);
-		builder.append(", responsable_idResp=");
-		builder.append(responsable);
+		builder.append(", dossier_idDos=");
+		builder.append(dossier);
 		builder.append(", nomEvt=");
 		builder.append(nomEvt);
 		builder.append(", descEvt=");
@@ -341,11 +319,11 @@ public class Evenement implements Serializable{
 		builder.append(recurtEvt);
 		builder.append(", libreEvt=");
 		builder.append(libreEvt);
+		builder.append(", responsable=");
+		builder.append(responsable);
 		builder.append(", documents=");
-		//builder.append(documents);
+		builder.append(documents);
 		builder.append("]");
 		return builder.toString();
-	}
-
-	
+	}	
 }
