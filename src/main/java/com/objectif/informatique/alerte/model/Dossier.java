@@ -12,7 +12,10 @@ import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import org.codehaus.jackson.annotate.JsonIgnore;
 
 /**
  * @author vdibi
@@ -43,7 +46,9 @@ public class Dossier implements Serializable{
 	/*@OneToMany(targetEntity=Dossier.class, mappedBy = "dossier", cascade = CascadeType.ALL)	
 	@Column(name = "evtDos")
 	private Set<Evenement> evenements = new HashSet<Evenement>();*/
-
+	@JsonIgnore
+	@OneToMany(mappedBy="dossier")
+	private Set<Evenement> evenements;
 	
 	@Column(name = "priorDos")
 	private boolean priorDos;
@@ -100,32 +105,15 @@ public class Dossier implements Serializable{
 				inverseJoinColumns=@JoinColumn(name="idDoc")
 		)
 	private Set<Document> documents = new HashSet<Document>();*/
-	/**
-	 * @param idDos
-	 * @param nomDos
-	 * @param enumTypesDossiers
-	 * @param descDoc
-	 * @param evenements
-	 * @param priorDos
-	 * @param mntDOS
-	 * @param periodJourDos
-	 * @param periodHebdoDos
-	 * @param periodMensDos
-	 * @param periodTrimDos
-	 * @param periodSemestDos
-	 * @param periodAnuDos
-	 * @param periodSansDos
-	 * @param actifDos
-	 * @param cntNomDos
-	 * @param cntPrenomDos
-	 * @param cntTelDos
-	 * @param cntCmntDos
-	 * @param libre
-	 */
-	public Dossier(){
-		
-	}
 	
+
+	/**
+	 * @return the idDos
+	 */
+	public int getIdDos() {
+		return idDos;
+	}
+
 	public Dossier(int idDos, String nomDos,
 			EnumTypesDossiers enumTypesDossiers, String descDoc,
 			Set<Evenement> evenements, boolean priorDos, float mntDOS,
@@ -158,13 +146,7 @@ public class Dossier implements Serializable{
 		this.libre = libre;
 	}
 
-	/**
-	 * @return the idDos
-	 */
-	public int getIdDos() {
-		return idDos;
-	}
-
+	public Dossier(){}
 	/**
 	 * @param idDos the idDos to set
 	 */
@@ -438,6 +420,20 @@ public class Dossier implements Serializable{
 		this.libre = libre;
 	}
 
+	/**
+	 * @return the evenements
+	 */
+	public Set<Evenement> getEvenements() {
+		return evenements;
+	}
+
+	/**
+	 * @param evenements the evenements to set
+	 */
+	public void setEvenements(Set<Evenement> evenements) {
+		this.evenements = evenements;
+	}
+
 	/* (non-Javadoc)
 	 * @see java.lang.Object#toString()
 	 */
@@ -453,7 +449,7 @@ public class Dossier implements Serializable{
 		builder.append(", descDoc=");
 		builder.append(descDoc);
 		builder.append(", evenements=");
-		//builder.append(evenements);
+		builder.append(evenements);
 		builder.append(", priorDos=");
 		builder.append(priorDos);
 		builder.append(", mntDOS=");
@@ -486,5 +482,5 @@ public class Dossier implements Serializable{
 		builder.append(libre);
 		builder.append("]");
 		return builder.toString();
-	}
+	}	
 }

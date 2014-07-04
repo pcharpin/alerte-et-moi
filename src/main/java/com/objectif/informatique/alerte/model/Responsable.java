@@ -25,6 +25,10 @@ import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Responsable implements Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -7420598333065416818L;
 	@Id @GeneratedValue
 	private int idResp;
 	@Column(name="Profil_idProf")
@@ -39,7 +43,6 @@ public class Responsable implements Serializable{
 	@JsonIgnore
 	@OneToMany(mappedBy="responsable")
 	private Set<Evenement> evenements;
-	
 	
 	/**
 	 * @param idResp
