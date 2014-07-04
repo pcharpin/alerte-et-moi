@@ -63,13 +63,9 @@ public class EvenementRestService {
 	@POST
 	@Path("/send")
 	@Consumes(MediaType.APPLICATION_JSON + ";charset=utf-8")
-	public Response add(Evenement evenement){
-		
-	evenement =  new Evenement();
-	evenement.setNomEvt("testVdibi");
-	evenement.setDescEvt("descEvt");	
-			service.create(evenement);
-			return Response.status(200).entity(evenement).build();
+	public Response add(Evenement evenement){			
+		service.create(evenement);
+		return Response.status(200).entity(evenement).build();
 	}
 	/**
 	 * Supprimmer un evenement par son id

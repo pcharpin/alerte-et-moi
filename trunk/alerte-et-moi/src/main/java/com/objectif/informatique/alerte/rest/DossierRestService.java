@@ -2,16 +2,20 @@ package com.objectif.informatique.alerte.rest;
 
 import java.util.List;
 
+import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.objectif.informatique.alerte.model.Dossier;
+import com.objectif.informatique.alerte.model.Evenement;
 import com.objectif.informatique.alerte.service.DossierService;
 
 @Component
@@ -37,4 +41,12 @@ public class DossierRestService {
 		List<Dossier> dossiers = service.findAll();
 		return dossiers;
 	}	
+	
+	@POST
+	@Path("/sendFolder")
+	@Consumes(MediaType.APPLICATION_JSON + ";charset=utf-8")
+	public Response add(Dossier dossier){			
+	service.create(dossier);
+	return Response.status(200).entity(dossier).build();
+	}
 }
