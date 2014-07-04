@@ -80,18 +80,16 @@ protected static EntityManagerFactory emf;
 		
 		//EntityManagerFactory emf = Persistence.createEntityManagerFactory("JpaALerte");
         EntityManager em = emf.createEntityManager();
-        
-        //EntityManager em = emf.createEntityManager(); 
-             
+                     
         EvenementDAOImpl service = new EvenementDAOImpl(em);
         Responsable resp = em.find(Responsable.class, 1);
         Dossier dossier =  em.find(Dossier.class, 2);
         
         Evenement evenement =  new Evenement();
-        evenement.setNomEvt("testVdibi1");
+        evenement.setNomEvt("test3");
         evenement.setDateEchEvt(new Date());
-        evenement.setResponsable(resp);
-        evenement.setDossier(dossier);
+//        evenement.setResponsable(resp);
+//        evenement.setDossier(dossier);
       
         //Dossier
         //Documents

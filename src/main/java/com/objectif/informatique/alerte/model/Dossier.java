@@ -147,6 +147,10 @@ public class Dossier implements Serializable{
 	}
 
 	public Dossier(){}
+	public Dossier(String nomDos) {
+		this.nomDos = nomDos;
+	}
+
 	/**
 	 * @param idDos the idDos to set
 	 */
