@@ -25,13 +25,22 @@ public class GenericDAOImpl<TYPE> implements GenericDAO<TYPE> {
 	}
 	@Override
 	public TYPE create(final TYPE object) {
-		this.entityManager.persist(object);
+		try {
+			this.entityManager.persist(object);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		return object;
 	}
 
 	@Override
 	public TYPE update(final TYPE object) {
-		return this.entityManager.merge(object);
+		try {
+			return this.entityManager.merge(object);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return object;		
 	}
 
 	@Override
