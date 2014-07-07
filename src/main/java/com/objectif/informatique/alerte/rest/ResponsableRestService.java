@@ -15,9 +15,7 @@ import javax.ws.rs.core.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.objectif.informatique.alerte.model.Evenement;
 import com.objectif.informatique.alerte.model.Responsable;
-import com.objectif.informatique.alerte.service.EvenementService;
 import com.objectif.informatique.alerte.service.ResponsableService;
 
 @Component

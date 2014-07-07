@@ -37,11 +37,10 @@ public class DossierTest {
 	@Test
 	public void addolder(){
 		DossierDAOImpl d = new DossierDAOImpl(em);
-		Dossier dossier = new Dossier("JouterDossier");
+		Dossier dossier = new Dossier("TestDossier");
 		dossier.setDescDoc("test de crétion3");
 		
-		
-		 em.getTransaction().begin();
+		em.getTransaction().begin();
         d.create(dossier);
         em.getTransaction().commit();
 		System.out.println("o_o");

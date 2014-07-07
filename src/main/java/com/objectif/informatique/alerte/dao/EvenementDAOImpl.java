@@ -34,8 +34,12 @@ public class EvenementDAOImpl extends GenericDAOImpl<Evenement> implements Evene
 	@Override
 	public List<Evenement> findAll() throws Exception {
 		List<Evenement> evenements = new ArrayList<Evenement>();
-		Query query = this.entityManager.createQuery("select e from Evenement e");
-	    evenements = query.getResultList();
+		try {
+			Query query = this.entityManager.createQuery("select e from Evenement e");
+		    evenements = query.getResultList();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	    return evenements;
 	}
 
