@@ -8,7 +8,6 @@ import javax.persistence.Persistence;
 
 import com.objectif.informatique.alerte.dao.DossierDAOImpl;
 import com.objectif.informatique.alerte.dao.EvenementDAOImpl;
-import com.objectif.informatique.alerte.dao.ResponsableDAOImpl;
 import com.objectif.informatique.alerte.model.Dossier;
 import com.objectif.informatique.alerte.model.Evenement;
 import com.objectif.informatique.alerte.model.Responsable;
@@ -34,28 +33,28 @@ public class JerseyClientPostTest {
 			
 			
 			//créer un dossier
-			Dossier dossier = new Dossier("testToto");
-			dossier.setDescDoc("descDoc");
-			dossierService.create(dossier);
-			
+//			Dossier dossier = new Dossier("testToto");
+//			dossier.setDescDoc("descDoc");
+//			dossierService.create(dossier);
+//			
 			//Profil
 //			Profil profil =  new Profil();
 //			profil.setIdProf(2);
 		
 			//selection un responsable existant ou créer
-			Responsable responsable = new Responsable();
-			responsable.setNomResp("admin");
-			responsable.setNomResp("nomResp");
-			responsable.setPrenResp("prenResp");
-			responsable.setEmailResp("test@objectif-informatique.com");
-			responsable.setProfil(2);
-			
+//			Responsable responsable = new Responsable();
+//			responsable.setNomResp("admin");
+//			responsable.setNomResp("nomResp");
+//			responsable.setPrenResp("prenResp");
+//			responsable.setEmailResp("test@objectif-informatique.com");
+//			responsable.setProfil(2);
+//			
 			// Evenement
-			Evenement evenement = new Evenement();
-			evenement.setNomEvt("testGan");
-			evenement.setDateEchEvt(new Date());
-			evenement.setDossier(dossier);
-			evenement.setResponsable(responsable);
+//			Evenement evenement = new Evenement();
+//			evenement.setNomEvt("testGan");
+//			evenement.setDateEchEvt(new Date());
+//			evenement.setDossier(dossier);
+//			evenement.setResponsable(responsable);
 						
 //			evenement.setDateEchEvt(new Date());
 //			Dossier dossier =  em.find(Dossier.class, 2);
@@ -64,6 +63,7 @@ public class JerseyClientPostTest {
 //			evenement.setResponsable(resp);
 			
 			em.getTransaction().begin();
+			Evenement evenement = new Evenement();
 			evenementDAOImpl.create(evenement);
 			em.getTransaction().commit();
 								

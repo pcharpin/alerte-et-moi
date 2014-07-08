@@ -28,7 +28,5 @@ public class JerseyClientTest {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
 	}
-
 }
