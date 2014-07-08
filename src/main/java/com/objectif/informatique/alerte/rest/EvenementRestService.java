@@ -3,6 +3,7 @@
  */
 package com.objectif.informatique.alerte.rest;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -43,6 +44,7 @@ public class EvenementRestService {
 	DossierService dossierService;
 	@Autowired
 	ResponsableService respService;
+	private Responsable responsable;
 	
 	EntityManagerFactory emf =Persistence.createEntityManagerFactory("JpaALerte");
 	EntityManager em = emf.createEntityManager();
@@ -81,30 +83,21 @@ public class EvenementRestService {
 	@Path("/send")
 	@Consumes(MediaType.APPLICATION_JSON + ";charset=utf-8")
 	public Response add(Evenement evenement){		
-		//créer un dossier
-		Dossier dossier = new Dossier("TestL");
-		dossier.setDescDoc("descDoc");
-		dossierService.create(dossier);
+		//Attribution d'un dossier par defaut
+		dossierService.getDossierById(1);
 		
-		//Profil
-		Profil profil =  new Profil();
-		profil.setIdProf(2);
+		//Profil : attribution du rôle normal à la création
+//		Profil profil =  new Profil();
+//		profil.setIdProf(2);
 	
-		//selection un responsable existant ou créer
+		//selection un responsable existant ou créer(un par défaut)
 		Responsable responsable = new Responsable();
-		responsable.setNomResp("admin");
-		responsable.setNomResp("nomResp");
-		responsable.setPrenResp("prenResp");
-		responsable.setEmailResp("test@objectif-informatique.com");
 		responsable.setProfil(2);
 		
-		// Evenement
-		evenement = new Evenement();
-		evenement.setNomEvt("testGan");
-		evenement.setDateEchEvt(new Date());
-		evenement.setDossier(dossier);
-		evenement.setResponsable(responsable);
+		//respService.getResponsableById(1);
 		
+		// Création d'un evenement
+		evenement.setResponsable(responsable);		
 		service.create(evenement);
 		
 		return Response.status(200).entity(evenement).build();

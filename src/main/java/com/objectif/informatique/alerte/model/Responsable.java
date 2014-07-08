@@ -147,5 +147,27 @@ public class Responsable implements Serializable{
 	 */
 	public void setEvenements(Set<Evenement> evenements) {
 		this.evenements = evenements;
+	}
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("Responsable [idResp=");
+		builder.append(idResp);
+		builder.append(", profil=");
+		builder.append(profil);
+		builder.append(", nomResp=");
+		builder.append(nomResp);
+		builder.append(", prenResp=");
+		builder.append(prenResp);
+		builder.append(", emailResp=");
+		builder.append(emailResp);
+		builder.append(", evenements=");
+		builder.append(evenements);
+		builder.append("]");
+		return builder.toString();
 	}	
 }
