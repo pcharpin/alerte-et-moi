@@ -15,6 +15,6 @@ public interface  EvenementService {
 	List<Evenement> findAll() throws Exception;
 	public Evenement getEvenementByName(String name) throws Exception;
 	public Evenement create(Evenement evenement);
-	public void delete(Class<Evenement> class1, int id);
+	public void delete(Evenement eventId);
 	public void update(Evenement evenement);
 }

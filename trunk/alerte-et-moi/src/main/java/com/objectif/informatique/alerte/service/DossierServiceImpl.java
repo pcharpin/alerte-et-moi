@@ -37,8 +37,8 @@ public class DossierServiceImpl implements DossierService{
 	}
 
 	@Override
-	public void delete(Class<Dossier> class1, int id) {
-		// TODO Auto-generated method stub
+	public void delete(Dossier dossierId) {
+		dossierDAO.delete(dossierId);	
 		
 	}
 
