@@ -54,8 +54,9 @@ public class ResponsableRestService {
 	@DELETE
 	@Path("/{id}")
 	@Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
-	public Response deleteEvent(@PathParam("id") int id){
-		service.delete(Responsable.class,id);
+	public Response deleteEvent(@PathParam("id") int id,Responsable responsable){
+		responsable =  service.getResponsableById(id);
+		service.delete(responsable);
 		return Response.ok().build();
 	}
 	

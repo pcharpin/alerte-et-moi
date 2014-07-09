@@ -46,8 +46,8 @@ public class ResponsableServiceImpl implements ResponsableService{
 	}
 
 	@Override
-	public void delete(Class<Responsable> class1, int id) {
-		responsableDAO.delete(id);	
+	public void delete(Responsable respId) {
+		responsableDAO.delete(respId);	
 	}
 
 

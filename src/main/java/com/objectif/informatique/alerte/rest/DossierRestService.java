@@ -3,6 +3,7 @@ package com.objectif.informatique.alerte.rest;
 import java.util.List;
 
 import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
@@ -60,5 +61,14 @@ public class DossierRestService {
 			service.update(dossier);
 		}
 		return Response.status(200).entity(dossier).build();		
+	}
+	
+	@DELETE
+	@Path("/delete/{id}")
+	@Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
+	public Response deleteEvent(@PathParam("id") int id,Dossier dossier){
+		dossier =  service.getDossierById(id);
+		service.delete(dossier);
+		return Response.ok().build();
 	}
 }

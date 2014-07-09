@@ -45,8 +45,8 @@ public class EvenementServiceImpl implements EvenementService {
 	}
 
 	@Override
-	public void delete(Class<Evenement> class1, int id) {
-		evenementDAO.delete(id);	
+	public void delete(Evenement eventId) {
+		evenementDAO.delete(eventId);	
 	}
 
 	@Override

@@ -107,8 +107,9 @@ public class EvenementRestService {
 	@DELETE
 	@Path("/delete/{id}")
 	@Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
-	public Response deleteEvent(@PathParam("id") int id){
-		service.delete(Evenement.class,id);
+	public Response deleteEvent(@PathParam("id") int id,Evenement evenement){
+		evenement =  service.getEvenementById(id);
+		service.delete(evenement);
 		return Response.ok().build();
 	}
 	/**

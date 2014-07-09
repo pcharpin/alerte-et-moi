@@ -15,6 +15,6 @@ public interface  ResponsableService {
 	List<Responsable> findAll() throws Exception;
 	public Responsable getResponsableByName(String name) throws Exception;
 	public Responsable create(Responsable responsable);
-	public void delete(Class<Responsable> class1, int id);
+	public void delete(Responsable respId);
 	public void update(Responsable responsable);
 }
