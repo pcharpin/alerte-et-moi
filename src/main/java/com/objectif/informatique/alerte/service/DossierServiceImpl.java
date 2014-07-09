@@ -41,4 +41,9 @@ public class DossierServiceImpl implements DossierService{
 		// TODO Auto-generated method stub
 		
 	}
+
+	@Override
+	public void update(Dossier dossier) {
+		dossierDAO.update(dossier);		
+	}
 }
