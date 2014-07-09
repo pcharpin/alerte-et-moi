@@ -3,8 +3,6 @@
  */
 package com.objectif.informatique.alerte.rest;
 
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -23,9 +21,7 @@ import javax.ws.rs.core.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.objectif.informatique.alerte.model.Dossier;
 import com.objectif.informatique.alerte.model.Evenement;
-import com.objectif.informatique.alerte.model.Profil;
 import com.objectif.informatique.alerte.model.Responsable;
 import com.objectif.informatique.alerte.service.DossierService;
 import com.objectif.informatique.alerte.service.EvenementService;

@@ -35,9 +35,11 @@ public class JerseyClientResponsableTest {
 			Responsable responsable = new Responsable();
 			responsable.setNomResp("alertAdmin");
 			responsable.setPrenResp("Julia");
+			responsable.setEmailResp("responsable@objectif-informatique.fr");
 			responsable.setProfil(2);
+			em.getTransaction().begin();
 			responsableDAOImpl.create(responsable);
-			
+			em.getTransaction().commit();
 			ClientResponse response = webResource.accept("application/json").post(ClientResponse.class,responsable);
 			
 			
