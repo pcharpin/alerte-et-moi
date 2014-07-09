@@ -49,4 +49,10 @@ public class ResponsableServiceImpl implements ResponsableService{
 	public void delete(Class<Responsable> class1, int id) {
 		responsableDAO.delete(id);	
 	}
+
+
+	@Override
+	public void update(Responsable responsable) {
+		responsableDAO.update(responsable);		
+	}
 }

@@ -30,7 +30,12 @@ public class DossierDAOImpl extends GenericDAOImpl<Dossier> implements DossierDA
 
 	@Override
 	public Dossier findFolderById(int folderId) throws Exception {
-		Dossier dossier = entityManager.find(Dossier.class, folderId); 
+		Dossier dossier = null;
+		try {
+		dossier = entityManager.find(Dossier.class, folderId); 
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
 		return dossier;
 	}
 

@@ -16,4 +16,5 @@ public interface  EvenementService {
 	public Evenement getEvenementByName(String name) throws Exception;
 	public Evenement create(Evenement evenement);
 	public void delete(Class<Evenement> class1, int id);
+	public void update(Evenement evenement);
 }

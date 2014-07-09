@@ -29,4 +29,9 @@ public interface DossierService {
 	 * @param id
 	 */
 	public void delete(Class<Dossier> class1, int id);
+	/**
+	 * 
+	 * @param dossier
+	 */
+	public void update(Dossier dossier);
 }
