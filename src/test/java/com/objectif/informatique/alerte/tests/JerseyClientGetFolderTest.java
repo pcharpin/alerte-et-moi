@@ -4,7 +4,7 @@ import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.WebResource;
 
-public class JerseyClientGetProfilTest {
+public class JerseyClientGetFolderTest {
 
 	/**
 	 * @param args
@@ -12,11 +12,11 @@ public class JerseyClientGetProfilTest {
 	public static void main(String[] args) {
 		try {
 			Client client =  Client.create();
-			//All proil
-			WebResource webResource = client.resource("http://localhost:8080/alerte-et-moi/rest/profil/getallProfil");
-			//By id
-			//WebResource webResource = client.resource("http://localhost:8080/alerte-et-moi/rest/profil/1");
-			
+			//GetAll
+			WebResource webResource = client.resource("http://localhost:8080/alerte-et-moi/rest/dossier/getFolders");
+			//by id
+			//WebResource webResource = client.resource("http://localhost:8080/alerte-et-moi/rest/dossier/1");
+		
 			ClientResponse response = webResource.accept("application/json").get(ClientResponse.class);
 			
 			if(response.getStatus() != 200) {
@@ -32,7 +32,5 @@ public class JerseyClientGetProfilTest {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
 	}
-
 }

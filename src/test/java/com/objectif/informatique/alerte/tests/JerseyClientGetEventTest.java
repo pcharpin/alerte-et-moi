@@ -4,7 +4,7 @@ import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.WebResource;
 
-public class JerseyClientTest {
+public class JerseyClientGetEventTest {
 
 	/**
 	 * @param args
@@ -12,7 +12,11 @@ public class JerseyClientTest {
 	public static void main(String[] args) {
 		try {
 			Client client =  Client.create();
+			//GetAll
 			WebResource webResource = client.resource("http://localhost:8080/alerte-et-moi/rest/evenement/getall");
+			//by id
+			//WebResource webResource = client.resource("http://localhost:8080/alerte-et-moi/rest/evenement/1");
+		
 			ClientResponse response = webResource.accept("application/json").get(ClientResponse.class);
 			
 			if(response.getStatus() != 200) {
