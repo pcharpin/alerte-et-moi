@@ -106,9 +106,9 @@
 			<!-- ****************************************************************Panneau de droite*************************************************************** -->
 			
 			<!-- ****************************************************************AFFICHAGE EN MODE LISTE	*************************************************************** -->
-						</tab> <!-- #############	AFFICHAGE EN MODE LISTE		############## --> <tab
-							select="renderCalender();"> <tab-heading> <i
-							class="glyphicon glyphicon-list"></i> Vue liste </tab-heading>
+						</tab> <!-- #############	AFFICHAGE EN MODE LISTE		############## --> 
+						<tab select="renderCalender();">
+							<tab-heading> <i class="glyphicon glyphicon-list"></i> Vue liste </tab-heading>
 						<div class="span4">
 							<span class="btn boolean" ng-click="showMyCalendar(showCal)"
 								ng-model="showCal"> <span class="on btn-primary"
@@ -120,8 +120,8 @@
 
 							<select ng-model="userSelected">
 								<option value="">tous</option>
-								<option ng-repeat="user in users" value="{{user}}">{{user.prenResp}}
-									; {{user.idResp}}</option>
+								<option ng-repeat="user in users" value="{{user}}">
+								{{user.prenResp}} ; {{user.idResp}}</option>
 							</select>
 							<hr>
 							<h4>Tri</h4>
@@ -168,28 +168,61 @@
 								</ul>
 							</div>
 						</div>
-						</tab> <!-- Ajouter un évènement --> <tab select="renderCalender();">
+						</tab> <!-- Ajouter un évènement --> 
+						<tab select="renderCalender();">
 				<!-- ****************************************************************Ajouter un évènement	*************************************************************** -->
 						<tab-heading> <i class="glyphicon glyphicon-list"></i>Créer un évènement </tab-heading>
-						<div>
-						<form name='loginForm' class='ng-dirty'>
-						<div><input type="text"  name='login' ng-model='' class='ng-dirty'/></div> 
-						<div><input type="text" name='password' ng-model='' class='ng-pristine'/></div>
-						<div><input  name='password' ng-model='' class='ng-pristine'/></div>
-					
-							<h4>Dossier</h4>
-							<select ng-model="userSelected">
-								<option value="">tous</option>
-								<option ng-repeat="user in users" value="{{user}}">{{user.prenResp}}
-									; {{user.idResp}}</option>
-							</select>
-							<h4>Responsable</h4>
-							<select ng-model="userSelected">
-								<option value="">tous</option>
-								<option ng-repeat="user in users" value="{{user}}">{{user.prenResp}}
-									; {{user.idResp}}</option>
-							</select>
-						</form>	
+						<div class="span4">
+						<h3>Options :</h3>
+						</div>
+						
+						<div class="span8">
+						<form>
+						<div><label>nom :</label><input type="text"/></div>
+						<div><label>dossier existant :</label>
+						<input type="radio" name="dossier"/>oui 
+						<input type="radio" name="dossier"/>non
+						</div>
+						<div><label>dossier :</label><select ng-model="">
+								<option value="">nouveau</option>
+								<option ng-repeat="" value="">
+								{{}}</option>
+							</select></div>
+						<div><label>descritption :</label><textarea ></textarea></div>
+						
+						<div><label>document rattaché :</label><input type="file"/><button type="button"  ng-click="detailDos(event.idDos)" class="btn btn-warning">Ajouter un nouveau document</button></div>
+						
+						<div><label>date d'échéance :</label><input type="text"/></div>
+						<div><label>année d'exercice :</label><input type="text"/></div>
+						<div><label>montant :</label><input type="text"/></div>
+						<div><label>nom :</label><input type="text"/></div>
+						<div><label>mode de gestion :</label>
+						<input type="radio" name="mdGestion">manuel 
+						<input type="radio" name="mdGestion">en ligne
+						</div>
+						<div><label>lien :</label><input type="url"/></div>
+
+						<div><label>responsable :</label><select ng-model="">
+								<option value="">test</option>
+								<option ng-repeat="" value="">
+								{{}}</option>
+							</select></div>
+							<span class="btn boolean" ng-click=""
+								ng-model="test"> <span class="on btn-primary"
+								ng-show="test">ON</span> <span class="off btn-default"
+								ng-hide="test">OFF</span>
+							</span>					
+						<div><label>périodicité :</label><select ng-model="">
+								<option value="">hebdomadaire</option>
+								<option value="">mensuel</option>
+								<option value="">trimestriel</option>
+								<option value="">annuel</option>
+								<option ng-repeat="" value="">
+								{{}}</option>
+							</select></div>
+						<div><label>libre :</label><textarea ></textarea></div>
+
+							</form>
 						</div>
 						</tab> </tabset>
 					</div>
