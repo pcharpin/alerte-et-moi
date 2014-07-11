@@ -3,7 +3,7 @@
  */
 angular.module('calendarDemoApp', ['ui.calendar', 'ui.bootstrap','ngDialog','calendarServices']);
 
-function CalendarCtrl($scope,ngDialog,evenements,evenement,evtToCal) {
+function CalendarCtrl($scope,ngDialog,evenements,evenement,evtToCal,dossiers,responsables) {
 	
     var date = new Date();
     var d = date.getDate(); 
@@ -13,23 +13,10 @@ function CalendarCtrl($scope,ngDialog,evenements,evenement,evtToCal) {
     $scope.months = [{nom:'Janvier',num:1},{nom:'Fevrier',num:2},{nom:'Mars',num:3},{nom:'Avril',num:4},{nom:'Mai',num:5},{nom:'Juin',num:6},{nom:'Juillet',num:7},{nom:'Aout',num:8},{nom:'Septembre',num:9},{nom:'Octobre',num:10},{nom:'Novembre',num:11},{nom:'Decembre',num:12}];
     $scope.showCal=true;
 	    
-    $scope.users = [
-                    {idResp:"1",profil:"2",nomResp:"Korsunsky",prenResp:"Slava",emailResp:"vkorsunsky@objectif-informatique.fr"},
-                    {idResp:'2',profil:'1',nomResp:'Gosse',prenResp:'Thierry',emailResp:'ema@'},
-                    {idResp:'3',profil:'user',nomResp:'',prenResp:'Véronique',emailResp:'isabelle@'},
-                    {idResp:'6',profil:'user',nomResp:'',prenResp:'toto',emailResp:'isabelle@'}
-                   ];
- 	    		
-    
-    $scope.events=[];/*
-                    {title: 'All Day Event',start: new Date(y, m, 1)},
-                    {title: 'Long Event',start: new Date(y, m, d - 5),end: new Date(y, m, d - 2)},
-                    {id: 999,title: 'Repeating Event',start: new Date(y, m, d - 3, 16, 0),allDay: false},
-                    {id: 999,title: 'Repeating Event',start: new Date(y, m, d + 4, 16, 0),allDay: false},
-                    {title: 'Birthday Party',start: new Date(y, m, d + 1, 19, 0),end: new Date(y, m, d + 1, 22, 30),allDay: false},
-                    {title: 'Click for Google',start: new Date(y, m, 28),end: new Date(y, m, 29),url: 'http://google.com/'},
-                    {title: 'toto a la fin?',start: new Date(y, m, d)}
-                  ];*/
+    $scope.formEvt={};
+    $scope.listDossiers=[];
+    $scope.listResponsables=[];
+    $scope.events=[];
 
 		/* event source that pulls from google.com */
 	    $scope.eventSource = {
@@ -141,19 +128,53 @@ function CalendarCtrl($scope,ngDialog,evenements,evenement,evtToCal) {
     };
     /* add custom event*/
     $scope.addEvent = function() {
-		evenements.findAll().$promise.then(function(result){
-	    	var list = evtToCal.convert(result);
-	    	for(var j=0;j<list.length;j++){
-	    		$scope.events.push(list[j]);
-	    	}
-	    	});
+    	if($scope.events.length==0){
+    		evenements.findAll().$promise.then(function(result){
+    	    	var list = evtToCal.convert(result);
+    	    	for(var j=0;j<list.length;j++){
+    	    		$scope.events.push(list[j]);
+    	    	}
+    	    	});
+    	}
+
+    };
+  /* recupère les dossiers */
+	    $scope.initCreer = function() {
+	    	if($scope.listDossiers.length==0){
+				dossiers.findAll().$promise.then(function(result){
+			    	for(var j=0;j<result.length;j++){
+			    		$scope.listDossiers.push(result[j]);
+			    	}
+			    });
+			}
+	    	/* recuperation des responsables */
+	    	if($scope.listResponsables.length==0){
+	    		responsables.findAll().$promise.then(function(result){
+			    	for(var j=0;j<result.length;j++){
+			    		$scope.listResponsables.push(result[j]);
+			    	}
+			    });
+			}	    	
+	    };	
+	    
+	    /* Ajouter un evenement en base */
+
+	    $scope.submitEvt = function() {
+	    	console.log("formEvt = "+ $scope.formEvt);
+    		evenement.create($scope.formEvt).$promise.then(function(result){
+    	    	console.log("resultat du create"+ result);
+    	    	});
+
+    };	    
+	    
+
       /*$scope.events.push({
         title: 'Open Sesame',
         start: new Date(y, m, 28),
         end: new Date(y, m, 29),
         className: ['openSesame']
       });*/
-    };
+    
     /* remove event */
     $scope.remove = function(index) {
       $scope.events.splice(index,1);
