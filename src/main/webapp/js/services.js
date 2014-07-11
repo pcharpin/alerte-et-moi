@@ -10,3 +10,15 @@ services.factory('evenement', function($resource){
 		create: {method: 'POST'}
 	});
 	});
+
+services.factory('dossiers', function($resource){
+	return $resource('rest/dossier/getFolders', {}, {
+	findAll: {method:'GET', isArray:true}
+	});
+	});
+
+services.factory('responsables', function($resource){
+	return $resource('rest/responsable/getallResponsable', {}, {
+		findAll: {method: 'GET', isArray:true}
+	});
+	});
