@@ -17,6 +17,8 @@ function CalendarCtrl($scope,ngDialog,evenements,evenement,evtToCal,dossiers,res
     $scope.listDossiers=[];
     $scope.listResponsables=[];
     $scope.events=[];
+    $scope.listeEvt=[];
+    
 
 		/* event source that pulls from google.com */
 	    $scope.eventSource = {
@@ -189,7 +191,7 @@ function CalendarCtrl($scope,ngDialog,evenements,evenement,evtToCal,dossiers,res
         calendar.fullCalendar('render');
       }
     };
-    /* bouton ON/OFF  premiere vue de la liste d'evenements, remplit la liste des evenement ci-dessous*/
+    /* bouton ON/OFF  premiere vue de la liste d'evenements, remplit la liste des evenement ci-dessous
     $scope.showRest = function(calendar){
     	$scope.showCal=!$scope.showCal;
     	if($scope.showCal){
@@ -205,21 +207,14 @@ function CalendarCtrl($scope,ngDialog,evenements,evenement,evtToCal,dossiers,res
 
     	}
     	
-    };
+    };*/
     
     /* bouton ON/OFF de la liste d'evenements, remplit la liste des evenement ci-dessous*/
-    $scope.showMyCalendar = function(){
-    	$scope.showCal=!$scope.showCal;
-    	if($scope.showCal){
-    	    //$scope.events = [];
-    		evenements.findAll().$promise.then(function(result){
-    	    	console.log("resultat du REST ##### : ",result);
-    	    	$scope.listeEvt = result;
-    	    	});    	    		
-    	}else{
-    		 $scope.listeEvt = [];
-    	}
-    	
+    $scope.showListEvts = function(){
+		evenements.findAll().$promise.then(function(result){
+			console.log("resultat du REST ##### : ",result);
+			$scope.listeEvt = result;
+    	});    	    		
     };
     
     /* fenetre d'edition d'un evenement */

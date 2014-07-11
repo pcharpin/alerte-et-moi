@@ -108,13 +108,8 @@
 			<!-- ****************************************************************AFFICHAGE EN MODE LISTE	*************************************************************** -->
 						</tab> <!-- #############	AFFICHAGE EN MODE LISTE		############## --> 
 						<tab select="renderCalender();">
-							<tab-heading> <i class="glyphicon glyphicon-list"></i> Vue liste </tab-heading>
+							<tab-heading> <i class="glyphicon glyphicon-list"></i><span ng-click="showListEvts()">Vue liste</span></tab-heading>
 						<div class="span4">
-							<span class="btn boolean" ng-click="showMyCalendar(showCal)"
-								ng-model="showCal"> <span class="on btn-primary"
-								ng-show="showCal">ON</span> <span class="off btn-default"
-								ng-hide="showCal">OFF</span>
-							</span>
 							<h3>Filtres :</h3>
 							<h4>Utilisateurs</h4>
 
@@ -208,7 +203,7 @@
 
 						<div><label>responsable :</label>
 							<select ng-model="formEvt.responsable">
-								<option ng-repeat="responsable in listResponsables" value="{{responsable}}" >
+								<option ng-repeat="responsable in listResponsables" value="{{responsable.idResp}}" >
 								{{responsable.nomResp}}</option>
 							</select>
 						</div>
