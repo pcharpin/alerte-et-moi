@@ -38,8 +38,6 @@ public class Document implements Serializable{
 	@Column(name = "lienDoc")
 	private String lienDoc;
 	
-//	@ManyToMany(mappedBy="documents", cascade=CascadeType.ALL)
-
 	@ManyToMany(cascade=CascadeType.ALL)
 	@JoinTable(
 			name="evenement_document",
@@ -48,15 +46,26 @@ public class Document implements Serializable{
 	)
 	private Set<Evenement> evenements;
 	
+	@ManyToMany(cascade=CascadeType.ALL)
+	@JoinTable(
+			name="dossier_document",
+			joinColumns={@JoinColumn(name="Dossier_idDos")},
+			inverseJoinColumns={@JoinColumn(name="Document_idDoc")}
+	)
+	private Set<Dossier> dossiers;
+	
 	public Document(){}
 	
-	public Document(int idDoc, String accesDoc, String lienDoc) {
+	public Document(int idDoc, String accesDoc, String lienDoc,
+			Set<Evenement> evenements, Set<Dossier> dossiers) {
 		super();
 		this.idDoc = idDoc;
 		this.accesDoc = accesDoc;
 		this.lienDoc = lienDoc;
+		this.evenements = evenements;
+		this.dossiers = dossiers;
 	}
-	
+
 	public Document(String accesDoc, String lienDoc) {
 		super();
 		this.accesDoc = accesDoc;
@@ -115,6 +124,8 @@ public class Document implements Serializable{
 		builder.append(lienDoc);
 		builder.append(", evenements=");
 		builder.append(evenements);
+		builder.append(", dossiers=");
+		builder.append(dossiers);
 		builder.append("]");
 		return builder.toString();
 	}
