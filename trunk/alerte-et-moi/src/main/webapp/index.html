@@ -38,6 +38,7 @@
 <script src="js/angular-ressource.js"></script>
 <script src="js/services.js"></script>
 <script src="js/convert.js"></script>
+<script src="js/filter.js"></script>
 </head>
 
 <body data-spy="scroll">
@@ -55,18 +56,13 @@
 						<tab select="renderCalender(myCalendar1);"> <tab-heading>
 						<i class="glyphicon glyphicon-calendar"></i>Vue calendrier </tab-heading>
 	<!-- ****************************************************************Panneau de gauche*************************************************************** -->
-						<div class="span4">
+						<div class="span2"><!-- pour le span2 mettre les width à 100px -->
 							<h3>Filtres :</h3>
 							<div class="well">
-								<!-- <h4>AngularJS Implementation</h4>
-								<p>This switch is implemented in AngularJS using a Twitter
-									Bootstrap button and some of Damian's styling. It responds
-									correctly to truthy and falsey values.</p>
-								isTest: {{isTest}} <br> -->
-								<button type="button" class="btn btn-primary" ng-click="addEvent()">Afficher les evenements</button>
+								<button type="button" class="btn btn-primary" ng-click="addEvent()">Afficher</button>
 							<hr>
 							<h4>Dossier</h4>
-							<select ng-model="userSelected">
+							<select style="width:100px" ng-model="userSelected">
 								<option value="">tous</option>
 								<option ng-repeat="user in users" value="{{user}}">{{user.prenResp}}
 									; {{user.idResp}}</option>
@@ -82,18 +78,18 @@
 						</div>
 	<!-- ****************************************************************Fin Panneau de gauche*************************************************************** -->
 		<!-- ****************************************************************Panneau de droite*************************************************************** -->
-						<div class="span8">
-							<div class="alert-success calAlert"
+						<div class="span10">
+							<!-- <div class="alert-success calAlert"
 								ng-show="alertMessage != undefined && alertMessage != ''">
 								<h4>{{alertMessage}}</h4>
-							</div>
+							</div> -->
 							<div class="btn-toolbar">
 								<p class="pull-right lead">Calendrier</p>
 								<div class="btn-group">
+									<!--  <button class="btn btn-success"
+										ng-click="changeView('agendaDay', myCalendar1)">Jour</button>-->
 									<button class="btn btn-success"
-										ng-click="changeView('agendaDay', myCalendar1)">Jour</button>
-									<button class="btn btn-success"
-										ng-click="changeView('agendaWeek', myCalendar1)">Semaine</button>
+										ng-click="changeView('basicWeek', myCalendar1)">Semaine</button>
 									<button class="btn btn-success"
 										ng-click="changeView('month', myCalendar1)">Mois</button>
 								</div>
@@ -109,23 +105,19 @@
 						</tab> <!-- #############	AFFICHAGE EN MODE LISTE		############## --> 
 						<tab select="renderCalender();">
 							<tab-heading><span ng-click="showListEvts()"> <i class="glyphicon glyphicon-list"></i>Vue liste</span></tab-heading>
-						<div class="span2">
+						<div class="span2"> <!-- pour le span2 mettre les width à 100px -->
 							<h3>Filtres :</h3>
 							<h4>Utilisateurs</h4>
 
-							<select ng-model="userSelected">
+							<select style="width:100px" ng-model="userSelected">
 								<option value="">tous</option>
 								<option ng-repeat="user in users" value="{{user}}">
 								{{user.prenResp}} ; {{user.idResp}}</option>
 							</select>
 							<hr>
-							<h4>Tri</h4>
-							<input type="radio" ng-model="order" value="dateEchEvt" checked="checked">date d'échéance<br> 
-							<input type="radio" ng-model="order" value="nomEvt">nom de l'événement<br> 
-							<hr>
 							<h4>Recherche :</h4>
-							(dans le nom de l'évènement) <span class"glyphiconglyphicon-search"></span><input
-								ng-model="recherche"><br>
+							(dans le nom de l'évènement)
+							<input type="text" style="width:100px" ng-model="recherche"><br>
 							<hr>
 						</div>
 						<div class="span10">
@@ -137,24 +129,32 @@
 							<div>
 								<table border="1">
 									<tr bgcolor="#FFCC66">
-									<th>Nom de l'évènement</th>
-									<th>Dossier de rattachement</th>
-									<th>Responsable de l'évènement</th>
-									<th>Date d'échéance</th>
-									<th>Périodicité de lévènement</th>
-									<th>Evénement traité?</th>
-									<th>Evénement actif?</th>
-									<th>Actions</th>
+									<th style="text-align:center">Nom </th>
+									<th style="text-align:center">Dossier </th>
+									<th style="text-align:center">
+										Responsable 
+										<i class="glyphicon glyphicon-chevron-up" ng-click="order='responsable.prenResp';"></i>
+										<i class="glyphicon glyphicon-chevron-down" ng-click="order='-responsable.prenResp';"></i>
+									</th>
+									<th style="text-align:center">
+										Date
+										<i class="glyphicon glyphicon-chevron-up" ng-click="order='dateEchEvt';"></i>
+										<i class="glyphicon glyphicon-chevron-down" ng-click="order='-dateEchEvt';"></i>
+									</th>
+									<th style="text-align:center">Périodicité </th>
+									<th style="text-align:center">traité? </th>
+									<th style="text-align:center">actif? </th>
+									<th style="text-align:center">Actions </th>
 									</tr>
 									<tr
 										ng-repeat="event in listeEvt | filter:{nomEvt: recherche, responsable.id: userSelected} | orderBy:order">
-										<td>{{event.nomEvt}}</td>
-										<td>{{event.dossier.nomDos}}</td>
-										<td>{{event.responsable.prenResp}}</td>
-										<td>{{event.dateEchEvt | date:"dd/MM/yyyy"}}</td>
-										<td>{{event.enumPeriodeEvet}}</td>
-										<td>{{event.trtEvt}}</td>
-										<td>{{event.actifEvt}}</td>
+										<td>{{event.nomEvt}} </td>
+										<td>{{event.dossier.nomDos}} </td>
+										<td>{{event.responsable.prenResp}} </td>
+										<td>{{event.dateEchEvt | date:"dd/MM/yyyy"}} </td>
+										<td>{{event.enumPeriodeEvet}} </td>
+										<td>{{event.trtEvt | booleanTooString}} </td>
+										<td>{{event.actifEvt | booleanTooString}} </td>
 										<td>
 										<i class="glyphicon glyphicon-search"></i>  
 										<i class="glyphicon glyphicon-folder-open"></i>  
