@@ -13,6 +13,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -43,7 +44,8 @@ public class Alerte implements Serializable{
 	@Column(name="dateAlerte")
 	private Date dateAlerte;
 
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne(cascade = CascadeType.ALL ,fetch=FetchType.EAGER)
+	@JoinColumn(name="Evenement_idEvt")
 	private Evenement evenement;
 	
 	@ManyToMany(targetEntity=Alerte.class,
@@ -56,7 +58,10 @@ public class Alerte implements Serializable{
 		)
 	private Set<Responsable> responsables = new HashSet<Responsable>();
 
+	public Alerte(){}
+	
 	/**
+	 * 
 	 * @param idAler
 	 * @param idEvt
 	 * @param enumConstante
@@ -64,7 +69,6 @@ public class Alerte implements Serializable{
 	 * @param evenement
 	 * @param responsables
 	 */
-	public Alerte(){}
 	public Alerte(int idAler, int idEvt, EnumConstante enumConstante,
 			Date dateAlerte, Evenement evenement, Set<Responsable> responsables) {
 		super();
@@ -180,7 +184,5 @@ public class Alerte implements Serializable{
 		builder.append(responsables);
 		builder.append("]");
 		return builder.toString();
-	}
-
-	
+	}	
 }
