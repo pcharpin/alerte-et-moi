@@ -46,12 +46,13 @@ var defaults = {
 	// time formats
 	titleFormat: {
 		month: 'MMMM yyyy',
-		week: "MMM d[ yyyy]{ '&#8212;'[ MMM] d yyyy}",
+		week: "[MMM] d[ yyyy]{ '&#8212;' d MMMM yyyy}",
 		day: 'dddd, MMM d, yyyy'
 	},
 	columnFormat: {
 		month: 'ddd',
-		week: 'ddd M/d',
+		//week: 'ddd M/d',
+		week: 'ddd d/M',// format FR
 		day: 'dddd M/d'
 	},
 	timeFormat: { // for event elements
@@ -73,7 +74,7 @@ var defaults = {
 		today: 'aujourd\'hui',
 		month: 'month',
 		week: 'week',
-		day: 'day'
+		day: 'day tototo'
 	},
 	
 	// jquery-ui theming

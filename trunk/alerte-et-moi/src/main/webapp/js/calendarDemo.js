@@ -1,7 +1,7 @@
 /**
  * calendarDemoApp - 0.1.3 
  */
-angular.module('calendarDemoApp', ['ui.calendar', 'ui.bootstrap','ngDialog','calendarServices']);
+angular.module('calendarDemoApp', ['ui.calendar', 'ui.bootstrap','ngDialog','calendarServices','filters']);
 
 function CalendarCtrl($scope,ngDialog,evenements,evenement,evtToCal,dossiers,responsables) {
 	
@@ -18,11 +18,12 @@ function CalendarCtrl($scope,ngDialog,evenements,evenement,evtToCal,dossiers,res
     $scope.listResponsables=[];
     $scope.events=[];
     $scope.listeEvt=[];
+    $scope.eventClicked={};
     
 
 		/* event source that pulls from google.com */
 	    $scope.eventSource = {
-	            /* url: "http://www.google.com/calendar/feeds/usa__en%40holiday.calendar.google.com/public/basic", */
+	            //url: "http://www.google.com/calendar/feeds/usa__en%40holiday.calendar.google.com/public/basic",
 	            url: "http://www.google.com/calendar/feeds/fr.french%23holiday%40group.v.calendar.google.com/public/basic",
 	            className: 'gcal-event',           // an option!
 	            currentTimezone: 'UTC/GMT' // an option!
@@ -35,7 +36,32 @@ function CalendarCtrl($scope,ngDialog,evenements,evenement,evtToCal,dossiers,res
 	      var events = [];
 	      callback(events);
 	    };	    
-
+	    /* alert on eventClick */
+	    $scope.alertOnEventClick = function( event, allDay, jsEvent, view ){
+	        $scope.alertMessage = (event.title + ' was clicked ' + date);
+	        $scope.event = event;
+    		evenement.get({evtId: $scope.event.id}).$promise.then(function(result){
+    			$scope.eventClicked = result;// la variable eventClicked est associé au resultat du get(id)
+    	    	});
+	    	ngDialog.open({
+	    		template: '<div class="ngdialog-message"><h3>{{eventClicked.nomEvt}}</h3>'+
+	    		'<p>date de début: <code>{{eventClicked.dateEchEvt | date:"dd/MM/yyyy"}}</code></p>'+
+    			'<p>dossier : {{eventClicked.dossier.nomDos}}</p>'+
+    			'<p>description : {{eventClicked.descEvt}}</p>'+
+    			'<p>montant : {{eventClicked.mntEvt}}€</p>'+
+    			'<p>periodicité : {{eventClicked.enumPeriodeEvet}}</p>'+
+    			'<p>mode de gestion : {{eventClicked.modeGestionEvt}}</p>'+
+    			'<p>traité : {{eventClicked.trtEvt | booleanTooString}}</p>'+
+    			'<p>responsable : {{eventClicked.responsable.prenResp}} {{eventClicked.responsable.nomResp}}</p></div>',
+	    			//+'<div class="ngdialog-buttons"><button type="button" class="ngdialog-button ngdialog-button-primary" ng-click="openSecond()">Open next</button></div>',
+	    		plain: true,
+	    		closeByEscape: true,
+	    		scope: $scope,
+	    		controller: 'InsideCtrl'
+	    		//controller: 'SecondModalCtrl'
+	    	});
+	    };
+	    
 	    /* config object */	
 	    $scope.uiConfig = {
 	      calendar:{
@@ -89,24 +115,7 @@ function CalendarCtrl($scope,ngDialog,evenements,evenement,evtToCal,dossiers,res
         ]
     };*/
 	    
-    /* alert on eventClick */
-    $scope.alertOnEventClick = function( event, allDay, jsEvent, view ){
-    	console.log("eventclick ##### : ");
-        $scope.alertMessage = (event.title + ' was clicked ' + date);
-        $scope.event = event;
-        
-    	ngDialog.open({
-    		template: '<div class="ngdialog-message"><h3>{{event.title}}</h3>'+
-    		'<p>date de début: <code>{{event.start | date:"dd/MM/yyyy"}}</code></p><br><p>date de fin : <code> {{event.end}} </code> </p>'+
-    			'<p>url : {{event.url}}</p></div>'+
-    			'<div class="ngdialog-buttons"><button type="button" class="ngdialog-button ngdialog-button-primary" ng-click="openSecond()">Open next</button></div>',
-    		plain: true,
-    		closeByEscape: true,
-    		scope: $scope,
-    		controller: 'InsideCtrl'
-    		/*controller: 'SecondModalCtrl'*/
-    	});
-    };
+
     /* alert on Drop */
      $scope.alertOnDrop = function(event, dayDelta, minuteDelta, allDay, revertFunc, jsEvent, ui, view){
        $scope.alertMessage = ('Event Droped to make dayDelta ' + dayDelta);
@@ -114,6 +123,7 @@ function CalendarCtrl($scope,ngDialog,evenements,evenement,evtToCal,dossiers,res
     /* alert on Resize */
     $scope.alertOnResize = function(event, dayDelta, minuteDelta, revertFunc, jsEvent, ui, view ){
        $scope.alertMessage = ('Event Resized to make dayDelta ' + minuteDelta);
+       
     };
     /* add and removes an event source of choice */
     $scope.addRemoveEventSource = function(sources,source) {
@@ -191,23 +201,7 @@ function CalendarCtrl($scope,ngDialog,evenements,evenement,evtToCal,dossiers,res
         calendar.fullCalendar('render');
       }
     };
-    /* bouton ON/OFF  premiere vue de la liste d'evenements, remplit la liste des evenement ci-dessous
-    $scope.showRest = function(calendar){
-    	$scope.showCal=!$scope.showCal;
-    	if($scope.showCal){
-    		
-    		//calendar.fullCalendar( 'removeEvents');
-    		evenements.findAll().$promise.then(function(result){
-    	    	console.log("resultat du REST ##### : ",result);
-   	    	 $scope.events.push(evtToCal.convert(result));
-   	    	 
-    	    	});
-    	}else{
- 	    	console.log("Nothing");
 
-    	}
-    	
-    };*/
     
     /* bouton ON/OFF de la liste d'evenements, remplit la liste des evenement ci-dessous*/
     $scope.showListEvts = function(){
@@ -230,7 +224,8 @@ function CalendarCtrl($scope,ngDialog,evenements,evenement,evtToCal,dossiers,res
     	ngDialog.open({
     		 template: 'editEvt.html'
     	});
-    }    
+    }
+    
     /* event sources array*/
     //$scope.eventSources2 = [$scope.calEventsExt, $scope.eventsF, $scope.events];
 	 // liste des evenements pour le calendrier, normalement doit disparaitre
