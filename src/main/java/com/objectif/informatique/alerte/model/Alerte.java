@@ -56,8 +56,6 @@ public class Alerte implements Serializable{
 		)
 	private Set<Responsable> responsables = new HashSet<Responsable>();
 
-	
-
 	/**
 	 * @param idAler
 	 * @param idEvt

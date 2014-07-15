@@ -4,14 +4,19 @@
 package com.objectif.informatique.alerte.model;
 
 import java.io.Serializable;
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -43,9 +48,13 @@ public class Dossier implements Serializable{
 	@Column(name = "descDos")
 	private String descDoc;
 	
-	/*@OneToMany(targetEntity=Dossier.class, mappedBy = "dossier", cascade = CascadeType.ALL)	
-	@Column(name = "evtDos")
-	private Set<Evenement> evenements = new HashSet<Evenement>();*/
+	@ManyToMany(targetEntity=Document.class, fetch=FetchType.LAZY)
+	@JoinTable(
+			name="dossier_document",
+			joinColumns={@JoinColumn(name="Dossier_idDos")},
+			inverseJoinColumns={@JoinColumn(name="Document.idDoc")}
+	)
+private Set<Document> documents = new HashSet<Document>();
 	@JsonIgnore
 	@OneToMany(mappedBy="dossier")
 	private Set<Evenement> evenements;
@@ -95,18 +104,6 @@ public class Dossier implements Serializable{
 	@Column(name = "libreDos")
 	private String libre;
 
-	/*@ManyToMany(
-			targetEntity=Document.class,
-			cascade={CascadeType.PERSIST, CascadeType.MERGE}
-	)
-		@JoinTable(
-				name="dossier_document",
-				joinColumns=@JoinColumn(name="idDos"),
-				inverseJoinColumns=@JoinColumn(name="idDoc")
-		)
-	private Set<Document> documents = new HashSet<Document>();*/
-	
-
 	/**
 	 * @return the idDos
 	 */
@@ -116,19 +113,20 @@ public class Dossier implements Serializable{
 
 	public Dossier(int idDos, String nomDos,
 			EnumTypesDossiers enumTypesDossiers, String descDoc,
-			Set<Evenement> evenements, boolean priorDos, float mntDOS,
-			boolean periodJourDos, boolean periodHebdoDos,
-			boolean periodMensDos, boolean periodTrimDos,
-			boolean periodSemestDos, boolean periodAnuDos,
-			boolean periodSansDos, boolean actifDos, String cntNomDos,
-			String cntPrenomDos, String cntTelDos, String cntCmntDos,
-			String libre) {
+			Set<Document> documents, Set<Evenement> evenements,
+			boolean priorDos, float mntDOS, boolean periodJourDos,
+			boolean periodHebdoDos, boolean periodMensDos,
+			boolean periodTrimDos, boolean periodSemestDos,
+			boolean periodAnuDos, boolean periodSansDos, boolean actifDos,
+			String cntNomDos, String cntPrenomDos, String cntTelDos,
+			String cntCmntDos, String libre) {
 		super();
 		this.idDos = idDos;
 		this.nomDos = nomDos;
 		this.enumTypesDossiers = enumTypesDossiers;
 		this.descDoc = descDoc;
-		//this.evenements = evenements;
+		this.documents = documents;
+		this.evenements = evenements;
 		this.priorDos = priorDos;
 		this.mntDOS = mntDOS;
 		this.periodJourDos = periodJourDos;
@@ -145,8 +143,9 @@ public class Dossier implements Serializable{
 		this.cntCmntDos = cntCmntDos;
 		this.libre = libre;
 	}
-
+	
 	public Dossier(){}
+	
 	public Dossier(String nomDos) {
 		this.nomDos = nomDos;
 	}
@@ -452,6 +451,8 @@ public class Dossier implements Serializable{
 		builder.append(enumTypesDossiers);
 		builder.append(", descDoc=");
 		builder.append(descDoc);
+		builder.append(", documents=");
+		builder.append(documents);
 		builder.append(", evenements=");
 		builder.append(evenements);
 		builder.append(", priorDos=");

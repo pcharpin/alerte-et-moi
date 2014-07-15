@@ -4,12 +4,17 @@
 package com.objectif.informatique.alerte.model;
 
 import java.io.Serializable;
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -44,18 +49,28 @@ public class Responsable implements Serializable{
 	@OneToMany(mappedBy="responsable")
 	private Set<Evenement> evenements;
 	
+	@ManyToMany(targetEntity=Alerte.class, fetch=FetchType.LAZY)
+	@JoinTable(
+			name="responsable_alertet",
+			joinColumns={@JoinColumn(name="idAler")},
+			inverseJoinColumns={@JoinColumn(name="idResp")}
+	)
+private Set<Alerte> alertes = new HashSet<Alerte>();
+
+	public Responsable(){}
+	
 	/**
+	 * 
 	 * @param idResp
 	 * @param profil
 	 * @param nomResp
 	 * @param prenResp
 	 * @param emailResp
 	 * @param evenements
+	 * @param alertes
 	 */
-	public Responsable(){}
-	
-	public Responsable(int idResp, int profil, String nomResp,
-			String prenResp, String emailResp, Set<Evenement> evenements) {
+	public Responsable(int idResp, int profil, String nomResp, String prenResp,
+			String emailResp, Set<Evenement> evenements, Set<Alerte> alertes) {
 		super();
 		this.idResp = idResp;
 		this.profil = profil;
@@ -63,19 +78,9 @@ public class Responsable implements Serializable{
 		this.prenResp = prenResp;
 		this.emailResp = emailResp;
 		this.evenements = evenements;
+		this.alertes = alertes;
 	}
-	
-	
-	public Responsable(int profil, String nomResp,
-			String prenResp, String emailResp, Set<Evenement> evenements) {
-		super();
-		this.profil = profil;
-		this.nomResp = nomResp;
-		this.prenResp = prenResp;
-		this.emailResp = emailResp;
-		this.evenements = evenements;
-	}
-	
+
 	/**
 	 * @return the idResp
 	 */
@@ -167,7 +172,9 @@ public class Responsable implements Serializable{
 		builder.append(emailResp);
 		builder.append(", evenements=");
 		builder.append(evenements);
+		builder.append(", alertes=");
+		builder.append(alertes);
 		builder.append("]");
 		return builder.toString();
-	}	
+	}
 }
