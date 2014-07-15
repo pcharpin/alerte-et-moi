@@ -9,7 +9,7 @@ function CalendarCtrl($scope,ngDialog,evenements,evenement,evtToCal,dossiers,res
     var d = date.getDate(); 
     var m = date.getMonth();
     var y = date.getFullYear();
-    $scope.order = 'date';
+    $scope.order = 'dateEchEvt';
     $scope.months = [{nom:'Janvier',num:1},{nom:'Fevrier',num:2},{nom:'Mars',num:3},{nom:'Avril',num:4},{nom:'Mai',num:5},{nom:'Juin',num:6},{nom:'Juillet',num:7},{nom:'Aout',num:8},{nom:'Septembre',num:9},{nom:'Octobre',num:10},{nom:'Novembre',num:11},{nom:'Decembre',num:12}];
     $scope.showCal=true;
 	    
@@ -32,7 +32,7 @@ function CalendarCtrl($scope,ngDialog,evenements,evenement,evtToCal,dossiers,res
 	      var s = new Date(start).getTime() / 1000;
 	      var e = new Date(end).getTime() / 1000;
 	      var m = new Date(start).getMonth();
-	      var events = [{title: 'Feed Me ' + m,start: s + (50000),end: s + (100000),allDay: false, className: ['customFeed']}];
+	      var events = [];
 	      callback(events);
 	    };	    
 
