@@ -20,8 +20,10 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 
 /**
@@ -79,6 +81,11 @@ public class Evenement implements Serializable{
 	@ManyToOne(cascade = CascadeType.ALL, fetch=FetchType.EAGER)
 	@JoinColumn(name="Responsable_idResp")
 	private Responsable responsable;	
+	
+	@JsonIgnore
+	@OneToMany(mappedBy="evenement")
+	private Set<Alerte> alertes =  new HashSet<Alerte>();
+	
 	
 	@ManyToMany(targetEntity=Document.class, fetch=FetchType.LAZY)
 		@JoinTable(
@@ -281,6 +288,30 @@ public class Evenement implements Serializable{
 	public void setDossier(Dossier dossier) {
 		this.dossier = dossier;
 	}
+	/**
+	 * @return the alertes
+	 */
+	public Set<Alerte> getAlertes() {
+		return alertes;
+	}
+	/**
+	 * @param alertes the alertes to set
+	 */
+	public void setAlertes(Set<Alerte> alertes) {
+		this.alertes = alertes;
+	}
+	/**
+	 * @return the documents
+	 */
+	public Set<Document> getDocuments() {
+		return documents;
+	}
+	/**
+	 * @param documents the documents to set
+	 */
+	public void setDocuments(Set<Document> documents) {
+		this.documents = documents;
+	}
 	/* (non-Javadoc)
 	 * @see java.lang.Object#toString()
 	 */
@@ -289,7 +320,7 @@ public class Evenement implements Serializable{
 		StringBuilder builder = new StringBuilder();
 		builder.append("Evenement [idEvt=");
 		builder.append(idEvt);
-		builder.append(", dossier_idDos=");
+		builder.append(", dossier=");
 		builder.append(dossier);
 		builder.append(", nomEvt=");
 		builder.append(nomEvt);
@@ -321,9 +352,11 @@ public class Evenement implements Serializable{
 		builder.append(libreEvt);
 		builder.append(", responsable=");
 		builder.append(responsable);
+		builder.append(", alertes=");
+		builder.append(alertes);
 		builder.append(", documents=");
 		builder.append(documents);
 		builder.append("]");
 		return builder.toString();
-	}	
+	}
 }
