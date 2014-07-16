@@ -4,16 +4,19 @@
 package com.objectif.informatique.alerte.model;
 
 import java.io.Serializable;
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 
 /**
  * @author vdibi
@@ -37,22 +40,23 @@ public class Document implements Serializable{
 	
 	@Column(name = "lienDoc")
 	private String lienDoc;
+		
+//	@ManyToMany(cascade=CascadeType.ALL,fetch=FetchType.EAGER)
+//	@JoinTable(
+//			name="evenement_document",
+//			joinColumns={@JoinColumn(name="Evenement_idEvt")},
+//			inverseJoinColumns={@JoinColumn(name="Document_idDoc")}
+//	)
+	@ManyToMany(mappedBy="documents")
+	private Set<Evenement> evenements = new HashSet<Evenement>();
 	
-	@ManyToMany(cascade=CascadeType.ALL)
-	@JoinTable(
-			name="evenement_document",
-			joinColumns={@JoinColumn(name="Document_idDoc")},
-			inverseJoinColumns={@JoinColumn(name="Evenement_idEvt")}
-	)
-	private Set<Evenement> evenements;
-	
-	@ManyToMany(cascade=CascadeType.ALL)
+	@ManyToMany(cascade=CascadeType.ALL,fetch=FetchType.EAGER)
 	@JoinTable(
 			name="dossier_document",
 			joinColumns={@JoinColumn(name="Dossier_idDos")},
 			inverseJoinColumns={@JoinColumn(name="Document_idDoc")}
 	)
-	private Set<Dossier> dossiers;
+	private Set<Dossier> dossiers = new HashSet<Dossier>();
 	
 	public Document(){}
 	
@@ -94,6 +98,20 @@ public class Document implements Serializable{
 
 	public void setLienDoc(String lienDoc) {
 		this.lienDoc = lienDoc;
+	}
+
+	/**
+	 * @return the dossiers
+	 */
+	public Set<Dossier> getDossiers() {
+		return dossiers;
+	}
+
+	/**
+	 * @param dossiers the dossiers to set
+	 */
+	public void setDossiers(Set<Dossier> dossiers) {
+		this.dossiers = dossiers;
 	}
 
 	/**

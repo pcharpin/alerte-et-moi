@@ -20,10 +20,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 
 /**
@@ -44,7 +42,6 @@ public class Evenement implements Serializable{
 	@ManyToOne(cascade = CascadeType.ALL, fetch=FetchType.EAGER)
 	@JoinColumn(name="Dossier_idDos")
 	private Dossier dossier;
-	
 	//private int idDos;
 	@Column(name="nomEvt")
 	private String nomEvt;
@@ -82,23 +79,19 @@ public class Evenement implements Serializable{
 	@JoinColumn(name="Responsable_idResp")
 	private Responsable responsable;	
 	
-	@JsonIgnore
-	@OneToMany(mappedBy="evenement")
-	private Set<Alerte> alertes =  new HashSet<Alerte>();
-	
-	
-	@ManyToMany(targetEntity=Document.class, fetch=FetchType.LAZY)
+	//@ManyToMany(targetEntity=Document.class, fetch=FetchType.LAZY)
+	@ManyToMany(cascade = CascadeType.ALL, fetch=FetchType.EAGER)
 		@JoinTable(
 				name="evenement_document",
-				joinColumns={@JoinColumn(name="Evenement.idEvt")},
-				inverseJoinColumns={@JoinColumn(name="Document.idDoc")}
+				joinColumns={@JoinColumn(name="Evenement_idEvt")},
+				inverseJoinColumns={@JoinColumn(name="Document_idDoc")}
 		)
 	private Set<Document> documents = new HashSet<Document>();
 	
 	
 	
-	public Evenement(int idEvt, Dossier dossier, String nomEvt, String descEvt,
-			Date dateEchEvt, int exeEvt, float mntEvt,
+	public Evenement(int idEvt, Dossier dossier, /*int idDos,*/ String nomEvt,
+			String descEvt, Date dateEchEvt, int exeEvt, float mntEvt,
 			EnumModeGestionEvt modeGestionEvt, String lienGestEvt, int trtEvt,
 			Date dateTrtEvt, EnumPeriodeEvet enumPeriodeEvet, int actifEvt,
 			int recopAutoEvt, int recurtEvt, String libreEvt,
@@ -106,6 +99,7 @@ public class Evenement implements Serializable{
 		super();
 		this.idEvt = idEvt;
 		this.dossier = dossier;
+		//this.idDos = idDos;
 		this.nomEvt = nomEvt;
 		this.descEvt = descEvt;
 		this.dateEchEvt = dateEchEvt;
@@ -146,7 +140,12 @@ public class Evenement implements Serializable{
 	public void setIdEvt(int idEvt) {
 		this.idEvt = idEvt;
 	}
-	
+//	public int getIdDos() {
+//		return idDos;
+//	}
+//	public void setIdDos(int idDos) {
+//		this.idDos = idDos;
+//	}
 	public Responsable getResponsable_resp() {
 		return this.responsable;
 	}
@@ -275,33 +274,8 @@ public class Evenement implements Serializable{
 	public void setEnumPeriodeEvet(EnumPeriodeEvet enumPeriodeEvet) {
 		this.enumPeriodeEvet = enumPeriodeEvet;
 	}
-	
 	/**
-	 * @return the dossier
-	 */
-	public Dossier getDossier() {
-		return dossier;
-	}
-	/**
-	 * @param dossier the dossier to set
-	 */
-	public void setDossier(Dossier dossier) {
-		this.dossier = dossier;
-	}
-	/**
-	 * @return the alertes
-	 */
-	public Set<Alerte> getAlertes() {
-		return alertes;
-	}
-	/**
-	 * @param alertes the alertes to set
-	 */
-	public void setAlertes(Set<Alerte> alertes) {
-		this.alertes = alertes;
-	}
-	/**
-	 * @return the documents
+	 * @return the evenements
 	 */
 	public Set<Document> getDocuments() {
 		return documents;
@@ -320,8 +294,10 @@ public class Evenement implements Serializable{
 		StringBuilder builder = new StringBuilder();
 		builder.append("Evenement [idEvt=");
 		builder.append(idEvt);
-		builder.append(", dossier=");
-		builder.append(dossier);
+		builder.append(", idDos=");
+		//builder.append(idDos);
+		builder.append(", responsable_idResp=");
+		builder.append(responsable);
 		builder.append(", nomEvt=");
 		builder.append(nomEvt);
 		builder.append(", descEvt=");
@@ -350,13 +326,11 @@ public class Evenement implements Serializable{
 		builder.append(recurtEvt);
 		builder.append(", libreEvt=");
 		builder.append(libreEvt);
-		builder.append(", responsable=");
-		builder.append(responsable);
-		builder.append(", alertes=");
-		builder.append(alertes);
 		builder.append(", documents=");
 		builder.append(documents);
 		builder.append("]");
 		return builder.toString();
 	}
+
+	
 }

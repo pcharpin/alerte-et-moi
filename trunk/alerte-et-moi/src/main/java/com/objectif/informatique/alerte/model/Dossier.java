@@ -52,7 +52,7 @@ public class Dossier implements Serializable{
 	@JoinTable(
 			name="dossier_document",
 			joinColumns={@JoinColumn(name="Dossier_idDos")},
-			inverseJoinColumns={@JoinColumn(name="Document.idDoc")}
+			inverseJoinColumns={@JoinColumn(name="Document_idDoc")}
 	)
 private Set<Document> documents = new HashSet<Document>();
 	@JsonIgnore
