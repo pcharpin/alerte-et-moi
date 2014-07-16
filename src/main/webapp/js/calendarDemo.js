@@ -172,9 +172,9 @@ function CalendarCtrl($scope,ngDialog,evenements,evenement,evtToCal,dossiers,res
 	    /* Ajouter un evenement en base */
 
 	    $scope.submitEvt = function() {
-	    	console.log("formEvt = "+ $scope.formEvt);
+	    	//sconsole.log("formEvt = "+ $scope.formEvt);
     		evenement.create($scope.formEvt).$promise.then(function(result){
-    	    	console.log("resultat du create"+ result);
+    	    	//console.log("resultat du create"+ result);
     	    	});
 
     };	    
@@ -206,7 +206,7 @@ function CalendarCtrl($scope,ngDialog,evenements,evenement,evtToCal,dossiers,res
     /* bouton ON/OFF de la liste d'evenements, remplit la liste des evenement ci-dessous*/
     $scope.showListEvts = function(){
 		evenements.findAll().$promise.then(function(result){
-			console.log("resultat du REST ##### : ",result);
+			//console.log("resultat du REST ##### : ",result);
 			$scope.listeEvt = result;
     	});    	    		
     };

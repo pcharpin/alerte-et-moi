@@ -34,9 +34,8 @@ public class DossierDAOImpl extends GenericDAOImpl<Dossier> implements DossierDA
 		try {
 		dossier = entityManager.find(Dossier.class, folderId); 
 		} catch (Exception e) {
-			// TODO: handle exception
+			e.printStackTrace();
 		}
 		return dossier;
 	}
-
 }
