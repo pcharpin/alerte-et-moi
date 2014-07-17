@@ -61,13 +61,11 @@
 							<div class="well">
 								<button type="button" class="btn btn-primary" ng-click="addEvent()">Afficher</button>
 							<hr>
-							<h4>Dossier</h4>
-							<select style="width:100px" ng-model="userSelected">
-								<option value="">tous</option>
-								<option ng-repeat="user in users" value="{{user}}">{{user.prenResp}}
-									; {{user.idResp}}</option>
+							<h4  ng-click="initCreer()">Dossier</h4>					
+							<select style="width:100px" >
+								<option ng-repeat="dossier in listDossiers" value="{{dossier}}">
+								{{dossier.nomDos}}</option>
 							</select>
-								<hr>
 							<h4>Status</h4>
 							<input type="radio" ng-model="order" value="dateEchEvt">Traités<br> 
 							<input type="radio" ng-model="order" value="nomEvt">Non traités<br> 
