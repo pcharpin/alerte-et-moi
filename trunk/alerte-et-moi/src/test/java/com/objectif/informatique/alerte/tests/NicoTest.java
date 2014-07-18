@@ -77,7 +77,7 @@ public class NicoTest {
         evt2.setDateEchEvt(new Date());
         evt2.setIdDos(1);*/
 
-        Evenement evt = new Evenement("RSI");
+        Evenement evt = new Evenement();
         Dossier dossier =  new Dossier();
         dossier.setNomDos("Test RSI");
         dossier.setDescDoc("Ceci est un test");
@@ -85,7 +85,7 @@ public class NicoTest {
         dossier.setNomDos("Dossier RSI");
 	    evt.setResponsable(resp);
 	    evt.setDateEchEvt(new Date());
-	    evt.setDossier(dossier);
+	   // evt.setDossier(dossier);
 	    
        Set<Evenement> evts = new HashSet<Evenement>();
         //evts.add(evt1);

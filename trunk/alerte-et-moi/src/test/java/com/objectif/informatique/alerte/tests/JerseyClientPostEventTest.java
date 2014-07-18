@@ -54,7 +54,7 @@ public class JerseyClientPostEventTest {
 			Evenement evenement = new Evenement();
 			evenement.setNomEvt("testGan");
 			evenement.setDateEchEvt(new Date());
-			evenement.setDossier(dossier);
+			//evenement.setDossier(dossier);
 			evenement.setResponsable(responsable);
 						
 //			evenement.setDateEchEvt(new Date());

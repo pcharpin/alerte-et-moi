@@ -22,6 +22,7 @@ import javax.ws.rs.core.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.objectif.informatique.alerte.model.Dossier;
 import com.objectif.informatique.alerte.model.Evenement;
 import com.objectif.informatique.alerte.model.Responsable;
 import com.objectif.informatique.alerte.service.DossierService;
@@ -79,22 +80,38 @@ public class EvenementRestService {
 	@POST
 	@Path("/send")
 	@Consumes(MediaType.APPLICATION_JSON + ";charset=utf-8")
-	public Response add(Evenement evenement){		
+	public Response add(Evenement evenement,@PathParam("id") int id){		
 		//Attribution d'un dossier par defaut
-		dossierService.getDossierById(1);
+		Dossier dossier = null;
+		if(dossier != null){
+			dossierService.getDossierById(id); 
+		}
+		else {
+			dossierService.create(dossier);
+		}
+		
 		
 		//Profil : attribution du rôle normal à la création
 //		Profil profil =  new Profil();
 //		profil.setIdProf(2);
 	
 		//selection un responsable existant ou créer(un par défaut)
-		Responsable responsable = new Responsable();
+		//Responsable responsable = new Responsable();
 		responsable.setProfil(2);
+		
+		Responsable responsable = null;
+		if(responsable != null){
+			respService.getResponsableById(id);
+		}
+		else {
+			responsable.setProfil(2);
+		}
 		
 		//respService.getResponsableById(1);
 		
 		// Création d'un evenement
-		evenement.setResponsable(responsable);		
+		evenement.setResponsable(responsable);	
+		evenement.setDossier(dossier);
 		service.create(evenement);
 		
 		return Response.status(200).entity(evenement).build();
