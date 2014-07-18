@@ -5,12 +5,11 @@ services.factory('evenements', function($resource){
 		findAll: {method:'GET', isArray:true}
 	});
 	});
-
+/*
 services.factory('evenement', function($resource){
 	return $resource('rest/evenement/send', {}, {
-		create: {method: 'POST'},
 	});
-	});
+	});*/
 
 services.factory('dossiers', function($resource){
 	return $resource('rest/dossier/getFolders', {}, {
@@ -25,8 +24,8 @@ services.factory('responsables', function($resource){
 	});
 
 services.factory('evenement', function($resource){
-	return $resource('rest/evenement/:evtId', {}, {
-		get: {method: 'GET',params: { evtId: '@evtId' }, 
-			isArray: false}
+	return $resource('rest/evenement/:arg1', {}, {
+		get: {method: 'GET',params: { arg1: '@evtId' }, isArray: false},
+		create: {method: 'POST', params: { arg1: 'send' }}
 	});
 	});

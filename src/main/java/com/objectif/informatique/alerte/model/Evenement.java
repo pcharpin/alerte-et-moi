@@ -129,6 +129,18 @@ public class Evenement implements Serializable{
 	
 	
 	/**
+	 * @return the dossier
+	 */
+	public Dossier getDossier() {
+		return dossier;
+	}
+	/**
+	 * @param dossier the dossier to set
+	 */
+	public void setDossier(Dossier dossier) {
+		this.dossier = dossier;
+	}
+	/**
 	 * @return the idEvt
 	 */
 	public int getIdEvt() {
@@ -294,10 +306,8 @@ public class Evenement implements Serializable{
 		StringBuilder builder = new StringBuilder();
 		builder.append("Evenement [idEvt=");
 		builder.append(idEvt);
-		builder.append(", idDos=");
-		//builder.append(idDos);
-		builder.append(", responsable_idResp=");
-		builder.append(responsable);
+		builder.append(", dossier=");
+		builder.append(dossier);
 		builder.append(", nomEvt=");
 		builder.append(nomEvt);
 		builder.append(", descEvt=");
@@ -326,11 +336,11 @@ public class Evenement implements Serializable{
 		builder.append(recurtEvt);
 		builder.append(", libreEvt=");
 		builder.append(libreEvt);
+		builder.append(", responsable=");
+		builder.append(responsable);
 		builder.append(", documents=");
 		builder.append(documents);
 		builder.append("]");
 		return builder.toString();
-	}
-
-	
+	}	
 }
