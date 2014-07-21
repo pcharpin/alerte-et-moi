@@ -37,25 +37,27 @@ public class Alerte implements Serializable{
 	@Id @GeneratedValue
 	@Column(name = "idAler")
 	private int idAler;
-	@Column(name = "idEvt")
-	private int idEvt;
+//	@Column(name = "idEvt")
+//	private int idEvt;
+	@Column(name="typeDeclenchAler")
 	@Enumerated(EnumType.STRING)
 	private EnumConstante enumConstante;
-	@Column(name="dateAlerte")
+	@Column(name="dateAler")
 	private Date dateAlerte;
 
 	@ManyToOne(cascade = CascadeType.ALL ,fetch=FetchType.EAGER)
 	@JoinColumn(name="Evenement_idEvt")
 	private Evenement evenement;
 	
-	@ManyToMany(targetEntity=Alerte.class,
-			cascade={CascadeType.PERSIST, CascadeType.MERGE}
-	)
-		@JoinTable(
-				name="responsable_alerte",
-				joinColumns=@JoinColumn(name="idAler"),
-				inverseJoinColumns=@JoinColumn(name="idResp")
-		)
+//	@ManyToMany(targetEntity=Alerte.class,
+//			cascade={CascadeType.PERSIST, CascadeType.MERGE}
+//	)
+//		@JoinTable(
+//				name="responsable_alerte",
+//				joinColumns=@JoinColumn(name="idAler"),
+//				inverseJoinColumns=@JoinColumn(name="idResp")
+//		)
+	@ManyToMany(mappedBy="alertes")
 	private Set<Responsable> responsables = new HashSet<Responsable>();
 
 	public Alerte(){}
@@ -69,11 +71,11 @@ public class Alerte implements Serializable{
 	 * @param evenement
 	 * @param responsables
 	 */
-	public Alerte(int idAler, int idEvt, EnumConstante enumConstante,
+	public Alerte(int idAler, /*int idEvt,*/ EnumConstante enumConstante,
 			Date dateAlerte, Evenement evenement, Set<Responsable> responsables) {
 		super();
 		this.idAler = idAler;
-		this.idEvt = idEvt;
+		//this.idEvt = idEvt;
 		this.enumConstante = enumConstante;
 		this.dateAlerte = dateAlerte;
 		this.evenement = evenement;
@@ -97,16 +99,16 @@ public class Alerte implements Serializable{
 	/**
 	 * @return the idEvt
 	 */
-	public int getIdEvt() {
-		return idEvt;
-	}
-
-	/**
-	 * @param idEvt the idEvt to set
-	 */
-	public void setIdEvt(int idEvt) {
-		this.idEvt = idEvt;
-	}
+//	public int getIdEvt() {
+//		return idEvt;
+//	}
+//
+//	/**
+//	 * @param idEvt the idEvt to set
+//	 */
+//	public void setIdEvt(int idEvt) {
+//		this.idEvt = idEvt;
+//	}
 
 	/**
 	 * @return the enumConstante
@@ -173,7 +175,7 @@ public class Alerte implements Serializable{
 		builder.append("Alerte [idAler=");
 		builder.append(idAler);
 		builder.append(", idEvt=");
-		builder.append(idEvt);
+		//builder.append(idEvt);
 		builder.append(", enumConstante=");
 		builder.append(enumConstante);
 		builder.append(", dateAlerte=");

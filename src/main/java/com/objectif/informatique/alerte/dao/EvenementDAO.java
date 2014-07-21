@@ -23,5 +23,11 @@ public interface EvenementDAO extends GenericDAO<Evenement>{
 	 * @throws Exception
 	 */
 	List<Evenement> findAll() throws Exception;
-
+	/**
+	 * Chercher un evenement par son nom
+	 * @param name
+	 * @return
+	 * @throws Exception
+	 */
+	Evenement findEvenementByName(String name) throws Exception;
 }

@@ -70,5 +70,4 @@ public class ResponsableRestService {
 		}
 		return Response.status(200).entity(responsable).build();		
 	}
-
 }

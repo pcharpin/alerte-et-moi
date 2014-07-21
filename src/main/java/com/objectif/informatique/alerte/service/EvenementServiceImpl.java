@@ -34,9 +34,13 @@ public class EvenementServiceImpl implements EvenementService {
 	}
 
 	@Override
-	public Evenement getEvenementByName(String name) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+	public Evenement getEvenementByName(String name){
+		try {
+			return evenementDAO.findEvenementByName(name);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;	
+		}		
 	}
 
 	@Override
