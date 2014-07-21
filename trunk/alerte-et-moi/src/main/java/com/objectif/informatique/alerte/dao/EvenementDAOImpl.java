@@ -48,4 +48,9 @@ public class EvenementDAOImpl extends GenericDAOImpl<Evenement> implements Evene
 		Evenement e = entityManager.find(Evenement.class, evenementId); 
 		return e;
 	}
+	@Override
+	public Evenement findEvenementByName(String name) throws Exception {
+		Evenement e = entityManager.find(Evenement.class, name); 
+		return e;
+	}
 }

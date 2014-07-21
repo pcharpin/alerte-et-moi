@@ -8,5 +8,10 @@ package com.objectif.informatique.alerte.model;
  *
  */
 public enum EnumConstante {
-	A,B,C
+	Minutes,
+	Heures,
+	Jours,
+	Semaines,
+	Maois,
+	Années
 }

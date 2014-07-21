@@ -88,8 +88,6 @@ public class Evenement implements Serializable{
 		)
 	private Set<Document> documents = new HashSet<Document>();
 	
-	
-	
 	public Evenement(int idEvt, Dossier dossier, /*int idDos,*/ String nomEvt,
 			String descEvt, Date dateEchEvt, int exeEvt, float mntEvt,
 			EnumModeGestionEvt modeGestionEvt, String lienGestEvt, int trtEvt,

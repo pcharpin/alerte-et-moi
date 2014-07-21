@@ -60,6 +60,14 @@ public class EvenementRestService {
 		return service.getEvenementById(id);
 	}
 
+//	@GET
+//	@Path("/{nom}")
+//	@Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
+//	public Response getByName(Evenement evenement,@PathParam("nom") String nom){
+//		evenement =  service.getEvenementByName(nom);
+//		return Response.ok().build();
+//	}
+	
 	/**
 	 * Retourne tous les evenements 
 	 * @return
@@ -83,35 +91,34 @@ public class EvenementRestService {
 	public Response add(Evenement evenement,@PathParam("id") int id){		
 		//Attribution d'un dossier par defaut
 		Dossier dossier = null;
-		if(dossier != null){
-			dossierService.getDossierById(id); 
-		}
-		else {
-			dossierService.create(dossier);
-		}
+		dossierService.getDossierById(id); 
+//		if(dossier == null){
+//			dossierService.create(dossier); 
+//		}
 		
 		
 		//Profil : attribution du rôle normal à la création
+		respService.getResponsableById(id);
 //		Profil profil =  new Profil();
 //		profil.setIdProf(2);
 	
 		//selection un responsable existant ou créer(un par défaut)
 		//Responsable responsable = new Responsable();
-		responsable.setProfil(2);
+		//responsable.setProfil(2);
 		
-		Responsable responsable = null;
-		if(responsable != null){
-			respService.getResponsableById(id);
-		}
-		else {
-			responsable.setProfil(2);
-		}
-		
+//		Responsable responsable = null;
+//		if(responsable != null){
+//			respService.getResponsableById(id);
+//		}
+//		else {
+//			responsable.setProfil(2);
+//		}
+//		
 		//respService.getResponsableById(1);
 		
 		// Création d'un evenement
-		evenement.setResponsable(responsable);	
-		evenement.setDossier(dossier);
+//		evenement.setResponsable(responsable);	
+//		evenement.setDossier(dossier);
 		service.create(evenement);
 		
 		return Response.status(200).entity(evenement).build();

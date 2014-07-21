@@ -7,6 +7,7 @@ import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -45,17 +46,18 @@ public class Responsable implements Serializable{
 	@Column(name="emailResp")
 	private String emailResp;
 	
-	@JsonIgnore
+	//@JsonIgnore
 	@OneToMany(mappedBy="responsable")
-	private Set<Evenement> evenements;
+	private Set<Evenement> evenements = new HashSet<Evenement>();
 	
-	@ManyToMany(targetEntity=Alerte.class, fetch=FetchType.LAZY)
+	//@ManyToMany(targetEntity=Alerte.class, fetch=FetchType.LAZY)
+	@ManyToMany(cascade = CascadeType.ALL, fetch=FetchType.EAGER)
 	@JoinTable(
-			name="responsable_alertet",
-			joinColumns={@JoinColumn(name="idAler")},
-			inverseJoinColumns={@JoinColumn(name="idResp")}
+			name="responsable_alerte",
+			joinColumns={@JoinColumn(name="Alerte_idAler")},
+			inverseJoinColumns={@JoinColumn(name="Responsable_idResp")}
 	)
-private Set<Alerte> alertes = new HashSet<Alerte>();
+	private Set<Alerte> alertes = new HashSet<Alerte>();
 
 	public Responsable(){}
 	
@@ -117,6 +119,20 @@ private Set<Alerte> alertes = new HashSet<Alerte>();
 	public void setNomResp(String nomResp) {
 		this.nomResp = nomResp;
 	}
+	/**
+	 * @return the alertes
+	 */
+	public Set<Alerte> getAlertes() {
+		return alertes;
+	}
+
+	/**
+	 * @param alertes the alertes to set
+	 */
+	public void setAlertes(Set<Alerte> alertes) {
+		this.alertes = alertes;
+	}
+
 	/**
 	 * @return the prenResp
 	 */
