@@ -3,7 +3,7 @@
  */
 angular.module('calendarDemoApp', ['ui.calendar', 'ui.bootstrap','ngDialog','calendarServices','filters']);
 
-function CalendarCtrl($scope,ngDialog,evenements,evenement,evtToCal,dossiers,responsables) {
+function CalendarCtrl($scope,ngDialog,evenements,evenement,evtToCal,dossiers,dossier,responsables) {
 	
     var date = new Date();
     var d = date.getDate(); 
@@ -14,6 +14,7 @@ function CalendarCtrl($scope,ngDialog,evenements,evenement,evtToCal,dossiers,res
     $scope.showCal=true;
 	    
     $scope.formEvt={};
+    $scope.formDos={};
     $scope.listDossiers=[];
     $scope.listResponsables=[];
     $scope.events=[];
@@ -168,16 +169,22 @@ function CalendarCtrl($scope,ngDialog,evenements,evenement,evtToCal,dossiers,res
 			    });
 			}	    	
 	    };	
+	    /*Ajouter un dossier*/    
+	    $scope.submitDos = function() {
+	    	console.log("formDos = ", $scope.formDos);
+    		dossier.create($scope.formDos).$promise.then(function(result){
+    	    	//console.log("resultat du create"+ result);
+    	    	});
+    	};	    
 	    
+    	
 	    /* Ajouter un evenement en base */
-
 	    $scope.submitEvt = function() {
 	    	console.log("formEvt = ", $scope.formEvt);
     		evenement.create($scope.formEvt).$promise.then(function(result){
     	    	//console.log("resultat du create"+ result);
     	    	});
-
-    };	    
+    	};	    
 	    
 
       /*$scope.events.push({

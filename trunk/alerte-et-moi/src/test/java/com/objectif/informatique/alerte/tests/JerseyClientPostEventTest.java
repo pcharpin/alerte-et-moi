@@ -57,7 +57,7 @@ public class JerseyClientPostEventTest {
 		
 			// Evenement
 			Evenement evenement = new Evenement();
-			evenement.setNomEvt("testGan");
+			evenement.setNomEvt("testGanss");
 			evenement.setDateEchEvt(new Date());
 			//evenement.setDossier(dossier);
 			//evenement.setResponsable(responsable);
@@ -80,8 +80,7 @@ public class JerseyClientPostEventTest {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-			
-								
+										
 			ClientResponse response = webResource.accept("application/json").post(ClientResponse.class,evenement);
 			
 			if(response.getStatus() != 200) {
