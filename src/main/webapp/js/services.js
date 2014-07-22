@@ -29,3 +29,10 @@ services.factory('evenement', function($resource){
 		create: {method: 'POST', params: { arg1: 'send' }}
 	});
 	});
+
+services.factory('dossier', function($resource){
+	return $resource('rest/dossier/:arg1', {}, {
+		get: {method: 'GET',params: { arg1: '@evtId' }, isArray: false},
+		create: {method: 'POST', params: { arg1: 'sendFolder' }}
+	});
+	});

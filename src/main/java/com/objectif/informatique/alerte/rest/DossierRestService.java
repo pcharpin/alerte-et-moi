@@ -17,8 +17,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.objectif.informatique.alerte.model.Dossier;
+import com.objectif.informatique.alerte.model.EnumTypesDossiers;
 import com.objectif.informatique.alerte.model.Evenement;
 import com.objectif.informatique.alerte.service.DossierService;
+import com.objectif.informatique.alerte.service.EnumTypesDossiersService;
 
 @Component
 @Path("/dossier")
@@ -26,6 +28,8 @@ public class DossierRestService {
 	
 	@Autowired
 	DossierService service;
+	@Autowired
+	EnumTypesDossiersService enumTypesDossiersService;
 
 	
 	@GET
@@ -43,11 +47,20 @@ public class DossierRestService {
 		List<Dossier> dossiers = service.findAll();
 		return dossiers;
 	}	
+		
+	@GET
+	@Path("/getTypesFolders")
+	@Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
+	public List<EnumTypesDossiers> getAllFoldersType() throws Exception {
+		List<EnumTypesDossiers> dossiersTypes = enumTypesDossiersService.findAll();
+		return dossiersTypes;
+	}	
 	
 	@POST
 	@Path("/sendFolder")
 	@Consumes(MediaType.APPLICATION_JSON + ";charset=utf-8")
-	public Response add(Dossier dossier){			
+	public Response add(Dossier dossier){	
+		System.out.println("dossier :" + dossier.toString());
 	service.create(dossier);
 	return Response.status(200).entity(dossier).build();
 	}

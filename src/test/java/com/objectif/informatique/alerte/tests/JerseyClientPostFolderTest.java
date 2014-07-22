@@ -11,7 +11,7 @@ import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.WebResource;
 
-public class JerseyClientFolderTest {
+public class JerseyClientPostFolderTest {
 
 	/**
 	 * @param args
@@ -30,16 +30,24 @@ public class JerseyClientFolderTest {
 			//WebResource webResource = client.resource("http://localhost:8080/alerte-et-moi/rest/dossier/1");
 			
 			//Update
-			WebResource webResource = client.resource("http://localhost:8080/alerte-et-moi/rest/dossier/update/2");
+			//WebResource webResource = client.resource("http://localhost:8080/alerte-et-moi/rest/dossier/update/2");
+			//création
+			WebResource webResource = client.resource("http://localhost:8080/alerte-et-moi/rest/dossier/sendFolder");
 			
 			DossierDAOImpl dossierService = new DossierDAOImpl();
 			//Get dossier 
-			Dossier dossier = dossierService.findFolderById(2);
-			dossier.setNomDos("conseil d'administration");
+//			Dossier dossier = dossierService.findFolderById(2);
+			Dossier dossier =  new Dossier();
+			dossier.setNomDos("conseil d'administration22");
 			
-			em.getTransaction().begin();
-			dossierService.update(dossier);
-			em.getTransaction().commit();
+			try {
+				em.getTransaction().begin();
+				//dossierService.update(dossier);
+				dossierService.create(dossier);
+				em.getTransaction().commit();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}			
 		
 			ClientResponse response = webResource.accept("application/json").post(ClientResponse.class,dossier);
 			
