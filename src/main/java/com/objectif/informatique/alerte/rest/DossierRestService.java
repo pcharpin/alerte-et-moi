@@ -68,7 +68,7 @@ public class DossierRestService {
 	@PUT
 	@Path("/update/{id}")
 	@Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
-	public  Response updateEvent(@PathParam("id") int id,Dossier dossier){
+	public  Response updateFolder(@PathParam("id") int id,Dossier dossier){
 		dossier =  service.getDossierById(id);
 		if(dossier != null){
 			service.update(dossier);
@@ -77,10 +77,10 @@ public class DossierRestService {
 	}
 	
 	@DELETE
-	@Path("/delete/{id}")
-	@Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
-	public Response deleteEvent(@PathParam("id") int id,Dossier dossier){
-		dossier =  service.getDossierById(id);
+	@Path("/{id}")
+	//@Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
+	public Response deleteFolder(@PathParam("id") int id){
+		Dossier dossier =  service.getDossierById(id);
 		service.delete(dossier);
 		return Response.ok().build();
 	}

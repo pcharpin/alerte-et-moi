@@ -1,10 +1,4 @@
-/**
- * calendarDemoApp - 0.1.3 
- */
-angular.module('calendarDemoApp', ['ui.calendar', 'ui.bootstrap','ngDialog','calendarServices','filters']);
-
-function CalendarCtrl($scope,ngDialog,evenements,evenement,evtToCal,dossiers,dossier,responsables) {
-	
+function CalendarCtrl($scope,ngDialog,evenements,evenement,evtToCal,responsables,dossiers) {
     var date = new Date();
     var d = date.getDate(); 
     var m = date.getMonth();
@@ -14,12 +8,11 @@ function CalendarCtrl($scope,ngDialog,evenements,evenement,evtToCal,dossiers,dos
     $scope.showCal=true;
 	    
     $scope.formEvt={};
-    $scope.formDos={};
-    $scope.listDossiers=[];
     $scope.listResponsables=[];
     $scope.events=[];
     $scope.listeEvt=[];
     $scope.eventClicked={};
+    $scope.listDossiers=[];
     
 
 		/* event source that pulls from google.com */
@@ -29,6 +22,18 @@ function CalendarCtrl($scope,ngDialog,evenements,evenement,evtToCal,dossiers,dos
 	            className: 'gcal-event',           // an option!
 	            currentTimezone: 'UTC/GMT' // an option!
 	    };
+	    
+	    $scope.init = function() {
+    		$scope.addEvent();
+    		if($scope.listDossiers.length==0){
+    			dossiers.findAll().$promise.then(function(result){
+    		    	for(var j=0;j<result.length;j++){
+    		    		$scope.listDossiers.push(result[j]);
+    		    	}
+    		    });
+    		}
+    	};
+	    
 	    /* event source that calls a function on every view switch */
 	    $scope.eventsF = function (start, end, callback) {
 	      var s = new Date(start).getTime() / 1000;
@@ -41,7 +46,7 @@ function CalendarCtrl($scope,ngDialog,evenements,evenement,evtToCal,dossiers,dos
 	    $scope.alertOnEventClick = function( event, allDay, jsEvent, view ){
 	        $scope.alertMessage = (event.title + ' was clicked ' + date);
 	        $scope.event = event;
-    		evenement.get({evtId: $scope.event.id}).$promise.then(function(result){
+    		evenement.get({}, {evtId: $scope.event.id}).$promise.then(function(result){
     			$scope.eventClicked = result;// la variable eventClicked est associé au resultat du get(id)
     	    	});
 	    	ngDialog.open({
@@ -152,14 +157,8 @@ function CalendarCtrl($scope,ngDialog,evenements,evenement,evtToCal,dossiers,dos
 
     };
   /* recupère les dossiers */
+
 	    $scope.initCreer = function() {
-	    	if($scope.listDossiers.length==0){
-				dossiers.findAll().$promise.then(function(result){
-			    	for(var j=0;j<result.length;j++){
-			    		$scope.listDossiers.push(result[j]);
-			    	}
-			    });
-			}
 	    	/* recuperation des responsables */
 	    	if($scope.listResponsables.length==0){
 	    		responsables.findAll().$promise.then(function(result){
@@ -169,13 +168,7 @@ function CalendarCtrl($scope,ngDialog,evenements,evenement,evtToCal,dossiers,dos
 			    });
 			}	    	
 	    };	
-	    /*Ajouter un dossier*/    
-	    $scope.submitDos = function() {
-	    	console.log("formDos = ", $scope.formDos);
-    		dossier.create($scope.formDos).$promise.then(function(result){
-    	    	//console.log("resultat du create"+ result);
-    	    	});
-    	};	    
+	       
 	    
     	
 	    /* Ajouter un evenement en base */
@@ -186,6 +179,12 @@ function CalendarCtrl($scope,ngDialog,evenements,evenement,evtToCal,dossiers,dos
     	    	});
     	};	    
 	    
+    	/*suppression**/
+    	 $scope.deleteEvent = function(evtId) {
+    		 evenement.deleteEvent({}, {evtId : evtId}).$promise.then(function(result){
+    				console.log("suppression ok"+ result);
+    			});
+    	    };	
 
       /*$scope.events.push({
         title: 'Open Sesame',
@@ -240,6 +239,4 @@ function CalendarCtrl($scope,ngDialog,evenements,evenement,evtToCal,dossiers,dos
 
 
 
-}
-
-/* EOF */
+};

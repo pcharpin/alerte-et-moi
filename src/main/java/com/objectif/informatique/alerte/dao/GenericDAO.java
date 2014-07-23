@@ -9,5 +9,5 @@ public interface GenericDAO <TYPE>{
 
 	TYPE find(Object id);
 	
-	void delete(Object id);
+	void delete(TYPE object);
 }

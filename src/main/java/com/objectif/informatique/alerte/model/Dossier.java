@@ -7,6 +7,7 @@ import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -56,7 +57,7 @@ public class Dossier implements Serializable{
 	)
 private Set<Document> documents = new HashSet<Document>();
 	@JsonIgnore
-	@OneToMany(mappedBy="dossier")
+	@OneToMany(mappedBy="dossier",cascade = CascadeType.ALL)
 	private Set<Evenement> evenements;
 	
 	@Column(name = "priorDos")

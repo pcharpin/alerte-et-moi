@@ -26,13 +26,16 @@ services.factory('responsables', function($resource){
 services.factory('evenement', function($resource){
 	return $resource('rest/evenement/:arg1', {}, {
 		get: {method: 'GET',params: { arg1: '@evtId' }, isArray: false},
-		create: {method: 'POST', params: { arg1: 'send' }}
+		create: {method: 'POST', params: { arg1: 'send' }},
+		deleteEvent: {method: 'DELETE', params: { arg1: '@evtId' }}
 	});
 	});
 
 services.factory('dossier', function($resource){
 	return $resource('rest/dossier/:arg1', {}, {
 		get: {method: 'GET',params: { arg1: '@evtId' }, isArray: false},
-		create: {method: 'POST', params: { arg1: 'sendFolder' }}
+		create: {method: 'POST', params: { arg1: 'sendFolder' }},
+		deleteFolder: {method: 'DELETE', params: { arg1: '@idFolder' }},
+		update: {method: 'PUT', params: { arg1: '/update/@idFolder}' }}
 	});
 	});

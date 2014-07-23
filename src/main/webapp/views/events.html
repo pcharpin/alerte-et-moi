@@ -1,0 +1,213 @@
+<div ng-controller="CalendarCtrl" ng-init='init()'>
+	<h1>Gestion des évenements</h1>
+	<tabset> <!-- #############	AFFICHAGE EN MODE CALENDRIER		############## -->
+
+	<tab select="renderCalender(myCalendar1);"> <tab-heading>
+	<i class="glyphicon glyphicon-calendar"></i>Vue calendrier </tab-heading> <!-- ****************************************************************Panneau de gauche*************************************************************** -->
+	<div class="span2">
+		<!-- pour le span2 mettre les width � 100px -->
+		<h3>Filtres :</h3>
+		<div class="well">
+			<h4>Status</h4>
+			<input type="radio" ng-model="order" value="dateEchEvt">Trait�s<br>
+			<input type="radio" ng-model="order" value="nomEvt">Non
+			trait�s<br> <input type="radio" ng-model="order" value="toto">Tous<br>
+			<hr>
+			</span>
+		</div>
+	</div>
+	<!-- ****************************************************************Fin Panneau de gauche*************************************************************** -->
+	<!-- ****************************************************************Panneau de droite*************************************************************** -->
+	<div class="span10">
+		<!-- <div class="alert-success calAlert"
+								ng-show="alertMessage != undefined && alertMessage != ''">
+								<h4>{{alertMessage}}</h4>
+							</div> -->
+		<div class="btn-toolbar">
+			<p class="pull-right lead">Calendrier</p>
+			<div class="btn-group">
+				<!--  <button class="btn btn-success"
+										ng-click="changeView('agendaDay', myCalendar1)">Jour</button>-->
+				<button class="btn btn-success"
+					ng-click="changeView('basicWeek', myCalendar1)">Semaine</button>
+				<button class="btn btn-success"
+					ng-click="changeView('month', myCalendar1)">Mois</button>
+			</div>
+		</div>
+		<!-- <div class="calendar" ng-model="eventSources" calendar="myCalendar1" config="uiConfig.calendar" ui-calendar="uiConfig.calendar"></div>-->
+		<div class="calendar" ng-model="eventSources" calendar="myCalendar1"
+			config="uiConfig.calendar" ui-calendar="uiConfig.calendar"></div>
+	</div>
+	<!-- ****************************************************************Panneau de droite*************************************************************** -->
+
+	<!-- ****************************************************************AFFICHAGE EN MODE LISTE	*************************************************************** -->
+	</tab> <!-- #############	AFFICHAGE EN MODE LISTE		############## --> 
+	<tab
+		select="renderCalender();"> <tab-heading>
+	<span ng-click="showListEvts()"> <i
+		class="glyphicon glyphicon-list"></i>Vue liste
+	</span></tab-heading>
+	<div class="span2">
+		<!-- pour le span2 mettre les width � 100px -->
+		<h3>Filtres :</h3>
+		<h4>Utilisateurs</h4>
+
+		<select style="width: 100px" ng-model="userSelected">
+			<option value="">tous</option>
+			<option ng-repeat="user in users" value="{{user}}">
+				{{user.prenResp}} ; {{user.idResp}}</option>
+		</select>
+		<hr>
+		<h4 ng-click="initCreer()">Dossier</h4>
+		<select style="width: 100px" ng-model="selectedDossier">
+			<option value="0">Tous</option>
+			<option ng-repeat="dossier in listDossiers" value="{{dossier}}" >
+				{{dossier.nomDos}}</option>
+		</select>
+		<hr>
+		<h4>Recherche :</h4>
+		(dans le nom de l'évènement) <input type="text" style="width: 100px"
+			ng-model="recherche"><br>
+		<hr>
+	</div>
+	<div class="span10">
+		<div class="alert-success calAlert"
+			ng-show="alertMessage != undefined && alertMessage != ''">
+			<h4>{{alertMessage}}</h4>
+		</div>
+
+		<div>
+			<table border="1">
+				<tr bgcolor="#FFCC66">
+				<th style="text-align: center">Id</th>
+					<th style="text-align: center">Nom</th>
+					<th style="text-align: center">Dossier</th>
+					<th style="text-align: center">Responsable <i
+						class="glyphicon glyphicon-chevron-up"
+						ng-click="order='responsable.prenResp';"></i> <i
+						class="glyphicon glyphicon-chevron-down"
+						ng-click="order='-responsable.prenResp';"></i>
+					</th>
+					<th style="text-align: center">Date <i
+						class="glyphicon glyphicon-chevron-up"
+						ng-click="order='dateEchEvt';"></i> <i
+						class="glyphicon glyphicon-chevron-down"
+						ng-click="order='-dateEchEvt';"></i>
+					</th>
+					<th style="text-align: center">Périodicité</th>
+					<th style="text-align: center">traitée</th>
+					<th style="text-align: center">actifivé</th>
+					<th style="text-align: center">Actions</th>
+				</tr>
+				<tr
+					ng-repeat="event in listeEvt | folderFilter:selectedDossier | filter:{nomEvt: recherche, responsable.id: userSelected}  | orderBy:order">
+					<td>{{event.idEvt}}</td>
+					<td>{{event.nomEvt}}</td>
+					<td>{{event.dossier.nomDos}}</td>
+					<td>{{event.responsable.prenResp}}</td>
+					<td>{{event.dateEchEvt | date:"dd/MM/yyyy"}}</td>
+					<td>{{event.enumPeriodeEvet}}</td>
+					<td>{{event.trtEvt | booleanTooString}}</td>
+					<td>{{event.actifEvt | booleanTooString}}</td>
+					<td><i class="glyphicon glyphicon-search"></i> <!-- <i
+						class="glyphicon glyphicon-folder-open"></i> <i
+						class="glyphicon glyphicon-plus"></i> <i
+						class="glyphicon glyphicon-ok-circle"
+						ng-click="validEvt(event.idEvt)"></i> --> <i
+						class="glyphicon glyphicon-remove-circle" ng-click="deleteEvent(event.idEvt)"></i>
+					</td>
+				</tr>
+			</table>
+		</div>
+	</div>
+	</tab> <!-- Ajouter un �v�nement --> <tab select="renderCalender();"> <!-- ****************************************************************Ajouter un �v�nement	*************************************************************** -->
+	<tab-heading>
+	<span ng-click="initCreer()"><i class="glyphicon glyphicon-list"></i>Cr�er
+		un �v�nement</span> </tab-heading>
+	<div class="span4">
+		<h3>Options :</h3>
+		<!-- {{formEvt}} -->
+	</div>
+
+	<div class="span8">
+		<form ng-submit="submitEvt()">
+			<div>
+				<label>nom :</label><input type="text" ng-model="formEvt.nomEvt" />
+			</div>
+			<div>
+				<label>dossier existant :</label> <input type="radio" name="dossier"
+					value="" />oui <input type="radio" name="dossier" value="" />non
+			</div>
+			<div>
+				<label>dossier :</label> <select ng-model="formEvt.dossier">
+					<option ng-repeat="dossier in listDossiers" value="{{dossier}}">
+						{{dossier.nomDos}}</option>
+				</select>
+			</div>
+			<div>
+				<label>descritption :</label>
+				<textarea ng-model="formEvt.descEvt"></textarea>
+			</div>
+
+			<!--<div><label>document rattach� :</label><input type="file" ng-model=""/>
+ 						<button type="button"  ng-click="detailDos(event.idDos)" class="btn btn-warning">Ajouter un nouveau document</button>
+ 						</div>-->
+			<div>
+				<label>date d'�ch�ance :</label><input type="text"
+					ng-model="formEvt.dateEchEvt" />
+			</div>
+			<div>
+				<label>ann�e d'exercice :</label><input type="text"
+					ng-model="formEvt.exeEvt" />
+			</div>
+			<div>
+				<label>montant :</label><input type="text" ng-model="formEvt.mntEvt" />
+			</div>
+			<div>
+				<label>mode de gestion :</label> <input type="radio"
+					name="mdGestion" ng-model="formEvt.modeGestionEvt" value="Manuel">manuel
+				<input type="radio" name="mdGestion"
+					ng-model="formEvt.modeGestionEvt" value="En ligne">en ligne
+			</div>
+			<div>
+				<label>lien :</label><input type="url"
+					ng-model="formEvt.lienGestEvt" />
+			</div>
+
+			<div>
+				<label>responsable :</label> <select ng-model="formEvt.responsable">
+					<option ng-repeat="responsable in listResponsables"
+						value="{{responsable.idResp}}">{{responsable.nomResp}}</option>
+				</select>
+			</div>
+			<div>
+				<label>r�alis� :</label> <input type="radio" name="mdGestion"
+					ng-model="formEvt.trtEvt" value="1">oui <input type="radio"
+					name="mdGestion" ng-model="formEvt.trtEvt" value="0">non
+			</div>
+			<div>
+				<label>date de r�alisation :</label> <input type="text"
+					ng-model="formEvt.dateTrtEvt" />
+			</div>
+
+			<div>
+				<label>p�riodicit� :</label><select
+					ng-model="formEvt.enumPeriodeEvet">
+					<option value="Journalier">journalier</option>
+					<option value="Hebdomadaire">hebdomadaire</option>
+					<option value="Mensuel">mensuel</option>
+					<option value="Trimestriel">Trimestriel</option>
+					<option value="Semestriel">Trimestriel</option>
+					<option value="Annuel">annuel</option>
+					<option value="Sans">sans</option>
+				</select>
+			</div>
+			<div>
+				<label>libre :</label>
+				<textarea ng-model="formEvt.libreEvt"></textarea>
+			</div>
+			<input type="submit" id="submit" value="Ajouter"
+				ng-click="submitEvt()" />
+		</form>
+	</div>
+</div>

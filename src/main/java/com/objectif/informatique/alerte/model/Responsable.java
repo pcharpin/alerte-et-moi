@@ -46,9 +46,9 @@ public class Responsable implements Serializable{
 	@Column(name="emailResp")
 	private String emailResp;
 	
-	//@JsonIgnore
+	@JsonIgnore
 	@OneToMany(mappedBy="responsable")
-	private Set<Evenement> evenements;
+	private Set<Evenement> evenements = new HashSet<Evenement>();
 	
 	//@ManyToMany(targetEntity=Alerte.class, fetch=FetchType.LAZY)
 	@ManyToMany(cascade = CascadeType.ALL, fetch=FetchType.EAGER)

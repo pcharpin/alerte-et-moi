@@ -49,7 +49,8 @@ public class GenericDAOImpl<TYPE> implements GenericDAO<TYPE> {
 	}
 
 	@Override
-	public void delete(final Object id) {
-		this.entityManager.remove(this.entityManager.getReference(type, id));	
+	public void delete(TYPE object ) {
+		//Object ob = this.entityManager.find(type, id);
+		this.entityManager.remove(object);
 	}
 }

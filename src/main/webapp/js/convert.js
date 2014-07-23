@@ -1,4 +1,4 @@
-angular.module('calendarDemoApp')
+angular.module('calendarApp')
 //transforme la liste d'evenements pour les intégrer dans le calendrier
 .service('evtToCal',[ function(){
 	
