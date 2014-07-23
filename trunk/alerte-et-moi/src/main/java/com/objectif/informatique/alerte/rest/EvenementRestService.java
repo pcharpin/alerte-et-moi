@@ -129,10 +129,13 @@ public class EvenementRestService {
 	 * @return
 	 */
 	@DELETE
-	@Path("/delete/{id}")
-	@Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
-	public Response deleteEvent(@PathParam("id") int id,Evenement evenement){
-		evenement =  service.getEvenementById(id);
+	@Path("/{id}")
+	//@Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
+	public Response deleteEvent(@PathParam("id") int id){
+		System.out.println(" **id**: "+ id); 
+		Evenement evenement =  service.getEvenementById(id);
+//		System.out.println("**evenement**: "+ evenement); 
+	
 		service.delete(evenement);
 		return Response.ok().build();
 	}

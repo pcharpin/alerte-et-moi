@@ -1,0 +1,58 @@
+<div ng-controller="FolderCtrl" ng-init='init()'>
+	<h1>Gestion des dossiers</h1>
+	<tabset> <!-- ****************************************************************Crée un dossier*************************************************************** -->
+	<tab> <tab-heading>	<i class="glyphicon glyphicon-calendar"></i>Liste des dossiers </tab-heading>
+	
+		<div>
+			<table border="1">
+				<tr bgcolor="#FFCC66">
+					<th style="text-align: center">Id</th>
+					<th style="text-align: center">Nom</th>
+					<th style="text-align: center">Type</th>
+					<th style="text-align: center">Description 
+					<!-- <i
+						class="glyphicon glyphicon-chevron-up"
+						ng-click="order='responsable.prenResp';"></i> <i
+						class="glyphicon glyphicon-chevron-down"
+						ng-click="order='-responsable.prenResp';"></i> -->
+					</th>
+					<!-- <th style="text-align: center">Date <i
+						class="glyphicon glyphicon-chevron-up"
+						ng-click="order='dateEchEvt';"></i> <i
+						class="glyphicon glyphicon-chevron-down"
+						ng-click="order='-dateEchEvt';"></i>
+					</th> -->
+					<th style="text-align: center">Actions</th>
+				</tr>
+				<tr
+					ng-repeat="folder in listDossiers | filter:{nomEvt: recherche, responsable.id: userSelected} | orderBy:order">
+					<td>{{folder.idDos}}</td>
+					<td>{{folder.nomDos}}</td>
+					<td>{{folder.enumTypesDossiers}}</td>
+					<td>{{folder.descDoc}}</td>
+					<td><i class="glyphicon glyphicon-search" ng-click="editFolder(folder)"></i> 
+					<!-- <i class="glyphicon glyphicon-folder-open"></i> 
+					<i class="glyphicon glyphicon-plus"></i> 
+					<i class="glyphicon glyphicon-ok-circle" ng-click="deletolder(folder.idDos)"></i>  -->
+					<i class="glyphicon glyphicon-remove-circle" ng-click="deleteFolder(folder.idDos)"></i>
+					</td>
+				</tr>
+			</table>
+		</div>
+		
+	</tab>
+	<tab> <tab-heading>
+	<i class="glyphicon glyphicon-calendar"></i>Créer un dossier </tab-heading>
+	<div class="span4">
+		<h3>Contact principal :</h3>
+		<h3>Options :</h3>
+		{{formDos}}
+	</div>
+
+	<div class="span8">
+		<!--<form ng-submit="submitDos()"> -->
+		<div ng-include src="'views/folderUpdate.html'"></div>
+	</div>
+	<!-- ****************************************************************Fin Crée un dossier	*************************************************************** -->
+	</tab> </tabset>
+</div>

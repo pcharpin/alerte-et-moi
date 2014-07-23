@@ -39,7 +39,8 @@ public class Evenement implements Serializable{
 	@Id @GeneratedValue
 	@Column(name = "idEvt")
 	private int idEvt;
-	@ManyToOne(cascade = CascadeType.ALL, fetch=FetchType.EAGER)
+	//@ManyToOne(cascade = CascadeType.ALL, fetch=FetchType.EAGER)
+	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name="Dossier_idDos")
 	private Dossier dossier;
 	//private int idDos;

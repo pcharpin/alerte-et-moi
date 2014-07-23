@@ -19,13 +19,14 @@ public class EvenementServiceImpl implements EvenementService {
 
 	@Override
 	public Evenement getEvenementById(int evenementId) {
+		Evenement evenement = null;
 		try {
-			return evenementDAO.findEvenementById(evenementId);
+			evenement =  evenementDAO.findEvenementById(evenementId);
 		} catch (Exception e) {
 			// il faut logger etc...
 			e.printStackTrace();
-			return null;
 		}
+		return evenement;
 	}
 
 	@Override
