@@ -4,14 +4,21 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 import com.objectif.informatique.alerte.dao.DossierDAOImpl;
 import com.objectif.informatique.alerte.model.Dossier;
 import com.objectif.informatique.alerte.model.Evenement;
+import com.objectif.informatique.alerte.service.DossierService;
 import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.WebResource;
 
 public class JerseyClientPostFolderTest {
+	
+	@Autowired
+	static
+	DossierService service;
 
 	/**
 	 * @param args
@@ -34,22 +41,21 @@ public class JerseyClientPostFolderTest {
 			//création
 			WebResource webResource = client.resource("http://localhost:8080/alerte-et-moi/rest/dossier/sendFolder");
 			
-			DossierDAOImpl dossierService = new DossierDAOImpl();
+			DossierDAOImpl dossierService = new DossierDAOImpl(em);
 			//Get dossier 
-//			Dossier dossier = dossierService.findFolderById(2);
+			//Dossier dossier = dossierService.findFolderById(2);
 			Dossier dossier =  new Dossier();
-			dossier.setNomDos("conseil d'administration22");
+			dossier.setNomDos("conseil d'administration26");
+			dossier.setDescDoc("Gant3");
 			
-			try {
 				em.getTransaction().begin();
 				//dossierService.update(dossier);
 				dossierService.create(dossier);
+				//service.create(dossier);
 				em.getTransaction().commit();
-			} catch (Exception e) {
-				e.printStackTrace();
-			}			
-		
-			ClientResponse response = webResource.accept("application/json").post(ClientResponse.class,dossier);
+			
+			ClientResponse response = webResource.post(ClientResponse.class,dossier);
+			//ClientResponse response = webResource.accept("application/json").post(ClientResponse.class,dossier);
 			
 			if(response.getStatus() != 200) {
 				   throw new RuntimeException("Failed : HTTP error code : "
