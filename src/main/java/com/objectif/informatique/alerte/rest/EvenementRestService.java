@@ -5,9 +5,6 @@ package com.objectif.informatique.alerte.rest;
 
 import java.util.List;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -21,6 +18,7 @@ import javax.ws.rs.core.Response;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.objectif.informatique.alerte.model.Dossier;
 import com.objectif.informatique.alerte.model.Evenement;
@@ -44,10 +42,6 @@ public class EvenementRestService {
 	ResponsableService respService;
 	private Responsable responsable;
 	
-	EntityManagerFactory emf =Persistence.createEntityManagerFactory("JpaALerte");
-	EntityManager em = emf.createEntityManager();
-	
-
 	/**
 	 * Retourne un evenement par son id
 	 * @param id
@@ -88,6 +82,7 @@ public class EvenementRestService {
 	@POST
 	@Path("/send")
 	@Consumes(MediaType.APPLICATION_JSON + ";charset=utf-8")
+	@Transactional
 	public Response add(Evenement evenement,@PathParam("id") int id){		
 		//Attribution d'un dossier par defaut
 		Dossier dossier = null;
@@ -129,13 +124,13 @@ public class EvenementRestService {
 	 * @return
 	 */
 	@DELETE
-	@Path("/{id}")
+	//@Path("/{id}")
+	@Path("/deleteEvent")
 	//@Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
-	public Response deleteEvent(@PathParam("id") int id){
-		System.out.println(" **id**: "+ id); 
-		Evenement evenement =  service.getEvenementById(id);
-//		System.out.println("**evenement**: "+ evenement); 
-	
+	//public Response deleteEvent(@PathParam("id") int id){
+	@Transactional
+	public Response deleteEvent(Evenement evenement){ 
+		//Evenement evenement =  service.getEvenementById(id);
 		service.delete(evenement);
 		return Response.ok().build();
 	}
@@ -146,6 +141,7 @@ public class EvenementRestService {
 	@PUT
 	@Path("/update/{id}")
 	@Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
+	@Transactional
 	public  Response updateEvent(@PathParam("id") int id,Evenement evenement){
 		evenement =  service.getEvenementById(id);
 		if(evenement != null){

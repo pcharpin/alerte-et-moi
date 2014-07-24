@@ -26,7 +26,9 @@ public class GenericDAOImpl<TYPE> implements GenericDAO<TYPE> {
 	@Override
 	public TYPE create(final TYPE object) {
 		try {
+			//this.entityManager.getTransaction().begin();
 			this.entityManager.persist(object);
+			//this.entityManager.getTransaction().commit();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

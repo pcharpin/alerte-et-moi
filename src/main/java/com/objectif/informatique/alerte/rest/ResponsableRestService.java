@@ -15,6 +15,7 @@ import javax.ws.rs.core.Response;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.objectif.informatique.alerte.model.Responsable;
 import com.objectif.informatique.alerte.service.ResponsableService;
@@ -46,6 +47,7 @@ public class ResponsableRestService {
 	@POST
 	@Path("/send")
 	@Consumes(MediaType.APPLICATION_JSON + ";charset=utf-8")
+	@Transactional
 	public Response add(Responsable responsable){			
 		service.create(responsable);
 		return Response.status(200).entity(responsable).build();
@@ -54,6 +56,7 @@ public class ResponsableRestService {
 	@DELETE
 	@Path("/{id}")
 	@Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
+	@Transactional
 	public Response deleteEvent(@PathParam("id") int id,Responsable responsable){
 		responsable =  service.getResponsableById(id);
 		service.delete(responsable);
@@ -63,6 +66,7 @@ public class ResponsableRestService {
 	@PUT
 	@Path("/update/{id}")
 	@Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
+	@Transactional
 	public  Response updateEvent(@PathParam("id") int id,Responsable responsable){
 		responsable =  service.getResponsableById(id);
 		if(responsable != null){
