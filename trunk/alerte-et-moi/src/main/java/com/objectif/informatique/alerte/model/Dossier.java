@@ -49,6 +49,9 @@ public class Dossier implements Serializable{
 	@Column(name = "descDos")
 	private String descDoc;
 	
+	@Column(name = "evtDos")
+	private String evtDos;
+	
 	@ManyToMany(targetEntity=Document.class, fetch=FetchType.LAZY)
 	@JoinTable(
 			name="dossier_document",
@@ -113,7 +116,7 @@ private Set<Document> documents = new HashSet<Document>();
 	}
 
 	public Dossier(int idDos, String nomDos,
-			EnumTypesDossiers enumTypesDossiers, String descDoc,
+			EnumTypesDossiers enumTypesDossiers, String descDoc,String evtDos,
 			Set<Document> documents, Set<Evenement> evenements,
 			boolean priorDos, float mntDOS, boolean periodJourDos,
 			boolean periodHebdoDos, boolean periodMensDos,
@@ -126,6 +129,7 @@ private Set<Document> documents = new HashSet<Document>();
 		this.nomDos = nomDos;
 		this.enumTypesDossiers = enumTypesDossiers;
 		this.descDoc = descDoc;
+		this.evtDos =  evtDos;
 		this.documents = documents;
 		this.evenements = evenements;
 		this.priorDos = priorDos;
@@ -147,6 +151,20 @@ private Set<Document> documents = new HashSet<Document>();
 	
 	public Dossier(){}
 	
+	/**
+	 * @return the evtDos
+	 */
+	public String getEvtDos() {
+		return evtDos;
+	}
+
+	/**
+	 * @param evtDos the evtDos to set
+	 */
+	public void setEvtDos(String evtDos) {
+		this.evtDos = evtDos;
+	}
+
 	public Dossier(String nomDos) {
 		this.nomDos = nomDos;
 	}
@@ -452,6 +470,8 @@ private Set<Document> documents = new HashSet<Document>();
 		builder.append(enumTypesDossiers);
 		builder.append(", descDoc=");
 		builder.append(descDoc);
+		builder.append(", evtDos=");
+		builder.append(evtDos);
 		builder.append(", documents=");
 		builder.append(documents);
 		builder.append(", evenements=");

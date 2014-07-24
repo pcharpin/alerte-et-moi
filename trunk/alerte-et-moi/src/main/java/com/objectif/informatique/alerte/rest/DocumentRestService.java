@@ -5,9 +5,6 @@ package com.objectif.informatique.alerte.rest;
 
 import java.util.List;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -21,6 +18,7 @@ import javax.ws.rs.core.Response;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.objectif.informatique.alerte.model.Document;
 import com.objectif.informatique.alerte.service.DocumentService;
@@ -34,10 +32,6 @@ public class DocumentRestService {
 
 	@Autowired
 	DocumentService service;
-	
-	EntityManagerFactory emf =Persistence.createEntityManagerFactory("JpaALerte");
-	EntityManager em = emf.createEntityManager();
-	
 
 	/**
 	 * Retourne un document par son id
@@ -71,6 +65,7 @@ public class DocumentRestService {
 	@POST
 	@Path("/send")
 	@Consumes(MediaType.APPLICATION_JSON + ";charset=utf-8")
+	@Transactional
 	public Response add(Document document){			
 		service.create(document);		
 		return Response.status(200).entity(document).build();
@@ -83,6 +78,7 @@ public class DocumentRestService {
 	@DELETE
 	@Path("/delete/{id}")
 	@Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
+	@Transactional
 	public Response deleteDocument(@PathParam("id") int id,Document document){
 		document =  service.getDocumentById(id);
 		service.delete(document);
@@ -95,6 +91,7 @@ public class DocumentRestService {
 	@PUT
 	@Path("/update/{id}")
 	@Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
+	@Transactional
 	public  Response updateEvent(@PathParam("id") int id,Document document){
 		document =  service.getDocumentById(id);
 		if(document != null){

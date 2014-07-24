@@ -1,4 +1,4 @@
-function CalendarCtrl($scope,ngDialog,evenements,evenement,evtToCal,responsables,dossiers) {
+function CalendarCtrl($rootScope,$scope,ngDialog,evenements,evenement,evtToCal,responsables,dossiers) {
     var date = new Date();
     var d = date.getDate(); 
     var m = date.getMonth();
@@ -231,6 +231,23 @@ function CalendarCtrl($scope,ngDialog,evenements,evenement,evtToCal,responsables
     		 template: 'editEvt.html'
     	});
     }
+    
+    /*Po-up modification*/
+ $scope.editEvent = function( event ){
+    	
+        $scope.formEvt = event;
+		
+    	ngDialog.open({
+    		template: 'views/eventUpdate.html?v=9',
+    		scope: $scope
+    	});
+        
+    };    
+    
+    $rootScope.$on('ngDialog.closed', function (e, $dialog) {
+    	//on vide le formulaire de création
+    	$scope.formEvt = {};
+    });
     
     /* event sources array*/
     //$scope.eventSources2 = [$scope.calEventsExt, $scope.eventsF, $scope.events];

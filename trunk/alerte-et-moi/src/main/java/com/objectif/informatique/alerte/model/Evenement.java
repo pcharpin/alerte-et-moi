@@ -43,7 +43,6 @@ public class Evenement implements Serializable{
 	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name="Dossier_idDos")
 	private Dossier dossier;
-	//private int idDos;
 	@Column(name="nomEvt")
 	private String nomEvt;
 	@Column(name="descEvt")
@@ -89,7 +88,7 @@ public class Evenement implements Serializable{
 		)
 	private Set<Document> documents = new HashSet<Document>();
 	
-	public Evenement(int idEvt, Dossier dossier, /*int idDos,*/ String nomEvt,
+	public Evenement(int idEvt, Dossier dossier,String nomEvt,
 			String descEvt, Date dateEchEvt, int exeEvt, float mntEvt,
 			EnumModeGestionEvt modeGestionEvt, String lienGestEvt, int trtEvt,
 			Date dateTrtEvt, EnumPeriodeEvet enumPeriodeEvet, int actifEvt,
@@ -98,7 +97,6 @@ public class Evenement implements Serializable{
 		super();
 		this.idEvt = idEvt;
 		this.dossier = dossier;
-		//this.idDos = idDos;
 		this.nomEvt = nomEvt;
 		this.descEvt = descEvt;
 		this.dateEchEvt = dateEchEvt;
@@ -151,12 +149,7 @@ public class Evenement implements Serializable{
 	public void setIdEvt(int idEvt) {
 		this.idEvt = idEvt;
 	}
-//	public int getIdDos() {
-//		return idDos;
-//	}
-//	public void setIdDos(int idDos) {
-//		this.idDos = idDos;
-//	}
+
 	public Responsable getResponsable_resp() {
 		return this.responsable;
 	}

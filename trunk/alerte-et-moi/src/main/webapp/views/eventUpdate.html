@@ -1,0 +1,79 @@
+<form ng-submit="submitEvt()">
+			<div>
+				<label>nom :</label><input type="text" ng-model="formEvt.nomEvt" />
+			</div>
+			<div>
+				<label>dossier existant :</label> <input type="radio" name="dossier"
+					value="" />oui <input type="radio" name="dossier" value="" />non
+			</div>
+			<div>
+				<label>dossier :</label> <select ng-model="formEvt.dossier">
+					<option ng-repeat="dossier in listDossiers" value="{{dossier}}">
+						{{dossier.nomDos}}</option>
+				</select>
+			</div>
+			<div>
+				<label>descritption :</label>
+				<textarea ng-model="formEvt.descEvt"></textarea>
+			</div>
+
+			<!--<div><label>document rattach� :</label><input type="file" ng-model=""/>
+ 						<button type="button"  ng-click="detailDos(event.idDos)" class="btn btn-warning">Ajouter un nouveau document</button>
+ 						</div>-->
+			<div>
+				<label>date d'échéance :</label><input type="text"
+					ng-model="formEvt.dateEchEvt" />
+			</div>
+			<div>
+				<label>année d'exercice :</label><input type="text"
+					ng-model="formEvt.exeEvt" />
+			</div>
+			<div>
+				<label>montant :</label><input type="text" ng-model="formEvt.mntEvt" />
+			</div>
+			<div>
+				<label>mode de gestion :</label> <input type="radio"
+					name="mdGestion" ng-model="formEvt.modeGestionEvt" value="Manuel">manuel
+				<input type="radio" name="mdGestion"
+					ng-model="formEvt.modeGestionEvt" value="En ligne">en ligne
+			</div>
+			<div>
+				<label>lien :</label><input type="url"
+					ng-model="formEvt.lienGestEvt" />
+			</div>
+
+			<div>
+				<label>responsable :</label> <select ng-model="formEvt.responsable">
+					<option ng-repeat="responsable in listResponsables"
+						value="{{responsable.idResp}}">{{responsable.nomResp}}</option>
+				</select>
+			</div>
+			<div>
+				<label>réalisé :</label> <input type="radio" name="mdGestion"
+					ng-model="formEvt.trtEvt" value="1">oui <input type="radio"
+					name="mdGestion" ng-model="formEvt.trtEvt" value="0">non
+			</div>
+			<div>
+				<label>date de réalisation :</label> <input type="text"
+					ng-model="formEvt.dateTrtEvt" />
+			</div>
+
+			<div>
+				<label>périodicité :</label><select
+					ng-model="formEvt.enumPeriodeEvet">
+					<option value="Journalier">journalier</option>
+					<option value="Hebdomadaire">hebdomadaire</option>
+					<option value="Mensuel">mensuel</option>
+					<option value="Trimestriel">Trimestriel</option>
+					<option value="Semestriel">Trimestriel</option>
+					<option value="Annuel">annuel</option>
+					<option value="Sans">sans</option>
+				</select>
+			</div>
+			<div>
+				<label>libre :</label>
+				<textarea ng-model="formEvt.libreEvt"></textarea>
+			</div>
+			<input type="submit" id="submit" value="Ajouter"
+				ng-click="submitEvt()" />
+		</form>

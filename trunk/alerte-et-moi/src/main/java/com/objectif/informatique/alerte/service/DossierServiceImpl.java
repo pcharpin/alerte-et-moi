@@ -2,6 +2,8 @@ package com.objectif.informatique.alerte.service;
 
 import java.util.List;
 
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,6 +14,12 @@ import com.objectif.informatique.alerte.model.Dossier;
 public class DossierServiceImpl implements DossierService{
 		
 	public DossierServiceImpl(){}
+	
+	private SessionFactory sessionFactory;
+
+	private Session getCurrentSession() {
+		return sessionFactory.getCurrentSession();
+	}
 	
 	@Autowired
 	private DossierDAO dossierDAO;

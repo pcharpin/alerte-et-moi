@@ -45,8 +45,8 @@ public class JerseyClientPostFolderTest {
 			//Get dossier 
 			//Dossier dossier = dossierService.findFolderById(2);
 			Dossier dossier =  new Dossier();
-			dossier.setNomDos("conseil d'administration26");
-			dossier.setDescDoc("Gant3");
+			dossier.setNomDos("conseil");
+			dossier.setDescDoc("Gant2");
 			
 				em.getTransaction().begin();
 				//dossierService.update(dossier);
@@ -54,8 +54,8 @@ public class JerseyClientPostFolderTest {
 				//service.create(dossier);
 				em.getTransaction().commit();
 			
-			ClientResponse response = webResource.post(ClientResponse.class,dossier);
-			//ClientResponse response = webResource.accept("application/json").post(ClientResponse.class,dossier);
+			//ClientResponse response = webResource.post(ClientResponse.class,dossier);
+			ClientResponse response = webResource.accept("application/json").post(ClientResponse.class,dossier);
 			
 			if(response.getStatus() != 200) {
 				   throw new RuntimeException("Failed : HTTP error code : "
