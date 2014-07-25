@@ -8,10 +8,16 @@ import javax.persistence.Persistence;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.objectif.informatique.alerte.dao.DossierDAOImpl;
 import com.objectif.informatique.alerte.dao.EvenementDAOImpl;
+import com.objectif.informatique.alerte.dao.ResponsableDAOImpl;
 import com.objectif.informatique.alerte.model.Dossier;
 import com.objectif.informatique.alerte.model.Evenement;
+import com.objectif.informatique.alerte.model.Responsable;
+import com.objectif.informatique.alerte.rest.ResponsableRestService;
 import com.objectif.informatique.alerte.service.DossierService;
+import com.objectif.informatique.alerte.service.DossierServiceImpl;
+import com.objectif.informatique.alerte.service.ResponsableServiceImpl;
 import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.WebResource;
@@ -32,55 +38,22 @@ public class JerseyClientPostEventTest {
 			WebResource webResource = client.resource("http://localhost:8080/alerte-et-moi/rest/evenement/send");
 			
 			EvenementDAOImpl evenementDAOImpl = new EvenementDAOImpl(em);
-			//ResponsableDAOImpl respService = new ResponsableDAOImpl();
 			
-			
-			//créer un dossier
-			Dossier d = new Dossier();
-			
-			
-//			dossier.setDescDoc("descDoc");
-//			dossierService.create(dossier);
-			//dossier.setIdDos(1);
-			
-			//Profil
-//			Profil profil =  new Profil();
-//			profil.setIdProf(2);
-		
-			//selection un responsable existant ou créer
-//			Responsable responsable = new Responsable();
-//			responsable.setNomResp("admin");
-//			responsable.setNomResp("nomResp");
-//			responsable.setPrenResp("prenResp");
-//			responsable.setEmailResp("test@objectif-informatique.com");
-//			responsable.setProfil(2);
-		
 			// Evenement
 			Evenement evenement = new Evenement();
-			evenement.setNomEvt("testGanss");
+			evenement.setNomEvt("RSI de toto2");
 			evenement.setDateEchEvt(new Date());
-			//evenement.setDossier(dossier);
-			//evenement.setResponsable(responsable);
-						
-//			evenement.setDateEchEvt(new Date());
-//			Dossier dossier =  em.find(Dossier.class, 2);
-//			Responsable resp = em.find(Responsable.class, 1);
-		//	evenement.setDossier(dossier);
-//			evenement.setResponsable(resp);
+		
+			Dossier dossier =  em.find(Dossier.class, 2);
+			Responsable resp = em.find(Responsable.class, 1);
 			
+			evenement.setDossier(dossier);
+			evenement.setResponsable(resp);
+								
 			em.getTransaction().begin();
-		//	Evenement evenement = new Evenement();
-			
-			try {
-				d  = dossierService.getDossierById(1);
-				d.getDescDoc();
-				evenement.setDossier(d);
-				evenementDAOImpl.create(evenement);
-				em.getTransaction().commit();
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-										
+			evenementDAOImpl.create(evenement);
+			em.getTransaction().commit();
+												
 			ClientResponse response = webResource.accept("application/json").post(ClientResponse.class,evenement);
 			
 			if(response.getStatus() != 200) {
