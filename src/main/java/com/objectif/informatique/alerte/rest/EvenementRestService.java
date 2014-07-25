@@ -42,6 +42,7 @@ public class EvenementRestService {
 	ResponsableService respService;
 	private Responsable responsable;
 	
+	
 	/**
 	 * Retourne un evenement par son id
 	 * @param id
@@ -84,36 +85,10 @@ public class EvenementRestService {
 	@Consumes(MediaType.APPLICATION_JSON + ";charset=utf-8")
 	@Transactional
 	public Response add(Evenement evenement,@PathParam("id") int id){		
-		//Attribution d'un dossier par defaut
-		Dossier dossier = null;
-		dossierService.getDossierById(id); 
-//		if(dossier == null){
-//			dossierService.create(dossier); 
-//		}
-		
-		
-		//Profil : attribution du rôle normal à la création
-		respService.getResponsableById(id);
-//		Profil profil =  new Profil();
-//		profil.setIdProf(2);
-	
-		//selection un responsable existant ou créer(un par défaut)
-		//Responsable responsable = new Responsable();
-		//responsable.setProfil(2);
-		
-//		Responsable responsable = null;
-//		if(responsable != null){
-//			respService.getResponsableById(id);
-//		}
-//		else {
-//			responsable.setProfil(2);
-//		}
-//		
-		//respService.getResponsableById(1);
-		
-		// Création d'un evenement
-//		evenement.setResponsable(responsable);	
-//		evenement.setDossier(dossier);
+		Dossier dossier = dossierService.getDossierById(id);
+		Responsable responsable = respService.getResponsableById(id);
+		evenement.setDossier(dossier);
+		evenement.setResponsable(responsable);	
 		service.create(evenement);
 		
 		return Response.status(200).entity(evenement).build();
