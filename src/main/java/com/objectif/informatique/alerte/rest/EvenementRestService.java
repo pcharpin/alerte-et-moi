@@ -58,9 +58,8 @@ public class EvenementRestService {
 //	@GET
 //	@Path("/{nom}")
 //	@Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
-//	public Response getByName(Evenement evenement,@PathParam("nom") String nom){
-//		evenement =  service.getEvenementByName(nom);
-//		return Response.ok().build();
+//	public Evenement getByName(Evenement evenement,@PathParam("nom") String nom){
+//	return service.getEvenementByName(nom);	
 //	}
 	
 	/**
@@ -84,7 +83,8 @@ public class EvenementRestService {
 	@Path("/send")
 	@Consumes(MediaType.APPLICATION_JSON + ";charset=utf-8")
 	@Transactional
-	public Response add(Evenement evenement,@PathParam("id") int id){		
+	public Response add(Evenement evenement,@PathParam("id") int id){
+		
 		Dossier dossier = dossierService.getDossierById(id);
 		Responsable responsable = respService.getResponsableById(id);
 		evenement.setDossier(dossier);
