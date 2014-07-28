@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.objectif.informatique.alerte.dao.EvenementDAO;
 import com.objectif.informatique.alerte.model.Evenement;
@@ -45,6 +46,7 @@ public class EvenementServiceImpl implements EvenementService {
 	}
 
 	@Override
+	@Transactional
 	public Evenement create(Evenement evenement) {
 		return evenementDAO.create(evenement);
 	}

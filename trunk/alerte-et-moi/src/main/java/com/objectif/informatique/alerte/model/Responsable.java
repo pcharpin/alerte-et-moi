@@ -47,8 +47,8 @@ public class Responsable implements Serializable{
 	private String emailResp;
 	
 	@JsonIgnore
-	@OneToMany(mappedBy="responsable")
-	private Set<Evenement> evenements = new HashSet<Evenement>();
+	@OneToMany(mappedBy="responsable",cascade = CascadeType.ALL)
+	private Set<Evenement> evenements;
 	
 	//@ManyToMany(targetEntity=Alerte.class, fetch=FetchType.LAZY)
 	@ManyToMany(cascade = CascadeType.ALL, fetch=FetchType.EAGER)
@@ -61,16 +61,6 @@ public class Responsable implements Serializable{
 
 	public Responsable(){}
 	
-	/**
-	 * 
-	 * @param idResp
-	 * @param profil
-	 * @param nomResp
-	 * @param prenResp
-	 * @param emailResp
-	 * @param evenements
-	 * @param alertes
-	 */
 	public Responsable(int idResp, int profil, String nomResp, String prenResp,
 			String emailResp, Set<Evenement> evenements, Set<Alerte> alertes) {
 		super();
@@ -192,5 +182,5 @@ public class Responsable implements Serializable{
 		builder.append(alertes);
 		builder.append("]");
 		return builder.toString();
-	}
+	}	
 }

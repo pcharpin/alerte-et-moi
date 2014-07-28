@@ -88,8 +88,9 @@ public class Evenement implements Serializable{
 		)
 	private Set<Document> documents = new HashSet<Document>();
 	
-	public Evenement(int idEvt, Dossier dossier,String nomEvt,
-			String descEvt, Date dateEchEvt, int exeEvt, float mntEvt,
+	
+	public Evenement(int idEvt, Dossier dossier, String nomEvt, String descEvt,
+			Date dateEchEvt, int exeEvt, float mntEvt,
 			EnumModeGestionEvt modeGestionEvt, String lienGestEvt, int trtEvt,
 			Date dateTrtEvt, EnumPeriodeEvet enumPeriodeEvet, int actifEvt,
 			int recopAutoEvt, int recurtEvt, String libreEvt,
@@ -114,6 +115,7 @@ public class Evenement implements Serializable{
 		this.responsable = responsable;
 		this.documents = documents;
 	}
+	
 	public Evenement(int id, String nomEvt){
 		super();
 		this.idEvt = idEvt;
@@ -334,5 +336,5 @@ public class Evenement implements Serializable{
 		builder.append(documents);
 		builder.append("]");
 		return builder.toString();
-	}	
+	}
 }

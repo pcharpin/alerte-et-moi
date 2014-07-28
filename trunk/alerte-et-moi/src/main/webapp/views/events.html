@@ -64,6 +64,7 @@
 			<option ng-repeat="dossier in listDossiers" value="{{dossier}}" >
 				{{dossier.nomDos}}</option>
 		</select>
+		
 		<hr>
 		<h4>Recherche :</h4>
 		(dans le nom de l'évènement) <input type="text" style="width: 100px"
@@ -109,12 +110,13 @@
 					<td>{{event.enumPeriodeEvet}}</td>
 					<td>{{event.trtEvt | booleanTooString}}</td>
 					<td>{{event.actifEvt | booleanTooString}}</td>
-					<td><i class="glyphicon glyphicon-search" ng-click="editEvent(event)"></i> <!-- <i
+					<td><i class="glyphicon glyphicon-search" ng-click="editEvent(event)"></i>
+					<!-- <i
 						class="glyphicon glyphicon-folder-open"></i> <i
 						class="glyphicon glyphicon-plus"></i> <i
 						class="glyphicon glyphicon-ok-circle"
-						ng-click="validEvt(event.idEvt)"></i> --> <i
-						class="glyphicon glyphicon-remove-circle" ng-click="deleteEvent(event.idEvt)"></i>
+						ng-click="validEvt(event.idEvt)"></i> --> 
+						<i class="glyphicon glyphicon-remove-circle" ng-click="deleteEvent(event.idEvt)"></i>
 					</td>
 				</tr>
 			</table>
@@ -126,7 +128,7 @@
 		un évènement</span> </tab-heading>
 	<div class="span4">
 		<h3>Options :</h3>
-		<!-- {{formEvt}} -->
+		{{formEvt}}
 	</div>
 
 	<div class="span8">

@@ -8,16 +8,11 @@ import javax.persistence.Persistence;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.objectif.informatique.alerte.dao.DossierDAOImpl;
 import com.objectif.informatique.alerte.dao.EvenementDAOImpl;
-import com.objectif.informatique.alerte.dao.ResponsableDAOImpl;
 import com.objectif.informatique.alerte.model.Dossier;
 import com.objectif.informatique.alerte.model.Evenement;
 import com.objectif.informatique.alerte.model.Responsable;
-import com.objectif.informatique.alerte.rest.ResponsableRestService;
 import com.objectif.informatique.alerte.service.DossierService;
-import com.objectif.informatique.alerte.service.DossierServiceImpl;
-import com.objectif.informatique.alerte.service.ResponsableServiceImpl;
 import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.WebResource;
