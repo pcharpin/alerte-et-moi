@@ -55,4 +55,9 @@ public class DossierServiceImpl implements DossierService{
 	public void update(Dossier dossier) {
 		dossierDAO.update(dossier);		
 	}
+
+	@Override
+	public Dossier getFolderByName(String name) {
+		return dossierDAO.getFolderByName(name);
+	}
 }

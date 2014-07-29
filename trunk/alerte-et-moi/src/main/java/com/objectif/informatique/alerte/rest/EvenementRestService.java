@@ -86,6 +86,10 @@ public class EvenementRestService {
 	public Response add(Evenement evenement,@PathParam("id") int id){
 		
 		Dossier dossier = dossierService.getDossierById(id);
+		
+		
+		System.out.println("*****dossier****" + dossier);
+		
 		Responsable responsable = respService.getResponsableById(id);
 		evenement.setDossier(dossier);
 		evenement.setResponsable(responsable);	

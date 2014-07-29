@@ -2,9 +2,6 @@ package com.objectif.informatique.alerte.rest;
 
 import java.util.List;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -39,7 +36,17 @@ public class DossierRestService {
 	@Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
 	public Dossier getFolder(@PathParam("id") int id) {
 		return service.getDossierById(id);
-		//return null;	
+	}
+	
+	@GET
+	@Path("/folder/{name}")
+	@Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
+	public Dossier getFolderByName(@PathParam("name") Dossier name,@PathParam("id") int id) {
+		
+//		Dossier dossier = new Dossier();
+		//name = service.getDossierById(id);
+		name = service.getFolderByName(name.getNomDos());
+		return name;
 	}
 	
 	@GET

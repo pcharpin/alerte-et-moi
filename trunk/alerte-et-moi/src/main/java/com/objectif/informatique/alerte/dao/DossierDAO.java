@@ -3,6 +3,7 @@ package com.objectif.informatique.alerte.dao;
 import java.util.List;
 
 import com.objectif.informatique.alerte.model.Dossier;
+import com.objectif.informatique.alerte.model.Evenement;
 
 public interface DossierDAO extends GenericDAO<Dossier>{
 	/**
@@ -18,4 +19,10 @@ public interface DossierDAO extends GenericDAO<Dossier>{
 	 * @throws Exception
 	 */
 	Dossier findFolderById(int folderId) throws Exception;
+	/**
+	 * 
+	 * @param name
+	 * @return
+	 */
+	public Dossier getFolderByName(String name);
 }

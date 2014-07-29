@@ -34,4 +34,10 @@ public interface DossierService {
 	 * @param dossier
 	 */
 	public void update(Dossier dossier);
+	/**
+	 * 
+	 * @param name
+	 * @return
+	 */
+	public Dossier getFolderByName(String name);
 }
