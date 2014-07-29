@@ -40,6 +40,7 @@ public class JerseyClientPostEventTest {
 			evenement.setDateEchEvt(new Date());
 		
 			Dossier dossier =  em.find(Dossier.class, 2);
+			System.out.println("****dossier***" + dossier);
 			Responsable resp = em.find(Responsable.class, 1);
 			
 			evenement.setDossier(dossier);

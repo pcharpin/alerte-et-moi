@@ -29,15 +29,13 @@ public class DossierDAOImpl extends GenericDAOImpl<Dossier> implements DossierDA
 	}
 
 	@Override
-	public Dossier findFolderById(int folderId) throws Exception {
-		
-	return entityManager.find(Dossier.class, folderId); 
-//		Dossier dossier = null;
-//		try {
-//		dossier = entityManager.find(Dossier.class, folderId); 
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
-//		return dossier;
+	public Dossier findFolderById(int folderId) throws Exception {	
+		return entityManager.find(Dossier.class, folderId); 
 	}
+	@Override
+	public Dossier getFolderByName(String name) {
+		Query query = this.entityManager.createQuery("select d from Dossier d where d.nomDos = ?");
+		query.setParameter("name", name);
+		return (Dossier) query;
+	}	
 }
