@@ -115,40 +115,73 @@ private Set<Document> documents = new HashSet<Document>();
 		return idDos;
 	}
 
-	public Dossier(int idDos, String nomDos,
-			EnumTypesDossiers enumTypesDossiers, String descDoc,String evtDos,
-			Set<Document> documents, Set<Evenement> evenements,
-			boolean priorDos, float mntDOS, boolean periodJourDos,
-			boolean periodHebdoDos, boolean periodMensDos,
-			boolean periodTrimDos, boolean periodSemestDos,
-			boolean periodAnuDos, boolean periodSansDos, boolean actifDos,
-			String cntNomDos, String cntPrenomDos, String cntTelDos,
-			String cntCmntDos, String libre) {
-		super();
-		this.idDos = idDos;
-		this.nomDos = nomDos;
-		this.enumTypesDossiers = enumTypesDossiers;
-		this.descDoc = descDoc;
-		this.evtDos =  evtDos;
-		this.documents = documents;
-		this.evenements = evenements;
-		this.priorDos = priorDos;
-		this.mntDOS = mntDOS;
-		this.periodJourDos = periodJourDos;
-		this.periodHebdoDos = periodHebdoDos;
-		this.periodMensDos = periodMensDos;
-		this.periodTrimDos = periodTrimDos;
-		this.periodSemestDos = periodSemestDos;
-		this.periodAnuDos = periodAnuDos;
-		this.periodSansDos = periodSansDos;
-		this.actifDos = actifDos;
-		this.cntNomDos = cntNomDos;
-		this.cntPrenomDos = cntPrenomDos;
-		this.cntTelDos = cntTelDos;
-		this.cntCmntDos = cntCmntDos;
-		this.libre = libre;
-	}
-	
+//	public Dossier(int idDos, String nomDos,
+//			EnumTypesDossiers enumTypesDossiers, String descDoc,String evtDos,
+//			Set<Document> documents, Set<Evenement> evenements,
+//			boolean priorDos, float mntDOS, boolean periodJourDos,
+//			boolean periodHebdoDos, boolean periodMensDos,
+//			boolean periodTrimDos, boolean periodSemestDos,
+//			boolean periodAnuDos, boolean periodSansDos, boolean actifDos,
+//			String cntNomDos, String cntPrenomDos, String cntTelDos,
+//			String cntCmntDos, String libre) {
+//		super();
+//		this.idDos = idDos;
+//		this.nomDos = nomDos;
+//		this.enumTypesDossiers = enumTypesDossiers;
+//		this.descDoc = descDoc;
+//		this.evtDos =  evtDos;
+//		this.documents = documents;
+//		this.evenements = evenements;
+//		this.priorDos = priorDos;
+//		this.mntDOS = mntDOS;
+//		this.periodJourDos = periodJourDos;
+//		this.periodHebdoDos = periodHebdoDos;
+//		this.periodMensDos = periodMensDos;
+//		this.periodTrimDos = periodTrimDos;
+//		this.periodSemestDos = periodSemestDos;
+//		this.periodAnuDos = periodAnuDos;
+//		this.periodSansDos = periodSansDos;
+//		this.actifDos = actifDos;
+//		this.cntNomDos = cntNomDos;
+//		this.cntPrenomDos = cntPrenomDos;
+//		this.cntTelDos = cntTelDos;
+//		this.cntCmntDos = cntCmntDos;
+//		this.libre = libre;
+//	}
+//	
+//	public Dossier(String nomDos,
+//			EnumTypesDossiers enumTypesDossiers, String descDoc,String evtDos,
+//			Set<Document> documents, Set<Evenement> evenements,
+//			boolean priorDos, float mntDOS, boolean periodJourDos,
+//			boolean periodHebdoDos, boolean periodMensDos,
+//			boolean periodTrimDos, boolean periodSemestDos,
+//			boolean periodAnuDos, boolean periodSansDos, boolean actifDos,
+//			String cntNomDos, String cntPrenomDos, String cntTelDos,
+//			String cntCmntDos, String libre) {
+//		super();
+//		this.nomDos = nomDos;
+//		this.enumTypesDossiers = enumTypesDossiers;
+//		this.descDoc = descDoc;
+//		this.evtDos =  evtDos;
+//		this.documents = documents;
+//		this.evenements = evenements;
+//		this.priorDos = priorDos;
+//		this.mntDOS = mntDOS;
+//		this.periodJourDos = periodJourDos;
+//		this.periodHebdoDos = periodHebdoDos;
+//		this.periodMensDos = periodMensDos;
+//		this.periodTrimDos = periodTrimDos;
+//		this.periodSemestDos = periodSemestDos;
+//		this.periodAnuDos = periodAnuDos;
+//		this.periodSansDos = periodSansDos;
+//		this.actifDos = actifDos;
+//		this.cntNomDos = cntNomDos;
+//		this.cntPrenomDos = cntPrenomDos;
+//		this.cntTelDos = cntTelDos;
+//		this.cntCmntDos = cntCmntDos;
+//		this.libre = libre;
+//	}
+//	
 	public Dossier(){}
 	
 	/**

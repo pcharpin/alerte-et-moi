@@ -17,4 +17,5 @@ public interface  ResponsableService {
 	public Responsable create(Responsable responsable);
 	public void delete(Responsable respId);
 	public void update(Responsable responsable);
+	public Responsable findResponsableById(int id);
 }

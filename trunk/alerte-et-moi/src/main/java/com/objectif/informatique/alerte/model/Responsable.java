@@ -4,6 +4,7 @@
 package com.objectif.informatique.alerte.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -72,7 +73,7 @@ public class Responsable implements Serializable{
 		this.evenements = evenements;
 		this.alertes = alertes;
 	}
-
+	
 	/**
 	 * @return the idResp
 	 */

@@ -170,12 +170,12 @@ function CalendarCtrl($rootScope,$scope,ngDialog,evenements,evenement,evtToCal,r
 	    };	
 	       
 	    
-    	
+    	console.log("ici");
 	    /* Ajouter un evenement en base */
 	    $scope.submitEvt = function() {
 	    	console.log("formEvt = ", $scope.formEvt);
     		evenement.create($scope.formEvt).$promise.then(function(result){
-    	    	//console.log("resultat du create"+ result);
+    	    	console.log("resultat du create"+ result);
     	    	});
     	};	    
 	    
