@@ -34,9 +34,10 @@ public class DossierDAOImpl extends GenericDAOImpl<Dossier> implements DossierDA
 	}
 	@Override
 	public Dossier getFolderByName(String name) {
-		Query query = this.entityManager.createQuery("select d from Dossier d where d.nomDos = name");
-		query.setParameter("name", name);
-		query.getSingleResult();
-		return (Dossier) query;
-	}	
+		return null;
+//		Query query = this.entityManager.createQuery("select d from Dossier d where d.name = : nomDos");
+//		query.setParameter("name",Dossier.);
+//		return query.toString();
+	}
+	
 }

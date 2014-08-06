@@ -3,7 +3,6 @@ package com.objectif.informatique.alerte.dao;
 import java.util.List;
 
 import com.objectif.informatique.alerte.model.Dossier;
-import com.objectif.informatique.alerte.model.Evenement;
 
 public interface DossierDAO extends GenericDAO<Dossier>{
 	/**

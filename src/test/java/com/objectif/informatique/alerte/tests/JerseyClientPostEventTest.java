@@ -36,7 +36,7 @@ public class JerseyClientPostEventTest {
 			
 			// Evenement
 			Evenement evenement = new Evenement();
-			evenement.setNomEvt("RSI de toto2");
+			evenement.setNomEvt("RSI test mardi");
 			evenement.setDateEchEvt(new Date());
 		
 			Dossier dossier =  em.find(Dossier.class, 2);
@@ -44,7 +44,7 @@ public class JerseyClientPostEventTest {
 			Responsable resp = em.find(Responsable.class, 1);
 			
 			evenement.setDossier(dossier);
-			evenement.setResponsable(resp);
+			//evenement.setResponsable(resp);
 								
 			em.getTransaction().begin();
 			evenementDAOImpl.create(evenement);

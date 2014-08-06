@@ -1,23 +1,24 @@
-<form ng-submit="submitEvt()">
+<form>
 			<div>
 				<label>Nom :</label><input type="text" ng-model="formEvt.nomEvt" />
 			</div>
-			<div>
+			 <div>
 				<label>dossier existant :</label> <input type="radio" name="dossier"
 					value="" />oui <input type="radio" name="dossier" value="" />non
-			</div>
+			</div> 
 			<div>
 				<label>dossier :</label> <select ng-model="formEvt.dossier">
-					<option ng-repeat="dossier in listDossiers" value="{{dossier}}">
-						{{dossier.nomDos}}</option>
+					<option ng-repeat="dossier in listDossiers"
+					 value="{{dossier.idDos}}">{{dossier.nomDos}}
+					</option>
 				</select>
 			</div>
 			<div>
 				<label>descritption :</label>
 				<textarea ng-model="formEvt.descEvt"></textarea>
 			</div>
-
-			<!--<div><label>document rattach� :</label><input type="file" ng-model=""/>
+<!-- 
+			<div><label>document rattach� :</label><input type="file" ng-model=""/>
  						<button type="button"  ng-click="detailDos(event.idDos)" class="btn btn-warning">Ajouter un nouveau document</button>
  						</div>-->
 			<div>
@@ -45,7 +46,8 @@
 			<div>
 				<label>responsable :</label> <select ng-model="formEvt.responsable">
 					<option ng-repeat="responsable in listResponsables"
-						value="{{responsable.idResp}}">{{responsable.nomResp}}</option>
+						value="{{responsable.idResp}}">{{responsable.nomResp}}
+					</option>
 				</select>
 			</div>
 			<div>
@@ -74,6 +76,5 @@
 				<label>libre :</label>
 				<textarea ng-model="formEvt.libreEvt"></textarea>
 			</div>
-			<input type="submit" id="submit" value="Ajouter"
-				ng-click="submitEvt()" />
+			<input type="submit" id="submit" value="Ajouter" ng-click="submitEvt()"/>
 		</form>

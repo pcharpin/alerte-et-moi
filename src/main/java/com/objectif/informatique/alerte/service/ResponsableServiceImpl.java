@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.objectif.informatique.alerte.dao.ResponsableDAO;
 import com.objectif.informatique.alerte.model.Responsable;
@@ -55,5 +54,11 @@ public class ResponsableServiceImpl implements ResponsableService{
 	@Override
 	public void update(Responsable responsable) {
 		responsableDAO.update(responsable);		
+	}
+
+
+	@Override
+	public Responsable findResponsableById(int id) {
+		return responsableDAO.find(id);
 	}
 }

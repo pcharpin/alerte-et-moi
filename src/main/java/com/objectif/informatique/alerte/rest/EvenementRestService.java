@@ -81,18 +81,35 @@ public class EvenementRestService {
 	 */
 	@POST
 	@Path("/send")
-	@Consumes(MediaType.APPLICATION_JSON + ";charset=utf-8")
+	//@Consumes(MediaType.APPLICATION_JSON + ";charset=utf-8")
 	@Transactional
-	public Response add(Evenement evenement,@PathParam("id") int id){
+	public Response add(Evenement evenement){
+		System.out.println("**evenement depuis le forme**:" + evenement);
+		int idDossier = evenement.getDossier().getIdDos();
+		System.out.println("**idDossier depuis le forme**:" + idDossier);
 		
-		Dossier dossier = dossierService.getDossierById(id);
+		Dossier dossier = evenement.getDossier(); 
+		System.out.println("dossier recupere :" + dossier);
 		
+		int IdDossierRecup = dossier.getIdDos();
 		
-		System.out.println("*****dossier****" + dossier);
+		System.out.println("**IdDossierRecup**:" + IdDossierRecup);
 		
-		Responsable responsable = respService.getResponsableById(id);
+		System.out.println("id du dossier recuperer :" + dossier.getIdDos());
+		System.out.println("**************************");
+		Responsable responsable =  evenement.getResponsable();
+		System.out.println("responsable recupere :" + responsable);
+		
+		System.out.println("**************************");
+		Responsable responsableid =  evenement.getResponsable_resp();
+		System.out.println("responsableid recupere :" + responsableid);
+		System.out.println("**************************");
+//		int idDossier = dossier.getIdDos();
 		evenement.setDossier(dossier);
-		evenement.setResponsable(responsable);	
+		evenement.setResponsable(responsable);
+//		
+		
+		System.out.println("evenement à créer:" + evenement);
 		service.create(evenement);
 		
 		return Response.status(200).entity(evenement).build();

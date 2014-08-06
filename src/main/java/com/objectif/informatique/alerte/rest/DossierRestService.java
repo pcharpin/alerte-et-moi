@@ -41,12 +41,11 @@ public class DossierRestService {
 	@GET
 	@Path("/folder/{name}")
 	@Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
-	public Dossier getFolderByName(@PathParam("name") Dossier name,@PathParam("id") int id) {
+	public Dossier getFolderByName(@PathParam("name") String dossier) {
 		
 //		Dossier dossier = new Dossier();
 		//name = service.getDossierById(id);
-		name = service.getFolderByName(name.getNomDos());
-		return name;
+		return service.getFolderByName(dossier);
 	}
 	
 	@GET
