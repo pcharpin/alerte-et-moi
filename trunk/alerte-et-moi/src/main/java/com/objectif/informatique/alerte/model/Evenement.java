@@ -8,7 +8,6 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -22,7 +21,6 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 
 /**
@@ -154,12 +152,12 @@ public class Evenement implements Serializable{
 		this.idEvt = idEvt;
 	}
 
-	public Responsable getResponsable_resp() {
-		return this.responsable;
-	}
-	public void setResponsable_resp(Responsable responsable_idResp) {
-		this.responsable = responsable_idResp;
-	}
+//	public Responsable getResponsable_resp() {
+//		return this.responsable;
+//	}
+//	public void setResponsable_resp(Responsable responsable_idResp) {
+//		this.responsable = responsable_idResp;
+//	}
 	public String getNomEvt() {
 		return nomEvt;
 	}
