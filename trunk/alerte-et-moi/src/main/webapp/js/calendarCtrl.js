@@ -13,7 +13,7 @@ function CalendarCtrl($rootScope,$scope,ngDialog,evenements,evenement,evtToCal,r
     $scope.listeEvt=[];
     $scope.eventClicked={};
     $scope.listDossiers=[];
-    $scope.json={};
+    $scope.json={}; //here
     
 
 		/* event source that pulls from google.com */
@@ -123,7 +123,7 @@ function CalendarCtrl($rootScope,$scope,ngDialog,evenements,evenement,evtToCal,r
     };*/
 	    var date = new Date();
 	    $scope.json={
-    		    "idEvt": 1,
+    		  
     		    "dossier": {
     		        "idDos": 1,
     		        "nomDos": "test",
@@ -147,7 +147,7 @@ function CalendarCtrl($rootScope,$scope,ngDialog,evenements,evenement,evtToCal,r
     		        "libre": null
     		    },
     		    "nomEvt": "test jeudi",
-    		    "descEvt": "Déclaration auprès de GAN",
+    		    "descEvt": "DÃ©claration toto auprÃ¨s de GAN",
     		    "dateEchEvt":new Date(),
     		    "exeEvt": 2014,
     		    "mntEvt": 0,
@@ -302,7 +302,7 @@ function CalendarCtrl($rootScope,$scope,ngDialog,evenements,evenement,evtToCal,r
     };    
     
     $rootScope.$on('ngDialog.closed', function (e, $dialog) {
-    	//on vide le formulaire de création
+    	//on vide le formulaire de crï¿½ation
     	$scope.formEvt = {};
     });
     
