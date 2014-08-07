@@ -5,6 +5,7 @@ package com.objectif.informatique.alerte.rest;
 
 import java.util.List;
 
+import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -52,13 +53,6 @@ public class EvenementRestService {
 	public Evenement getEvenement(@PathParam("id") int id) {
 		return service.getEvenementById(id);
 	}
-
-//	@GET
-//	@Path("/{nom}")
-//	@Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
-//	public Evenement getByName(Evenement evenement,@PathParam("nom") String nom){
-//	return service.getEvenementByName(nom);	
-//	}
 	
 	/**
 	 * Retourne tous les evenements 
@@ -79,37 +73,10 @@ public class EvenementRestService {
 	 */
 	@POST
 	@Path("/send")
-	//@Consumes(MediaType.APPLICATION_JSON + ";charset=utf-8")
-	@Transactional
+	@Consumes(MediaType.APPLICATION_JSON + ";charset=utf-8")
 	public Response add(Evenement evenement){
-//		System.out.println("**evenement depuis le forme**:" + evenement);
-//		int idDossier = evenement.getDossier().getIdDos();
-//		System.out.println("**idDossier depuis le forme**:" + idDossier);
-//		
-//		Dossier dossier = evenement.getDossier(); 
-//		System.out.println("dossier recupere :" + dossier);
-//		
-//		int IdDossierRecup = dossier.getIdDos();
-//		
-//		System.out.println("**IdDossierRecup**:" + IdDossierRecup);
-//		
-//		System.out.println("id du dossier recuperer :" + dossier.getIdDos());
-//		System.out.println("**************************");
-//		Responsable responsable =  evenement.getResponsable();
-//		System.out.println("responsable recupere :" + responsable);
-//		
-//		System.out.println("**************************");
-//		Responsable responsableid =  evenement.getResponsable_resp();
-//		System.out.println("responsableid recupere :" + responsableid);
-//		System.out.println("**************************");
-////		int idDossier = dossier.getIdDos();
-//		evenement.setDossier(dossier);
-//		evenement.setResponsable(responsable);
-////		
-		
-		System.out.println("evenement à créer:" + evenement);
-		service.create(evenement);
-		
+		System.out.println("evenement :" + evenement);
+		service.create(evenement);	
 		return Response.status(200).entity(evenement).build();
 	}
 	/**
@@ -118,10 +85,8 @@ public class EvenementRestService {
 	 * @return
 	 */
 	@DELETE
-	//@Path("/{id}")
 	@Path("/deleteEvent")
 	//@Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
-	//public Response deleteEvent(@PathParam("id") int id){
 	@Transactional
 	public Response deleteEvent(Evenement evenement){ 
 		//Evenement evenement =  service.getEvenementById(id);

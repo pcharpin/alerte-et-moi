@@ -24,7 +24,6 @@ public class GenericDAOImpl<TYPE> implements GenericDAO<TYPE> {
 		return sessionFactory.getCurrentSession();
 	}
 	@Override
-	//@Transactional
 	public TYPE create(final TYPE object) {
 		try {
 			this.entityManager.persist(object);
