@@ -5,7 +5,6 @@ import javax.persistence.PersistenceContext;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.springframework.transaction.annotation.Transactional;
 
 public class GenericDAOImpl<TYPE> implements GenericDAO<TYPE> {
 	
@@ -25,7 +24,7 @@ public class GenericDAOImpl<TYPE> implements GenericDAO<TYPE> {
 		return sessionFactory.getCurrentSession();
 	}
 	@Override
-	@Transactional
+	//@Transactional
 	public TYPE create(final TYPE object) {
 		try {
 			this.entityManager.persist(object);

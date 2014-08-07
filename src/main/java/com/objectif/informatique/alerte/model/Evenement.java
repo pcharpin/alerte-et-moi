@@ -77,13 +77,11 @@ public class Evenement implements Serializable{
 	@Column(name="libreEvt")
 	private String libreEvt;
 	
-	@ManyToOne(cascade = CascadeType.ALL, fetch=FetchType.EAGER)
-	//@ManyToOne(fetch=FetchType.EAGER)
+	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name="Responsable_idResp")
 	private Responsable responsable;	
 	
-	//@ManyToMany(targetEntity=Document.class, fetch=FetchType.LAZY)
-	@ManyToMany(cascade = CascadeType.ALL, fetch=FetchType.EAGER)
+	@ManyToMany(fetch=FetchType.EAGER)
 		@JoinTable(
 				name="evenement_document",
 				joinColumns={@JoinColumn(name="Evenement_idEvt")},
