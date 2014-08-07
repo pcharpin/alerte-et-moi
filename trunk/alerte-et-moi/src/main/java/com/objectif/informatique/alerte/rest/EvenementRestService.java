@@ -5,7 +5,6 @@ package com.objectif.informatique.alerte.rest;
 
 import java.util.List;
 
-import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -20,7 +19,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.objectif.informatique.alerte.model.Dossier;
 import com.objectif.informatique.alerte.model.Evenement;
 import com.objectif.informatique.alerte.model.Responsable;
 import com.objectif.informatique.alerte.service.DossierService;
@@ -84,30 +82,30 @@ public class EvenementRestService {
 	//@Consumes(MediaType.APPLICATION_JSON + ";charset=utf-8")
 	@Transactional
 	public Response add(Evenement evenement){
-		System.out.println("**evenement depuis le forme**:" + evenement);
-		int idDossier = evenement.getDossier().getIdDos();
-		System.out.println("**idDossier depuis le forme**:" + idDossier);
-		
-		Dossier dossier = evenement.getDossier(); 
-		System.out.println("dossier recupere :" + dossier);
-		
-		int IdDossierRecup = dossier.getIdDos();
-		
-		System.out.println("**IdDossierRecup**:" + IdDossierRecup);
-		
-		System.out.println("id du dossier recuperer :" + dossier.getIdDos());
-		System.out.println("**************************");
-		Responsable responsable =  evenement.getResponsable();
-		System.out.println("responsable recupere :" + responsable);
-		
-		System.out.println("**************************");
-		Responsable responsableid =  evenement.getResponsable_resp();
-		System.out.println("responsableid recupere :" + responsableid);
-		System.out.println("**************************");
-//		int idDossier = dossier.getIdDos();
-		evenement.setDossier(dossier);
-		evenement.setResponsable(responsable);
+//		System.out.println("**evenement depuis le forme**:" + evenement);
+//		int idDossier = evenement.getDossier().getIdDos();
+//		System.out.println("**idDossier depuis le forme**:" + idDossier);
 //		
+//		Dossier dossier = evenement.getDossier(); 
+//		System.out.println("dossier recupere :" + dossier);
+//		
+//		int IdDossierRecup = dossier.getIdDos();
+//		
+//		System.out.println("**IdDossierRecup**:" + IdDossierRecup);
+//		
+//		System.out.println("id du dossier recuperer :" + dossier.getIdDos());
+//		System.out.println("**************************");
+//		Responsable responsable =  evenement.getResponsable();
+//		System.out.println("responsable recupere :" + responsable);
+//		
+//		System.out.println("**************************");
+//		Responsable responsableid =  evenement.getResponsable_resp();
+//		System.out.println("responsableid recupere :" + responsableid);
+//		System.out.println("**************************");
+////		int idDossier = dossier.getIdDos();
+//		evenement.setDossier(dossier);
+//		evenement.setResponsable(responsable);
+////		
 		
 		System.out.println("evenement à créer:" + evenement);
 		service.create(evenement);
