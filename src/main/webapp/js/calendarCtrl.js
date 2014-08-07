@@ -121,63 +121,6 @@ function CalendarCtrl($rootScope,$scope,ngDialog,evenements,evenement,evtToCal,r
           {type:'party',title: 'Click for Google',start: new Date(y, m, 28),end: new Date(y, m, 29),url: 'http://google.com/'}
         ]
     };*/
-	    var date = new Date();
-	    $scope.json={
-    		  
-    		    "dossier": {
-    		        "idDos": 1,
-    		        "nomDos": "test",
-    		        "enumTypesDossiers": "Clients",
-    		        "descDoc": "",
-    		        "evtDos": "",
-    		        "priorDos": false,
-    		        "mntDOS": 0,
-    		        "periodJourDos": false,
-    		        "periodHebdoDos": false,
-    		        "periodMensDos": false,
-    		        "periodTrimDos": true,
-    		        "periodSemestDos": false,
-    		        "periodAnuDos": false,
-    		        "periodSansDos": false,
-    		        "actifDos": true,
-    		        "cntNomDos": null,
-    		        "cntPrenomDos": null,
-    		        "cntTelDos": null,
-    		        "cntCmntDos": "Pas de contact",
-    		        "libre": null
-    		    },
-    		    "nomEvt": "test jeudi",
-    		    "descEvt": "Déclaration toto auprès de GAN",
-    		    "dateEchEvt":new Date(),
-    		    "exeEvt": 2014,
-    		    "mntEvt": 0,
-    		    "modeGestionEvt": "Manuel",
-    		    "lienGestEvt": null,
-    		    "trtEvt": 0,
-    		    "dateTrtEvt": null,
-    		    "enumPeriodeEvet": "Trimestriel",
-    		    "actifEvt": 1,
-    		    "recopAutoEvt": 0,
-    		    "recurtEvt": 1,
-    		    "libreEvt": null,
-    		    "responsable": {
-    		        "idResp": 1,
-    		        "profil": 2,
-    		        "nomResp": "Korsunsky",
-    		        "prenResp": "Slava",
-    		        "emailResp": "vkorsunsky@objectif-informatique.fr",
-    		        "alertes": []
-    		    },
-    		    "documents": [],
-    		    "responsable_resp": {
-    		        "idResp": 1,
-    		        "profil": 2,
-    		        "nomResp": "Korsunsky",
-    		        "prenResp": "Slava",
-    		        "emailResp": "vkorsunsky@objectif-informatique.fr",
-    		        "alertes": []
-    		    }
-    		}
 	    
 
     /* alert on Drop */
@@ -227,13 +170,46 @@ function CalendarCtrl($rootScope,$scope,ngDialog,evenements,evenement,evtToCal,r
 			}	    	
 	    };	
 	       
+	    $scope.json={
+    		  
+    		    "dossier": {
+    		        "idDos": 2,
+    		    },
+    		    "nomEvt": "test jeudi Déclaration",
+    		    "descEvt": "Déclaration toto auprès de GAN",
+    		    "dateEchEvt":new Date(),
+    		    "exeEvt": 2014,
+    		    "mntEvt": 0,
+    		    "modeGestionEvt": "Manuel",
+    		    "lienGestEvt": null,
+    		    "trtEvt": 0,
+    		    "dateTrtEvt": null,
+    		    "enumPeriodeEvet": "Trimestriel",
+    		    "actifEvt": 1,
+    		    "recopAutoEvt": 0,
+    		    "recurtEvt": 1,
+    		    "libreEvt": null,
+    		    "responsable": {
+    		        "idResp": 1,
+    		        "alertes": []
+    		    },
+    		    "documents": [],
+    		}
+	    
 	    /* Ajouter un evenement en base */
 	    $scope.submitEvt = function() {
-	    	    	
-	    console.log("json = ", $scope.json);
-    		evenement.create($scope.json).$promise.then(function(result){
-//    	    	console.log("resultat du create"+ result);
+	    	
+	    	 console.log("formEvt = ", $scope.formEvt);
+	    	 
+	    	evenement.create($scope.formEvt).$promise.then(function(result){
+    	    	console.log("resultat du create"+ result);
   	    	});
+	    	    	
+//	    console.log("json = ", $scope.json);
+//    	evenement.create($scope.json).$promise.then(function(result){
+//	    	console.log("resultat du create"+ result);
+//	    	});
+//	    	
     	};	    
 	    
     	/*suppression**/
