@@ -586,4 +586,17 @@ table.fc-border-separate {
 	_overflow: hidden;
 	}
 	
-	
+	/* New event Form
+------------------------------------------------------------------------*/
+.form-help{
+	color: rgb(71, 69, 69);;
+}
+
+.form-confirmation-button{
+	text-align: center;
+	margin-top: 20px;
+}
+
+.confirm-button{
+	margin-top: 5px;
+}
