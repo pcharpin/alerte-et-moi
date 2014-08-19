@@ -1,4 +1,4 @@
-/**
+﻿/**
  * calendarApp - 0.1.3 
  */
 angular.module('calendarApp', ['ui.calendar', 'ngRoute', 'ui.bootstrap','ngDialog','calendarServices','filters'])

@@ -1,4 +1,4 @@
-function FolderCtrl($rootScope, $scope, dossiers, dossier, ngDialog) {
+﻿function FolderCtrl($rootScope, $scope, dossiers, dossier, ngDialog) {
     $scope.formDos={};
     $scope.listDossiers=[];
 	/*Ajouter un dossier*/    
