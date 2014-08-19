@@ -181,9 +181,15 @@
     	    	for(var j=0;j<list.length;j++){
     	    		$scope.events.push(list[j]);
     	    	}
-    	    	});
+    		});
     	}
-
+    };
+    
+    $scope.syncEvents = function(){
+    	evenements.findAll().$promise.then(function(result){
+	    	var list = evtToCal.convert(result);
+	    	$scope.events = result;
+		});
     };
   /* recupère les dossiers */
 
