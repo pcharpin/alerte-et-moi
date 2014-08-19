@@ -1,4 +1,4 @@
-function CalendarCtrl($rootScope,$scope,ngDialog,evenements,evenement,evtToCal,responsables,dossiers) {
+﻿function CalendarCtrl($rootScope,$scope,ngDialog,evenements,evenement,evtToCal,responsables,dossiers) {
     var date = new Date();
     var d = date.getDate(); 
     var m = date.getMonth();
@@ -6,31 +6,41 @@ function CalendarCtrl($rootScope,$scope,ngDialog,evenements,evenement,evtToCal,r
     $scope.order = 'dateEchEvt';
     $scope.months = [{nom:'Janvier',num:1},{nom:'Fevrier',num:2},{nom:'Mars',num:3},{nom:'Avril',num:4},{nom:'Mai',num:5},{nom:'Juin',num:6},{nom:'Juillet',num:7},{nom:'Aout',num:8},{nom:'Septembre',num:9},{nom:'Octobre',num:10},{nom:'Novembre',num:11},{nom:'Decembre',num:12}];
     $scope.showCal=true;
-	    
-    $scope.formEvt={
-    		"dossier": {
-		        "idDos": null,
-		    },
-		    "nomEvt": "",
-		    "descEvt": "",
-		    "dateEchEvt":new Date(),
-		    "exeEvt": null,
-		    "mntEvt": 0,
-		    "modeGestionEvt": null,
-		    "lienGestEvt": null,
-		    "trtEvt": 0,
-		    "dateTrtEvt": null,
-		    "enumPeriodeEvet": null,
-		    "actifEvt": 1,
-		    "recopAutoEvt": 0,
-		    "recurtEvt": 1,
-		    "libreEvt": null,
-		    "responsable": {
-		        "idResp": null,
-		        "alertes": []
-		    },
-		    "documents": [],
+	
+    $scope.initForm = function(){
+    	$scope.formStatus = null;
+    	$scope.resetForm();
     };
+    
+    $scope.resetForm = function(){
+    	$scope.formEvt = null;
+    	$scope.formEvt = {
+        		"dossier": {
+    		        "idDos": null,
+    		    },
+    		    "nomEvt": "",
+    		    "descEvt": "",
+    		    "dateEchEvt": null,
+    		    "exeEvt": null,
+    		    "mntEvt": 0,
+    		    "modeGestionEvt": null,
+    		    "lienGestEvt": null,
+    		    "trtEvt": 0,
+    		    "dateTrtEvt": null,
+    		    "enumPeriodeEvet": null,
+    		    "actifEvt": 1,
+    		    "recopAutoEvt": 0,
+    		    "recurtEvt": 1,
+    		    "libreEvt": null,
+    		    "responsable": {
+    		        "idResp": null,
+    		        "alertes": []
+    		    },
+    		    "documents": [],
+        };
+    };
+    
+    
     $scope.listResponsables=[];
     $scope.events=[];
     $scope.listeEvt=[];
@@ -197,6 +207,16 @@ function CalendarCtrl($rootScope,$scope,ngDialog,evenements,evenement,evtToCal,r
 	    $scope.submitEvt = function() {
 	    	evenement.create($scope.formEvt).$promise.then(function(result){
 	    		console.log("resultat du create"+ result);
+	    		$scope.resetForm();
+	    		$scope.formStatus = {
+	    				status: 'success',
+	    				message: 'L\'évènement a été créé avec succès.'
+	    		};
+	    	}, function(err){
+	    		$scope.formStatus = {
+	    				status: 'error',
+	    				message: 'L\'évènement n\'a pu être créé. Veuillez re-essayer.'
+	    		};
 	    	});
 	    };
 	    
