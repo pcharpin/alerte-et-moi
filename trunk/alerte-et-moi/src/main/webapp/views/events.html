@@ -3,7 +3,7 @@
 	<tabset> <!-- #############	AFFICHAGE EN MODE CALENDRIER		############## -->
 
 	<tab select="renderCalender(myCalendar1);"> <tab-heading>
-	<span ng-click="syncEvents()">
+	<span ng-click="refreshCal()">
 	<i class="glyphicon glyphicon-calendar"></i>
 	Vue calendrier </span></tab-heading> <!-- ****************************************************************Panneau de gauche*************************************************************** -->
 	<div class="span2">
@@ -37,7 +37,7 @@
 			</div>
 		</div>
 		<!-- <div class="calendar" ng-model="eventSources" calendar="myCalendar1" config="uiConfig.calendar" ui-calendar="uiConfig.calendar"></div>-->
-		<div class="calendar" ng-model="eventSources" calendar="myCalendar1"
+		<div id="calendar" class="calendar" ng-model="eventSources" calendar="myCalendar1"
 			config="uiConfig.calendar" ui-calendar="uiConfig.calendar"></div>
 	</div>
 	<!-- ****************************************************************Panneau de droite*************************************************************** -->

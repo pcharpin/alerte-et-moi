@@ -185,11 +185,8 @@
     	}
     };
     
-    $scope.syncEvents = function(){
-    	evenements.findAll().$promise.then(function(result){
-	    	var list = evtToCal.convert(result);
-	    	$scope.events = result;
-		});
+    $scope.refreshCal = function(){
+    	//TODO actualiser le calendrier, ne fonctionne pas si l'on crée un évènement et que l'on ne rafraichis pas la page, on ne le voit pas sur le calendrier.
     };
   /* recupère les dossiers */
 
@@ -211,7 +208,14 @@
 	    /* Ajouter un evenement en base */
 	    $scope.submitEvt = function() {
 	    	evenement.create($scope.formEvt).$promise.then(function(result){
-	    		console.log("resultat du create"+ result);
+	    		console.log("resultat du create", result);
+	    		
+	    		/* ajout de l'évènement à ceux en cours */
+	    		evenements.findAll().$promise.then(function(serverEvents){
+	    			var list = evtToCal.convert(serverEvents);
+	    	    	$scope.events.push(list[list.length-1]);
+	    		});
+	    		
 	    		$scope.resetForm();
 	    		$scope.formStatus = {
 	    				status: 'success',
