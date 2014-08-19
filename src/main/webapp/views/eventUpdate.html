@@ -1,4 +1,5 @@
-<form name="newEventForm">
+﻿<form name="newEventForm">
+	<div class="col-lg-12 col-md-12 col-xs-12 form-status" ng-show="formStatus" ng-class="formStatus.status" ng-bind="formStatus.message"></div>
 	<div class="col-lg-offset-1 col-lg-5 col-md-6 col-xs-12">
 		<div>
 			<label>Nom : (*)</label><input type="text" ng-model="formEvt.nomEvt"
@@ -28,7 +29,7 @@
 				ng-model="formEvt.dateEchEvt" required />
 		</div>
 		<div>
-			<label>année d'exercice :</label><input type="text"
+			<label>Année d'exercice : (*)</label><input type="text"
 				ng-model="formEvt.exeEvt" required />
 		</div>
 		<div>
