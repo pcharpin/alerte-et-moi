@@ -6,11 +6,6 @@
     $scope.order = 'dateEchEvt';
     $scope.months = [{nom:'Janvier',num:1},{nom:'Fevrier',num:2},{nom:'Mars',num:3},{nom:'Avril',num:4},{nom:'Mai',num:5},{nom:'Juin',num:6},{nom:'Juillet',num:7},{nom:'Aout',num:8},{nom:'Septembre',num:9},{nom:'Octobre',num:10},{nom:'Novembre',num:11},{nom:'Decembre',num:12}];
     $scope.showCal=true;
-	
-    $scope.initForm = function(){
-    	$scope.formStatus = null;
-    	$scope.resetForm();
-    };
     
     $scope.resetForm = function(){
     	$scope.formEvt = null;
@@ -193,6 +188,10 @@
   /* recupère les dossiers */
 
 	    $scope.initCreer = function() {
+	    	/* reset formulaire et affichage status formulaire*/
+	    	$scope.formStatus = null;
+	    	$scope.resetForm();
+	    	
 	    	/* recuperation des responsables */
 	    	if($scope.listResponsables.length==0){
 	    		responsables.findAll().$promise.then(function(result){
