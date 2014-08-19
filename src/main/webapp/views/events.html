@@ -3,7 +3,9 @@
 	<tabset> <!-- #############	AFFICHAGE EN MODE CALENDRIER		############## -->
 
 	<tab select="renderCalender(myCalendar1);"> <tab-heading>
-	<i class="glyphicon glyphicon-calendar"></i>Vue calendrier </tab-heading> <!-- ****************************************************************Panneau de gauche*************************************************************** -->
+	<span ng-click="syncEvents()">
+	<i class="glyphicon glyphicon-calendar"></i>
+	Vue calendrier </span></tab-heading> <!-- ****************************************************************Panneau de gauche*************************************************************** -->
 	<div class="span2">
 		<!-- pour le span2 mettre les width � 100px -->
 		<h3>Filtres :</h3>
