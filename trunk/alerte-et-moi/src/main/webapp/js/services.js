@@ -1,4 +1,4 @@
-var services = angular.module('calendarServices', ['ngResource']);
+﻿var services = angular.module('calendarServices', ['ngResource']);
 
 services.factory('evenements', function($resource){
 	return $resource('rest/evenement/getall', {}, {
