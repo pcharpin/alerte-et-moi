@@ -20,8 +20,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.objectif.informatique.alerte.model.Document;
 import com.objectif.informatique.alerte.model.Evenement;
 import com.objectif.informatique.alerte.model.Responsable;
+import com.objectif.informatique.alerte.service.DocumentService;
 import com.objectif.informatique.alerte.service.DossierService;
 import com.objectif.informatique.alerte.service.EvenementService;
 import com.objectif.informatique.alerte.service.ResponsableService;
@@ -40,6 +42,9 @@ public class EvenementRestService {
 	@Autowired
 	ResponsableService respService;
 	private Responsable responsable;
+	
+	@Autowired
+	DocumentService docService;
 	
 	
 	/**
@@ -75,8 +80,17 @@ public class EvenementRestService {
 	@Path("/send")
 	@Consumes(MediaType.APPLICATION_JSON + ";charset=utf-8")
 	public Response add(Evenement evenement){
-		System.out.println("evenement :" + evenement);
+		System.out.println("**************************************************************************************");
+		System.out.println("evenement avant :" + evenement);
+		Document document = new Document();
+		evenement.getDocuments();
+		System.out.println("**************************************o___o************************************************");
+		System.out.println("document form :" + evenement.getDocuments());
+		//Document document2 = docService.create(document.get);
+		//evenement.addFile(document2);
 		service.create(evenement);	
+		System.out.println("evenement après :" + evenement);
+		System.out.println("**************************************************************************************");
 		return Response.status(200).entity(evenement).build();
 	}
 	/**

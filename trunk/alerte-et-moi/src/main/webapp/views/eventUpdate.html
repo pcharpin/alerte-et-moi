@@ -20,12 +20,14 @@
 			<label>Descritption :</label>
 			<textarea ng-model="formEvt.descEvt"></textarea>
 		</div>
-		<!-- 
-			<div><label>document rattach� :</label><input type="file" ng-model=""/>
- 						<button type="button"  ng-click="detailDos(event.idDos)" class="btn btn-warning">Ajouter un nouveau document</button>
- 						</div>-->
+		
+			<div>
+				<label>Document rattach&eacute; :</label><input id="file" type="file"  file-upload multiple
+				ng-model="formEvt.documents"/>
+				<!-- <button type="button"  ng-click="detailDos(event.idDos)" class="btn btn-warning">Ajouter un nouveau document</button> -->
+ 			</div>
 		<div>
-			<label>Date d'échéance : (*)</label><input type="date"
+			<label>Date d'&eacute;ch&eacute;ance : (*)</label><input type="date"
 				ng-model="formEvt.dateEchEvt" required />
 		</div>
 		<div>
@@ -55,16 +57,16 @@
 			</select>
 		</div>
 		<div>
-			<label>Réalisé :</label> <input type="radio" name="mdGestion"
+			<label>R&eacute;alis&eacute; :</label> <input type="radio" name="mdGestion"
 				ng-model="formEvt.trtEvt" value="1">oui <input type="radio"
 				name="mdGestion" ng-model="formEvt.trtEvt" value="0">non
 		</div>
 		<div>
-			<label>Date de réalisation :</label> <input type="text"
+			<label>Date de r&eacute;alisation :</label> <input type="date"
 				ng-model="formEvt.dateTrtEvt" />
 		</div>
 		<div>
-			<label>Périodicité :</label><select
+			<label>P&eacute;riodicit&eacute;:</label><select
 				ng-model="formEvt.enumPeriodeEvet">
 				<option value="Journalier">journalier</option>
 				<option value="Hebdomadaire">hebdomadaire</option>
@@ -81,7 +83,7 @@
 		</div>
 		</div>
 		<div class="col-lg-12 form-confirmation-button">
-		<div class="form-help">Les éléments suivis de (*) sont requis.</div>
+		<div class="form-help">Les &eacute;l&eacute;ments suivis de (*) sont requis.</div>
 		<input type="submit" id="submit" value="Ajouter"
 			ng-click="submitEvt()" ng-disabled="newEventForm.$invalid" class="btn btn-primary confirm-button" ng-class="newEventForm.$invalid"/>
 	</div>

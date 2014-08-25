@@ -42,6 +42,7 @@
     $scope.eventClicked={};
     $scope.listDossiers=[];
     $scope.json={}; //here
+    $scope.documents=[];
     
 
 		/* event source that pulls from google.com */
@@ -207,6 +208,10 @@
 	    
 	    /* Ajouter un evenement en base */
 	    $scope.submitEvt = function() {
+	    	console.log($scope.documents);
+	    	$scope.formEvt.documents = $scope.documents;
+	    	console.log($scope.formEvt);
+	    	
 	    	evenement.create($scope.formEvt).$promise.then(function(result){
 	    		console.log("resultat du create", result);
 	    		
@@ -305,5 +310,13 @@
     $scope.eventSources = [$scope.events, $scope.eventSource, $scope.eventsF];
 
 
+    
+  //listen for the file selected event
+    $scope.$on("fileSelected", function (event, args) {
+        $scope.$apply(function () {            
+            //add the file object to the scope's files collection
+        	$scope.documents.push(args.file);
+        });
+    });
 
 };
