@@ -16,7 +16,9 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
+import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 
 /**
  * @author vdibi
@@ -24,6 +26,8 @@ import javax.persistence.ManyToOne;
  *
  */
 @Entity
+@Table(name="document")
+@JsonIgnoreProperties({"hibernateLazyInitializer","handler"})
 public class Document implements Serializable{
 
 	/**
@@ -41,12 +45,6 @@ public class Document implements Serializable{
 	@Column(name = "lienDoc")
 	private String lienDoc;
 		
-//	@ManyToMany(cascade=CascadeType.ALL,fetch=FetchType.EAGER)
-//	@JoinTable(
-//			name="evenement_document",
-//			joinColumns={@JoinColumn(name="Evenement_idEvt")},
-//			inverseJoinColumns={@JoinColumn(name="Document_idDoc")}
-//	)
 	@ManyToMany(mappedBy="documents")
 	private Set<Evenement> evenements = new HashSet<Evenement>();
 	

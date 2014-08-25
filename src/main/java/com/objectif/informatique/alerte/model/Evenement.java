@@ -4,8 +4,10 @@
 package com.objectif.informatique.alerte.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.Column;
@@ -21,6 +23,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 
 /**
@@ -79,6 +82,7 @@ public class Evenement implements Serializable{
 	@JoinColumn(name="Responsable_idResp")
 	private Responsable responsable;	
 	
+	//@JsonIgnore
 	@ManyToMany(fetch=FetchType.EAGER)
 		@JoinTable(
 				name="evenement_document",
@@ -113,6 +117,10 @@ public class Evenement implements Serializable{
 		this.libreEvt = libreEvt;
 		this.responsable = responsable;
 		this.documents = documents;
+	}
+	public boolean addFile(Document document){
+		List<Document> documents =  new ArrayList<Document>();
+		return documents.add(document);		
 	}
 	
 	public Evenement(int id, String nomEvt){

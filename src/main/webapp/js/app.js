@@ -16,7 +16,23 @@ angular.module('calendarApp', ['ui.calendar', 'ngRoute', 'ui.bootstrap','ngDialo
       otherwise({
         redirectTo: '/evenements'
       });
-  }]);
+  }]).directive('fileUpload', function () {
+    return {
+        scope: true,        //create a new scope
+        link: function (scope, el, attrs) {
+            el.bind('change', function (event) {
+                var files = event.target.files;
+                //iterate files since 'multiple' may be specified on the element
+                for (var i = 0;i<files.length;i++) {
+                    //emit event upward
+                	console.log(files[i]);
+                	console.log(files[i].webkitRelativePath);
+                    scope.$emit("fileSelected", { file: files[i] });
+                }                                       
+            });
+        }
+    };
+});
 
 
 
