@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.objectif.informatique.alerte.dao.DocumentDAO;
 import com.objectif.informatique.alerte.model.Document;
@@ -37,6 +38,7 @@ public class DocumentServiceImpl implements DocumentService{
 	}
 
 	@Override
+	@Transactional
 	public Document create(Document document) {
 		return documentDAO.create(document);
 	}

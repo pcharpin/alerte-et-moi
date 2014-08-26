@@ -22,6 +22,7 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
@@ -38,6 +39,34 @@ public class Evenement implements Serializable{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	@Transient
+	private String[] documentNames;
+	@Transient
+	private String[] documentContents;
+	/**
+	 * @return the documentNames
+	 */
+	public String[] getDocumentNames() {
+		return documentNames;
+	}
+	/**
+	 * @param documentNames the documentNames to set
+	 */
+	public void setDocumentNames(String[] documentNames) {
+		this.documentNames = documentNames;
+	}
+	/**
+	 * @return the documentContents
+	 */
+	public String[] getDocumentContents() {
+		return documentContents;
+	}
+	/**
+	 * @param documentContents the documentContents to set
+	 */
+	public void setDocumentContents(String[] documentContents) {
+		this.documentContents = documentContents;
+	}
 	@Id @GeneratedValue
 	@Column(name = "idEvt")
 	private int idEvt;

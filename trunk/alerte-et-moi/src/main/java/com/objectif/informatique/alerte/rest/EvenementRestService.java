@@ -3,9 +3,17 @@
  */
 package com.objectif.informatique.alerte.rest;
 
+import java.io.BufferedOutputStream;
+import java.io.DataOutputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Enumeration;
+import java.util.HashSet;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -22,8 +30,11 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.objectif.informatique.alerte.model.Document;
 import com.objectif.informatique.alerte.model.Evenement;
 import com.objectif.informatique.alerte.model.Responsable;
 import com.objectif.informatique.alerte.service.DocumentService;
@@ -83,28 +94,42 @@ public class EvenementRestService {
 	@POST
 	@Path("/send")
 	@Consumes(MediaType.APPLICATION_JSON + ";charset=utf-8")
-	public Response add(Evenement evenement/*,@ModelAttribute("uploadForm")FileUploadForm uploadForm,Model map*/){
+	public Response add(Evenement evenement){	
+		String [] datas =  evenement.getDocumentContents();
+		String [] datasNames = evenement.getDocumentNames();
+		//List<Document> documents = new ArrayList<Document>(datas.length);
 		
-		System.out.println("************************___o____*************************************");		
-		System.out.println("Depuis le form : " + evenement);
-		System.out.println("***********************___o____**************************************");
-//		//téléchargement du ou des fihciers 
-//		List<MultipartFile> files = uploadForm.getFiles();
-//
-//		List<String> fileNames = new ArrayList<String>();
-//		
-//		if(null != files && files.size() > 0) {
-//			for (MultipartFile multipartFile : files) {
-//
-//				String fileName = multipartFile.getOriginalFilename();
-//				fileNames.add(fileName);
-//			}
-//		}		
-//		map.addAttribute("files", fileNames);
+		for (int i = 0; i < datas.length; i++) {			
+			String data = datas[i];
+			String dataName = datasNames[i];
+			
+			//Chemin à modifier
+			String path = "c:/Temp/"+ dataName;
+			try {
+				DataOutputStream dos = new DataOutputStream(new BufferedOutputStream(new FileOutputStream(path)));
+				dos.writeBytes(data);
+				dos.close();
+				
+				//Création d'un objet document
+				Document doc = new Document();
+				doc.setLienDoc(path);
+				docService.create(doc);
+				
+				if(evenement.getDocuments() == null){
+					evenement.setDocuments( new HashSet<Document>());
+				}
+				evenement.getDocuments().add(doc);
+				
+			} catch (FileNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 		
 		service.create(evenement);	
-		System.out.println("évènement crée : " + evenement);
-		System.out.println("***********************___o____**************************************");
 		return Response.status(200).entity(evenement).build();
 	}
 	/**
