@@ -32,6 +32,8 @@
     		        "alertes": []
     		    },
     		    "documents": [],
+    		    "documentNames":[],
+    		    "documentContents":[]
         };
     };
     
@@ -43,6 +45,8 @@
     $scope.listDossiers=[];
     $scope.json={}; //here
     $scope.documents=[];
+    $scope.documentNames=[];
+    $scope.documentContents=[];
     
 
 		/* event source that pulls from google.com */
@@ -210,6 +214,10 @@
 	    $scope.submitEvt = function() {
 	    	console.log($scope.documents);
 	    	$scope.formEvt.documents = $scope.documents;
+	    	$scope.formEvt.documentNames = $scope.documentNames;
+	    	$scope.formEvt.documentContents = $scope.documentContents;
+	    	
+	    	
 	    	console.log($scope.formEvt);
 	    	
 	    	evenement.create($scope.formEvt).$promise.then(function(result){
@@ -312,10 +320,22 @@
 
     
   //listen for the file selected event
+    $scope.showContent = function($fileContent){    
+        var obj = {name:args.file.name}
+    	$scope.documents.push(obj);
+    };
     $scope.$on("fileSelected", function (event, args) {
         $scope.$apply(function () {            
             //add the file object to the scope's files collection
-        	$scope.documents.push(args.file);
+        	var reader = new FileReader();
+        	reader.readAsBinaryString(args.file);
+     
+        	reader.onloadend = function(e){
+        		var result = e.target.result;
+        		//var obj = {name:args.file.name,fileContent:result} ;          	
+            	$scope.documentNames.push(args.file.name);
+            	$scope.documentContents.push(result);
+        	}        	
         });
     });
 

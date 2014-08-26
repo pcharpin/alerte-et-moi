@@ -17,6 +17,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
@@ -45,6 +46,7 @@ public class Document implements Serializable{
 	@Column(name = "lienDoc")
 	private String lienDoc;
 	
+
 	@ManyToMany(mappedBy="documents")
 	private Set<Evenement> evenements = new HashSet<Evenement>();
 	
@@ -126,6 +128,7 @@ public class Document implements Serializable{
 		this.evenements = evenements;
 	}
 
+	
 	/* (non-Javadoc)
 	 * @see java.lang.Object#toString()
 	 */
