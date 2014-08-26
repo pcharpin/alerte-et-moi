@@ -82,15 +82,14 @@ public class Evenement implements Serializable{
 	@JoinColumn(name="Responsable_idResp")
 	private Responsable responsable;	
 	
-	//@JsonIgnore
 	@ManyToMany(fetch=FetchType.EAGER)
 		@JoinTable(
 				name="evenement_document",
 				joinColumns={@JoinColumn(name="Evenement_idEvt")},
 				inverseJoinColumns={@JoinColumn(name="Document_idDoc")}
 		)
+	@JsonIgnore
 	private Set<Document> documents = new HashSet<Document>();
-	
 	
 	public Evenement(int idEvt, Dossier dossier, String nomEvt, String descEvt,
 			Date dateEchEvt, int exeEvt, float mntEvt,

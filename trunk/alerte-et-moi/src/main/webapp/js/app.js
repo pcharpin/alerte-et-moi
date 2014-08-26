@@ -26,7 +26,6 @@ angular.module('calendarApp', ['ui.calendar', 'ngRoute', 'ui.bootstrap','ngDialo
                 for (var i = 0;i<files.length;i++) {
                     //emit event upward
                 	console.log(files[i]);
-                	console.log(files[i].webkitRelativePath);
                     scope.$emit("fileSelected", { file: files[i] });
                 }                                       
             });
