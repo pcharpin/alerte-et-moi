@@ -18,6 +18,7 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
+import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 
 /**
@@ -27,7 +28,6 @@ import org.codehaus.jackson.annotate.JsonIgnoreProperties;
  */
 @Entity
 @Table(name="document")
-@JsonIgnoreProperties({"hibernateLazyInitializer","handler"})
 public class Document implements Serializable{
 
 	/**
@@ -44,7 +44,7 @@ public class Document implements Serializable{
 	
 	@Column(name = "lienDoc")
 	private String lienDoc;
-		
+	
 	@ManyToMany(mappedBy="documents")
 	private Set<Evenement> evenements = new HashSet<Evenement>();
 	

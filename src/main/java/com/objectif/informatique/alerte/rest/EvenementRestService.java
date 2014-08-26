@@ -3,6 +3,7 @@
  */
 package com.objectif.informatique.alerte.rest;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.ws.rs.Consumes;
@@ -19,14 +20,17 @@ import javax.ws.rs.core.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.multipart.MultipartFile;
 
-import com.objectif.informatique.alerte.model.Document;
 import com.objectif.informatique.alerte.model.Evenement;
 import com.objectif.informatique.alerte.model.Responsable;
 import com.objectif.informatique.alerte.service.DocumentService;
 import com.objectif.informatique.alerte.service.DossierService;
 import com.objectif.informatique.alerte.service.EvenementService;
 import com.objectif.informatique.alerte.service.ResponsableService;
+import com.objectif.informatique.alerte.utils.FileUploadForm;
 
 /**
  * 
@@ -79,18 +83,28 @@ public class EvenementRestService {
 	@POST
 	@Path("/send")
 	@Consumes(MediaType.APPLICATION_JSON + ";charset=utf-8")
-	public Response add(Evenement evenement){
-		System.out.println("**************************************************************************************");
-		System.out.println("evenement avant :" + evenement);
-		Document document = new Document();
-		evenement.getDocuments();
-		System.out.println("**************************************o___o************************************************");
-		System.out.println("document form :" + evenement.getDocuments());
-		//Document document2 = docService.create(document.get);
-		//evenement.addFile(document2);
+	public Response add(Evenement evenement/*,@ModelAttribute("uploadForm")FileUploadForm uploadForm,Model map*/){
+		
+		System.out.println("************************___o____*************************************");		
+		System.out.println("Depuis le form : " + evenement);
+		System.out.println("***********************___o____**************************************");
+//		//téléchargement du ou des fihciers 
+//		List<MultipartFile> files = uploadForm.getFiles();
+//
+//		List<String> fileNames = new ArrayList<String>();
+//		
+//		if(null != files && files.size() > 0) {
+//			for (MultipartFile multipartFile : files) {
+//
+//				String fileName = multipartFile.getOriginalFilename();
+//				fileNames.add(fileName);
+//			}
+//		}		
+//		map.addAttribute("files", fileNames);
+		
 		service.create(evenement);	
-		System.out.println("evenement après :" + evenement);
-		System.out.println("**************************************************************************************");
+		System.out.println("évènement crée : " + evenement);
+		System.out.println("***********************___o____**************************************");
 		return Response.status(200).entity(evenement).build();
 	}
 	/**
