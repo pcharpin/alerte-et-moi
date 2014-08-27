@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.objectif.informatique.alerte.dao.EvenementDAO;
+import com.objectif.informatique.alerte.model.EnumPeriodeEvet;
 import com.objectif.informatique.alerte.model.Evenement;
 
 @Service("EvenementService")
@@ -59,5 +60,17 @@ public class EvenementServiceImpl implements EvenementService {
 	@Override
 	public void update(Evenement evenement) {
 		evenementDAO.update(evenement);		
+	}
+
+	@Override
+	public List<EnumPeriodeEvet> findListOfPeriod() {
+		List<EnumPeriodeEvet> enumPeriodeEvets=  null;
+		try {
+			enumPeriodeEvets =  evenementDAO.findEnumPeriod();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return enumPeriodeEvets;
 	}
 }

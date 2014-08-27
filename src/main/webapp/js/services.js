@@ -17,6 +17,12 @@ services.factory('dossiers', function($resource){
 	});
 	});
 
+services.factory('enumPeriod', function($resource){
+	return $resource('rest/evenement/period', {}, {
+	findAllPeriod: {method:'GET', isArray:true}
+	});
+	});
+
 services.factory('responsables', function($resource){
 	return $resource('rest/responsable/getallResponsable', {}, {
 		findAll: {method: 'GET', isArray:true}

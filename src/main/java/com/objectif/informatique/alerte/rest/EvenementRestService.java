@@ -8,12 +8,9 @@ import java.io.DataOutputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Enumeration;
 import java.util.HashSet;
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -28,20 +25,15 @@ import javax.ws.rs.core.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.context.request.WebRequest;
-import org.springframework.web.multipart.MultipartFile;
 
 import com.objectif.informatique.alerte.model.Document;
+import com.objectif.informatique.alerte.model.EnumPeriodeEvet;
 import com.objectif.informatique.alerte.model.Evenement;
 import com.objectif.informatique.alerte.model.Responsable;
 import com.objectif.informatique.alerte.service.DocumentService;
 import com.objectif.informatique.alerte.service.DossierService;
 import com.objectif.informatique.alerte.service.EvenementService;
 import com.objectif.informatique.alerte.service.ResponsableService;
-import com.objectif.informatique.alerte.utils.FileUploadForm;
 
 /**
  * 
@@ -95,15 +87,17 @@ public class EvenementRestService {
 	@Path("/send")
 	@Consumes(MediaType.APPLICATION_JSON + ";charset=utf-8")
 	public Response add(Evenement evenement){	
+	
 		String [] datas =  evenement.getDocumentContents();
 		String [] datasNames = evenement.getDocumentNames();
+		//gestion de la mémoire
 		//List<Document> documents = new ArrayList<Document>(datas.length);
 		
 		for (int i = 0; i < datas.length; i++) {			
 			String data = datas[i];
 			String dataName = datasNames[i];
 			
-			//Chemin à modifier
+			//Chemin à modifier (mettre le chemin du server)
 			String path = "c:/Temp/"+ dataName;
 			try {
 				DataOutputStream dos = new DataOutputStream(new BufferedOutputStream(new FileOutputStream(path)));

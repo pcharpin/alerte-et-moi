@@ -11,6 +11,7 @@ import javax.persistence.Query;
 
 import org.springframework.stereotype.Repository;
 
+import com.objectif.informatique.alerte.model.EnumPeriodeEvet;
 import com.objectif.informatique.alerte.model.Evenement;
 
 /**
@@ -52,5 +53,16 @@ public class EvenementDAOImpl extends GenericDAOImpl<Evenement> implements Evene
 	public Evenement findEvenementByName(String name) throws Exception {
 		Evenement e = entityManager.find(Evenement.class, name); 
 		return e;
+	}
+	@Override
+	public List<EnumPeriodeEvet> findEnumPeriod() throws Exception {
+		List<EnumPeriodeEvet> ListOfPeriode = new ArrayList<EnumPeriodeEvet>();
+		try {
+			Query query = this.entityManager.createQuery("select enumPeriodeEvet from Evenement e");
+			ListOfPeriode = query.getResultList();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	    return ListOfPeriode;
 	}
 }

@@ -1,4 +1,4 @@
-﻿function CalendarCtrl($rootScope,$scope,ngDialog,evenements,evenement,evtToCal,responsables,dossiers) {
+﻿function CalendarCtrl($rootScope,$scope,ngDialog,evenements,evenement,evtToCal,responsables,dossiers/*,enumPeriod*/) {
     var date = new Date();
     var d = date.getDate(); 
     var m = date.getMonth();
@@ -18,11 +18,11 @@
     		    "dateEchEvt": null,
     		    "exeEvt": null,
     		    "mntEvt": 0,
-    		    "modeGestionEvt": null,
+    		    "modeGestionEvt": [],
     		    "lienGestEvt": null,
     		    "trtEvt": 0,
     		    "dateTrtEvt": null,
-    		    "enumPeriodeEvet": null,
+    		    "enumPeriodeEvet": [],
     		    "actifEvt": 1,
     		    "recopAutoEvt": 0,
     		    "recurtEvt": 1,
@@ -47,6 +47,7 @@
     $scope.documents=[];
     $scope.documentNames=[];
     $scope.documentContents=[];
+    //$scope.enumPeriodeEvet=[];
     
 
 		/* event source that pulls from google.com */
@@ -207,7 +208,7 @@
 			    		$scope.listResponsables.push(result[j]);
 			    	}
 			    });
-			}	    	
+			}	
 	    };	
 	    
 	    /* Ajouter un evenement en base */
@@ -247,8 +248,16 @@
     		 evenement.deleteEvent({}, {evtId : evtId}).$promise.then(function(result){
     				console.log("suppression ok"+ result);
     			});
-    	    };	
+    	    };
 
+    /*Récupération de la liste des période*/
+//	    	if($scope.enumPeriodeEvet.length==0){
+//	    		enumPeriod.findAllPeriod().$promise.then(function(result){
+//			    	for(var j=0;j<result.length;j++){
+//			    		$scope.enumPeriodeEvet.push(result[j]);
+//			    	}
+//			    });
+//			};	
       /*$scope.events.push({
         title: 'Open Sesame',
         start: new Date(y, m, 28),
@@ -319,24 +328,42 @@
 
 
     
-  //listen for the file selected event
+  //load the file
     $scope.showContent = function($fileContent){    
         var obj = {name:args.file.name}
     	$scope.documents.push(obj);
     };
     $scope.$on("fileSelected", function (event, args) {
         $scope.$apply(function () {            
-            //add the file object to the scope's files collection
+            //Read content file
         	var reader = new FileReader();
         	reader.readAsBinaryString(args.file);
-     
+        	
+        	//end of reading and loading
         	reader.onloadend = function(e){
         		var result = e.target.result;
-        		//var obj = {name:args.file.name,fileContent:result} ;          	
+        		//var obj = {name:args.file.name,fileContent:result} ;   
+        		//name -> content
             	$scope.documentNames.push(args.file.name);
             	$scope.documentContents.push(result);
         	}        	
         });
     });
+    
+    //Show input when "en ligne" selected
+    $scope.showCheckbox= function(){
+    	var thumbsUp = element(by.css('span.glyphicon-thumbs-up'));
+    	var thumbsDown = element(by.css('span.glyphicon-thumbs-down'));
+
+    	it('should check ng-show / ng-hide', function() {
+    	  expect(thumbsUp.isDisplayed()).toBeFalsy();
+    	  expect(thumbsDown.isDisplayed()).toBeTruthy();
+
+    	  element(by.model('checked')).click();
+
+    	  expect(thumbsUp.isDisplayed()).toBeTruthy();
+    	  expect(thumbsDown.isDisplayed()).toBeFalsy();
+    	});
+    };
 
 };

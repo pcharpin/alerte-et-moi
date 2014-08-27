@@ -23,15 +23,13 @@
 		
 			<div>
 				<label>Document rattach&eacute; :</label><input id="file" type="file" file-upload multiple ng-model="formEvt.documents"/>
-				<!-- <label>Document rattach&eacute; :</label><input id="file" type="file" file-upload multiple ng-model="formEvt.documents"/> -->
-				<!-- <button type="button"  ng-click="detailDos(event.idDos)" class="btn btn-warning">Ajouter un nouveau document</button> -->
  			</div>
 		<div>
 			<label>Date d'&eacute;ch&eacute;ance : (*)</label><input type="date"
 				ng-model="formEvt.dateEchEvt" required />
 		</div>
 		<div>
-			<label>Année d'exercice : (*)</label><input type="text"
+			<label>Ann&eacute;e d'exercice : (*)</label><input type="text"
 				ng-model="formEvt.exeEvt" required />
 		</div>
 		<div>
@@ -40,13 +38,13 @@
 	</div>
 	<div class="col-lg-offset-1 col-lg-5 col-md-6 col-xs-12">
 		<div>
-			<label>Mode de gestion :</label> <input type="radio" name="mdGestion"
-				ng-model="formEvt.modeGestionEvt" value="Manuel">manuel <input
-				type="radio" name="mdGestion" ng-model="formEvt.modeGestionEvt"
-				value="En ligne">en ligne
+			<label>Mode de gestion :</label> 
+			<input type="radio" id="manuel" name="manuel" ng-model="formEvt.modeGestionEvt" value="Manuel">Manuel 
+		 	<input type="radio" id="enligne" name="enligne" ng-model="formEvt.modeGestionEvt" value="EnLigne">En ligne
+		 	<input type="radio" id="autre" name="autre" ng-model="formEvt.modeGestionEvt" value="Autre">Autre
 		</div>
-		<div>
-			<label>Lien :</label><input type="url" ng-model="formEvt.lienGestEvt" />
+		<div ng-hide="checked">
+			<label>Lien :</label><input class="check-element animate-show"  id="lien" type="url" ng-model="formEvt.lienGestEvt" />
 		</div>
 
 		<div>
@@ -68,8 +66,6 @@
 		<div>
 			<label>P&eacute;riodicit&eacute;:</label><select
 				ng-model="formEvt.enumPeriodeEvet">
-				<option value="Journalier">journalier</option>
-				<option value="Hebdomadaire">hebdomadaire</option>
 				<option value="Mensuel">mensuel</option>
 				<option value="Trimestriel">trimestriel</option>
 				<option value="Semestriel">semestriel</option>

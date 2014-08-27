@@ -8,6 +8,5 @@ package com.objectif.informatique.alerte.model;
  *
  */
 public enum EnumPeriodeEvet {
-
-	Annuel,Trimestriel,Mensuel,Semestriel
+	Annuel,Trimestriel,Mensuel,Semestriel,Sans
 }
