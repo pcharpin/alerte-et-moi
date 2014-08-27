@@ -11,8 +11,11 @@ package com.objectif.informatique.alerte.model;
 
 public enum EnumModeGestionEvt {
 
-	En_ligne,
-	Manuel
+	EnLigne,
+	Manuel,
+	Autre
+			
+	
 
  		
 				  				  

@@ -2,6 +2,7 @@ package com.objectif.informatique.alerte.service;
 
 import java.util.List;
 
+import com.objectif.informatique.alerte.model.EnumPeriodeEvet;
 import com.objectif.informatique.alerte.model.Evenement;
 
 /**
@@ -17,4 +18,5 @@ public interface  EvenementService {
 	public Evenement create(Evenement evenement);
 	public void delete(Evenement eventId);
 	public void update(Evenement evenement);
+	public List<EnumPeriodeEvet> findListOfPeriod();
 }

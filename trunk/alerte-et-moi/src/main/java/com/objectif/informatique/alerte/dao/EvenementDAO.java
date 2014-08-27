@@ -2,6 +2,7 @@ package com.objectif.informatique.alerte.dao;
 
 import java.util.List;
 
+import com.objectif.informatique.alerte.model.EnumPeriodeEvet;
 import com.objectif.informatique.alerte.model.Evenement;
 
 /**
@@ -30,4 +31,5 @@ public interface EvenementDAO extends GenericDAO<Evenement>{
 	 * @throws Exception
 	 */
 	Evenement findEvenementByName(String name) throws Exception;
+	List<EnumPeriodeEvet> findEnumPeriod()throws Exception;
 }
