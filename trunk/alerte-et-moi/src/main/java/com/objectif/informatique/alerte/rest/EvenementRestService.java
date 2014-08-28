@@ -8,8 +8,10 @@ import java.io.DataOutputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Properties;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
@@ -23,6 +25,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -53,6 +56,8 @@ public class EvenementRestService {
 	@Autowired
 	DocumentService docService;
 	
+	@Value("${alerte.file.root.dir}")
+	String rootPath ;
 	
 	/**
 	 * Retourne un evenement par son id
@@ -87,18 +92,16 @@ public class EvenementRestService {
 	@Path("/send")
 	@Consumes(MediaType.APPLICATION_JSON + ";charset=utf-8")
 	public Response add(Evenement evenement){	
-	
+		
 		String [] datas =  evenement.getDocumentContents();
 		String [] datasNames = evenement.getDocumentNames();
-		//gestion de la mémoire
-		//List<Document> documents = new ArrayList<Document>(datas.length);
 		
 		for (int i = 0; i < datas.length; i++) {			
 			String data = datas[i];
 			String dataName = datasNames[i];
 			
 			//Chemin à modifier (mettre le chemin du server)
-			String path = "c:/Temp/"+ dataName;
+			String path = rootPath + dataName;
 			try {
 				DataOutputStream dos = new DataOutputStream(new BufferedOutputStream(new FileOutputStream(path)));
 				dos.writeBytes(data);
