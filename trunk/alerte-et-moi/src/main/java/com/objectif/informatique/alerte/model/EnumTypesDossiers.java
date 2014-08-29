@@ -8,7 +8,13 @@ package com.objectif.informatique.alerte.model;
  *
  */
 public enum EnumTypesDossiers {
-	//CHARGESSOCIALES("chargessociales"),
-	//VIESOCIALE ("viesociale");
-	Clients
+	
+	TaxesEtImpots,
+	ChargesSociales,
+	Comptabilite,
+	ArreteComptable,
+	VieSociale,
+	Salaries,
+	Clients,
+	FournisseursIndependants
 }

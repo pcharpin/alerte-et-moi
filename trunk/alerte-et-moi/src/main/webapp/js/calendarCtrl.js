@@ -37,7 +37,6 @@
         };
     };
     
-    
     $scope.listResponsables=[];
     $scope.events=[];
     $scope.listeEvt=[];
@@ -114,8 +113,7 @@
 				if (title) {
 					$scope.events.push({title: title,start: start,end: end});
 					evenement.create({nomEvt: title,dateEchEvt: start});
-					$('#calendar').fullCalendar('renderEvent', event, true); // stick? = true
-				    
+					$('#calendar').fullCalendar('renderEvent', event, true); // stick? = true				    
 				}
 				$('#calendar').fullCalendar('unselect');
 			},
@@ -128,7 +126,6 @@
 	        eventDrop: $scope.alertOnDrop,
 	        eventResize: $scope.alertOnResize
 	      }
-
 	    };
   
 // FIN DU INIT
@@ -313,7 +310,6 @@
 	 // liste des evenements pour le calendrier, normalement doit disparaitre
     $scope.eventSources = [$scope.events, $scope.eventSource, $scope.eventsF];
 
-
     
   //load the file
     $scope.showContent = function($fileContent){    
@@ -335,6 +331,5 @@
             	$scope.documentContents.push(result);
         	}        	
         });
-    });
-    
+    });    
 };
