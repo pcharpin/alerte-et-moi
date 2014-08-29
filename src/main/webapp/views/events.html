@@ -11,9 +11,9 @@
 		<h3>Filtres :</h3>
 		<div class="well">
 			<h4>Status</h4>
-			<input type="radio" ng-model="order" value="dateEchEvt">Traités<br>
-			<input type="radio" ng-model="order" value="nomEvt">Non
-			traités<br> <input type="radio" ng-model="order" value="toto">Tous<br>
+			<input type="radio" ng-model="order" value="dateEchEvt">Trait&eacute;s<br>
+			<input type="radio" ng-model="order" value="nomEvt">Non trait&eacute;s<br> 
+			<input type="radio" ng-model="order" value="toto">Tous<br>
 			<hr>
 			</span>
 		</div>
@@ -22,14 +22,14 @@
 	<!-- ****************************************************************Panneau de droite*************************************************************** -->
 	<div class="span10">
 		<!-- <div class="alert-success calAlert"
-								ng-show="alertMessage != undefined && alertMessage != ''">
-								<h4>{{alertMessage}}</h4>
-							</div> -->
+			 ng-show="alertMessage != undefined && alertMessage != ''">
+			 <h4>{{alertMessage}}</h4>
+		</div> -->
 		<div class="btn-toolbar">
 			<p class="pull-right lead">Calendrier</p>
 			<div class="btn-group">
 				<!--  <button class="btn btn-success"
-										ng-click="changeView('agendaDay', myCalendar1)">Jour</button>-->
+					ng-click="changeView('agendaDay', myCalendar1)">Jour</button>-->
 				<button class="btn btn-success"
 					ng-click="changeView('basicWeek', myCalendar1)">Semaine</button>
 				<button class="btn btn-success"
@@ -52,13 +52,20 @@
 	<div class="span2">
 		<!-- pour le span2 mettre les width � 100px -->
 		<h3>Filtres :</h3>
-		<h4>Utilisateurs</h4>
-
+		<!-- <h4>Utilisateurs</h4>
 		<select style="width: 100px" ng-model="userSelected">
 			<option value="">tous</option>
 			<option ng-repeat="user in users" value="{{user}}">
 				{{user.prenResp}} ; {{user.idResp}}</option>
-		</select>
+		</select> -->
+	
+			<h4>Utilisateurs</h4> 
+			<select
+				ng-model="formEvt.responsable.idResp" required>
+				<option ng-repeat="responsable in listResponsables"
+					value="{{responsable.idResp}}">{{responsable.nomResp}}</option>
+			</select>
+	
 		<hr>
 		<h4 ng-click="initCreer()">Dossier</h4>
 		<select style="width: 100px" ng-model="selectedDossier">
@@ -69,7 +76,7 @@
 		
 		<hr>
 		<h4>Recherche :</h4>
-		(dans le nom de l'évènement) <input type="text" style="width: 100px"
+		(dans le nom de l'&eacute;vènement) <input type="text" style="width: 100px"
 			ng-model="recherche"><br>
 		<hr>
 	</div>
@@ -112,13 +119,16 @@
 					<td>{{event.enumPeriodeEvet}}</td>
 					<td>{{event.trtEvt | booleanTooString}}</td>
 					<td>{{event.actifEvt | booleanTooString}}</td>
-					<td><i class="glyphicon glyphicon-search" ng-click="editEvent(event)"></i>
+					<td>
+					<i class="glyphicon glyphicon-search" ng-click="editEvent(event)"></i>
+					<!-- <div class="col-lg-12 col-md-12 col-xs-12 form-status" ng-show="formStatus" ng-class="formStatus.status" ng-bind="formStatus.message"></div> -->
+					<!-- <i class="glyphicon glyphicon-remove-circle" ng-click="deleteEvent(event.idEvt)" ng-show="formEvtStatus" ng-class="formEvtStatus.status"  ng-bind="formEvtStatus.message"></i> -->
+					<i class="glyphicon glyphicon-remove-circle" ng-click="deleteEvent(event.idEvt)"></i>
 					<!-- <i
 						class="glyphicon glyphicon-folder-open"></i> <i
 						class="glyphicon glyphicon-plus"></i> <i
 						class="glyphicon glyphicon-ok-circle"
 						ng-click="validEvt(event.idEvt)"></i> --> 
-						<i class="glyphicon glyphicon-remove-circle" ng-click="deleteEvent(event.idEvt)"></i>
 					</td>
 				</tr>
 			</table>
@@ -126,11 +136,11 @@
 	</div>
 	</tab> <!-- Ajouter un �v�nement --> <tab select="renderCalender();"> <!-- ****************************************************************Ajouter un �v�nement	*************************************************************** -->
 	<tab-heading>
-	<span ng-click="initCreer()"><i class="glyphicon glyphicon-list"></i>Créer
-		un évènement</span> </tab-heading>
+	<span ng-click="initCreer()"><i class="glyphicon glyphicon-list"></i>Cr&eacute;er
+		un &eacute;vènement</span> </tab-heading>
 	
-	<div>
+
 		<!--<form ng-submit="submitDos()"> -->
-		<div ng-include src="'views/eventUpdate.html'"></div>
-	</div>
+		<div ng-include src="'views/eventUpdate.html'"></div> 
+
 </div>

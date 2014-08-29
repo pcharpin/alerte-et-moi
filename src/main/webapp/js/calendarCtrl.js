@@ -1,4 +1,4 @@
-﻿function CalendarCtrl($rootScope,$scope,ngDialog,evenements,evenement,evtToCal,responsables,dossiers/*,enumPeriod*/) {
+﻿function CalendarCtrl($rootScope,$scope,ngDialog,evenements,evenement,evtToCal,responsables,dossiers) {
     var date = new Date();
     var d = date.getDate(); 
     var m = date.getMonth();
@@ -47,8 +47,7 @@
     $scope.documents=[];
     $scope.documentNames=[];
     $scope.documentContents=[];
-    //$scope.enumPeriodeEvet=[];
-    
+   
 
 		/* event source that pulls from google.com */
 	    $scope.eventSource = {
@@ -194,11 +193,11 @@
     $scope.refreshCal = function(){
     	//TODO actualiser le calendrier, ne fonctionne pas si l'on crée un évènement et que l'on ne rafraichis pas la page, on ne le voit pas sur le calendrier.
     };
-  /* recupère les dossiers */
-
 	    $scope.initCreer = function() {
 	    	/* reset formulaire et affichage status formulaire*/
 	    	$scope.formStatus = null;
+	    	newEventForm = null;
+	    	//scope.formEvtStatus=null;
 	    	$scope.resetForm();
 	    	
 	    	/* recuperation des responsables */
@@ -217,7 +216,6 @@
 	    	$scope.formEvt.documents = $scope.documents;
 	    	$scope.formEvt.documentNames = $scope.documentNames;
 	    	$scope.formEvt.documentContents = $scope.documentContents;
-	    	
 	    	
 	    	console.log($scope.formEvt);
 	    	
@@ -245,25 +243,15 @@
 	    
     	/*suppression**/
     	 $scope.deleteEvent = function(evtId) {
+    		// alert(evtId);
     		 evenement.deleteEvent({}, {evtId : evtId}).$promise.then(function(result){
-    				console.log("suppression ok"+ result);
-    			});
+    				//console.log("suppression ok"+ result);
+//    			 $scope.formEvtStatus = {
+// 	    				status: 'success',
+// 	    				message: 'L\'évènement a été supprimée avec succès.'
+// 	    		};
+    			});    		 
     	    };
-
-    /*Récupération de la liste des période*/
-//	    	if($scope.enumPeriodeEvet.length==0){
-//	    		enumPeriod.findAllPeriod().$promise.then(function(result){
-//			    	for(var j=0;j<result.length;j++){
-//			    		$scope.enumPeriodeEvet.push(result[j]);
-//			    	}
-//			    });
-//			};	
-      /*$scope.events.push({
-        title: 'Open Sesame',
-        start: new Date(y, m, 28),
-        end: new Date(y, m, 29),
-        className: ['openSesame']
-      });*/
     
     /* remove event */
     $scope.remove = function(index) {
@@ -305,8 +293,7 @@
     }
     
     /*Po-up modification*/
- $scope.editEvent = function( event ){
-    	
+ $scope.editEvent = function( event ){ 	
         $scope.formEvt = event;
 		
     	ngDialog.open({
@@ -350,20 +337,4 @@
         });
     });
     
-    //Show input when "en ligne" selected
-    $scope.showCheckbox= function(){
-    	var thumbsUp = element(by.css('span.glyphicon-thumbs-up'));
-    	var thumbsDown = element(by.css('span.glyphicon-thumbs-down'));
-
-    	it('should check ng-show / ng-hide', function() {
-    	  expect(thumbsUp.isDisplayed()).toBeFalsy();
-    	  expect(thumbsDown.isDisplayed()).toBeTruthy();
-
-    	  element(by.model('checked')).click();
-
-    	  expect(thumbsUp.isDisplayed()).toBeTruthy();
-    	  expect(thumbsDown.isDisplayed()).toBeFalsy();
-    	});
-    };
-
 };

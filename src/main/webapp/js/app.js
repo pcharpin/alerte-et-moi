@@ -72,6 +72,4 @@ angular.module('calendarApp', ['ui.calendar', 'ngRoute', 'ui.bootstrap','ngDialo
 });
 
 
-
-
 /* EOF */

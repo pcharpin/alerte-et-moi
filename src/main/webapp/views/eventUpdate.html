@@ -1,6 +1,7 @@
 <form name="newEventForm" enctype="multipart/form-data">
 	<div class="col-lg-12 col-md-12 col-xs-12 form-status" ng-show="formStatus" ng-class="formStatus.status" ng-bind="formStatus.message"></div>
-	<div class="col-lg-offset-1 col-lg-5 col-md-6 col-xs-12">
+	<!-- <div class="col-lg-offset-1 col-lg-5 col-md-6 col-xs-12"> -->
+		<div class="col-lg-offset-1 col-lg-5 col-md-6 col-xs-12">
 		<div>
 			<label>Nom : (*)</label><input type="text" ng-model="formEvt.nomEvt"
 				required />
@@ -40,10 +41,10 @@
 		<div>
 			<label>Mode de gestion :</label> 
 			<input type="radio" id="manuel" name="manuel" ng-model="formEvt.modeGestionEvt" value="Manuel">Manuel 
-		 	<input type="radio" id="enligne" name="enligne" ng-model="formEvt.modeGestionEvt" value="EnLigne">En ligne
+		 	<input type="radio" id="enligne" ng-click="toggleDiv()" name="enligne" ng-model="formEvt.modeGestionEvt" value="EnLigne">En ligne
 		 	<input type="radio" id="autre" name="autre" ng-model="formEvt.modeGestionEvt" value="Autre">Autre
 		</div>
-		<div ng-hide="checked">
+		<div>
 			<label>Lien :</label><input class="check-element animate-show"  id="lien" type="url" ng-model="formEvt.lienGestEvt" />
 		</div>
 
