@@ -33,40 +33,9 @@ import org.codehaus.jackson.annotate.JsonIgnoreProperties;
  */
 @Entity
 @Table(name="evenement")
-@JsonIgnoreProperties({"hibernateLazyInitializer","handler"})
+//@JsonIgnoreProperties({"hibernateLazyInitializer","handler"})
 public class Evenement implements Serializable{
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
-	@Transient
-	private String[] documentNames;
-	@Transient
-	private String[] documentContents;
-	/**
-	 * @return the documentNames
-	 */
-	public String[] getDocumentNames() {
-		return documentNames;
-	}
-	/**
-	 * @param documentNames the documentNames to set
-	 */
-	public void setDocumentNames(String[] documentNames) {
-		this.documentNames = documentNames;
-	}
-	/**
-	 * @return the documentContents
-	 */
-	public String[] getDocumentContents() {
-		return documentContents;
-	}
-	/**
-	 * @param documentContents the documentContents to set
-	 */
-	public void setDocumentContents(String[] documentContents) {
-		this.documentContents = documentContents;
-	}
+	
 	@Id @GeneratedValue
 	@Column(name = "idEvt")
 	private int idEvt;
@@ -106,6 +75,12 @@ public class Evenement implements Serializable{
 	private int recurtEvt;
 	@Column(name="libreEvt")
 	private String libreEvt;
+	
+	private static final long serialVersionUID = 1L;
+	@Transient
+	private String[] documentNames;
+	@Transient
+	private String[] documentContents;
 	
 	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name="Responsable_idResp")
@@ -327,6 +302,30 @@ public class Evenement implements Serializable{
 	 */
 	public void setDocuments(Set<Document> documents) {
 		this.documents = documents;
+	}
+	/**
+	 * @return the documentNames
+	 */
+	public String[] getDocumentNames() {
+		return documentNames;
+	}
+	/**
+	 * @param documentNames the documentNames to set
+	 */
+	public void setDocumentNames(String[] documentNames) {
+		this.documentNames = documentNames;
+	}
+	/**
+	 * @return the documentContents
+	 */
+	public String[] getDocumentContents() {
+		return documentContents;
+	}
+	/**
+	 * @param documentContents the documentContents to set
+	 */
+	public void setDocumentContents(String[] documentContents) {
+		this.documentContents = documentContents;
 	}
 	/* (non-Javadoc)
 	 * @see java.lang.Object#toString()
