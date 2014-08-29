@@ -147,14 +147,11 @@ public class EvenementRestService {
 	 * @return
 	 */
 	@PUT
-	@Path("/update/{id}")
+	@Path("/{id}")
 	@Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
 	@Transactional
-	public  Response updateEvent(@PathParam("id") int id,Evenement evenement){
-		evenement =  service.getEvenementById(id);
-		if(evenement != null){
-			service.update(evenement);
-		}
-		return Response.status(200).entity(evenement).build();		
+	public  Response updateEvent(@PathParam("id") int id){
+			service.update(service.getEvenementById(id));
+			return Response.ok().build();
 	}
 }

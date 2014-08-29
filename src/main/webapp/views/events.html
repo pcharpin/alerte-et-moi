@@ -24,12 +24,12 @@
 		<!-- <div class="alert-success calAlert"
 			 ng-show="alertMessage != undefined && alertMessage != ''">
 			 <h4>{{alertMessage}}</h4>
-		</div> -->
+			</div> -->
 		<div class="btn-toolbar">
 			<p class="pull-right lead">Calendrier</p>
 			<div class="btn-group">
 				<!--  <button class="btn btn-success"
-					ng-click="changeView('agendaDay', myCalendar1)">Jour</button>-->
+										ng-click="changeView('agendaDay', myCalendar1)">Jour</button>-->
 				<button class="btn btn-success"
 					ng-click="changeView('basicWeek', myCalendar1)">Semaine</button>
 				<button class="btn btn-success"
@@ -52,20 +52,13 @@
 	<div class="span2">
 		<!-- pour le span2 mettre les width � 100px -->
 		<h3>Filtres :</h3>
-		<!-- <h4>Utilisateurs</h4>
+		<h4>Utilisateurs</h4>
 		<select style="width: 100px" ng-model="userSelected">
 			<option value="">tous</option>
 			<option ng-repeat="user in users" value="{{user}}">
 				{{user.prenResp}} ; {{user.idResp}}</option>
-		</select> -->
-	
-			<h4>Utilisateurs</h4> 
-			<select
-				ng-model="formEvt.responsable.idResp" required>
-				<option ng-repeat="responsable in listResponsables"
-					value="{{responsable.idResp}}">{{responsable.nomResp}}</option>
-			</select>
-	
+		</select> 
+		
 		<hr>
 		<h4 ng-click="initCreer()">Dossier</h4>
 		<select style="width: 100px" ng-model="selectedDossier">

@@ -1,15 +1,14 @@
 <form name="newEventForm" enctype="multipart/form-data">
 	<div class="col-lg-12 col-md-12 col-xs-12 form-status" ng-show="formStatus" ng-class="formStatus.status" ng-bind="formStatus.message"></div>
-	<!-- <div class="col-lg-offset-1 col-lg-5 col-md-6 col-xs-12"> -->
 		<div class="col-lg-offset-1 col-lg-5 col-md-6 col-xs-12">
 		<div>
 			<label>Nom : (*)</label><input type="text" ng-model="formEvt.nomEvt"
 				required />
 		</div>
-		<!-- 			 <div> -->
-		<!-- 				<label>dossier existant : (*)</label> <input type="radio" name="dossier" -->
-		<!-- 					value="" />oui <input type="radio" name="dossier" value="" required/>non -->
-		<!-- 			</div>  -->
+		<!-- <div> -->
+		<!-- <label>dossier existant : (*)</label> <input type="radio" name="dossier" -->
+		<!-- value="" />oui <input type="radio" name="dossier" value="" required/>non -->
+		<!-- </div>  -->
 		<div>
 			<label>Dossier : (*)</label> <select ng-model="formEvt.dossier.idDos"
 				required>
