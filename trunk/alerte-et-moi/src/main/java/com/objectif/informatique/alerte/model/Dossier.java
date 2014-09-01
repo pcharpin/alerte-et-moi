@@ -20,6 +20,7 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import org.codehaus.jackson.annotate.JsonIgnore;
 
@@ -52,16 +53,23 @@ public class Dossier implements Serializable{
 	@Column(name = "evtDos")
 	private String evtDos;
 	
-	@ManyToMany(targetEntity=Document.class, fetch=FetchType.LAZY)
+	@Transient
+	private String[] documentNames;
+	@Transient
+	private String[] documentContents;
+	
+	//@ManyToMany(targetEntity=Document.class, fetch=FetchType.LAZY)
+	@ManyToMany(fetch=FetchType.EAGER)
 	@JoinTable(
 			name="dossier_document",
 			joinColumns={@JoinColumn(name="Dossier_idDos")},
 			inverseJoinColumns={@JoinColumn(name="Document_idDoc")}
 	)
-private Set<Document> documents = new HashSet<Document>();
+	private Set<Document> documents = new HashSet<Document>();
+	
 	@JsonIgnore
 	@OneToMany(mappedBy="dossier",cascade = CascadeType.ALL)
-	private Set<Evenement> evenements;
+	private Set<Evenement> evenement = new HashSet<Evenement>();;
 	
 	@Column(name = "priorDos")
 	private boolean priorDos;
@@ -117,7 +125,7 @@ private Set<Document> documents = new HashSet<Document>();
 
 	public Dossier(int idDos, String nomDos,
 			EnumTypesDossiers enumTypesDossiers, String descDoc,String evtDos,
-			Set<Document> documents, Set<Evenement> evenements,
+			Set<Document> documents, Set<Evenement> evenement,
 			boolean priorDos, float mntDOS, boolean periodJourDos,
 			boolean periodHebdoDos, boolean periodMensDos,
 			boolean periodTrimDos, boolean periodSemestDos,
@@ -131,7 +139,7 @@ private Set<Document> documents = new HashSet<Document>();
 		this.descDoc = descDoc;
 		this.evtDos =  evtDos;
 		this.documents = documents;
-		this.evenements = evenements;
+		this.evenement = evenement;
 		this.priorDos = priorDos;
 		this.mntDOS = mntDOS;
 		this.periodJourDos = periodJourDos;
@@ -164,7 +172,7 @@ private Set<Document> documents = new HashSet<Document>();
 		this.descDoc = descDoc;
 		this.evtDos =  evtDos;
 		this.documents = documents;
-		this.evenements = evenements;
+		this.evenement = evenement;
 		this.priorDos = priorDos;
 		this.mntDOS = mntDOS;
 		this.periodJourDos = periodJourDos;
@@ -475,18 +483,61 @@ private Set<Document> documents = new HashSet<Document>();
 		this.libre = libre;
 	}
 
+	
 	/**
-	 * @return the evenements
+	 * @return the documentNames
 	 */
-	public Set<Evenement> getEvenements() {
-		return evenements;
+	public String[] getDocumentNames() {
+		return documentNames;
 	}
 
 	/**
-	 * @param evenements the evenements to set
+	 * @param documentNames the documentNames to set
 	 */
-	public void setEvenements(Set<Evenement> evenements) {
-		this.evenements = evenements;
+	public void setDocumentNames(String[] documentNames) {
+		this.documentNames = documentNames;
+	}
+
+	/**
+	 * @return the documentContents
+	 */
+	public String[] getDocumentContents() {
+		return documentContents;
+	}
+
+	/**
+	 * @param documentContents the documentContents to set
+	 */
+	public void setDocumentContents(String[] documentContents) {
+		this.documentContents = documentContents;
+	}
+
+	/**
+	 * @return the documents
+	 */
+	public Set<Document> getDocuments() {
+		return documents;
+	}
+
+	/**
+	 * @param documents the documents to set
+	 */
+	public void setDocuments(Set<Document> documents) {
+		this.documents = documents;
+	}
+
+	/**
+	 * @return the evenement
+	 */
+	public Set<Evenement> getEvenement() {
+		return evenement;
+	}
+
+	/**
+	 * @param evenement the evenement to set
+	 */
+	public void setEvenement(Set<Evenement> evenement) {
+		this.evenement = evenement;
 	}
 
 	/* (non-Javadoc)
@@ -507,8 +558,8 @@ private Set<Document> documents = new HashSet<Document>();
 		builder.append(evtDos);
 		builder.append(", documents=");
 		builder.append(documents);
-		builder.append(", evenements=");
-		builder.append(evenements);
+		builder.append(", evenement=");
+		builder.append(evenement);
 		builder.append(", priorDos=");
 		builder.append(priorDos);
 		builder.append(", mntDOS=");

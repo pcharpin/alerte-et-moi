@@ -53,6 +53,7 @@ public class DocumentRestService {
 	@GET
 	@Path("/getallDocument")
 	@Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
+	@Transactional
 	public List<Document> getAllDocument() throws Exception {
 		List<Document> documents = service.findAll();
 		return documents;

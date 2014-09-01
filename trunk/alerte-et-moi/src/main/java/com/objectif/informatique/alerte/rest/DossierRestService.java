@@ -69,6 +69,9 @@ public class DossierRestService {
 	@Consumes(MediaType.APPLICATION_JSON + ";charset=utf-8")
 	@Transactional
 	public Response add(Dossier dossier){	
+		System.out.println("*****************************************");
+		System.out.println("*****dossier*********: " + dossier );
+		System.out.println();
 		service.create(dossier);		
 		return Response.status(200).entity(dossier).build();
 	}

@@ -13,10 +13,5 @@ public enum EnumModeGestionEvt {
 
 	EnLigne,
 	Manuel,
-	Autre
-			
-	
-
- 		
-				  				  
+	Autre				  				  
 }
