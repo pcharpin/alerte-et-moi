@@ -24,9 +24,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
-import org.codehaus.jackson.annotate.JsonIgnore;
-import org.codehaus.jackson.annotate.JsonIgnoreProperties;
-
 /**
  * @author vdibi
  *
@@ -92,7 +89,7 @@ public class Evenement implements Serializable{
 				joinColumns={@JoinColumn(name="Evenement_idEvt")},
 				inverseJoinColumns={@JoinColumn(name="Document_idDoc")}
 		)
-	@JsonIgnore
+	//@JsonIgnore
 	private Set<Document> documents = new HashSet<Document>();
 	
 	public Evenement(int idEvt, Dossier dossier, String nomEvt, String descEvt,
