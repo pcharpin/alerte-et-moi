@@ -7,14 +7,11 @@ import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
@@ -43,7 +40,7 @@ public class Document implements Serializable{
 	private String lienDoc;
 	
 
-	@ManyToMany(mappedBy="documents")
+	@ManyToMany(mappedBy="documents" ,fetch=FetchType.EAGER)
 	private Set<Evenement> evenements = new HashSet<Evenement>();
 	
 	//@ManyToMany(cascade=CascadeType.ALL,fetch=FetchType.EAGER)
@@ -52,7 +49,7 @@ public class Document implements Serializable{
 //			joinColumns={@JoinColumn(name="Dossier_idDos")},
 //			inverseJoinColumns={@JoinColumn(name="Document_idDoc")}
 //	)
-	@ManyToMany(mappedBy="documents")
+	@ManyToMany(mappedBy="documents" ,fetch=FetchType.EAGER)
 	private Set<Dossier> dossiers = new HashSet<Dossier>();
 	
 	public Document(){}

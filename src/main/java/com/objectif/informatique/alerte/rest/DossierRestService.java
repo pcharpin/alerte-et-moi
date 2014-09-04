@@ -1,5 +1,11 @@
 package com.objectif.informatique.alerte.rest;
 
+import java.io.BufferedOutputStream;
+import java.io.DataOutputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.util.HashSet;
 import java.util.List;
 
 import javax.ws.rs.Consumes;
@@ -14,13 +20,14 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.objectif.informatique.alerte.model.Document;
 import com.objectif.informatique.alerte.model.Dossier;
-import com.objectif.informatique.alerte.model.EnumTypesDossiers;
+import com.objectif.informatique.alerte.service.DocumentService;
 import com.objectif.informatique.alerte.service.DossierService;
-import com.objectif.informatique.alerte.service.EnumTypesDossiersService;
 
 @Component
 @Path("/dossier")
@@ -28,8 +35,13 @@ public class DossierRestService {
 	
 	@Autowired
 	DossierService service;
+	
+	@Value("${alerte.file.root.dir}")
+	String rootPath ;
+	
 	@Autowired
-	EnumTypesDossiersService enumTypesDossiersService;
+	DocumentService docService;
+	
 
 	@GET
 	@Path("/{id}")
@@ -42,9 +54,6 @@ public class DossierRestService {
 	@Path("/folder/{name}")
 	@Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
 	public Dossier getFolderByName(@PathParam("name") String dossier) {
-		
-//		Dossier dossier = new Dossier();
-		//name = service.getDossierById(id);
 		return service.getFolderByName(dossier);
 	}
 	
@@ -55,23 +64,57 @@ public class DossierRestService {
 		List<Dossier> dossiers = service.findAll();
 		return dossiers;
 	}	
-		
-	@GET
-	@Path("/getTypesFolders")
-	@Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
-	public List<EnumTypesDossiers> getAllFoldersType() throws Exception {
-		List<EnumTypesDossiers> dossiersTypes = enumTypesDossiersService.findAll();
-		return dossiersTypes;
-	}	
-	
+	/**
+	 * 	
+	 * @param dossier
+	 * @return
+	 */
 	@POST
 	@Path("/sendFolder")
 	@Consumes(MediaType.APPLICATION_JSON + ";charset=utf-8")
 	@Transactional
 	public Response add(Dossier dossier){	
-		System.out.println("*****************************************");
-		System.out.println("*****dossier*********: " + dossier );
-		System.out.println();
+		
+		System.out.println("******dossier:****" + dossier);
+		
+//		String [] datas =  dossier.getDocumentContents();
+//		String [] datasNames = dossier.getDocumentNames();
+//		
+//		System.out.println("***********************");
+//		System.out.println("******datas:****" + datas);
+//		System.out.println("******datasNames:****" + datasNames);
+//		System.out.println("***********************");
+		
+//		for (int i = 0; i < datas.length; i++) {			
+//			String data = datas[i];
+//			String dataName = datasNames[i];
+//			
+//		//Chemin à modifier (mettre le chemin du server)
+//		String path = rootPath + dataName;
+//		try {
+//			DataOutputStream dos = new DataOutputStream(new BufferedOutputStream(new FileOutputStream(path)));
+//			dos.writeBytes(data);
+//			dos.close();
+//			
+//			//Création d'un objet document
+//			Document doc = new Document();
+//			doc.setLienDoc(path);
+//			docService.create(doc);
+//			
+//			if(dossier.getDocuments() == null){
+//				//dossier.setDocuments( new HashSet<Document>());
+//				dossier.setDocuments( new HashSet<Document>());
+//			}
+//			dossier.getDocuments().add(doc);
+//			
+//		} catch (FileNotFoundException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		} catch (IOException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//	}			
 		service.create(dossier);		
 		return Response.status(200).entity(dossier).build();
 	}
