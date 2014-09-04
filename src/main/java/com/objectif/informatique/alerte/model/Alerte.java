@@ -36,9 +36,11 @@ public class Alerte implements Serializable{
 	@Id @GeneratedValue
 	@Column(name = "idAler")
 	private int idAler;
-	@Column(name="typeDeclenchAler")
+	@Column(name="declanchAler")
+	private int declenchAler;
+	
 	@Enumerated(EnumType.STRING)
-	private EnumConstante enumConstante;
+	private TypeDeclenchAler typeDeclenchAler;
 	@Column(name="dateAler")
 	private Date dateAlerte;
 
@@ -59,107 +61,85 @@ public class Alerte implements Serializable{
 
 	public Alerte(){}
 	
-	/**
-	 * 
-	 * @param idAler
-	 * @param idEvt
-	 * @param enumConstante
-	 * @param dateAlerte
-	 * @param evenement
-	 * @param responsables
-	 */
-	public Alerte(int idAler,EnumConstante enumConstante,
+	public Alerte( int declenchAler, TypeDeclenchAler typeDeclenchAler,
 			Date dateAlerte, Evenement evenement, Set<Responsable> responsables) {
 		super();
-		this.idAler = idAler;
-		this.enumConstante = enumConstante;
+		this.declenchAler = declenchAler;
+		this.typeDeclenchAler = typeDeclenchAler;
 		this.dateAlerte = dateAlerte;
 		this.evenement = evenement;
 		this.responsables = responsables;
 	}
 
-	/**
-	 * @return the idAler
-	 */
+	
+	public Alerte(int idAler, int declenchAler, TypeDeclenchAler typeDeclenchAler,
+			Date dateAlerte, Evenement evenement, Set<Responsable> responsables) {
+		super();
+		this.idAler = idAler;
+		this.declenchAler = declenchAler;
+		this.typeDeclenchAler = typeDeclenchAler;
+		this.dateAlerte = dateAlerte;
+		this.evenement = evenement;
+		this.responsables = responsables;
+	}
+
 	public int getIdAler() {
 		return idAler;
 	}
 
-	/**
-	 * @param idAler the idAler to set
-	 */
 	public void setIdAler(int idAler) {
 		this.idAler = idAler;
 	}
 
-	/**
-	 * @return the enumConstante
-	 */
-	public EnumConstante getEnumConstante() {
-		return enumConstante;
+	public int getDeclenchAler() {
+		return declenchAler;
 	}
 
-	/**
-	 * @param enumConstante the enumConstante to set
-	 */
-	public void setEnumConstante(EnumConstante enumConstante) {
-		this.enumConstante = enumConstante;
+	public void setDeclenchAler(int declenchAler) {
+		this.declenchAler = declenchAler;
 	}
 
-	/**
-	 * @return the dateAlerte
-	 */
+	public TypeDeclenchAler getTypeDeclenchAler() {
+		return typeDeclenchAler;
+	}
+
+	public void setTypeDeclenchAler(TypeDeclenchAler typeDeclenchAler) {
+		this.typeDeclenchAler = typeDeclenchAler;
+	}
+
 	public Date getDateAlerte() {
 		return dateAlerte;
 	}
 
-	/**
-	 * @param dateAlerte the dateAlerte to set
-	 */
 	public void setDateAlerte(Date dateAlerte) {
 		this.dateAlerte = dateAlerte;
 	}
 
-	/**
-	 * @return the evenement
-	 */
 	public Evenement getEvenement() {
 		return evenement;
 	}
 
-	/**
-	 * @param evenement the evenement to set
-	 */
 	public void setEvenement(Evenement evenement) {
 		this.evenement = evenement;
 	}
 
-	/**
-	 * @return the responsables
-	 */
 	public Set<Responsable> getResponsables() {
 		return responsables;
 	}
 
-	/**
-	 * @param responsables the responsables to set
-	 */
 	public void setResponsables(Set<Responsable> responsables) {
 		this.responsables = responsables;
 	}
 
-	/* (non-Javadoc)
-	 * @see java.lang.Object#toString()
-	 */
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
 		builder.append("Alerte [idAler=");
 		builder.append(idAler);
-		builder.append(", idEvt=");
-		//builder.append(idEvt);
-		builder.append(", enumConstante=");
-		builder.append(enumConstante);
+		builder.append(", declenchAler=");
+		builder.append(declenchAler);
+		builder.append(", typeDeclenchAler=");
+		builder.append(typeDeclenchAler);
 		builder.append(", dateAlerte=");
 		builder.append(dateAlerte);
 		builder.append(", evenement=");
@@ -168,5 +148,5 @@ public class Alerte implements Serializable{
 		builder.append(responsables);
 		builder.append("]");
 		return builder.toString();
-	}	
+	}
 }
