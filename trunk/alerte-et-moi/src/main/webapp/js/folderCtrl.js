@@ -19,7 +19,22 @@
 	    	console.log("resultat du create"+ result);
     	});
 	};	 
+	//***************************Mise à jour d'un dossier*******************
+	  $scope.submitUpdateDos = function(idFolder) {
+		  console.log("formDoso_o = ", $scope.formDos);
+		  dossier.update({}, {idFolder : idFolder}).$promise.then(function(result){
+				console.log("Mise à jour ok"+ result);
+			});
+		};	 
 	
+		//******************Retour à la liste des dossier*****************
+		  $scope.cancel = function() {
+		    	ngDialog.open({
+		    		template: 'views/folders.html?v=9',
+		    		scope: $scope
+		    	});  
+			};	 
+		
 	$scope.initCreer = function() {
 		
 		$scope.resetForm();
