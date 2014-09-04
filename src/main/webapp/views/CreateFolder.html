@@ -1,4 +1,5 @@
 <form>
+<table style="margin: auto;"><tr><td style="width: 290px;">
 	<div class="">
 	<div>
 		<label>Nom du dossier:</label><input type="text"
@@ -46,7 +47,8 @@
 	</div> 
 	</div> 
 	
-<div class="col-lg-offset-1 col-lg-5 col-md-6 col-xs-12">
+	</td><td>
+<div class="right-pan">
 	<div>
 		<h3>Contact principal:</h3>
 		<label>Nom:</label><input type="text" ng-model="formDos.cntNomDos" />
@@ -55,6 +57,7 @@
 		<label>Commentaire:</label>
 		<textarea ng-model="formDos.cntCmntDos"></textarea>
 	</div>
+</td></tr></table>
 	<input type="submit" id="submitDos" value="Ajouter" ng-click="submitDos()" />
 </div>
 </form>

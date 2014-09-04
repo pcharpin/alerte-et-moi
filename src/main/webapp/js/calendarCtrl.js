@@ -306,8 +306,7 @@
         $scope.formEvt = event;
 		
     	ngDialog.open({
-    		//template: 'views/eventUpdate.html?v=9',
-    		template: 'views/ModifEvent.html?v=9',
+    		template: 'views/updateEvent.html?v=9',
     		scope: $scope
     	});
         

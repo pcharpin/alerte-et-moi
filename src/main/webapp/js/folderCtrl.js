@@ -46,7 +46,7 @@
     $scope.editFolder = function( folder ){   	
         $scope.formDos = folder;		
     	ngDialog.open({
-    		template: 'views/folderUpdate.html?v=9',
+    		template: 'views/updateFolder.html?v=9',
     		scope: $scope
     	});       
     };    
