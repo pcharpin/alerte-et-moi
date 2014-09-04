@@ -1,0 +1,102 @@
+<!-- <form name="newEventForm" enctype="multipart/form-data" novalidate=""> -->
+<form name="newEventForm" enctype="multipart/form-data">
+<div class="form-help">Les &eacute;l&eacute;ments suivis de (*) sont requis.</div>
+<br/>
+	<div class="form-status" ng-show="formStatus" ng-class="formStatus.status" ng-bind="formStatus.message"></div>
+	<table style="margin: auto;"><tr><td style="width: 290px;">
+		<div class="">
+      
+		<div>
+			<label>Nom : (*)</label><input type="text" ng-model="formEvt.nomEvt"  placeholder="Un nom d'évènement..." required />
+		</div>
+		<!-- <span ng-show="formEvt.nomEvt.$dirty">
+			<span ng-show="formEvt.nomEvt.$error.required">Champs obligatoire</span>
+     	</span> -->
+     	<br/>
+		<!-- <div> -->
+		<!-- <label>dossier existant : (*)</label> <input type="radio" name="dossier" -->
+		<!-- value="" />oui <input type="radio" name="dossier" value="" required/>non -->
+		<!-- </div>  -->
+		<div>
+			<label>Dossier : (*)</label> <select ng-model="formEvt.dossier.idDos"
+				required>
+				<option ng-repeat="dossier in listDossiers"
+					value="{{dossier.idDos}}">{{dossier.nomDos}}</option>
+			</select>
+		</div>
+		<div>
+			<label>Descritption :</label>
+			<textarea ng-model="formEvt.descEvt"></textarea>
+		</div>
+		
+			<div>
+				<label>Document rattach&eacute; :</label><input id="file" type="file" file-upload multiple ng-model="formEvt.documents"/>
+ 			</div>
+		<div>
+			<label>Date d'&eacute;ch&eacute;ance : (*)</label><input type="date"
+				ng-model="formEvt.dateEchEvt" required />
+		</div>
+		<div>
+			<!-- <label>Ann&eacute;e d'exercice : (*)</label><input type="text"
+				ng-model="formEvt.exeEvt" ng-pattern="/[0-9]{4}$/" placeholder="Un entier..."required /> -->
+		</div>
+		<!-- <span ng-show="formEvt.exeEvt.$dirty">
+        <span ng-show="formEvt.exeEvt.$error.required">Champs obligatoire</span>
+        <span ng-show="formEvt.exeEvt.$error.pattern">L'année d'exercice doit être composé de 4 chiffres</span>
+      </span> -->
+      <br/>
+      
+		<div>
+			<label>Montant :</label><input type="text" ng-model="formEvt.mntEvt" />
+		</div>
+	</div>
+	</td><td>
+	<div class="right-pan" style="">
+		<div>
+			<label>Mode de gestion :</label> 
+			<input type="radio" id="manuel" name="manuel" ng-model="formEvt.modeGestionEvt" value="Manuel">Manuel 
+		 	<input type="radio" id="enligne" ng-click="toggleDiv()" name="enligne" ng-model="formEvt.modeGestionEvt" value="EnLigne">En ligne
+		 	<input type="radio" id="autre" name="autre" ng-model="formEvt.modeGestionEvt" value="Autre">Autre
+		</div>
+		<div>
+			<label>Lien :</label><input class="check-element animate-show"  id="lien" type="url" ng-model="formEvt.lienGestEvt" />
+		</div>
+
+		<div>
+			<label>Responsable : (*)</label> <select
+				ng-model="formEvt.responsable.idResp" required>
+				<option ng-repeat="responsable in listResponsables"
+					value="{{responsable.idResp}}">{{responsable.nomResp}}</option>
+			</select>
+		</div>
+		<div>
+			<label>R&eacute;alis&eacute; :</label> 
+			<input type="radio" name="mdGestion" ng-model="formEvt.trtEvt" value="1">Oui 
+			<input type="radio"	name="mdGestion" ng-model="formEvt.trtEvt" value="0">Non
+		</div>
+		<div>
+			<label>Date de r&eacute;alisation :</label> <input type="date"
+				ng-model="formEvt.dateTrtEvt" />
+		</div>
+		<div>
+			<label>P&eacute;riodicit&eacute;:</label><select
+				ng-model="formEvt.enumPeriodeEvet">
+				<option value="Mensuel">mensuel</option>
+				<option value="Trimestriel">trimestriel</option>
+				<option value="Semestriel">semestriel</option>
+				<option value="Annuel">annuel</option>
+				<option value="Sans">sans</option>
+			</select>
+		</div>
+		<div>
+			<label>Libre commentaire :</label>
+			<textarea ng-model="formEvt.libreEvt"></textarea>
+		</div>
+		</div>
+	</td></tr></table>
+	
+	<div class="form-confirmation-button">
+		<input type="submit" id="submit" value="Modifier"
+			ng-click="updateEvt()" ng-disabled="newEventForm.$invalid" class="btn btn-primary confirm-button" ng-class="newEventForm.$invalid"/>
+	</div>
+</form>

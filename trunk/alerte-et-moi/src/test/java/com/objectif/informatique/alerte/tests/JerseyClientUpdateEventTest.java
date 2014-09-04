@@ -20,13 +20,14 @@ public class JerseyClientUpdateEventTest {
 		emf = Persistence.createEntityManagerFactory("JpaALerte");
 		EntityManager em = emf.createEntityManager();
 		try {
-			Client client =  Client.create();
-			WebResource webResource = client.resource("http://localhost:8080/alerte-et-moi/rest/evenement/update/21");
-			
+			Client client = Client.create();
+			WebResource webResource = client
+					.resource("http://localhost:8080/alerte-et-moi/rest/evenement/update/21");
+
 			EvenementDAOImpl evenementDAOImpl = new EvenementDAOImpl(em);
 			DossierDAOImpl dossierService = new DossierDAOImpl();
-			
-			//grt event id
+
+			// grt event id
 			Evenement evenement = evenementDAOImpl.findEvenementById(21);
 			evenement.setNomEvt("EVT21");
 			evenement.setDescEvt("Test de mise à jour");
@@ -34,20 +35,21 @@ public class JerseyClientUpdateEventTest {
 			em.getTransaction().begin();
 			evenementDAOImpl.update(evenement);
 			em.getTransaction().commit();
-								
-			ClientResponse response = webResource.accept("application/json").put(ClientResponse.class,evenement);
-			
-			if(response.getStatus() != 200) {
-				   throw new RuntimeException("Failed : HTTP error code : "
-					+ response.getStatus());
-				}
-		 
-				String output = response.getEntity(String.class);
-		 
-				System.out.println("Output from Server .... \n");
-	
-				System.out.println(output);
-		 
+
+			ClientResponse response = webResource.accept("application/json")
+					.put(ClientResponse.class, evenement);
+
+			if (response.getStatus() != 200) {
+				throw new RuntimeException("Failed : HTTP error code : "
+						+ response.getStatus());
+			}
+
+			String output = response.getEntity(String.class);
+
+			System.out.println("Output from Server .... \n");
+
+			System.out.println(output);
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

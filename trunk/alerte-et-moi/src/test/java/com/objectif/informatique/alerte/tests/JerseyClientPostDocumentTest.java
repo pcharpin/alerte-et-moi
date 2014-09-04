@@ -21,42 +21,44 @@ import com.sun.jersey.api.client.WebResource;
 
 public class JerseyClientPostDocumentTest {
 	@Autowired
-	static
-	DossierService dossierService;
+	static DossierService dossierService;
+
 	/**
 	 * @param args
 	 */
 	public static void main(String[] args) {
 		EntityManagerFactory emf;
 		emf = Persistence.createEntityManagerFactory("JpaALerte");
-		 EntityManager em = emf.createEntityManager();
+		EntityManager em = emf.createEntityManager();
 		try {
-			Client client =  Client.create();
-			WebResource webResource = client.resource("http://localhost:8080/alerte-et-moi/rest/document/send");
-			
+			Client client = Client.create();
+			WebResource webResource = client
+					.resource("http://localhost:8080/alerte-et-moi/rest/document/send");
+
 			DocumentDAOImpl documentDAOImpl = new DocumentDAOImpl(em);
-			
-			//Document
+
+			// Document
 			Document document = new Document();
 			document.setAccesDoc("accesDoc");
 			document.setLienDoc("lienDoc");
 			em.getTransaction().begin();
 			documentDAOImpl.create(document);
 			em.getTransaction().commit();
-												
-			ClientResponse response = webResource.accept("application/json").post(ClientResponse.class,document);
-			
-			if(response.getStatus() != 200) {
-				   throw new RuntimeException("Failed : HTTP error code : "
-					+ response.getStatus());
-				}
-		 
-				String output = response.getEntity(String.class);
-		 
-				System.out.println("Output from Server .... \n");
-	
-				System.out.println(output);
-		 
+
+			ClientResponse response = webResource.accept("application/json")
+					.post(ClientResponse.class, document);
+
+			if (response.getStatus() != 200) {
+				throw new RuntimeException("Failed : HTTP error code : "
+						+ response.getStatus());
+			}
+
+			String output = response.getEntity(String.class);
+
+			System.out.println("Output from Server .... \n");
+
+			System.out.println(output);
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

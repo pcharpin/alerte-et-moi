@@ -17,44 +17,49 @@ public class JerseyClientGetEventTest {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		
+
 		EntityManagerFactory emf;
 		emf = Persistence.createEntityManagerFactory("JpaALerte");
 		EntityManager em = emf.createEntityManager();
-		
+
 		try {
-			Client client =  Client.create();
-			//GetAll
-			//WebResource webResource = client.resource("http://localhost:8080/alerte-et-moi/rest/evenement/getall");
-			//by id
-			//WebResource webResource = client.resource("http://localhost:8080/alerte-et-moi/rest/evenement/1");
-			
-			//Delete event
-			WebResource webResource = client.resource("http://localhost:8080/alerte-et-moi/rest/evenement/delete/2");
-			
+			Client client = Client.create();
+			// GetAll
+			// WebResource webResource =
+			// client.resource("http://localhost:8080/alerte-et-moi/rest/evenement/getall");
+			// by id
+			// WebResource webResource =
+			// client.resource("http://localhost:8080/alerte-et-moi/rest/evenement/1");
+
+			// Delete event
+			WebResource webResource = client
+					.resource("http://localhost:8080/alerte-et-moi/rest/evenement/delete/2");
+
 			EvenementDAOImpl evenementDAOImpl = new EvenementDAOImpl(em);
-		
-			//grt event id
+
+			// grt event id
 			Evenement evenement = evenementDAOImpl.findEvenementById(2);
-			
+
 			em.getTransaction().begin();
 			evenementDAOImpl.delete(evenement);
 			em.getTransaction().commit();
-					
-			ClientResponse response = webResource.accept("application/json").delete(ClientResponse.class);
-		
-			//ClientResponse response = webResource.accept("application/json").get(ClientResponse.class);
-			
-			if(response.getStatus() != 200) {
-				   throw new RuntimeException("Failed : HTTP error code : "
-					+ response.getStatus());
-				}
-		 
-				String output = response.getEntity(String.class);
-		 
-				System.out.println("Output from Server .... \n");
-				System.out.println(output);
-		 
+
+			ClientResponse response = webResource.accept("application/json")
+					.delete(ClientResponse.class);
+
+			// ClientResponse response =
+			// webResource.accept("application/json").get(ClientResponse.class);
+
+			if (response.getStatus() != 200) {
+				throw new RuntimeException("Failed : HTTP error code : "
+						+ response.getStatus());
+			}
+
+			String output = response.getEntity(String.class);
+
+			System.out.println("Output from Server .... \n");
+			System.out.println(output);
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
