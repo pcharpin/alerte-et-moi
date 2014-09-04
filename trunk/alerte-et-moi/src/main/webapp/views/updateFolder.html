@@ -39,7 +39,7 @@
 		<label>Montant :</label><input type="text" ng-model="formDos.mntDOS" />
 	</div>
 	<div>
-		<label>Périodicité:</label> 
+		<label>P&eacute;�riodicit&eacute;:</label> 
 		<input type="checkbox" name="periodMensDos" ng-model="formDos.periodMensDos">Mensuel 
 		<input type="checkbox" name="periodTrimDos" ng-model="formDos.periodTrimDos">Trimestriel
 		<input type="checkbox" name="periodSemestDos" ng-model="formDos.periodSemestDos">Semestriel 
@@ -53,12 +53,13 @@
 		<h3>Contact principal:</h3>
 		<label>Nom:</label><input type="text" ng-model="formDos.cntNomDos" />
 		<label>Prenom:</label><input type="text" ng-model="formDos.cntPrenomDos"/> 
-		<label>Téléphone:</label><input type="text" ng-model="formDos.cntTelDos" /> 
+		<label>T&eacute;l&eacute;phone:</label><input type="text" ng-model="formDos.cntTelDos" /> 
 		<label>Commentaire:</label>
 		<textarea ng-model="formDos.cntCmntDos"></textarea>
 	</div>
 </td></tr></table>
-	<input type="submit" id="submitDos" value="Modifier" ng-click="submitUpdateDos(folder.idDos)" />
+	<input type="submit" id="submitDos" value="Modifier" ng-click="submitUpdateDos(formDos.idDos)" />
+	<h1>{{formDos.idDos}}</h1>
 	<!-- <a href="views/folders.html">Annuler</a> -->
 	<!-- <input type="submit" id="cancelDos" value="Annuler" ng-click="cancel()" /> -->
 </div>
