@@ -39,5 +39,4 @@ public class DossierDAOImpl extends GenericDAOImpl<Dossier> implements DossierDA
 //		query.setParameter("name",Dossier.);
 //		return query.toString();
 	}
-	
 }

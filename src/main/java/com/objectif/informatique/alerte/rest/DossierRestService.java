@@ -120,15 +120,13 @@ public class DossierRestService {
 	}
 	
 	@PUT
-	@Path("/update/{id}")
-	@Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
+	@Path("/{id}")
+	//@Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
 	@Transactional
-	public  Response updateFolder(@PathParam("id") int id,Dossier dossier){
-		dossier =  service.getDossierById(id);
-		if(dossier != null){
-			service.update(dossier);
-		}
-		return Response.status(200).entity(dossier).build();		
+	public  Response updateFolder(@PathParam("id") int id){
+		 Dossier dossier =  service.getDossierById(id);
+		service.update(dossier);
+		return Response.ok().build();
 	}
 	
 	@DELETE
