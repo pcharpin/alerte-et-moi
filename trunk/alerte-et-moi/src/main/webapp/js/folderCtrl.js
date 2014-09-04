@@ -10,9 +10,9 @@
     $scope.submitDos = function() {
     	
     	console.log($scope.documents);
-    	$scope.formDos.documents = $scope.documents;
-    	$scope.formDos.documentNames = $scope.documentNames;
-    	$scope.formDos.documentContents = $scope.documentContents;
+//    	$scope.formDos.documents = $scope.documents;
+//    	$scope.formDos.documentNames = $scope.documentNames;
+//    	$scope.formDos.documentContents = $scope.documentContents;
     	
     	console.log("formDos = ", $scope.formDos);
 		dossier.create($scope.formDos).$promise.then(function(result){
@@ -87,24 +87,24 @@
     
     // Ajouter un document à un dossier 
     
-    $scope.showContent = function($fileContent){    
-        var obj = {name:args.file.name}
-    	$scope.documents.push(obj);
-    };
-    $scope.$on("fileSelected", function (folder, args) {
-        $scope.$apply(function () {            
-            //Read content file
-        	var reader = new FileReader();
-        	reader.readAsBinaryString(args.file);
-        	
-        	//end of reading and loading
-        	reader.onloadend = function(e){
-        		var result = e.target.result;
-        		//var obj = {name:args.file.name,fileContent:result} ;   
-        		//name -> content
-            	$scope.documentNames.push(args.file.name);
-            	$scope.documentContents.push(result);
-        	}        	
-        });
-    });      
+//    $scope.showContent = function($fileContent){    
+//        var obj = {name:args.file.name}
+//    	$scope.documents.push(obj);
+//    };
+//    $scope.$on("fileSelected", function (folder, args) {
+//        $scope.$apply(function () {            
+//            //Read content file
+//        	var reader = new FileReader();
+//        	reader.readAsBinaryString(args.file);
+//        	
+//        	//end of reading and loading
+//        	reader.onloadend = function(e){
+//        		var result = e.target.result;
+//        		//var obj = {name:args.file.name,fileContent:result} ;   
+//        		//name -> content
+//            	$scope.documentNames.push(args.file.name);
+//            	$scope.documentContents.push(result);
+//        	}        	
+//        });
+//    });      
 };

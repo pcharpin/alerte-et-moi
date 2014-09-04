@@ -89,7 +89,7 @@ public class EvenementRestService {
 	@Path("/send")
 	@Consumes(MediaType.APPLICATION_JSON + ";charset=utf-8")
 	public Response add(Evenement evenement){	
-		
+
 		String [] datas =  evenement.getDocumentContents();
 		String [] datasNames = evenement.getDocumentNames();
 		

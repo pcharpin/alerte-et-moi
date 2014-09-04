@@ -24,13 +24,15 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import org.codehaus.jackson.annotate.JsonIgnoreProperties;
+
 /**
  * @author vdibi
  *
  */
 @Entity
 @Table(name="evenement")
-//@JsonIgnoreProperties({"hibernateLazyInitializer","handler"})
+@JsonIgnoreProperties({"hibernateLazyInitializer","handler"})
 public class Evenement implements Serializable{
 	
 	@Id @GeneratedValue

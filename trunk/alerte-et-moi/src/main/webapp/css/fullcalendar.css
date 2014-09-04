@@ -589,7 +589,10 @@ table.fc-border-separate {
 	/* New event Form
 ------------------------------------------------------------------------*/
 .form-help{
-	color: rgb(71, 69, 69);;
+	/*color: rgb(71, 69, 69);;*/
+	color: red;
+    text-align: center;
+    font-size: 20px;
 }
 
 .form-confirmation-button{
@@ -621,3 +624,15 @@ table.fc-border-separate {
 .form-status.error{
 	color: red;
 }
+
+
+
+
+.ngdialog-content {
+	width:585px !important;
+}
+/*
+.ngdialog-content .right-pan{
+position:absolute;top: 60px;right: 45px;
+}
+*/

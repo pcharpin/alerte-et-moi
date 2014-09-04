@@ -4,6 +4,7 @@
 package com.objectif.informatique.alerte.model;
 
 import java.io.Serializable;
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -53,12 +54,11 @@ public class Dossier implements Serializable{
 	@Column(name = "evtDos")
 	private String evtDos;
 	
-	@Transient
-	private String[] documentNames;
-	@Transient
-	private String[] documentContents;
+//	@Transient
+//	private String[] documentNames;
+//	@Transient
+//	private String[] documentContents;
 	
-	//@ManyToMany(targetEntity=Document.class, fetch=FetchType.LAZY)
 	@ManyToMany(fetch=FetchType.EAGER)
 	@JoinTable(
 			name="dossier_document",
@@ -67,6 +67,8 @@ public class Dossier implements Serializable{
 	)
 	private Set<Document> documents = new HashSet<Document>();
 	
+	//@JsonIgnore
+	//@OneToMany(mappedBy="dossier",fetch=FetchType.EAGER)
 	@JsonIgnore
 	@OneToMany(mappedBy="dossier",cascade = CascadeType.ALL)
 	private Set<Evenement> evenement = new HashSet<Evenement>();;
@@ -115,6 +117,7 @@ public class Dossier implements Serializable{
 	
 	@Column(name = "libreDos")
 	private String libre;
+	
 
 	/**
 	 * @return the idDos
@@ -123,8 +126,52 @@ public class Dossier implements Serializable{
 		return idDos;
 	}
 
+	public Dossier(){}
+	public Dossier(String nomDos){
+		super();
+		this.nomDos = nomDos;
+	}
+	
+	public Dossier(String nomDos, EnumTypesDossiers enumTypesDossiers,
+			String descDoc, String evtDos, String[] documentNames,
+			String[] documentContents, Set<Document> documents,
+			Set<Evenement> evenement, boolean priorDos, float mntDOS,
+			boolean periodJourDos, boolean periodHebdoDos,
+			boolean periodMensDos, boolean periodTrimDos,
+			boolean periodSemestDos, boolean periodAnuDos,
+			boolean periodSansDos, boolean actifDos, String cntNomDos,
+			String cntPrenomDos, String cntTelDos, String cntCmntDos,
+			String libre) {
+		super();
+		this.nomDos = nomDos;
+		this.enumTypesDossiers = enumTypesDossiers;
+		this.descDoc = descDoc;
+		this.evtDos = evtDos;
+//		this.documentNames = documentNames;
+//		this.documentContents = documentContents;
+		this.documents = documents;
+		this.evenement = evenement;
+		this.priorDos = priorDos;
+		this.mntDOS = mntDOS;
+		this.periodJourDos = periodJourDos;
+		this.periodHebdoDos = periodHebdoDos;
+		this.periodMensDos = periodMensDos;
+		this.periodTrimDos = periodTrimDos;
+		this.periodSemestDos = periodSemestDos;
+		this.periodAnuDos = periodAnuDos;
+		this.periodSansDos = periodSansDos;
+		this.actifDos = actifDos;
+		this.cntNomDos = cntNomDos;
+		this.cntPrenomDos = cntPrenomDos;
+		this.cntTelDos = cntTelDos;
+		this.cntCmntDos = cntCmntDos;
+		this.libre = libre;
+	}
+
+
 	public Dossier(int idDos, String nomDos,
-			EnumTypesDossiers enumTypesDossiers, String descDoc,String evtDos,
+			EnumTypesDossiers enumTypesDossiers, String descDoc, String evtDos,
+			String[] documentNames, String[] documentContents,
 			Set<Document> documents, Set<Evenement> evenement,
 			boolean priorDos, float mntDOS, boolean periodJourDos,
 			boolean periodHebdoDos, boolean periodMensDos,
@@ -137,84 +184,26 @@ public class Dossier implements Serializable{
 		this.nomDos = nomDos;
 		this.enumTypesDossiers = enumTypesDossiers;
 		this.descDoc = descDoc;
-		this.evtDos =  evtDos;
-		this.documents = documents;
-		this.evenement = evenement;
-		this.priorDos = priorDos;
-		this.mntDOS = mntDOS;
-		this.periodJourDos = periodJourDos;
-		this.periodHebdoDos = periodHebdoDos;
-		this.periodMensDos = periodMensDos;
-		this.periodTrimDos = periodTrimDos;
-		this.periodSemestDos = periodSemestDos;
-		this.periodAnuDos = periodAnuDos;
-		this.periodSansDos = periodSansDos;
-		this.actifDos = actifDos;
-		this.cntNomDos = cntNomDos;
-		this.cntPrenomDos = cntPrenomDos;
-		this.cntTelDos = cntTelDos;
-		this.cntCmntDos = cntCmntDos;
-		this.libre = libre;
-	}
-	
-	public Dossier(String nomDos,
-			EnumTypesDossiers enumTypesDossiers, String descDoc,String evtDos,
-			Set<Document> documents, Set<Evenement> evenements,
-			boolean priorDos, float mntDOS, boolean periodJourDos,
-			boolean periodHebdoDos, boolean periodMensDos,
-			boolean periodTrimDos, boolean periodSemestDos,
-			boolean periodAnuDos, boolean periodSansDos, boolean actifDos,
-			String cntNomDos, String cntPrenomDos, String cntTelDos,
-			String cntCmntDos, String libre) {
-		super();
-		this.nomDos = nomDos;
-		this.enumTypesDossiers = enumTypesDossiers;
-		this.descDoc = descDoc;
-		this.evtDos =  evtDos;
-		this.documents = documents;
-		this.evenement = evenement;
-		this.priorDos = priorDos;
-		this.mntDOS = mntDOS;
-		this.periodJourDos = periodJourDos;
-		this.periodHebdoDos = periodHebdoDos;
-		this.periodMensDos = periodMensDos;
-		this.periodTrimDos = periodTrimDos;
-		this.periodSemestDos = periodSemestDos;
-		this.periodAnuDos = periodAnuDos;
-		this.periodSansDos = periodSansDos;
-		this.actifDos = actifDos;
-		this.cntNomDos = cntNomDos;
-		this.cntPrenomDos = cntPrenomDos;
-		this.cntTelDos = cntTelDos;
-		this.cntCmntDos = cntCmntDos;
-		this.libre = libre;
-	}
-	
-	public Dossier(){}
-	
-	/**
-	 * @return the evtDos
-	 */
-	public String getEvtDos() {
-		return evtDos;
-	}
-
-	/**
-	 * @param evtDos the evtDos to set
-	 */
-	public void setEvtDos(String evtDos) {
 		this.evtDos = evtDos;
-	}
-
-	public Dossier(String nomDos) {
-		this.nomDos = nomDos;
-	}
-
-	/**
-	 * @param idDos the idDos to set
-	 */
-	public void setIdDos(int idDos) {
-		this.idDos = idDos;
+//		this.documentNames = documentNames;
+//		this.documentContents = documentContents;
+		this.documents = documents;
+		this.evenement = evenement;
+		this.priorDos = priorDos;
+		this.mntDOS = mntDOS;
+		this.periodJourDos = periodJourDos;
+		this.periodHebdoDos = periodHebdoDos;
+		this.periodMensDos = periodMensDos;
+		this.periodTrimDos = periodTrimDos;
+		this.periodSemestDos = periodSemestDos;
+		this.periodAnuDos = periodAnuDos;
+		this.periodSansDos = periodSansDos;
+		this.actifDos = actifDos;
+		this.cntNomDos = cntNomDos;
+		this.cntPrenomDos = cntPrenomDos;
+		this.cntTelDos = cntTelDos;
+		this.cntCmntDos = cntCmntDos;
+		this.libre = libre;
 	}
 
 	/**
@@ -224,12 +213,16 @@ public class Dossier implements Serializable{
 		return nomDos;
 	}
 
+
+
 	/**
 	 * @param nomDos the nomDos to set
 	 */
 	public void setNomDos(String nomDos) {
 		this.nomDos = nomDos;
 	}
+
+
 
 	/**
 	 * @return the enumTypesDossiers
@@ -238,12 +231,16 @@ public class Dossier implements Serializable{
 		return enumTypesDossiers;
 	}
 
+
+
 	/**
 	 * @param enumTypesDossiers the enumTypesDossiers to set
 	 */
 	public void setEnumTypesDossiers(EnumTypesDossiers enumTypesDossiers) {
 		this.enumTypesDossiers = enumTypesDossiers;
 	}
+
+
 
 	/**
 	 * @return the descDoc
@@ -252,6 +249,8 @@ public class Dossier implements Serializable{
 		return descDoc;
 	}
 
+
+
 	/**
 	 * @param descDoc the descDoc to set
 	 */
@@ -259,272 +258,79 @@ public class Dossier implements Serializable{
 		this.descDoc = descDoc;
 	}
 
-	/**
-	 * @return the evenements
-	 */
-/*	public Set<Evenement> getEvenements() {
-		return evenements;
-	}*/
+
 
 	/**
-	 * @param evenements the evenements to set
+	 * @return the evtDos
 	 */
-/*	public void setEvenements(Set<Evenement> evenements) {
-		this.evenements = evenements;
-	}*/
-
-	/**
-	 * @return the priorDos
-	 */
-	public boolean isPriorDos() {
-		return priorDos;
+	public String getEvtDos() {
+		return evtDos;
 	}
 
-	/**
-	 * @param priorDos the priorDos to set
-	 */
-	public void setPriorDos(boolean priorDos) {
-		this.priorDos = priorDos;
-	}
+
 
 	/**
-	 * @return the mntDOS
+	 * @param evtDos the evtDos to set
 	 */
-	public float getMntDOS() {
-		return mntDOS;
+	public void setEvtDos(String evtDos) {
+		this.evtDos = evtDos;
 	}
 
-	/**
-	 * @param mntDOS the mntDOS to set
-	 */
-	public void setMntDOS(float mntDOS) {
-		this.mntDOS = mntDOS;
-	}
 
-	/**
-	 * @return the periodJourDos
-	 */
-	public boolean isPeriodJourDos() {
-		return periodJourDos;
-	}
 
-	/**
-	 * @param periodJourDos the periodJourDos to set
-	 */
-	public void setPeriodJourDos(boolean periodJourDos) {
-		this.periodJourDos = periodJourDos;
-	}
+//	/**
+//	 * @return the documentNames
+//	 */
+//	public String[] getDocumentNames() {
+//		return documentNames;
+//	}
+//
+//
+//
+//	/**
+//	 * @param documentNames the documentNames to set
+//	 */
+//	public void setDocumentNames(String[] documentNames) {
+//		this.documentNames = documentNames;
+//	}
+//
+//
+//
+//	/**
+//	 * @return the documentContents
+//	 */
+//	public String[] getDocumentContents() {
+//		return documentContents;
+//	}
 
-	/**
-	 * @return the periodHebdoDos
-	 */
-	public boolean isPeriodHebdoDos() {
-		return periodHebdoDos;
-	}
 
-	/**
-	 * @param periodHebdoDos the periodHebdoDos to set
-	 */
-	public void setPeriodHebdoDos(boolean periodHebdoDos) {
-		this.periodHebdoDos = periodHebdoDos;
-	}
-
-	/**
-	 * @return the periodMensDos
-	 */
-	public boolean isPeriodMensDos() {
-		return periodMensDos;
-	}
-
-	/**
-	 * @param periodMensDos the periodMensDos to set
-	 */
-	public void setPeriodMensDos(boolean periodMensDos) {
-		this.periodMensDos = periodMensDos;
-	}
-
-	/**
-	 * @return the periodTrimDos
-	 */
-	public boolean isPeriodTrimDos() {
-		return periodTrimDos;
-	}
-
-	/**
-	 * @param periodTrimDos the periodTrimDos to set
-	 */
-	public void setPeriodTrimDos(boolean periodTrimDos) {
-		this.periodTrimDos = periodTrimDos;
-	}
-
-	/**
-	 * @return the periodSemestDos
-	 */
-	public boolean isPeriodSemestDos() {
-		return periodSemestDos;
-	}
-
-	/**
-	 * @param periodSemestDos the periodSemestDos to set
-	 */
-	public void setPeriodSemestDos(boolean periodSemestDos) {
-		this.periodSemestDos = periodSemestDos;
-	}
-
-	/**
-	 * @return the periodAnuDos
-	 */
-	public boolean isPeriodAnuDos() {
-		return periodAnuDos;
-	}
-
-	/**
-	 * @param periodAnuDos the periodAnuDos to set
-	 */
-	public void setPeriodAnuDos(boolean periodAnuDos) {
-		this.periodAnuDos = periodAnuDos;
-	}
-
-	/**
-	 * @return the periodSansDos
-	 */
-	public boolean isPeriodSansDos() {
-		return periodSansDos;
-	}
-
-	/**
-	 * @param periodSansDos the periodSansDos to set
-	 */
-	public void setPeriodSansDos(boolean periodSansDos) {
-		this.periodSansDos = periodSansDos;
-	}
-
-	/**
-	 * @return the actifDos
-	 */
-	public boolean isActifDos() {
-		return actifDos;
-	}
-
-	/**
-	 * @param actifDos the actifDos to set
-	 */
-	public void setActifDos(boolean actifDos) {
-		this.actifDos = actifDos;
-	}
-
-	/**
-	 * @return the cntNomDos
-	 */
-	public String getCntNomDos() {
-		return cntNomDos;
-	}
-
-	/**
-	 * @param cntNomDos the cntNomDos to set
-	 */
-	public void setCntNomDos(String cntNomDos) {
-		this.cntNomDos = cntNomDos;
-	}
-
-	/**
-	 * @return the cntPrenomDos
-	 */
-	public String getCntPrenomDos() {
-		return cntPrenomDos;
-	}
-
-	/**
-	 * @param cntPrenomDos the cntPrenomDos to set
-	 */
-	public void setCntPrenomDos(String cntPrenomDos) {
-		this.cntPrenomDos = cntPrenomDos;
-	}
-
-	/**
-	 * @return the cntTelDos
-	 */
-	public String getCntTelDos() {
-		return cntTelDos;
-	}
-
-	/**
-	 * @param cntTelDos the cntTelDos to set
-	 */
-	public void setCntTelDos(String cntTelDos) {
-		this.cntTelDos = cntTelDos;
-	}
-
-	/**
-	 * @return the cntCmntDos
-	 */
-	public String getCntCmntDos() {
-		return cntCmntDos;
-	}
-
-	/**
-	 * @param cntCmntDos the cntCmntDos to set
-	 */
-	public void setCntCmntDos(String cntCmntDos) {
-		this.cntCmntDos = cntCmntDos;
-	}
-
-	/**
-	 * @return the libre
-	 */
-	public String getLibre() {
-		return libre;
-	}
-
-	/**
-	 * @param libre the libre to set
-	 */
-	public void setLibre(String libre) {
-		this.libre = libre;
-	}
-
-	
-	/**
-	 * @return the documentNames
-	 */
-	public String[] getDocumentNames() {
-		return documentNames;
-	}
-
-	/**
-	 * @param documentNames the documentNames to set
-	 */
-	public void setDocumentNames(String[] documentNames) {
-		this.documentNames = documentNames;
-	}
-
-	/**
-	 * @return the documentContents
-	 */
-	public String[] getDocumentContents() {
-		return documentContents;
-	}
 
 	/**
 	 * @param documentContents the documentContents to set
 	 */
-	public void setDocumentContents(String[] documentContents) {
-		this.documentContents = documentContents;
-	}
+//	public void setDocumentContents(String[] documentContents) {
+//		this.documentContents = documentContents;
+//	}
+
+
 
 	/**
-	 * @return the documents
+	 * @return the documentsDossier
 	 */
 	public Set<Document> getDocuments() {
 		return documents;
 	}
 
+
+
 	/**
-	 * @param documents the documents to set
+	 * @param documentsDossier the documentsDossier to set
 	 */
 	public void setDocuments(Set<Document> documents) {
 		this.documents = documents;
 	}
+
+
 
 	/**
 	 * @return the evenement
@@ -533,12 +339,295 @@ public class Dossier implements Serializable{
 		return evenement;
 	}
 
+
+
 	/**
 	 * @param evenement the evenement to set
 	 */
 	public void setEvenement(Set<Evenement> evenement) {
 		this.evenement = evenement;
 	}
+
+
+
+	/**
+	 * @return the priorDos
+	 */
+	public boolean isPriorDos() {
+		return priorDos;
+	}
+
+
+
+	/**
+	 * @param priorDos the priorDos to set
+	 */
+	public void setPriorDos(boolean priorDos) {
+		this.priorDos = priorDos;
+	}
+
+
+
+	/**
+	 * @return the mntDOS
+	 */
+	public float getMntDOS() {
+		return mntDOS;
+	}
+
+
+
+	/**
+	 * @param mntDOS the mntDOS to set
+	 */
+	public void setMntDOS(float mntDOS) {
+		this.mntDOS = mntDOS;
+	}
+
+
+
+	/**
+	 * @return the periodJourDos
+	 */
+	public boolean isPeriodJourDos() {
+		return periodJourDos;
+	}
+
+
+
+	/**
+	 * @param periodJourDos the periodJourDos to set
+	 */
+	public void setPeriodJourDos(boolean periodJourDos) {
+		this.periodJourDos = periodJourDos;
+	}
+
+
+
+	/**
+	 * @return the periodHebdoDos
+	 */
+	public boolean isPeriodHebdoDos() {
+		return periodHebdoDos;
+	}
+
+
+
+	/**
+	 * @param periodHebdoDos the periodHebdoDos to set
+	 */
+	public void setPeriodHebdoDos(boolean periodHebdoDos) {
+		this.periodHebdoDos = periodHebdoDos;
+	}
+
+
+
+	/**
+	 * @return the periodMensDos
+	 */
+	public boolean isPeriodMensDos() {
+		return periodMensDos;
+	}
+
+
+
+	/**
+	 * @param periodMensDos the periodMensDos to set
+	 */
+	public void setPeriodMensDos(boolean periodMensDos) {
+		this.periodMensDos = periodMensDos;
+	}
+
+
+
+	/**
+	 * @return the periodTrimDos
+	 */
+	public boolean isPeriodTrimDos() {
+		return periodTrimDos;
+	}
+
+
+
+	/**
+	 * @param periodTrimDos the periodTrimDos to set
+	 */
+	public void setPeriodTrimDos(boolean periodTrimDos) {
+		this.periodTrimDos = periodTrimDos;
+	}
+
+
+
+	/**
+	 * @return the periodSemestDos
+	 */
+	public boolean isPeriodSemestDos() {
+		return periodSemestDos;
+	}
+
+
+
+	/**
+	 * @param periodSemestDos the periodSemestDos to set
+	 */
+	public void setPeriodSemestDos(boolean periodSemestDos) {
+		this.periodSemestDos = periodSemestDos;
+	}
+
+
+
+	/**
+	 * @return the periodAnuDos
+	 */
+	public boolean isPeriodAnuDos() {
+		return periodAnuDos;
+	}
+
+
+
+	/**
+	 * @param periodAnuDos the periodAnuDos to set
+	 */
+	public void setPeriodAnuDos(boolean periodAnuDos) {
+		this.periodAnuDos = periodAnuDos;
+	}
+
+
+
+	/**
+	 * @return the periodSansDos
+	 */
+	public boolean isPeriodSansDos() {
+		return periodSansDos;
+	}
+
+
+
+	/**
+	 * @param periodSansDos the periodSansDos to set
+	 */
+	public void setPeriodSansDos(boolean periodSansDos) {
+		this.periodSansDos = periodSansDos;
+	}
+
+
+
+	/**
+	 * @return the actifDos
+	 */
+	public boolean isActifDos() {
+		return actifDos;
+	}
+
+
+
+	/**
+	 * @param actifDos the actifDos to set
+	 */
+	public void setActifDos(boolean actifDos) {
+		this.actifDos = actifDos;
+	}
+
+
+
+	/**
+	 * @return the cntNomDos
+	 */
+	public String getCntNomDos() {
+		return cntNomDos;
+	}
+
+
+
+	/**
+	 * @param cntNomDos the cntNomDos to set
+	 */
+	public void setCntNomDos(String cntNomDos) {
+		this.cntNomDos = cntNomDos;
+	}
+
+
+
+	/**
+	 * @return the cntPrenomDos
+	 */
+	public String getCntPrenomDos() {
+		return cntPrenomDos;
+	}
+
+
+
+	/**
+	 * @param cntPrenomDos the cntPrenomDos to set
+	 */
+	public void setCntPrenomDos(String cntPrenomDos) {
+		this.cntPrenomDos = cntPrenomDos;
+	}
+
+
+
+	/**
+	 * @return the cntTelDos
+	 */
+	public String getCntTelDos() {
+		return cntTelDos;
+	}
+
+
+
+	/**
+	 * @param cntTelDos the cntTelDos to set
+	 */
+	public void setCntTelDos(String cntTelDos) {
+		this.cntTelDos = cntTelDos;
+	}
+
+
+
+	/**
+	 * @return the cntCmntDos
+	 */
+	public String getCntCmntDos() {
+		return cntCmntDos;
+	}
+
+
+
+	/**
+	 * @param cntCmntDos the cntCmntDos to set
+	 */
+	public void setCntCmntDos(String cntCmntDos) {
+		this.cntCmntDos = cntCmntDos;
+	}
+
+
+
+	/**
+	 * @return the libre
+	 */
+	public String getLibre() {
+		return libre;
+	}
+
+
+
+	/**
+	 * @param libre the libre to set
+	 */
+	public void setLibre(String libre) {
+		this.libre = libre;
+	}
+
+
+
+	/**
+	 * @param idDos the idDos to set
+	 */
+	public void setIdDos(int idDos) {
+		this.idDos = idDos;
+	}
+
+
 
 	/* (non-Javadoc)
 	 * @see java.lang.Object#toString()
@@ -556,7 +645,11 @@ public class Dossier implements Serializable{
 		builder.append(descDoc);
 		builder.append(", evtDos=");
 		builder.append(evtDos);
-		builder.append(", documents=");
+		builder.append(", documentNames=");
+//		builder.append(Arrays.toString(documentNames));
+//		builder.append(", documentContents=");
+//		builder.append(Arrays.toString(documentContents));
+//		builder.append(", documentsDossier=");
 		builder.append(documents);
 		builder.append(", evenement=");
 		builder.append(evenement);
@@ -592,5 +685,5 @@ public class Dossier implements Serializable{
 		builder.append(libre);
 		builder.append("]");
 		return builder.toString();
-	}	
+	}
 }

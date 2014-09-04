@@ -1,3 +1,4 @@
+
 /**
  * 
  */
@@ -35,8 +36,6 @@ public class Alerte implements Serializable{
 	@Id @GeneratedValue
 	@Column(name = "idAler")
 	private int idAler;
-//	@Column(name = "idEvt")
-//	private int idEvt;
 	@Column(name="typeDeclenchAler")
 	@Enumerated(EnumType.STRING)
 	private EnumConstante enumConstante;
@@ -69,11 +68,10 @@ public class Alerte implements Serializable{
 	 * @param evenement
 	 * @param responsables
 	 */
-	public Alerte(int idAler, /*int idEvt,*/ EnumConstante enumConstante,
+	public Alerte(int idAler,EnumConstante enumConstante,
 			Date dateAlerte, Evenement evenement, Set<Responsable> responsables) {
 		super();
 		this.idAler = idAler;
-		//this.idEvt = idEvt;
 		this.enumConstante = enumConstante;
 		this.dateAlerte = dateAlerte;
 		this.evenement = evenement;
@@ -93,20 +91,6 @@ public class Alerte implements Serializable{
 	public void setIdAler(int idAler) {
 		this.idAler = idAler;
 	}
-
-	/**
-	 * @return the idEvt
-	 */
-//	public int getIdEvt() {
-//		return idEvt;
-//	}
-//
-//	/**
-//	 * @param idEvt the idEvt to set
-//	 */
-//	public void setIdEvt(int idEvt) {
-//		this.idEvt = idEvt;
-//	}
 
 	/**
 	 * @return the enumConstante
