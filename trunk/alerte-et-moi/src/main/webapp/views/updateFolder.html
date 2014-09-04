@@ -1,0 +1,63 @@
+<form>
+<table style="margin: auto;"><tr><td style="width: 290px;">
+	<div class="">
+	<div>
+		<label>Nom du dossier:</label><input type="text"
+			ng-model="formDos.nomDos" />
+	</div>
+	<div>
+		<label>Type de dossier :</label>	
+		<select ng-model="formDos.enumTypesDossiers">
+		<option value="TaxesEtImpots">Taxes et impôts</option>
+		<option value="ChargesSociales">Charges sociales</option>
+		<option value="Comptabilite">Comptabilité</option>
+		<option value="ArreteComptable">Arrêté comptable</option>	
+		<option value="VieSociale">Vie sociale</option>
+		<option value="Salaries">Salariés</option>
+		<option value="Clients">Clients</option>
+		<option value="FournisseursIndependant">Fournisseurs/Indépendants</option>
+		</select> 
+	</div>
+	<div>
+		<label>Description :</label>
+		<input type="text"
+			ng-model="formDos.descDoc" />
+		<!-- <textarea ng-model="formDos.descDoc"></textarea> -->
+	</div>
+	<div><label>Etape à suivre :</label><textarea ng-model="formDos.evtDos"></textarea></div> 
+	<!-- <div>
+		<label>Document rattaché :</label><input type="file"
+			ng-model="formDos.documents" />
+		<button type="button" ng-click="detailDos(event.idDos)"
+			class="btn btn-warning">Ajouter un nouveau document</button>
+	</div> -->
+	<div>
+		<!-- <label>Document rattach&eacute; :</label><input id="file" type="file" file-Upload-Folder multiple ng-model="formEvt.documents"/> -->
+		<label>Document rattach&eacute; :</label><input id="file" type="file" ng-model="formEvt.documents"/>
+ 	</div>
+	<div>
+		<label>Montant :</label><input type="text" ng-model="formDos.mntDOS" />
+	</div>
+	<div>
+		<label>Périodicité:</label> 
+		<input type="checkbox" name="periodMensDos" ng-model="formDos.periodMensDos">Mensuel 
+		<input type="checkbox" name="periodTrimDos" ng-model="formDos.periodTrimDos">Trimestriel
+		<input type="checkbox" name="periodSemestDos" ng-model="formDos.periodSemestDos">Semestriel 
+		<input type="checkbox" name="periodAnuDos" ng-model="formDos.periodAnuDos">Annuel
+	</div> 
+	</div> 
+	
+	</td><td>
+<div class="right-pan">
+	<div>
+		<h3>Contact principal:</h3>
+		<label>Nom:</label><input type="text" ng-model="formDos.cntNomDos" />
+		<label>Prenom:</label><input type="text" ng-model="formDos.cntPrenomDos"/> 
+		<label>Téléphone:</label><input type="text" ng-model="formDos.cntTelDos" /> 
+		<label>Commentaire:</label>
+		<textarea ng-model="formDos.cntCmntDos"></textarea>
+	</div>
+</td></tr></table>
+	<input type="submit" id="submitDos" value="Modifier" ng-click="submitUpdateDos()" />
+</div>
+</form>
