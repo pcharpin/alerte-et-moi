@@ -19,50 +19,52 @@ import com.sun.jersey.api.client.WebResource;
 
 public class JerseyClientPostEventTest {
 	@Autowired
-	static
-	DossierService dossierService;
+	static DossierService dossierService;
+
 	/**
 	 * @param args
 	 */
 	public static void main(String[] args) {
 		EntityManagerFactory emf;
 		emf = Persistence.createEntityManagerFactory("JpaALerte");
-		 EntityManager em = emf.createEntityManager();
+		EntityManager em = emf.createEntityManager();
 		try {
-			Client client =  Client.create();
-			WebResource webResource = client.resource("http://localhost:8080/alerte-et-moi/rest/evenement/send");
-			
+			Client client = Client.create();
+			WebResource webResource = client
+					.resource("http://localhost:8080/alerte-et-moi/rest/evenement/send");
+
 			EvenementDAOImpl evenementDAOImpl = new EvenementDAOImpl(em);
-			
+
 			// Evenement
 			Evenement evenement = new Evenement();
 			evenement.setNomEvt("RSI test mardi");
 			evenement.setDateEchEvt(new Date());
-		
-			Dossier dossier =  em.find(Dossier.class, 2);
+
+			Dossier dossier = em.find(Dossier.class, 2);
 			System.out.println("****dossier***" + dossier);
 			Responsable resp = em.find(Responsable.class, 1);
-			
+
 			evenement.setDossier(dossier);
-			//evenement.setResponsable(resp);
-								
+			// evenement.setResponsable(resp);
+
 			em.getTransaction().begin();
 			evenementDAOImpl.create(evenement);
 			em.getTransaction().commit();
-												
-			ClientResponse response = webResource.accept("application/json").post(ClientResponse.class,evenement);
-			
-			if(response.getStatus() != 200) {
-				   throw new RuntimeException("Failed : HTTP error code : "
-					+ response.getStatus());
-				}
-		 
-				String output = response.getEntity(String.class);
-		 
-				System.out.println("Output from Server .... \n");
-	
-				System.out.println(output);
-		 
+
+			ClientResponse response = webResource.accept("application/json")
+					.post(ClientResponse.class, evenement);
+
+			if (response.getStatus() != 200) {
+				throw new RuntimeException("Failed : HTTP error code : "
+						+ response.getStatus());
+			}
+
+			String output = response.getEntity(String.class);
+
+			System.out.println("Output from Server .... \n");
+
+			System.out.println(output);
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

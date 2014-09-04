@@ -238,6 +238,18 @@
 	    	});
 	    };
 	    
+	    /*Mise à jour événemenet en base*/
+	    
+	    $scope.updateEvt = function(evtId) {
+	    	evenement.update({}, {evtId : evtId}).$promise.then(function(result){
+	    		
+	    	});
+	    };
+	    
+	    
+	    
+	    
+	    
     	/*suppression**/
     	 $scope.deleteEvent = function(evtId) {
     		// alert(evtId);
@@ -294,7 +306,8 @@
         $scope.formEvt = event;
 		
     	ngDialog.open({
-    		template: 'views/eventUpdate.html?v=9',
+    		//template: 'views/eventUpdate.html?v=9',
+    		template: 'views/ModifEvent.html?v=9',
     		scope: $scope
     	});
         
