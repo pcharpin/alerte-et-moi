@@ -19,6 +19,13 @@
 	    	console.log("resultat du create"+ result);
     	});
 	};	 
+	
+	//*************************Suppression d'un dossier****************************
+	 $scope.deleteFolder = function(idFolder) {
+			dossier.deleteFolder({}, {idFolder : idFolder}).$promise.then(function(result){
+				console.log("suppression ok"+ result);
+			});
+	    };	
 	//***************************Mise à jour d'un dossier*******************
 	  $scope.submitUpdateDos = function(idFolder) {
 		  console.log("formDoso_o = ", $scope.formDos);
@@ -30,6 +37,7 @@
 		//******************Retour à la liste des dossier*****************
 		  $scope.cancel = function() {
 		    	ngDialog.open({
+		    		//template: 'views/folders.html?v=9',
 		    		template: 'views/folders.html?v=9',
 		    		scope: $scope
 		    	});  
@@ -52,16 +60,13 @@
 		$scope.initCreer();
 	};
     
-    $scope.deleteFolder = function(idFolder) {
-		dossier.deleteFolder({}, {idFolder : idFolder}).$promise.then(function(result){
-			console.log("suppression ok"+ result);
-		});
-    };	
-    
     $scope.editFolder = function( folder ){   	
-        $scope.formDos = folder;		
+        $scope.formDos = folder;
+        console.log("folder _o_ = ", $scope.formDos);
+        
     	ngDialog.open({
-    		template: 'views/updateFolder.html?v=9',
+    		//template: 'views/updateFolder.html?v=9',
+    		template: 'views/updateFolder.html',
     		scope: $scope
     	});       
     };    

@@ -43,6 +43,6 @@ services.factory('dossier', function($resource){
 		get: {method: 'GET',params: { arg1: '@evtId' }, isArray: false},
 		create: {method: 'POST', params: { arg1: 'sendFolder' }},
 		deleteFolder: {method: 'DELETE', params: { arg1: '@idFolder' }},
-		update: {method: 'PUT', params: { arg1: '/update/@idFolder}' }}
+		update: {method: 'PUT', params: { arg1: '@idFolder}' }}
 	});
 	});
