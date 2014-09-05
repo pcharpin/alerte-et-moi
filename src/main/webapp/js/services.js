@@ -5,11 +5,6 @@ services.factory('evenements', function($resource){
 		findAll: {method:'GET', isArray:true}
 	});
 	});
-/*
-services.factory('evenement', function($resource){
-	return $resource('rest/evenement/send', {}, {
-	});
-	});*/
 
 services.factory('dossiers', function($resource){
 	return $resource('rest/dossier/getFolders', {}, {
@@ -34,15 +29,15 @@ services.factory('evenement', function($resource){
 		get: {method: 'GET',params: { arg1: '@evtId' }, isArray: false},
 		create: {method: 'POST', params: { arg1: 'send'}},
 		deleteEvent: {method: 'DELETE', params: { arg1: '@evtId'}},
-		update: {method: 'PUT', params: { arg1: '@evtId}' }}
+		update: {method: 'PUT', params: { arg1: '@evtId}'}}
 	});
 	});
 
 services.factory('dossier', function($resource){
 	return $resource('rest/dossier/:arg1', {}, {
-		get: {method: 'GET',params: { arg1: '@evtId' }, isArray: false},
+		get: {method: 'GET',params: { arg1: '@idFolder' }, isArray: false},
 		create: {method: 'POST', params: { arg1: 'sendFolder' }},
 		deleteFolder: {method: 'DELETE', params: { arg1: '@idFolder' }},
-		update: {method: 'PUT', params: { arg1: '@idFolder}' }}
+		updateFolder: {method: 'POST', params: { arg1: '@idFolder'}}
 	});
 	});
