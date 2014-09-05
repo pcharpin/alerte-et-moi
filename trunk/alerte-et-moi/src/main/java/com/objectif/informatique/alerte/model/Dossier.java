@@ -133,8 +133,8 @@ public class Dossier implements Serializable{
 	}
 	
 	public Dossier(String nomDos, EnumTypesDossiers enumTypesDossiers,
-			String descDoc, String evtDos, String[] documentNames,
-			String[] documentContents, Set<Document> documents,
+			String descDoc, String evtDos/*, String[] documentNames,
+			String[] documentContents, Set<Document> documents*/,
 			Set<Evenement> evenement, boolean priorDos, float mntDOS,
 			boolean periodJourDos, boolean periodHebdoDos,
 			boolean periodMensDos, boolean periodTrimDos,
@@ -171,7 +171,7 @@ public class Dossier implements Serializable{
 
 	public Dossier(int idDos, String nomDos,
 			EnumTypesDossiers enumTypesDossiers, String descDoc, String evtDos,
-			String[] documentNames, String[] documentContents,
+			/*String[] documentNames, String[] documentContents,*/
 			Set<Document> documents, Set<Evenement> evenement,
 			boolean priorDos, float mntDOS, boolean periodJourDos,
 			boolean periodHebdoDos, boolean periodMensDos,

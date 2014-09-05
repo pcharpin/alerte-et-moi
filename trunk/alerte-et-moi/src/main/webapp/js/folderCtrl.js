@@ -2,8 +2,8 @@
     $scope.formDos={};
     $scope.listDossiers=[];
     $scope.documents=[];
-    $scope.documentNames=[];
-    $scope.documentContents=[];
+//    $scope.documentNames=[];
+//    $scope.documentContents=[];
     
 	//****************Ajouter un dossier*******************    
     
@@ -84,8 +84,8 @@
     			"enumTypesDossiers":[],
     			"descDoc": "",
     			"evtDos": "",
-    			"documentNames":  [],
-    			"documentContents":  [],
+//    			"documentNames":  [],
+//    			"documentContents":  [],
     			"documents": [],
     			"priorDos": false,
     			"mntDOS": 0,
