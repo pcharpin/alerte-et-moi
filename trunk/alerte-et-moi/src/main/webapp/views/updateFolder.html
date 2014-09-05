@@ -2,6 +2,7 @@
 <table style="margin: auto;"><tr><td style="width: 290px;">
 	<div class="">
 	<div>
+{{formDos}}
 		<label>Nom du dossier:</label><input type="text"
 			ng-model="formDos.nomDos" />
 	</div>
@@ -39,7 +40,7 @@
 		<label>Montant :</label><input type="text" ng-model="formDos.mntDOS" />
 	</div>
 	<div>
-		<label>P&eacute;©riodicit&eacute;:</label> 
+		<label>P&eacute;riodicit&eacute;:</label> 
 		<input type="checkbox" name="periodMensDos" ng-model="formDos.periodMensDos">Mensuel 
 		<input type="checkbox" name="periodTrimDos" ng-model="formDos.periodTrimDos">Trimestriel
 		<input type="checkbox" name="periodSemestDos" ng-model="formDos.periodSemestDos">Semestriel 
@@ -59,8 +60,7 @@
 	</div>
 </td></tr></table>
 	<input type="submit" id="submitDos" value="Modifier" ng-click="submitUpdateDos(formDos.idDos)" />
-	<h1>{{formDos.idDos}}</h1>
 	<!-- <a href="views/folders.html">Annuler</a> -->
-	<!-- <input type="submit" id="cancelDos" value="Annuler" ng-click="cancel()" /> -->
+	<input type="submit" id="cancelDos" value="Annuler" ng-click="cancel()" />
 </div>
 </form>

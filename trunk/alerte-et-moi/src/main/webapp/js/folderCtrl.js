@@ -1,4 +1,4 @@
-﻿function FolderCtrl($rootScope, $scope, dossiers, dossier, ngDialog) {
+﻿function FolderCtrl($rootScope, $scope, dossiers, dossier, ngDialog,$location) {
     $scope.formDos={};
     $scope.listDossiers=[];
     $scope.documents=[];
@@ -28,19 +28,17 @@
 	    };	
 	//***************************Mise à jour d'un dossier*******************
 	  $scope.submitUpdateDos = function(idFolder) {
-		  console.log("formDoso_o = ", $scope.formDos);
-		  dossier.update({}, {idFolder : idFolder}).$promise.then(function(result){
-				console.log("Mise à jour ok"+ result);
+	  
+		  //dossier.updateFolder($scope.formDos, {idFolder : idFolder}).$promise.then(function(result){
+		  dossier.updateFolder({},{idFolder : idFolder}).$promise.then(function(result){
+			  console.log("mis à jour ok"+ result);
+			  ngDialog.closeAll(); 
 			});
 		};	 
 	
 		//******************Retour à la liste des dossier*****************
 		  $scope.cancel = function() {
-		    	ngDialog.open({
-		    		//template: 'views/folders.html?v=9',
-		    		template: 'views/folders.html?v=9',
-		    		scope: $scope
-		    	});  
+			  ngDialog.closeAll(); 
 			};	 
 		
 	$scope.initCreer = function() {

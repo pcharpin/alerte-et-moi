@@ -119,7 +119,7 @@ public class DossierRestService {
 		return Response.status(200).entity(dossier).build();
 	}
 	
-	@PUT
+	@POST
 	@Path("/{id}")
 	//@Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
 	@Transactional
@@ -131,7 +131,7 @@ public class DossierRestService {
 	
 	@DELETE
 	@Path("/{id}")
-	//@Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
+	@Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
 	@Transactional
 	public Response deleteFolder(@PathParam("id") int id){
 		Dossier dossier =  service.getDossierById(id);
