@@ -55,8 +55,10 @@ public class Responsable implements Serializable{
 	@ManyToMany(cascade = CascadeType.ALL, fetch=FetchType.EAGER)
 	@JoinTable(
 			name="responsable_alerte",
-			joinColumns={@JoinColumn(name="Alerte_idAler")},
-			inverseJoinColumns={@JoinColumn(name="Responsable_idResp")}
+			//joinColumns={@JoinColumn(name="Alerte_idAler")},
+			//inverseJoinColumns={@JoinColumn(name="Responsable_idResp")}
+			joinColumns={@JoinColumn(name="Responsable_idResp")},
+		    inverseJoinColumns={@JoinColumn(name="Alerte_idAler")}
 	)
 	private Set<Alerte> alertes = new HashSet<Alerte>();
 
