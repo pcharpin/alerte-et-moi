@@ -15,6 +15,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 /**
@@ -37,9 +38,10 @@ public class Profil implements Serializable{
 	private EnumTypeProf enumTypeProf;
 	@Column(name="descProf")
 	private String descProf;
-	@ManyToOne(cascade = CascadeType.ALL, fetch=FetchType.EAGER)
-	@JoinColumn(name="Profil_idProf")
-	private Responsable responsable;	
+	//@ManyToOne(cascade = CascadeType.ALL, fetch=FetchType.EAGER)
+//	@OneToOne
+//	@JoinColumn(name="Profil_idProf")
+//	private Responsable responsable;	
 	
 	
 	/**
@@ -49,13 +51,13 @@ public class Profil implements Serializable{
 	 */
 	public Profil(){}
 	
-	public Profil(int idProf, EnumTypeProf enumTypeProf, String descProf,
-			Responsable responsable) {
+	public Profil(int idProf, EnumTypeProf enumTypeProf, String descProf
+			/*Responsable responsable*/) {
 		super();
 		this.idProf = idProf;
 		this.enumTypeProf = enumTypeProf;
 		this.descProf = descProf;
-		this.responsable = responsable;
+		//this.responsable = responsable;
 	}
 
 	/**
@@ -95,19 +97,19 @@ public class Profil implements Serializable{
 		this.descProf = descProf;
 	}
 
-	/**
-	 * @return the responsable
-	 */
-	public Responsable getResponsable() {
-		return responsable;
-	}
-
-	/**
-	 * @param responsable the responsable to set
-	 */
-	public void setResponsable(Responsable responsable) {
-		this.responsable = responsable;
-	}
+//	/**
+//	 * @return the responsable
+//	 */
+//	public Responsable getResponsable() {
+//		return responsable;
+//	}
+//
+//	/**
+//	 * @param responsable the responsable to set
+//	 */
+//	public void setResponsable(Responsable responsable) {
+//		this.responsable = responsable;
+//	}
 
 	/* (non-Javadoc)
 	 * @see java.lang.Object#toString()
@@ -121,8 +123,8 @@ public class Profil implements Serializable{
 		builder.append(enumTypeProf);
 		builder.append(", descProf=");
 		builder.append(descProf);
-		builder.append(", responsable=");
-		builder.append(responsable);
+//		builder.append(", responsable=");
+//		builder.append(responsable);
 		builder.append("]");
 		return builder.toString();
 	}	
