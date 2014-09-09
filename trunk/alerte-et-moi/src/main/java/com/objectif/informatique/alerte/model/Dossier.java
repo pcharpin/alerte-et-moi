@@ -627,8 +627,6 @@ public class Dossier implements Serializable{
 		this.idDos = idDos;
 	}
 
-
-
 	/* (non-Javadoc)
 	 * @see java.lang.Object#toString()
 	 */
@@ -645,11 +643,7 @@ public class Dossier implements Serializable{
 		builder.append(descDoc);
 		builder.append(", evtDos=");
 		builder.append(evtDos);
-		builder.append(", documentNames=");
-//		builder.append(Arrays.toString(documentNames));
-//		builder.append(", documentContents=");
-//		builder.append(Arrays.toString(documentContents));
-//		builder.append(", documentsDossier=");
+		builder.append(", documents=");
 		builder.append(documents);
 		builder.append(", evenement=");
 		builder.append(evenement);
@@ -686,4 +680,5 @@ public class Dossier implements Serializable{
 		builder.append("]");
 		return builder.toString();
 	}
+	
 }

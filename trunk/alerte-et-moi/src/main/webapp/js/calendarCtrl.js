@@ -245,23 +245,27 @@
 	    		
 	    	});
 	    };
-	    
-	    
-	    
-	    
-	    
-    	/*suppression**/
+	        
+    	//*********************************suppression*******************************/
     	 $scope.deleteEvent = function(evtId) {
     		// alert(evtId);
-    		 evenement.deleteEvent({}, {evtId : evtId}).$promise.then(function(result){
-    				//console.log("suppression ok"+ result);
-//    			 $scope.formEvtStatus = {
-// 	    				status: 'success',
-// 	    				message: 'L\'évènement a été supprimée avec succès.'
-// 	    		};
-    			});    		 
+    		 evenement.deleteEvent({}, {evtId : evtId}).$promise.then(function(result){});  
+    		 ngDialog.closeAll(); 
     	    };
     
+    	  //************************Ouvrir la popup de confirmation*************************
+    		 $scope.openEvent = function(evtId) {
+    			 $scope.evtId =evtId;
+    			 ngDialog.open({
+    					template: 'views/confirmEvt.html',
+    					scope: $scope
+    				}); 
+    		 };
+    	//******************Retour à la liste des dossier*****************
+   		  $scope.cancel = function() {
+   			  ngDialog.closeAll(); 
+   			};	
+   			
     /* remove event */
     $scope.remove = function(index) {
       $scope.events.splice(index,1);

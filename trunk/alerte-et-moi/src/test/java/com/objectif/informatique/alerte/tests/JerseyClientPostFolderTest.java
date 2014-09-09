@@ -38,29 +38,29 @@ public class JerseyClientPostFolderTest {
 			// client.resource("http://localhost:8080/alerte-et-moi/rest/dossier/1");
 
 			// Update
-			// WebResource webResource =
-			// client.resource("http://localhost:8080/alerte-et-moi/rest/dossier/update/2");
-			// création
-			WebResource webResource = client
-					.resource("http://localhost:8080/alerte-et-moi/rest/dossier/sendFolder");
+			 WebResource webResource = client.resource("http://localhost:8080/alerte-et-moi/rest/dossier/27");
+			 
+			 // création
+			 //WebResource webResource = client
+			 //.resource("http://localhost:8080/alerte-et-moi/rest/dossier/sendFolder");
 
 			DossierDAOImpl dossierService = new DossierDAOImpl(em);
 			// Get dossier
-			// Dossier dossier = dossierService.findFolderById(2);
-			Dossier dossier = new Dossier();
-			dossier.setNomDos("conseil");
-			dossier.setDescDoc("Gant2");
+			 Dossier dossier = dossierService.findFolderById(27);
+			//Dossier dossier = new Dossier();
+			dossier.setNomDos("DéléguésMMMM2");
+			dossier.setDescDoc("Election des délégués du personnel");
 
 			em.getTransaction().begin();
-			// dossierService.update(dossier);
-			dossierService.create(dossier);
+			 dossierService.update(dossier);
+			//ossierService.create(dossier);
 			// service.create(dossier);
 			em.getTransaction().commit();
 
 			// ClientResponse response =
 			// webResource.post(ClientResponse.class,dossier);
 			ClientResponse response = webResource.accept("application/json")
-					.post(ClientResponse.class, dossier);
+					.put(ClientResponse.class, dossier);
 
 			if (response.getStatus() != 200) {
 				throw new RuntimeException("Failed : HTTP error code : "

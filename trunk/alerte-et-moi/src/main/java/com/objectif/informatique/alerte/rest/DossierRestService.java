@@ -119,9 +119,10 @@ public class DossierRestService {
 		return Response.status(200).entity(dossier).build();
 	}
 	
-	@POST
+	@PUT
 	@Path("/{id}")
-	//@Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
+	//@Path("/updateFolder")
+	@Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
 	@Transactional
 	public  Response updateFolder(@PathParam("id") int id){
 		 Dossier dossier =  service.getDossierById(id);

@@ -2,7 +2,6 @@
 <table style="margin: auto;"><tr><td style="width: 290px;">
 	<div class="">
 	<div>
-{{formDos}}
 		<label>Nom du dossier:</label><input type="text"
 			ng-model="formDos.nomDos" />
 	</div>
@@ -34,7 +33,7 @@
 	</div> -->
 	<div>
 		<!-- <label>Document rattach&eacute; :</label><input id="file" type="file" file-Upload-Folder multiple ng-model="formEvt.documents"/> -->
-		<label>Document rattach&eacute; :</label><input id="file" type="file" ng-model="formEvt.documents"/>
+		<label>Document rattach&eacute; :</label><input id="file" type="file" ng-model="formDos.documents"/>
  	</div>
 	<div>
 		<label>Montant :</label><input type="text" ng-model="formDos.mntDOS" />
@@ -59,7 +58,8 @@
 		<textarea ng-model="formDos.cntCmntDos"></textarea>
 	</div>
 </td></tr></table>
-	<input type="submit" id="submitDos" value="Modifier" ng-click="submitUpdateDos(formDos.idDos)" />
+	<input type="submit" id="submitDos" value="Modifier" ng-click="submitUpdateDos(formDos.idDos)" /> 
+	<!-- <input type="submit" id="submitDos" value="Modifier" ng-click="submitUpdateDos()" /> -->
 	<!-- <a href="views/folders.html">Annuler</a> -->
 	<input type="submit" id="cancelDos" value="Annuler" ng-click="cancel()" />
 </div>

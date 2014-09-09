@@ -52,8 +52,14 @@ public class DossierServiceImpl implements DossierService{
 	}
 
 	@Override
+	@Transactional
 	public void update(Dossier dossier) {
-		dossierDAO.update(dossier);		
+		try {
+			dossierDAO.update(dossier);		
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
 	}
 
 	@Override
