@@ -35,9 +35,9 @@ services.factory('evenement', function($resource){
 
 services.factory('dossier', function($resource){
 	return $resource('rest/dossier/:arg1', {}, {
-		get: {method: 'GET',params: { arg1: '@idFolder' }, isArray: false},
+		get: {method: 'GET',params: { arg1: '@idFolder' },isArray: false},
 		create: {method: 'POST', params: { arg1: 'sendFolder' }},
 		deleteFolder: {method: 'DELETE', params: { arg1: '@idFolder' }},
-		updateFolder: {method: 'POST', params: { arg1: '@idFolder'}}
+		updateFolder: {method: 'PUT', params: { arg1: '@idFolder'},isArray: false}
 	});
 	});

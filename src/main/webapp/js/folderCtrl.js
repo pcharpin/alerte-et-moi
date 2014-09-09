@@ -1,4 +1,4 @@
-﻿function FolderCtrl($rootScope, $scope, dossiers, dossier, ngDialog,$location) {
+﻿function FolderCtrl($rootScope, $scope, dossiers, dossier, ngDialog) {
     $scope.formDos={};
     $scope.listDossiers=[];
     $scope.documents=[];
@@ -19,21 +19,27 @@
 	    	console.log("resultat du create"+ result);
     	});
 	};	 
+	//************************Ouvrir la popup de confirmation*************************
+	 $scope.openFolder = function(idFolder) {
+		 $scope.idFolder =idFolder;
+		 ngDialog.open({
+				template: 'views/confirm.html',
+				scope: $scope
+			}); 
+	 };
 	
 	//*************************Suppression d'un dossier****************************
-	 $scope.deleteFolder = function(idFolder) {
-			dossier.deleteFolder({}, {idFolder : idFolder}).$promise.then(function(result){
-				console.log("suppression ok"+ result);
-			});
+	 $scope.deleteFolder = function(idFolder) { 
+			dossier.deleteFolder({}, {idFolder : idFolder}).$promise.then(function(result){});
+			  ngDialog.closeAll(); 
 	    };	
+	    
 	//***************************Mise à jour d'un dossier*******************
 	  $scope.submitUpdateDos = function(idFolder) {
-	  
-		  //dossier.updateFolder($scope.formDos, {idFolder : idFolder}).$promise.then(function(result){
-		  dossier.updateFolder({},{idFolder : idFolder}).$promise.then(function(result){
-			  console.log("mis à jour ok"+ result);
-			  ngDialog.closeAll(); 
-			});
+		  //dossier.updateFolder({},{idFolder : idFolder}).$promise.then(function(result){
+		  dossier.updateFolder({idFolder : idFolder},$scope.formDos).$promise.then(function(result){			  
+		  });
+		  ngDialog.closeAll(); 
 		};	 
 	
 		//******************Retour à la liste des dossier*****************
@@ -66,7 +72,7 @@
     		//template: 'views/updateFolder.html?v=9',
     		template: 'views/updateFolder.html',
     		scope: $scope
-    	});       
+    	});      	
     };    
     
     $rootScope.$on('ngDialog.closed', function (e, $dialog) {
