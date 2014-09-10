@@ -71,7 +71,7 @@ public class Dossier implements Serializable{
 	//@OneToMany(mappedBy="dossier",fetch=FetchType.EAGER)
 	@JsonIgnore
 	@OneToMany(mappedBy="dossier",cascade = CascadeType.ALL)
-	private Set<Evenement> evenement = new HashSet<Evenement>();;
+	private Set<Evenement> evenement = new HashSet<Evenement>();
 	
 	@Column(name = "priorDos")
 	private boolean priorDos;
