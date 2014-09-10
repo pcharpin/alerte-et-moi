@@ -22,12 +22,16 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.codehaus.jackson.annotate.JsonIgnore;
+import org.codehaus.jackson.annotate.JsonIgnoreProperties;
+
 /**
  * @author vdibi
  *
  */
 @Entity
 @Table(name="alerte")
+@JsonIgnoreProperties({"hibernateLazyInitializer","handler"})
 public class Alerte implements Serializable{
 	/**
 	 * 
@@ -44,9 +48,12 @@ public class Alerte implements Serializable{
 	@Column(name="dateAler")
 	private Date dateAlerte;
 
-	@ManyToOne(cascade = CascadeType.ALL ,fetch=FetchType.EAGER)
+	@JsonIgnore
+	@ManyToOne(cascade = CascadeType.ALL, fetch=FetchType.EAGER)
 	@JoinColumn(name="Evenement_idEvt")
 	private Evenement evenement;
+
+	//private int eventId;
 	
 //	@ManyToMany(targetEntity=Alerte.class,
 //			cascade={CascadeType.PERSIST, CascadeType.MERGE}
@@ -56,13 +63,16 @@ public class Alerte implements Serializable{
 //				joinColumns=@JoinColumn(name="idAler"),
 //				inverseJoinColumns=@JoinColumn(name="idResp")
 //		)
-	@ManyToMany(mappedBy="alertes")
+	@JsonIgnore
+	@ManyToMany(mappedBy="alertes",fetch=FetchType.EAGER)
 	private Set<Responsable> responsables = new HashSet<Responsable>();
 
 	public Alerte(){}
 	
-	public Alerte( int declenchAler, TypeDeclenchAler typeDeclenchAler,
-			Date dateAlerte, Evenement evenement, Set<Responsable> responsables) {
+	
+	public Alerte(int declenchAler,
+			TypeDeclenchAler typeDeclenchAler, Date dateAlerte,
+			Evenement evenement, Set<Responsable> responsables) {
 		super();
 		this.declenchAler = declenchAler;
 		this.typeDeclenchAler = typeDeclenchAler;
@@ -71,9 +81,9 @@ public class Alerte implements Serializable{
 		this.responsables = responsables;
 	}
 
-	
+
 	public Alerte(int idAler, int declenchAler, TypeDeclenchAler typeDeclenchAler,
-			Date dateAlerte, Evenement evenement, Set<Responsable> responsables) {
+			Date dateAlerte,Evenement evenement, Set<Responsable> responsables) {
 		super();
 		this.idAler = idAler;
 		this.declenchAler = declenchAler;
@@ -115,13 +125,7 @@ public class Alerte implements Serializable{
 		this.dateAlerte = dateAlerte;
 	}
 
-	public Evenement getEvenement() {
-		return evenement;
-	}
 
-	public void setEvenement(Evenement evenement) {
-		this.evenement = evenement;
-	}
 
 	public Set<Responsable> getResponsables() {
 		return responsables;
@@ -130,6 +134,17 @@ public class Alerte implements Serializable{
 	public void setResponsables(Set<Responsable> responsables) {
 		this.responsables = responsables;
 	}
+
+	
+	public Evenement getEvenement() {
+		return evenement;
+	}
+
+
+	public void setEvenement(Evenement evenement) {
+		this.evenement = evenement;
+	}
+
 
 	@Override
 	public String toString() {
@@ -149,4 +164,6 @@ public class Alerte implements Serializable{
 		builder.append("]");
 		return builder.toString();
 	}
+
+
 }

@@ -49,7 +49,7 @@ public class Responsable implements Serializable{
 	
 	@JsonIgnore
 	@OneToMany(mappedBy="responsable",cascade = CascadeType.ALL)
-	private Set<Evenement> evenements;
+	private Set<Evenement> evenements  = new HashSet<Evenement>();
 	
 	//@ManyToMany(targetEntity=Alerte.class, fetch=FetchType.LAZY)
 	@ManyToMany(cascade = CascadeType.ALL, fetch=FetchType.EAGER)

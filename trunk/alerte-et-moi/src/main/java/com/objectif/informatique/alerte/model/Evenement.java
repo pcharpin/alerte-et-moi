@@ -5,11 +5,13 @@ package com.objectif.informatique.alerte.model;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -21,9 +23,11 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 
 /**
@@ -85,6 +89,9 @@ public class Evenement implements Serializable{
 	@JoinColumn(name="Responsable_idResp")
 	private Responsable responsable;	
 	
+	@OneToMany(mappedBy="evenement",cascade = CascadeType.ALL,fetch=FetchType.EAGER)
+	private Set<Alerte> alertes = new HashSet<Alerte>();
+	
 	@ManyToMany(fetch=FetchType.EAGER)
 		@JoinTable(
 				name="evenement_document",
@@ -93,13 +100,18 @@ public class Evenement implements Serializable{
 		)
 	//@JsonIgnore
 	private Set<Document> documents = new HashSet<Document>();
-	
+
+	public Evenement(){
+		super();
+	}
 	public Evenement(int idEvt, Dossier dossier, String nomEvt, String descEvt,
 			Date dateEchEvt, int exeEvt, float mntEvt,
 			EnumModeGestionEvt modeGestionEvt, String lienGestEvt, int trtEvt,
 			Date dateTrtEvt, EnumPeriodeEvet enumPeriodeEvet, int actifEvt,
 			int recopAutoEvt, int recurtEvt, String libreEvt,
-			Responsable responsable, Set<Document> documents) {
+			String[] documentNames, String[] documentContents,
+			Responsable responsable, Set<Alerte> alertes,
+			Set<Document> documents) {
 		super();
 		this.idEvt = idEvt;
 		this.dossier = dossier;
@@ -117,57 +129,55 @@ public class Evenement implements Serializable{
 		this.recopAutoEvt = recopAutoEvt;
 		this.recurtEvt = recurtEvt;
 		this.libreEvt = libreEvt;
+		this.documentNames = documentNames;
+		this.documentContents = documentContents;
 		this.responsable = responsable;
+		this.alertes = alertes;
 		this.documents = documents;
 	}
-	public boolean addFile(Document document){
-		List<Document> documents =  new ArrayList<Document>();
-		return documents.add(document);		
-	}
 	
-	public Evenement(int id, String nomEvt){
+	public Evenement(Dossier dossier, String nomEvt, String descEvt,
+			Date dateEchEvt, int exeEvt, float mntEvt,
+			EnumModeGestionEvt modeGestionEvt, String lienGestEvt, int trtEvt,
+			Date dateTrtEvt, EnumPeriodeEvet enumPeriodeEvet, int actifEvt,
+			int recopAutoEvt, int recurtEvt, String libreEvt,
+			String[] documentNames, String[] documentContents,
+			Responsable responsable, Set<Alerte> alertes,
+			Set<Document> documents) {
 		super();
-		this.idEvt = idEvt;
-		this.nomEvt = nomEvt;
-	}
-	/**
-	 * Constructeur vide
-	 */
-	public Evenement(){}
-	
-	
-	/**
-	 * @return the dossier
-	 */
-	public Dossier getDossier() {
-		return dossier;
-	}
-	/**
-	 * @param dossier the dossier to set
-	 */
-	public void setDossier(Dossier dossier) {
 		this.dossier = dossier;
+		this.nomEvt = nomEvt;
+		this.descEvt = descEvt;
+		this.dateEchEvt = dateEchEvt;
+		this.exeEvt = exeEvt;
+		this.mntEvt = mntEvt;
+		this.modeGestionEvt = modeGestionEvt;
+		this.lienGestEvt = lienGestEvt;
+		this.trtEvt = trtEvt;
+		this.dateTrtEvt = dateTrtEvt;
+		this.enumPeriodeEvet = enumPeriodeEvet;
+		this.actifEvt = actifEvt;
+		this.recopAutoEvt = recopAutoEvt;
+		this.recurtEvt = recurtEvt;
+		this.libreEvt = libreEvt;
+		this.documentNames = documentNames;
+		this.documentContents = documentContents;
+		this.responsable = responsable;
+		this.alertes = alertes;
+		this.documents = documents;
 	}
-	
-	/**
-	 * @return the idEvt
-	 */
 	public int getIdEvt() {
 		return idEvt;
 	}
-	/**
-	 * @param idEvt the idEvt to set
-	 */
 	public void setIdEvt(int idEvt) {
 		this.idEvt = idEvt;
 	}
-
-//	public Responsable getResponsable_resp() {
-//		return this.responsable;
-//	}
-//	public void setResponsable_resp(Responsable responsable_idResp) {
-//		this.responsable = responsable_idResp;
-//	}
+	public Dossier getDossier() {
+		return dossier;
+	}
+	public void setDossier(Dossier dossier) {
+		this.dossier = dossier;
+	}
 	public String getNomEvt() {
 		return nomEvt;
 	}
@@ -179,18 +189,6 @@ public class Evenement implements Serializable{
 	}
 	public void setDescEvt(String descEvt) {
 		this.descEvt = descEvt;
-	}
-	/**
-	 * @return the responsable
-	 */
-	public Responsable getResponsable() {
-		return responsable;
-	}
-	/**
-	 * @param responsable the responsable to set
-	 */
-	public void setResponsable(Responsable responsable) {
-		this.responsable = responsable;
 	}
 	public Date getDateEchEvt() {
 		return dateEchEvt;
@@ -210,22 +208,21 @@ public class Evenement implements Serializable{
 	public void setMntEvt(float mntEvt) {
 		this.mntEvt = mntEvt;
 	}
+	public EnumModeGestionEvt getModeGestionEvt() {
+		return modeGestionEvt;
+	}
+	public void setModeGestionEvt(EnumModeGestionEvt modeGestionEvt) {
+		this.modeGestionEvt = modeGestionEvt;
+	}
 	public String getLienGestEvt() {
 		return lienGestEvt;
 	}
 	public void setLienGestEvt(String lienGestEvt) {
 		this.lienGestEvt = lienGestEvt;
 	}
-	
-	/**
-	 * @return the trtEvt
-	 */
 	public int getTrtEvt() {
 		return trtEvt;
 	}
-	/**
-	 * @param trtEvt the trtEvt to set
-	 */
 	public void setTrtEvt(int trtEvt) {
 		this.trtEvt = trtEvt;
 	}
@@ -235,40 +232,27 @@ public class Evenement implements Serializable{
 	public void setDateTrtEvt(Date dateTrtEvt) {
 		this.dateTrtEvt = dateTrtEvt;
 	}
-	
-	/**
-	 * @return the actifEvt
-	 */
+	public EnumPeriodeEvet getEnumPeriodeEvet() {
+		return enumPeriodeEvet;
+	}
+	public void setEnumPeriodeEvet(EnumPeriodeEvet enumPeriodeEvet) {
+		this.enumPeriodeEvet = enumPeriodeEvet;
+	}
 	public int getActifEvt() {
 		return actifEvt;
 	}
-	/**
-	 * @param actifEvt the actifEvt to set
-	 */
 	public void setActifEvt(int actifEvt) {
 		this.actifEvt = actifEvt;
 	}
-	/**
-	 * @return the recopAutoEvt
-	 */
 	public int getRecopAutoEvt() {
 		return recopAutoEvt;
 	}
-	/**
-	 * @param recopAutoEvt the recopAutoEvt to set
-	 */
 	public void setRecopAutoEvt(int recopAutoEvt) {
 		this.recopAutoEvt = recopAutoEvt;
 	}
-	/**
-	 * @return the recurtEvt
-	 */
 	public int getRecurtEvt() {
 		return recurtEvt;
 	}
-	/**
-	 * @param recurtEvt the recurtEvt to set
-	 */
 	public void setRecurtEvt(int recurtEvt) {
 		this.recurtEvt = recurtEvt;
 	}
@@ -278,57 +262,36 @@ public class Evenement implements Serializable{
 	public void setLibreEvt(String libreEvt) {
 		this.libreEvt = libreEvt;
 	}
-	public EnumModeGestionEvt getModeGestionEvt() {
-		return modeGestionEvt;
-	}
-	public void setModeGestionEvt(EnumModeGestionEvt modeGestionEvt) {
-		this.modeGestionEvt = modeGestionEvt;
-	}
-	public EnumPeriodeEvet getEnumPeriodeEvet() {
-		return enumPeriodeEvet;
-	}
-	public void setEnumPeriodeEvet(EnumPeriodeEvet enumPeriodeEvet) {
-		this.enumPeriodeEvet = enumPeriodeEvet;
-	}
-	/**
-	 * @return the evenements
-	 */
-	public Set<Document> getDocuments() {
-		return documents;
-	}
-	/**
-	 * @param documents the documents to set
-	 */
-	public void setDocuments(Set<Document> documents) {
-		this.documents = documents;
-	}
-	/**
-	 * @return the documentNames
-	 */
 	public String[] getDocumentNames() {
 		return documentNames;
 	}
-	/**
-	 * @param documentNames the documentNames to set
-	 */
 	public void setDocumentNames(String[] documentNames) {
 		this.documentNames = documentNames;
 	}
-	/**
-	 * @return the documentContents
-	 */
 	public String[] getDocumentContents() {
 		return documentContents;
 	}
-	/**
-	 * @param documentContents the documentContents to set
-	 */
 	public void setDocumentContents(String[] documentContents) {
 		this.documentContents = documentContents;
 	}
-	/* (non-Javadoc)
-	 * @see java.lang.Object#toString()
-	 */
+	public Responsable getResponsable() {
+		return responsable;
+	}
+	public void setResponsable(Responsable responsable) {
+		this.responsable = responsable;
+	}
+	public Set<Alerte> getAlertes() {
+		return alertes;
+	}
+	public void setAlertes(Set<Alerte> alertes) {
+		this.alertes = alertes;
+	}
+	public Set<Document> getDocuments() {
+		return documents;
+	}
+	public void setDocuments(Set<Document> documents) {
+		this.documents = documents;
+	}
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
@@ -364,11 +327,18 @@ public class Evenement implements Serializable{
 		builder.append(recurtEvt);
 		builder.append(", libreEvt=");
 		builder.append(libreEvt);
+		builder.append(", documentNames=");
+		builder.append(Arrays.toString(documentNames));
+		builder.append(", documentContents=");
+		builder.append(Arrays.toString(documentContents));
 		builder.append(", responsable=");
 		builder.append(responsable);
+		builder.append(", alertes=");
+		builder.append(alertes);
 		builder.append(", documents=");
 		builder.append(documents);
 		builder.append("]");
 		return builder.toString();
 	}
+		
 }
