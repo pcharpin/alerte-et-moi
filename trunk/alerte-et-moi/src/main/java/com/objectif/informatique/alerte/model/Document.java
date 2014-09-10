@@ -15,6 +15,9 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
+import org.codehaus.jackson.annotate.JsonIgnore;
+import org.codehaus.jackson.annotate.JsonIgnoreProperties;
+
 /**
  * @author vdibi
  * @author P0P0T3
@@ -22,6 +25,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name="document")
+@JsonIgnoreProperties({"hibernateLazyInitializer","handler"})
 public class Document implements Serializable{
 
 	/**
@@ -39,7 +43,7 @@ public class Document implements Serializable{
 	@Column(name = "lienDoc")
 	private String lienDoc;
 	
-
+	@JsonIgnore
 	@ManyToMany(mappedBy="documents" ,fetch=FetchType.EAGER)
 	private Set<Evenement> evenements = new HashSet<Evenement>();
 	
