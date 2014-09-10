@@ -4,7 +4,6 @@
 package com.objectif.informatique.alerte.model;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -51,12 +50,9 @@ public class Responsable implements Serializable{
 	@OneToMany(mappedBy="responsable",cascade = CascadeType.ALL)
 	private Set<Evenement> evenements  = new HashSet<Evenement>();
 	
-	//@ManyToMany(targetEntity=Alerte.class, fetch=FetchType.LAZY)
 	@ManyToMany(cascade = CascadeType.ALL, fetch=FetchType.EAGER)
 	@JoinTable(
 			name="responsable_alerte",
-			//joinColumns={@JoinColumn(name="Alerte_idAler")},
-			//inverseJoinColumns={@JoinColumn(name="Responsable_idResp")}
 			joinColumns={@JoinColumn(name="Responsable_idResp")},
 		    inverseJoinColumns={@JoinColumn(name="Alerte_idAler")}
 	)

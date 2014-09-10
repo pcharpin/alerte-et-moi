@@ -53,16 +53,6 @@ public class Alerte implements Serializable{
 	@JoinColumn(name="Evenement_idEvt")
 	private Evenement evenement;
 
-	//private int eventId;
-	
-//	@ManyToMany(targetEntity=Alerte.class,
-//			cascade={CascadeType.PERSIST, CascadeType.MERGE}
-//	)
-//		@JoinTable(
-//				name="responsable_alerte",
-//				joinColumns=@JoinColumn(name="idAler"),
-//				inverseJoinColumns=@JoinColumn(name="idResp")
-//		)
 	@JsonIgnore
 	@ManyToMany(mappedBy="alertes",fetch=FetchType.EAGER)
 	private Set<Responsable> responsables = new HashSet<Responsable>();
