@@ -32,43 +32,20 @@ angular.module('calendarApp', ['ui.calendar', 'ngRoute', 'ui.bootstrap','ngDialo
 	            });
 	        }
 	    };
+}).directive('fileUploadFolder', function () {
+    return {
+        scope: true,        //create a new scope
+        link: function (scope, el, attrs) {
+            el.bind('change', function (folder) {
+                var files = folder.target.files;
+                for (var i = 0;i<files.length;i++) {
+                	console.log(files[i]);
+                    scope.$emit("fileSelected", { file: files[i] });
+                }                                       
+            });
+        }
+    };
 });
-//	    .directive('dialogServiceTest',function($scope,$rootScope,$timeout,$dialogs){
-//	  $scope.confirmed = 'You have yet to be confirmed!';
-//	  $scope.name = '"Your name here."';
-//	  
-//	  $scope.launch = function(which){
-//	    var dlg = null;
-//	    switch(which){
-//	           
-//	      // Confirm Dialog
-//	      case 'confirm':
-//	        dlg = $dialogs.confirm('Please Confirm','Is this awesome or what?');
-//	        dlg.result.then(function(btn){
-//	          $scope.confirmed = 'You thought this quite awesome!';
-//	        },function(btn){
-//	          $scope.confirmed = 'Shame on you for not thinking this is awesome!';
-//	        });
-//	        break;
-//
-//	    }; // end switch
-//	  }; // end launch
-//	  
-//	});
-//}).directive('fileUploadFolder', function () {
-//    return {
-//        scope: true,        //create a new scope
-//        link: function (scope, el, attrs) {
-//            el.bind('change', function (event) {
-//                var files = event.target.files;
-//                for (var i = 0;i<files.length;i++) {
-//                	console.log(files[i]);
-//                    scope.$emit("fileSelected", { file: files[i] });
-//                }                                       
-//            });
-//        }
-//    };
-//});
 
 
 /* EOF */

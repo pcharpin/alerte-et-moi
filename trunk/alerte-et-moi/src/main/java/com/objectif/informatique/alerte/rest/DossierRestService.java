@@ -42,7 +42,6 @@ public class DossierRestService {
 	@Autowired
 	DocumentService docService;
 	
-
 	@GET
 	@Path("/{id}")
 	@Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
@@ -77,44 +76,41 @@ public class DossierRestService {
 		
 		System.out.println("******dossier:****" + dossier);
 		
-//		String [] datas =  dossier.getDocumentContents();
-//		String [] datasNames = dossier.getDocumentNames();
-//		
-//		System.out.println("***********************");
-//		System.out.println("******datas:****" + datas);
-//		System.out.println("******datasNames:****" + datasNames);
-//		System.out.println("***********************");
+		String [] datas =  dossier.getDocumentContents();
+		String [] datasNames = dossier.getDocumentNames();
 		
-//		for (int i = 0; i < datas.length; i++) {			
-//			String data = datas[i];
-//			String dataName = datasNames[i];
-//			
-//		//Chemin à modifier (mettre le chemin du server)
-//		String path = rootPath + dataName;
-//		try {
-//			DataOutputStream dos = new DataOutputStream(new BufferedOutputStream(new FileOutputStream(path)));
-//			dos.writeBytes(data);
-//			dos.close();
-//			
-//			//Création d'un objet document
-//			Document doc = new Document();
-//			doc.setLienDoc(path);
-//			docService.create(doc);
-//			
-//			if(dossier.getDocuments() == null){
-//				//dossier.setDocuments( new HashSet<Document>());
-//				dossier.setDocuments( new HashSet<Document>());
-//			}
-//			dossier.getDocuments().add(doc);
-//			
-//		} catch (FileNotFoundException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		} catch (IOException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-//	}			
+    	System.out.println("***********************");
+		System.out.println("******datas:****" + datas);
+		System.out.println("******datasNames:****" + datasNames);
+		System.out.println("***********************");
+		
+		for (int i = 0; i < datas.length; i++) {			
+			String data = datas[i];
+			String dataName = datasNames[i];
+			
+		//Chemin à modifier (mettre le chemin du server)
+		String path = rootPath + dataName;
+		try {
+			DataOutputStream dos = new DataOutputStream(new BufferedOutputStream(new FileOutputStream(path)));
+			dos.writeBytes(data);
+			dos.close();
+			
+			//Création d'un objet document
+			Document doc = new Document();
+			doc.setLienDoc(path);
+			docService.create(doc);
+			
+			if(dossier.getDocuments() == null){
+				dossier.setDocuments( new HashSet<Document>());
+			}
+			dossier.getDocuments().add(doc);
+			
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}			
 		service.create(dossier);		
 		return Response.status(200).entity(dossier).build();
 	}

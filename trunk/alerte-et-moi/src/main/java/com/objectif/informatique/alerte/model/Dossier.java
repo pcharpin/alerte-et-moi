@@ -54,10 +54,10 @@ public class Dossier implements Serializable{
 	@Column(name = "evtDos")
 	private String evtDos;
 	
-//	@Transient
-//	private String[] documentNames;
-//	@Transient
-//	private String[] documentContents;
+	@Transient
+	private String[] documentNames;
+	@Transient
+	private String[] documentContents;
 	
 	@ManyToMany(fetch=FetchType.EAGER)
 	@JoinTable(
@@ -133,8 +133,8 @@ public class Dossier implements Serializable{
 	}
 	
 	public Dossier(String nomDos, EnumTypesDossiers enumTypesDossiers,
-			String descDoc, String evtDos/*, String[] documentNames,
-			String[] documentContents, Set<Document> documents*/,
+			String descDoc, String evtDos, String[] documentNames,
+			String[] documentContents, Set<Document> documents,
 			Set<Evenement> evenement, boolean priorDos, float mntDOS,
 			boolean periodJourDos, boolean periodHebdoDos,
 			boolean periodMensDos, boolean periodTrimDos,
@@ -147,8 +147,8 @@ public class Dossier implements Serializable{
 		this.enumTypesDossiers = enumTypesDossiers;
 		this.descDoc = descDoc;
 		this.evtDos = evtDos;
-//		this.documentNames = documentNames;
-//		this.documentContents = documentContents;
+		this.documentNames = documentNames;
+		this.documentContents = documentContents;
 		this.documents = documents;
 		this.evenement = evenement;
 		this.priorDos = priorDos;
@@ -171,7 +171,7 @@ public class Dossier implements Serializable{
 
 	public Dossier(int idDos, String nomDos,
 			EnumTypesDossiers enumTypesDossiers, String descDoc, String evtDos,
-			/*String[] documentNames, String[] documentContents,*/
+			String[] documentNames, String[] documentContents,
 			Set<Document> documents, Set<Evenement> evenement,
 			boolean priorDos, float mntDOS, boolean periodJourDos,
 			boolean periodHebdoDos, boolean periodMensDos,
@@ -185,8 +185,8 @@ public class Dossier implements Serializable{
 		this.enumTypesDossiers = enumTypesDossiers;
 		this.descDoc = descDoc;
 		this.evtDos = evtDos;
-//		this.documentNames = documentNames;
-//		this.documentContents = documentContents;
+		this.documentNames = documentNames;
+		this.documentContents = documentContents;
 		this.documents = documents;
 		this.evenement = evenement;
 		this.priorDos = priorDos;
@@ -276,32 +276,30 @@ public class Dossier implements Serializable{
 		this.evtDos = evtDos;
 	}
 
+	/**
+	 * @return the documentNames
+	 */
+	public String[] getDocumentNames() {
+		return documentNames;
+	}
 
 
-//	/**
-//	 * @return the documentNames
-//	 */
-//	public String[] getDocumentNames() {
-//		return documentNames;
-//	}
-//
-//
-//
-//	/**
-//	 * @param documentNames the documentNames to set
-//	 */
-//	public void setDocumentNames(String[] documentNames) {
-//		this.documentNames = documentNames;
-//	}
-//
-//
-//
-//	/**
-//	 * @return the documentContents
-//	 */
-//	public String[] getDocumentContents() {
-//		return documentContents;
-//	}
+
+	/**
+	 * @param documentNames the documentNames to set
+	 */
+	public void setDocumentNames(String[] documentNames) {
+		this.documentNames = documentNames;
+	}
+
+
+
+	/**
+	 * @return the documentContents
+	 */
+	public String[] getDocumentContents() {
+		return documentContents;
+	}
 
 
 
@@ -643,6 +641,10 @@ public class Dossier implements Serializable{
 		builder.append(descDoc);
 		builder.append(", evtDos=");
 		builder.append(evtDos);
+//		builder.append(", documentNames=");
+//		builder.append(Arrays.toString(documentNames));
+//		builder.append(", documentContents=");
+//		builder.append(Arrays.toString(documentContents));
 		builder.append(", documents=");
 		builder.append(documents);
 		builder.append(", evenement=");
@@ -680,5 +682,4 @@ public class Dossier implements Serializable{
 		builder.append("]");
 		return builder.toString();
 	}
-	
 }
