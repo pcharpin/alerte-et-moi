@@ -1,4 +1,4 @@
-<form>
+<form name="newEventForm" enctype="multipart/form-data"> 
 <table style="margin: auto;"><tr><td style="width: 290px;">
 	<div class="">
 	<div>
@@ -32,8 +32,8 @@
 			class="btn btn-warning">Ajouter un nouveau document</button>
 	</div> -->
 	<div>
-		<!-- <label>Document rattach&eacute; :</label><input id="file" type="file" file-Upload-Folder multiple ng-model="formEvt.documents"/> -->
-		<label>Document rattach&eacute; :</label><input id="file" type="file" ng-model="formEvt.documents"/>
+		<label>Document rattach&eacute; :</label><input id="file" type="file" file-Upload-Folder multiple ng-model="formDos.documents"/>
+		<!-- <label>Document rattach&eacute; :</label><input id="file" type="file" ng-model="formEvt.documents"/> -->
  	</div>
 	<div>
 		<label>Montant :</label><input type="text" ng-model="formDos.mntDOS" />

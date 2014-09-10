@@ -2,19 +2,19 @@
     $scope.formDos={};
     $scope.listDossiers=[];
     $scope.documents=[];
-//    $scope.documentNames=[];
-//    $scope.documentContents=[];
+    $scope.documentNames=[];
+    $scope.documentContents=[];
     
 	//****************Ajouter un dossier*******************    
     
     $scope.submitDos = function() {
     	
     	console.log($scope.documents);
-//    	$scope.formDos.documents = $scope.documents;
-//    	$scope.formDos.documentNames = $scope.documentNames;
-//    	$scope.formDos.documentContents = $scope.documentContents;
+    	$scope.formDos.documents = $scope.documents;
+   	    $scope.formDos.documentNames = $scope.documentNames;
+    	$scope.formDos.documentContents = $scope.documentContents;
     	
-    	console.log("formDos = ", $scope.formDos);
+    	console.log($scope.formDos);
 		dossier.create($scope.formDos).$promise.then(function(result){
 	    	console.log("resultat du create"+ result);
     	});
@@ -36,9 +36,11 @@
 	    
 	//***************************Mise à jour d'un dossier*******************
 	  $scope.submitUpdateDos = function(idFolder) {
-		  //dossier.updateFolder({},{idFolder : idFolder}).$promise.then(function(result){
-		  dossier.updateFolder({idFolder : idFolder},$scope.formDos).$promise.then(function(result){			  
-		  });
+		  //$scope.idFolder =idFolder;
+
+		  //dossier.updateFolder({idFolder : idFolder},idFolder).$promise.then(function(result){});
+		dossier.updateFolder({idFolder : idFolder},$scope.formDos).$promise.then(function(result){});
+	 
 		  ngDialog.closeAll(); 
 		};	 
 	
@@ -66,8 +68,6 @@
     
     $scope.editFolder = function( folder ){   	
         $scope.formDos = folder;
-        console.log("folder _o_ = ", $scope.formDos);
-        
     	ngDialog.open({
     		//template: 'views/updateFolder.html?v=9',
     		template: 'views/updateFolder.html',
@@ -88,8 +88,8 @@
     			"enumTypesDossiers":[],
     			"descDoc": "",
     			"evtDos": "",
-//    			"documentNames":  [],
-//    			"documentContents":  [],
+    			"documentNames":  [],
+    			"documentContents":  [],
     			"documents": [],
     			"priorDos": false,
     			"mntDOS": 0,
@@ -111,24 +111,24 @@
     
     // Ajouter un document à un dossier 
     
-//    $scope.showContent = function($fileContent){    
-//        var obj = {name:args.file.name}
-//    	$scope.documents.push(obj);
-//    };
-//    $scope.$on("fileSelected", function (folder, args) {
-//        $scope.$apply(function () {            
-//            //Read content file
-//        	var reader = new FileReader();
-//        	reader.readAsBinaryString(args.file);
-//        	
-//        	//end of reading and loading
-//        	reader.onloadend = function(e){
-//        		var result = e.target.result;
-//        		//var obj = {name:args.file.name,fileContent:result} ;   
-//        		//name -> content
-//            	$scope.documentNames.push(args.file.name);
-//            	$scope.documentContents.push(result);
-//        	}        	
-//        });
-//    });      
+    $scope.showContent = function($fileContent){    
+        var obj = {name:args.file.name}
+    	$scope.documents.push(obj);
+    };
+    $scope.$on("fileSelected", function (folder, args) {
+        $scope.$apply(function () {            
+            //Read content file
+        	var reader = new FileReader();
+        	reader.readAsBinaryString(args.file);
+        	
+        	//end of reading and loading
+        	reader.onloadend = function(e){
+        		var result = e.target.result;
+        		//var obj = {name:args.file.name,fileContent:result} ;   
+        		//name -> content
+            	$scope.documentNames.push(args.file.name);
+            	$scope.documentContents.push(result);
+        	}        	
+        });
+    });      
 };
