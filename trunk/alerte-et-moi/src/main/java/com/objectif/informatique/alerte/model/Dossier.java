@@ -4,7 +4,6 @@
 package com.objectif.informatique.alerte.model;
 
 import java.io.Serializable;
-import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 

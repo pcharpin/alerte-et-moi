@@ -1,18 +1,13 @@
-<!-- <form name="newEventForm" enctype="multipart/form-data" novalidate=""> -->
 <form name="newEventForm" enctype="multipart/form-data">
 <div class="form-help">Les &eacute;l&eacute;ments suivis de (*) sont requis.</div>
-<br/>
-	<div class="form-status" ng-show="formStatus" ng-class="formStatus.status" ng-bind="formStatus.message"></div>
+
+<div class="form-status" ng-show="formStatus" ng-class="formStatus.status" ng-bind="formStatus.message"></div> 
 	<table style="margin: auto;"><tr><td style="width: 290px;">
-		<div class="">
-      
+		<div class="">     
 		<div>
 			<label>Nom : (*)</label><input type="text" ng-model="formEvt.nomEvt"  placeholder="Un nom d'évènement..." required />
 		</div>
-		<!-- <span ng-show="formEvt.nomEvt.$dirty">
-			<span ng-show="formEvt.nomEvt.$error.required">Champs obligatoire</span>
-     	</span> -->
-     	<br/>
+	
 		<!-- <div> -->
 		<!-- <label>dossier existant : (*)</label> <input type="radio" name="dossier" -->
 		<!-- value="" />oui <input type="radio" name="dossier" value="" required/>non -->
@@ -47,7 +42,7 @@
       <br/>
       
 		<div>
-			<label>Montant :</label><input type="text" ng-model="formEvt.mntEvt" />
+			<label>Montant :</label><input type="text" ng-model="formEvt.mntEvt" placeholder="Tappez des chiffres..." />
 		</div>
 	</div>
 	</td><td>
@@ -95,8 +90,12 @@
 		</div>
 	</td></tr></table>
 	
-	<div class="form-confirmation-button">
+	<!-- <div class="form-confirmation-button">
 		<input type="submit" id="submit" value="Ajouter"
 			ng-click="submitEvt()" ng-disabled="newEventForm.$invalid" class="btn btn-primary confirm-button" ng-class="newEventForm.$invalid"/>
+	</div> -->
+	<div class="form-confirmation-button">
+		<input type="submit" id="submit" value="Ajouter"
+			ng-click="submitEvt()" ng-disabled="formEvt.$invalid" class="btn btn-primary confirm-button" />
 	</div>
 </form>

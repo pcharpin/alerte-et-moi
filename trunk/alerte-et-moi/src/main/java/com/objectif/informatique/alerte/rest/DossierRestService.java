@@ -74,16 +74,9 @@ public class DossierRestService {
 	@Transactional
 	public Response add(Dossier dossier){	
 		
-		System.out.println("******dossier:****" + dossier);
-		
 		String [] datas =  dossier.getDocumentContents();
 		String [] datasNames = dossier.getDocumentNames();
-		
-    	System.out.println("***********************");
-		System.out.println("******datas:****" + datas);
-		System.out.println("******datasNames:****" + datasNames);
-		System.out.println("***********************");
-		
+			
 		for (int i = 0; i < datas.length; i++) {			
 			String data = datas[i];
 			String dataName = datasNames[i];
