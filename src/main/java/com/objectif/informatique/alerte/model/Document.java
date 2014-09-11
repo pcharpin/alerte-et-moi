@@ -47,12 +47,7 @@ public class Document implements Serializable{
 	@ManyToMany(mappedBy="documents" ,fetch=FetchType.EAGER)
 	private Set<Evenement> evenements = new HashSet<Evenement>();
 	
-	//@ManyToMany(cascade=CascadeType.ALL,fetch=FetchType.EAGER)
-//	@JoinTable(
-//			name="dossier_document",
-//			joinColumns={@JoinColumn(name="Dossier_idDos")},
-//			inverseJoinColumns={@JoinColumn(name="Document_idDoc")}
-//	)
+	@JsonIgnore
 	@ManyToMany(mappedBy="documents" ,fetch=FetchType.EAGER)
 	private Set<Dossier> dossiers = new HashSet<Dossier>();
 	

@@ -658,3 +658,28 @@ position:absolute;top: 60px;right: 45px;
 /* Ease Display */
 
 .pad { padding: 25px; }
+
+/***************************************Message d'erreur****************************************************/
+
+h1 {
+    font-size:18px;
+    font-weight:bold;
+    margin : 20px 0;
+}
+
+input{
+    padding:5px 10px;
+    margin:10px;
+    border:1px solid #999;
+}
+
+input.ng-invalid.ng-dirty {
+   background-color: rgb(255, 107, 107);
+}
+    
+input.ng-valid.ng-dirty {
+   background-color: rgb(125, 211, 129);
+}
+.test{
+	color: red;
+}

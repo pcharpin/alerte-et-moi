@@ -198,7 +198,7 @@
 	    	$scope.resetForm();
 	    	
 	    	/* recuperation des responsables */
-	    	if($scope.listResponsables.length==0){
+	    	if($scope.listResponsables.length==0){ 		
 	    		responsables.findAll().$promise.then(function(result){
 			    	for(var j=0;j<result.length;j++){
 			    		$scope.listResponsables.push(result[j]);
@@ -216,26 +216,28 @@
 	    	
 	    	console.log($scope.formEvt);
 	    	
+	    	//******************Création d'un évènement************************************
 	    	evenement.create($scope.formEvt).$promise.then(function(result){
-	    		console.log("resultat du create", result);
 	    		
-	    		/* ajout de l'évènement à ceux en cours */
+	    	/* ajout de l'évènement à ceux en cours */
 	    		evenements.findAll().$promise.then(function(serverEvents){
 	    			var list = evtToCal.convert(serverEvents);
 	    	    	$scope.events.push(list[list.length-1]);
 	    		});
 	    		
 	    		$scope.resetForm();
-	    		$scope.formStatus = {
-	    				status: 'success',
-	    				message: 'L\'évènement a été créé avec succès.'
-	    		};
-	    	}, function(err){
-	    		$scope.formStatus = {
-	    				status: 'error',
-	    				message: 'L\'évènement n\'a pu être créé. Veuillez re-essayer.'
-	    		};
-	    	});
+//	    		$scope.formStatus = {
+//	    				status: 'success',
+//	    				message: 'L\'évènement a été créé avec succès.'
+//	    		};
+	    	}
+	    	//	    	, function(err){
+//	    		$scope.formStatus = {
+//	    				status: 'error',
+//	    				message: 'L\'évènement n\'a pu être créé. Veuillez re-essayer.'
+//	    		};
+//	    	}
+	    	);
 	    };
 	    
 	    /*Mise à jour événemenet en base*/
