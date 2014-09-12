@@ -268,6 +268,14 @@
    			  ngDialog.closeAll(); 
    			};	
    			
+   		//***Liste des fichiers associés à un évènement***************************
+   		  $scope.listOfFiles = function() {
+   			 ngDialog.open({
+					template: 'views/confirmEvt.html',
+					scope: $scope
+				})
+   			};	
+   			
     /* remove event */
     $scope.remove = function(index) {
       $scope.events.splice(index,1);

@@ -37,9 +37,12 @@
 	//***************************Mise à jour d'un dossier*******************
 	  $scope.submitUpdateDos = function(idFolder) {
 		  //$scope.idFolder =idFolder;
-
-		  //dossier.updateFolder({idFolder : idFolder},idFolder).$promise.then(function(result){});
-		dossier.updateFolder({idFolder : idFolder},$scope.formDos).$promise.then(function(result){});
+		  //console.log({idFolder : idFolder});
+		  console.log($scope.formDos);
+		  
+		  //dossier.updateFolder($scope.formDos).$promise.then(function(result){});
+		  dossier.updateFolder({idFolder : idFolder},$scope.formDos).$promise.then(function(result){});
+		  //dossier.updateFolder($scope.formDos,{idFolder : idFolder}).$promise.then(function(result){});
 	 
 		  ngDialog.closeAll(); 
 		};	 
