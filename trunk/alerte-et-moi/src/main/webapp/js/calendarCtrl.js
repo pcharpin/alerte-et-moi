@@ -207,19 +207,17 @@
 			}	
 	    };	
 	    
-	    /* Ajouter un evenement en base */
+	    //***************Ajouter un evenement en base**********************/
 	    $scope.submitEvt = function() {
 	    	console.log($scope.documents);
 	    	$scope.formEvt.documents = $scope.documents;
 	    	$scope.formEvt.documentNames = $scope.documentNames;
 	    	$scope.formEvt.documentContents = $scope.documentContents;
-	    	
-	    	console.log($scope.formEvt);
-	    	
-	    	//******************Création d'un évènement************************************
+
+	    //******************Création d'un évènement************************************
 	    	evenement.create($scope.formEvt).$promise.then(function(result){
 	    		
-	    	/* ajout de l'évènement à ceux en cours */
+	    //***************ajout de l'évènement à ceux en cours */
 	    		evenements.findAll().$promise.then(function(serverEvents){
 	    			var list = evtToCal.convert(serverEvents);
 	    	    	$scope.events.push(list[list.length-1]);
@@ -269,9 +267,10 @@
    			};	
    			
    		//***Liste des fichiers associés à un évènement***************************
-   		  $scope.listOfFiles = function() {
+   		  $scope.listOfFiles = function(evtId) { 		
+   			 console.log(evtId);
    			 ngDialog.open({
-					template: 'views/confirmEvt.html',
+					template: 'views/listOfFiles.html',
 					scope: $scope
 				})
    			};	
