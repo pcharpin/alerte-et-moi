@@ -11,7 +11,7 @@
 		<!-- <div> -->
 		<!-- <label>dossier existant : (*)</label> <input type="radio" name="dossier" -->
 		<!-- value="" />oui <input type="radio" name="dossier" value="" required/>non -->
-		<!-- </div>  -->
+		<!-- </div> -->
 		<div>
 			<label>Dossier : (*)</label> <select ng-model="formEvt.dossier.idDos"
 				required>
@@ -50,7 +50,7 @@
 		<div>
 			<label>Mode de gestion :</label> 
 			<input type="radio" id="manuel" name="manuel" ng-model="formEvt.modeGestionEvt" value="Manuel">Manuel 
-		 	<input type="radio" id="enligne" ng-click="toggleDiv()" name="enligne" ng-model="formEvt.modeGestionEvt" value="EnLigne">En ligne
+		 	<input type="radio" id="enligne" name="enligne" ng-model="formEvt.modeGestionEvt" value="EnLigne">En ligne
 		 	<input type="radio" id="autre" name="autre" ng-model="formEvt.modeGestionEvt" value="Autre">Autre
 		</div>
 		<div>
