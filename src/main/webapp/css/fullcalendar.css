@@ -683,3 +683,6 @@ input.ng-valid.ng-dirty {
 .test{
 	color: red;
 }
+.pointerStyle{
+cursor:pointer;
+}

@@ -13,4 +13,14 @@
 		  }
       });
   }
+}).filter('responsableFilder', function() {
+	  return function(list, selected) {
+		  return _.filter(list, function(item){
+			  if(selected && JSON.parse(selected).idResp) {
+				  return item.responsable.idResp == JSON.parse(selected).idResp;
+			  } else {
+				  return list;
+			  }
+	      });
+	  }
 });
