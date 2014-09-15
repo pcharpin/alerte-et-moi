@@ -13,5 +13,5 @@ public enum TypeDeclenchAler {
 	Jours,
 	Semaines,
 	Mois,
-	Années
+	Annees
 }

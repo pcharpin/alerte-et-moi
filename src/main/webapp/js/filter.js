@@ -6,6 +6,7 @@
 .filter('folderFilter', function() {
   return function(list, selected) {
 	  return _.filter(list, function(item){
+		  alert(item);
 		  if(selected && JSON.parse(selected).idDos) {
 			  return item.dossier.idDos == JSON.parse(selected).idDos;
 		  } else {
