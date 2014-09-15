@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.objectif.informatique.alerte.dao.ResponsableDAO;
+import com.objectif.informatique.alerte.model.Evenement;
 import com.objectif.informatique.alerte.model.Responsable;
 
 @Service("ResponsableService")
@@ -60,5 +61,12 @@ public class ResponsableServiceImpl implements ResponsableService{
 	@Override
 	public Responsable findResponsableById(int id) {
 		return responsableDAO.find(id);
+	}
+
+
+	@Override
+	public List<Evenement> findAllEventsByRespName(String respName)
+			throws Exception {
+		return responsableDAO.findAllEventsByRespName(respName);
 	}
 }

@@ -9,6 +9,7 @@ import javax.persistence.Query;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.objectif.informatique.alerte.model.Evenement;
 import com.objectif.informatique.alerte.model.Responsable;
 
 @Repository("ResponsableDAO")
@@ -32,6 +33,16 @@ public class ResponsableDAOImpl  extends GenericDAOImpl<Responsable> implements 
 		Query query = this.entityManager.createQuery("select r from Responsable r");
 		responsables = query.getResultList();
 	    return responsables;
+	}
+	@Override
+	public List<Evenement> findAllEventsByRespName(String nomResp)
+			throws Exception {
+		List<Evenement> evenements = new ArrayList<Evenement>();
+		
+		Query query = this.entityManager.createQuery("select r from Responsable r " +
+				"inner join fetch  Evenement.Responsable_idResp = r.idResp where r.nomResp like "+ nomResp);
+		evenements = query.getResultList();
+	    return evenements;
 	}
 
 }

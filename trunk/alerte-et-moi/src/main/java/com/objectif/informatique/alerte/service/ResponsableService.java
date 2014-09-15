@@ -2,6 +2,7 @@ package com.objectif.informatique.alerte.service;
 
 import java.util.List;
 
+import com.objectif.informatique.alerte.model.Evenement;
 import com.objectif.informatique.alerte.model.Responsable;
 
 /**
@@ -18,4 +19,5 @@ public interface  ResponsableService {
 	public void delete(Responsable respId);
 	public void update(Responsable responsable);
 	public Responsable findResponsableById(int id);
+	List<Evenement> findAllEventsByRespName(String respName) throws Exception;
 }

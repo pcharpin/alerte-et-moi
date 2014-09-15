@@ -17,6 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.objectif.informatique.alerte.model.Evenement;
 import com.objectif.informatique.alerte.model.Responsable;
 import com.objectif.informatique.alerte.service.ResponsableService;
 
@@ -42,7 +43,15 @@ public class ResponsableRestService {
 	public List<Responsable> getAllEvenement() throws Exception {
 		List<Responsable> responsables = service.findAll();
 		return responsables;
-	}	
+	}
+	
+	@GET
+	@Path("/getList/{respName}")
+	@Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
+	public List<Evenement> getListEvenement(@PathParam("respName") String respName) throws Exception {
+	List<Evenement> evenements = service.findAllEventsByRespName(respName);
+		return evenements;
+	}
 
 	@POST
 	@Path("/send")
@@ -64,7 +73,7 @@ public class ResponsableRestService {
 	}
 	
 	@PUT
-	@Path("/update/{id}")
+	@Path("/{id}")
 	@Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
 	@Transactional
 	public  Response updateEvent(@PathParam("id") int id,Responsable responsable){

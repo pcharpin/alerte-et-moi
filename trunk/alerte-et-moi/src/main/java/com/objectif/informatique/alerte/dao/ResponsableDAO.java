@@ -2,6 +2,7 @@ package com.objectif.informatique.alerte.dao;
 
 import java.util.List;
 
+import com.objectif.informatique.alerte.model.Evenement;
 import com.objectif.informatique.alerte.model.Responsable;
 
 /**
@@ -23,5 +24,8 @@ public interface ResponsableDAO extends GenericDAO<Responsable>{
 	 * @throws Exception
 	 */
 	List<Responsable> findAll() throws Exception;
+	
+	
+	List<Evenement> findAllEventsByRespName(String nomResp) throws Exception;
 
 }
