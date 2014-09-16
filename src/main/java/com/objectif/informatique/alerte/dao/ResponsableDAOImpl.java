@@ -17,15 +17,11 @@ import com.objectif.informatique.alerte.model.Responsable;
 @Repository("ResponsableDAO")
 public class ResponsableDAOImpl  extends GenericDAOImpl<Responsable> implements ResponsableDAO{
 	
-//	public ResponsableDAOImpl(EntityManager entityManager) {
-//		super(entityManager);
-//		entityManager = this.entityManager;
-//	}
-	
 	public ResponsableDAOImpl(EntityManager entityManager) {
-	super(entityManager);
-	entityManager = this.entityManager;
-  }
+		super(entityManager);
+		entityManager = this.entityManager;
+	}
+	
 	public ResponsableDAOImpl(){}
 
 	@Override
