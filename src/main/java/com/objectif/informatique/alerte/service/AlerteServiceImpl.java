@@ -1,5 +1,8 @@
 package com.objectif.informatique.alerte.service;
 
+import java.util.List;
+
+
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +35,28 @@ public class AlerteServiceImpl implements AlerteService{
 	public void update(Alerte alerte) {
 		
 		alerteDAO.update(alerte);
+	}
+
+	@Override
+	public void delete(Alerte alerte) {
+		
+		alerteDAO.delete(alerte);		
+	}
+
+	@Override
+	public List<Alerte> findAll() throws Exception {
+		
+		return alerteDAO.findAll();
+	}
+
+	@Override
+	public Alerte findAlerteById(int alertId) {
+		try {
+			return alerteDAO.findAlerteById(alertId);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
 	}
 
 	
