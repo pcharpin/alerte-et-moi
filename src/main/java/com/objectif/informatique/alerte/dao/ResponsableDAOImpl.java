@@ -22,10 +22,9 @@ public class ResponsableDAOImpl  extends GenericDAOImpl<Responsable> implements 
 //		entityManager = this.entityManager;
 //	}
 	
-	public ResponsableDAOImpl(EntityManager entityManager, SessionFactory sessionFactory) {
-	super(entityManager, sessionFactory);
+	public ResponsableDAOImpl(EntityManager entityManager) {
+	super(entityManager);
 	entityManager = this.entityManager;
-	sessionFactory = this.sessionFactory;
   }
 	public ResponsableDAOImpl(){}
 
