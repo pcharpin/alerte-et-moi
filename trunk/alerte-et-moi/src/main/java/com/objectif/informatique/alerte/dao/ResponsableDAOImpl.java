@@ -39,8 +39,13 @@ public class ResponsableDAOImpl  extends GenericDAOImpl<Responsable> implements 
 			throws Exception {
 		List<Evenement> evenements = new ArrayList<Evenement>();
 		
-		Query query = this.entityManager.createQuery("select r from Responsable r " +
-				"inner join fetch  Evenement.Responsable_idResp = r.idResp where r.nomResp like "+ nomResp);
+		//Query query = this.entityManager.createQuery("select r.nomResp from Responsable r" +
+			//										 "inner join Evenement e on e.Responsable_idResp = r.idResp");
+		
+		Query query = this.entityManager.createQuery("select r.nomResp from Responsable r " +
+				 "inner join Evenement e on e.Responsable_idResp = r.idResp +" +
+				 "where r.nomresp like '" +
+				 nomResp + "'");
 		evenements = query.getResultList();
 	    return evenements;
 	}
