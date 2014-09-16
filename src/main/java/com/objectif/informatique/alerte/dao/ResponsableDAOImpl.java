@@ -6,6 +6,8 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
+import org.hibernate.SQLQuery;
+import org.hibernate.SessionFactory;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -15,10 +17,16 @@ import com.objectif.informatique.alerte.model.Responsable;
 @Repository("ResponsableDAO")
 public class ResponsableDAOImpl  extends GenericDAOImpl<Responsable> implements ResponsableDAO{
 	
-	public ResponsableDAOImpl(EntityManager entityManager) {
-		super(entityManager);
-		entityManager = this.entityManager;
-	}
+//	public ResponsableDAOImpl(EntityManager entityManager) {
+//		super(entityManager);
+//		entityManager = this.entityManager;
+//	}
+	
+	public ResponsableDAOImpl(EntityManager entityManager, SessionFactory sessionFactory) {
+	super(entityManager, sessionFactory);
+	entityManager = this.entityManager;
+	sessionFactory = this.sessionFactory;
+  }
 	public ResponsableDAOImpl(){}
 
 	@Override
@@ -34,18 +42,17 @@ public class ResponsableDAOImpl  extends GenericDAOImpl<Responsable> implements 
 		responsables = query.getResultList();
 	    return responsables;
 	}
+	
 	@Override
 	public List<Evenement> findAllEventsByRespName(String nomResp)
 			throws Exception {
-		List<Evenement> evenements = new ArrayList<Evenement>();
-		
-		//Query query = this.entityManager.createQuery("select r.nomResp from Responsable r" +
-			//										 "inner join Evenement e on e.Responsable_idResp = r.idResp");
-		
-		Query query = this.entityManager.createQuery("select r.nomResp from Responsable r " +
-				 "inner join Evenement e on e.Responsable_idResp = r.idResp +" +
-				 "where r.nomresp like '" +
-				 nomResp + "'");
+		List<Evenement> evenements = new ArrayList<Evenement>();		
+		Query query = this.entityManager.createQuery("select e.idEvt, e.nomEvt, e.dossier.nomDos, r.nomResp, e.dateEchEvt, " +
+													 "e.enumPeriodeEvet, e.trtEvt, e.actifEvt" +
+													 " from Responsable r, Evenement e" +
+				                                     " where e.responsable.idResp = r.idResp"+
+													 " and r.nomResp like :nameResp"+
+				                                     " order by r.nomResp").setParameter("nameResp", nomResp);
 		evenements = query.getResultList();
 	    return evenements;
 	}
