@@ -46,7 +46,7 @@ public class ResponsableRestService {
 	}
 	
 	@GET
-	@Path("/getList/{respName}")
+	@Path("/getEventsByUser/{respName}")
 	@Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
 	public List<Evenement> getListEvenement(@PathParam("respName") String respName) throws Exception {
 	List<Evenement> evenements = service.findAllEventsByRespName(respName);
