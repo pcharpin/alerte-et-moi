@@ -1,5 +1,6 @@
 package com.objectif.informatique.alerte.service;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -72,5 +73,18 @@ public class EvenementServiceImpl implements EvenementService {
 			e.printStackTrace();
 		}
 		return enumPeriodeEvets;
+	}
+
+	@Override
+	public List<Evenement> findEvenementsByDateRange(Date start_date,
+			Date end_date) throws Exception {
+		List<Evenement> evenements =  null;
+		try {
+			evenements =  evenementDAO.findEvenementsByDateRange(start_date, end_date);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return evenements;
 	}
 }

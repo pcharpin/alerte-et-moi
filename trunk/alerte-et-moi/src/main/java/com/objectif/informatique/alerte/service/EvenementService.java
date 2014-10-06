@@ -1,5 +1,6 @@
 package com.objectif.informatique.alerte.service;
 
+import java.util.Date;
 import java.util.List;
 
 import com.objectif.informatique.alerte.model.EnumPeriodeEvet;
@@ -19,4 +20,5 @@ public interface  EvenementService {
 	public void delete(Evenement eventId);
 	public void update(Evenement evenement);
 	public List<EnumPeriodeEvet> findListOfPeriod();
+	public List<Evenement> findEvenementsByDateRange(Date start_date, Date end_date) throws Exception;
 }

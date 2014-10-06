@@ -9,12 +9,10 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
+import org.apache.log4j.Logger;
 import org.springframework.stereotype.Repository;
 
 import com.objectif.informatique.alerte.model.Alerte;
-import com.objectif.informatique.alerte.model.Responsable;
-
-import org.apache.log4j.Logger;
 
 /**
  * @author gsoh
