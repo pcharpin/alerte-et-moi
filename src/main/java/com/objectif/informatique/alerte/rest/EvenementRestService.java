@@ -8,6 +8,10 @@ import java.io.DataOutputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.HashSet;
 import java.util.List;
 
@@ -150,5 +154,39 @@ public class EvenementRestService {
 	public  Response updateEvent(@PathParam("id") int id){
 			service.update(service.getEvenementById(id));
 			return Response.ok().build();
+	}
+	
+	/**
+	 * Retourne tous les evenements 
+	 * @return
+	 * @throws Exception
+	 */
+	@GET
+	@Path("/getbydates")
+	@Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
+	public List<Evenement>  getEventsByDates() throws Exception {
+		
+		Calendar c = new GregorianCalendar();
+	    c.set(Calendar.HOUR_OF_DAY, 0); //anything 0 - 23
+	    c.set(Calendar.MINUTE, 0);
+	    c.set(Calendar.SECOND, 0);
+	    Date current_date = c.getTime();
+	    
+	    c.set(Calendar.MONTH, c.get(Calendar.MONTH -1));
+	    
+		Date start_date =  c.getTime();
+		c.set(Calendar.MONTH, c.get(Calendar.MONTH +2));
+		Date end_date = c.getTime();
+		
+		SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
+		String str_from= sdf.format(start_date);
+		String str_to= sdf.format(end_date);
+		String str_current = sdf.format(current_date);
+		
+		System.out.println("Now " + str_current + " "+ "From " + str_from + " "+ "To "+ str_to);
+		
+	    
+		List<Evenement> evenements = service.findEvenementsByDateRange(start_date, end_date);
+		return evenements;
 	}
 }

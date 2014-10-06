@@ -4,6 +4,7 @@
 package com.objectif.informatique.alerte.dao;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -64,5 +65,21 @@ public class EvenementDAOImpl extends GenericDAOImpl<Evenement> implements Evene
 			e.printStackTrace();
 		}
 	    return ListOfPeriode;
+	}
+	@Override
+	public List<Evenement> findEvenementsByDateRange(Date start_date,
+			Date end_date) throws Exception {
+		List<Evenement> evenements = new ArrayList<Evenement>();
+		
+		try {
+			Query query = this.entityManager.createQuery("select e from Evenement e where e.dateEchEvt between :start_date and :end_date")
+						  .setParameter("start_date", start_date)
+						  .setParameter("end_date", end_date);
+			evenements = query.getResultList();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return evenements;
 	}
 }
