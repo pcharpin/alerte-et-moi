@@ -162,28 +162,37 @@ public class EvenementRestService {
 	 * @throws Exception
 	 */
 	@GET
-	@Path("/getbydates")
+	@Path("/Date/{day}-{month}-{year}")
 	@Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
-	public List<Evenement>  getEventsByDates() throws Exception {
+	public List<Evenement>  getEventsByDate(@PathParam("day") int day,
+											@PathParam("month") int month,
+											@PathParam("year") int year) throws Exception {
 		
-		Calendar c = new GregorianCalendar();
-	    c.set(Calendar.HOUR_OF_DAY, 0); //anything 0 - 23
-	    c.set(Calendar.MINUTE, 0);
-	    c.set(Calendar.SECOND, 0);
-	    Date current_date = c.getTime();
+		Calendar calendar = null;
+		final int [] MONTH_LENGTH
+		= {31,28,31,30,31,30,31,31,30,31,30,31};
+		
+		if (  year != 0 &&  month != 0 && day != 0){
+			calendar = new GregorianCalendar(year, month-1, day);
+		} else {
+			calendar = new GregorianCalendar();
+		}
 	    
-	    c.set(Calendar.MONTH, c.get(Calendar.MONTH -1));
+	    month = calendar.get(Calendar.MONTH);
+	    year = calendar.get(Calendar.YEAR);
+	    calendar = new GregorianCalendar(year, month-1, 1);
+    
+		Date start_date = calendar.getTime();
 	    
-		Date start_date =  c.getTime();
-		c.set(Calendar.MONTH, c.get(Calendar.MONTH +2));
-		Date end_date = c.getTime();
-		
-		SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
-		String str_from= sdf.format(start_date);
-		String str_to= sdf.format(end_date);
-		String str_current = sdf.format(current_date);
-		
-		System.out.println("Now " + str_current + " "+ "From " + str_from + " "+ "To "+ str_to);
+	    if (month == 11){
+	    	month = 0;
+	    	year = year + 1;
+	    	calendar = new GregorianCalendar(year, month, MONTH_LENGTH[month]);
+	    } else {
+	    	calendar = new GregorianCalendar(year, month+1, MONTH_LENGTH[month+1]);
+	    }
+	    		    
+	    Date end_date = calendar.getTime();
 		
 	    
 		List<Evenement> evenements = service.findEvenementsByDateRange(start_date, end_date);
