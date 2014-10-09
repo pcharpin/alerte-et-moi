@@ -1,4 +1,4 @@
-﻿function CalendarCtrl($rootScope,$scope,ngDialog,evenements,evenement,evtToCal,responsables,dossiers) {
+﻿function CalendarCtrl($rootScope,$scope,ngDialog,evenements,evenement,evtToCal,responsables,dossiers,filterFilter) {
     var date = new Date();
     var d = date.getDate(); 
     var m = date.getMonth();
@@ -46,6 +46,8 @@
     $scope.documents=[];
     $scope.documentNames=[];
     $scope.documentContents=[];
+    $scope.status = 0;
+
    
 
 		/* event source that pulls from google.com */
@@ -64,7 +66,15 @@
     		    		$scope.listDossiers.push(result[j]);
     		    	}
     		    });
-    		}
+    		}	    	
+    		
+    		if($scope.listResponsables.length==0){ 		
+	    		responsables.findAll().$promise.then(function(result){
+			    	for(var j=0;j<result.length;j++){
+			    		$scope.listResponsables.push(result[j]);
+			    	}
+			    });
+			}	
     	};
 	    
 	    /* event source that calls a function on every view switch */
@@ -335,6 +345,10 @@
 	 // liste des evenements pour le calendrier, normalement doit disparaitre
     $scope.eventSources = [$scope.events, $scope.eventSource, $scope.eventsF];
 
+    $scope.filterCalendar = function(status) {
+    	$scope.events = filterFilter($scope.events, {status:status});
+    	$('#calendar').fullCalendar('renderEvent', $scope.events, true);
+    };
     
   //load the file
     $scope.showContent = function($fileContent){    
