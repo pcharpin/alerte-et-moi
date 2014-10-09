@@ -11,9 +11,9 @@
 		<h3>Filtres :</h3>
 		<div class="well">
 			<h4>Status</h4>
-			<input type="radio" ng-model="order" value="dateEchEvt">Trait&eacute;s<br>
-			<input type="radio" ng-model="order" value="nomEvt">Non trait&eacute;s<br> 
-			<input type="radio" ng-model="order" value="toto">Tous<br>
+			<input type="radio" ng-model="order" value="0" ng-click="filterCalendar(0)">Trait&eacute;s<br>
+			<input type="radio" ng-model="order" value="1" ng-click="filterCalendar(1)">Non trait&eacute;s<br> 
+			<input type="radio" ng-model="order" value="" ng-click="filterCalendar('')">Tous<br>
 			<hr>
 			</span>
 		</div>
@@ -37,6 +37,8 @@
 			</div>
 		</div>
 		<!-- <div class="calendar" ng-model="eventSources" calendar="myCalendar1" config="uiConfig.calendar" ui-calendar="uiConfig.calendar"></div>-->
+		<!-- {{eventSources}} -->
+		
 		<div id="calendar" class="calendar" ng-model="eventSources" calendar="myCalendar1"
 			config="uiConfig.calendar" ui-calendar="uiConfig.calendar"></div>
 	</div>
@@ -58,7 +60,7 @@
 			<h4>Utilisateurs</h4>
 			<select style="width: 100px" ng-model="userSelected">
 				<option value="0">tous</option>
-				<option ng-repeat="responsable in listResponsables" value="{{responsable}}">{{responsable.prenResp}}</option>
+				<option ng-repeat="responsable in listResponsables" value="{{responsable}}">{{responsable.nomResp}}</option>
 			</select>  		
 		</div>
 	
@@ -91,9 +93,9 @@
 					<th style="text-align: center">Dossier</th>
 					<th style="text-align: center">Responsable <i
 						class="glyphicon glyphicon-chevron-up"
-						ng-click="order='responsable.prenResp';"></i> <i
+						ng-click="order='responsable.nomResp';"></i> <i
 						class="glyphicon glyphicon-chevron-down"
-						ng-click="order='-responsable.prenResp';"></i>
+						ng-click="order='-responsable.nomResp';"></i>
 					</th>
 					<th style="text-align: center">Date <i
 						class="glyphicon glyphicon-chevron-up"
@@ -107,11 +109,11 @@
 					<th style="text-align: center">Actions</th>
 				</tr>
 				<tr
-					ng-repeat="event in listeEvt | folderFilter:selectedDossier |responsableFilder:userSelected | filter:{nomEvt: recherche, responsable.id: userSelected}  | orderBy:order">
+					ng-repeat="event in listeEvt | folderFilter:selectedDossier |responsableFilder:userSelected | filter:{nomEvt: recherche}  | orderBy:order">
 					<td>{{event.idEvt}}</td>
 					<td>{{event.nomEvt}}</td>
 					<td>{{event.dossier.nomDos}}</td>
-					<td>{{event.responsable.prenResp}}</td>
+					<td>{{event.responsable.nomResp}}</td>
 					<td>{{event.dateEchEvt | date:"dd/MM/yyyy"}}</td>
 					<td>{{event.enumPeriodeEvet}}</td>
 					<td>{{event.trtEvt | booleanTooString}}</td>

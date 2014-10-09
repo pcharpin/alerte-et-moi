@@ -24,4 +24,19 @@
 			  }
 	      });
 	  }
+}).filter('calendarFilter', function() {
+	  return function(list, selected) {
+		  return _.filter(list, function(item){
+			  console.log(item,selected);
+			  return list;
+			  /*
+			  if(selected && JSON.parse(selected).idResp) {
+				  return item.responsable.idResp == JSON.parse(selected).idResp;
+			  } else {
+				  return list;
+			  }
+			  */
+	      });
+	  }
 });
+

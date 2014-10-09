@@ -60,6 +60,9 @@ public class EvenementRestService {
 	@Value("${alerte.file.root.dir}")
 	String rootPath ;
 	
+	private final int [] MONTH_LENGTH
+	= {31,28,31,30,31,30,31,31,30,31,30,31};
+	
 	/**
 	 * Retourne un evenement par son id
 	 * @param id
@@ -101,14 +104,14 @@ public class EvenementRestService {
 			String data = datas[i];
 			String dataName = datasNames[i];
 			
-			//Chemin à modifier (mettre le chemin du server)
+			//Chemin ï¿½ modifier (mettre le chemin du server)
 			String path = rootPath + dataName;
 			try {
 				DataOutputStream dos = new DataOutputStream(new BufferedOutputStream(new FileOutputStream(path)));
 				dos.writeBytes(data);
 				dos.close();
 				
-				//Création d'un objet document
+				//Crï¿½ation d'un objet document
 				Document doc = new Document();
 				doc.setLienDoc(path);
 				docService.create(doc);
@@ -144,7 +147,7 @@ public class EvenementRestService {
 		return Response.ok().build();
 	}
 	/**
-	 * Mise à jour d'un evenement par son id
+	 * Mise ï¿½ jour d'un evenement par son id
 	 * @return
 	 */
 	@PUT
@@ -157,7 +160,7 @@ public class EvenementRestService {
 	}
 	
 	/**
-	 * Retourne tous les evenements 
+	 * Retourne tous les evenements sur 3 mois. Mois courant M-1, M et M+1 
 	 * @return
 	 * @throws Exception
 	 */
@@ -169,8 +172,14 @@ public class EvenementRestService {
 											@PathParam("year") int year) throws Exception {
 		
 		Calendar calendar = null;
-		final int [] MONTH_LENGTH
-		= {31,28,31,30,31,30,31,31,30,31,30,31};
+		
+		int current_month = 11;
+		int start_month;
+		int end_month;
+		int current_year = 2014;
+		int start_year;
+		int end_year;
+		
 		
 		if (  year != 0 &&  month != 0 && day != 0){
 			calendar = new GregorianCalendar(year, month-1, day);
@@ -178,24 +187,94 @@ public class EvenementRestService {
 			calendar = new GregorianCalendar();
 		}
 	    
-	    month = calendar.get(Calendar.MONTH);
-	    year = calendar.get(Calendar.YEAR);
-	    calendar = new GregorianCalendar(year, month-1, 1);
+		current_month = calendar.get(Calendar.MONTH);
+	    current_year = calendar.get(Calendar.YEAR);
+	    
+	    //Controls on current month to detect switch on year to perform DAO request 
+	    if (current_month == 0){
+	    	start_month = 11;
+	    	start_year = current_year-1;
+	    	calendar = new GregorianCalendar(start_year, start_month, 1);
+	    } else {
+	    	calendar = new GregorianCalendar(current_year, current_month-1, 1);
+	    }
     
 		Date start_date = calendar.getTime();
 	    
-	    if (month == 11){
-	    	month = 0;
-	    	year = year + 1;
-	    	calendar = new GregorianCalendar(year, month, MONTH_LENGTH[month]);
-	    } else {
-	    	calendar = new GregorianCalendar(year, month+1, MONTH_LENGTH[month+1]);
-	    }
+	    if (current_month == 11){
+	    	end_month = 0;
+	    	end_year = current_year + 1;
+	    	calendar = new GregorianCalendar(end_year, end_month, MONTH_LENGTH[end_month]);
+	    } else
+	    	calendar = new GregorianCalendar(current_year, current_month+1, MONTH_LENGTH[current_month+1]);
 	    		    
 	    Date end_date = calendar.getTime();
 		
 	    
-		List<Evenement> evenements = service.findEvenementsByDateRange(start_date, end_date);
+		List<Evenement> evenements = service.getEvenementsByDateRange(start_date, end_date);
+		return evenements;
+	}
+	
+	
+	/**
+	 * Retourne tous les evenements ï¿½ partir du nom (ou partie) 
+	 * @return
+	 * @throws Exception
+	 */
+	@GET
+	@Path("/{name}")
+	@Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
+	public List<Evenement>  getEventsByName(@PathParam("name") String name) throws Exception {
+				
+	    
+		List<Evenement> evenements = service.getEvenementsByPartialName(name);
+		return evenements;
+	}
+	
+	
+	/**
+	 * Retourne tous les evenements ï¿½ partir du nom (ou partie) 
+	 * @return
+	 * @throws Exception
+	 */
+	@GET
+	@Path("/resp/{respname}")
+	@Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
+	public List<Evenement>  getEventsByRespName(@PathParam("respname") String respname) throws Exception {
+				
+	    
+		List<Evenement> evenements = service.getEvenementsByRespName(respname);
+		return evenements;
+	}
+	
+	
+	/**
+	 * Retourne tous les evenements ï¿½ partir du nom (ou partie) 
+	 * @return
+	 * @throws Exception
+	 */
+	@GET
+	@Path("/Folder/{typedos}")
+	@Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
+	public List<Evenement>  getEventsByDosType(@PathParam("typedos") String typedos) throws Exception {
+				
+	    
+		List<Evenement> evenements = service.getEvenementsByTypeDos(typedos);
+		return evenements;
+	}
+	
+	/**
+	 * Retourne tous les evenements ï¿½ partir du nom (ou partie) 
+	 * @return
+	 * @throws Exception
+	 */
+	@GET
+	@Path("/Status/{status}")
+	@Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
+	public List<Evenement>  getEventsByStatus(@PathParam("status") int status) throws Exception {
+				
+	    
+		List<Evenement> evenements = service.getEvenementsByStatus(status);
 		return evenements;
 	}
 }

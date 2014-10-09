@@ -37,27 +37,42 @@ public class DemoAlerte {
 		
 		final int [] MONTH_LENGTH
 				= {31,28,31,30,31,30,31,31,30,31,30,31};
-			int year = 2014;
-			int month = 0;
+	
+			int current_month = 11;
+			int start_month;
+			int end_month;
+			int current_year = 2014;
+			int start_year;
+			int end_year;
+			
 			int day = 1;
 			
-			Calendar calendar = new GregorianCalendar(year, month, day);
+			Calendar calendar = new GregorianCalendar(current_year, current_month, day);
 			//Calendar calendar = Calendar.getInstance();
+			
+			
 			
 		    Date current_date = calendar.getTime();
 		    
-		    month = calendar.get(Calendar.MONTH);
-		    year = calendar.get(Calendar.YEAR);
-		    calendar = new GregorianCalendar(year, month-1, 1);
+		    current_month = calendar.get(Calendar.MONTH);
+		    current_year = calendar.get(Calendar.YEAR);
+		    
+		    if (current_month == 0){
+		    	start_month = 11;
+		    	start_year = current_year-1;
+		    	calendar = new GregorianCalendar(start_year, start_month, 1);
+		    } else {
+		    	calendar = new GregorianCalendar(current_year, current_month-1, 1);
+		    }
 	    
  		    Date start_date = calendar.getTime();
 		    
-		    if (month == 11){
-		    	month = 0;
-		    	year = year + 1;
-		    	calendar = new GregorianCalendar(year, month, MONTH_LENGTH[month]);
+		    if (current_month == 11){
+		    	end_month = 0;
+		    	end_year = current_year + 1;
+		    	calendar = new GregorianCalendar(end_year, end_month, MONTH_LENGTH[end_month]);
 		    } else
-		    	calendar = new GregorianCalendar(year, month+1, MONTH_LENGTH[month+1]);
+		    	calendar = new GregorianCalendar(current_year, current_month+1, MONTH_LENGTH[current_month+1]);
 		    		    
 		    Date end_date = calendar.getTime();
 		    
@@ -71,7 +86,7 @@ public class DemoAlerte {
 		    
 		    
 			
-			// 1 : Ouverture unité de travail JPA
+			// 1 : Ouverture unitï¿½ de travail JPA
 			EntityManagerFactory emf = Persistence.createEntityManagerFactory("JpaALerte");
 			EntityManager em = emf.createEntityManager();
 			
@@ -107,7 +122,7 @@ public class DemoAlerte {
 			
 			//a.delete(alerte);
 			
-			// 4 : Persistance Objet/Relationnel : création d'un enregistrement en base
+			// 4 : Persistance Objet/Relationnel : crï¿½ation d'un enregistrement en base
 			 //em.persist(alerte);
 			
 			// 5 : Fermeture transaction 
@@ -119,7 +134,7 @@ public class DemoAlerte {
 			}
 
 			
-			// 6 : Fermeture unité de travail JPA 
+			// 6 : Fermeture unitï¿½ de travail JPA 
 			em.close();
 			emf.close();	
 		}

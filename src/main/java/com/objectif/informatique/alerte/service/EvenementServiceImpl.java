@@ -69,20 +69,65 @@ public class EvenementServiceImpl implements EvenementService {
 		try {
 			enumPeriodeEvets =  evenementDAO.findEnumPeriod();
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return enumPeriodeEvets;
 	}
 
 	@Override
-	public List<Evenement> findEvenementsByDateRange(Date start_date,
+	public List<Evenement> getEvenementsByDateRange(Date start_date,
 			Date end_date) throws Exception {
 		List<Evenement> evenements =  null;
 		try {
 			evenements =  evenementDAO.findEvenementsByDateRange(start_date, end_date);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return evenements;
+	}
+
+	@Override
+	public List<Evenement> getEvenementsByPartialName(String srchKeyWord)
+			throws Exception {
+		List<Evenement> evenements =  null;
+		try {
+			evenements =  evenementDAO.findEvenementsByPartialName(srchKeyWord);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return evenements;
+	}
+	
+	@Override
+	public List<Evenement> getEvenementsByRespName(String respname)
+			throws Exception {
+		List<Evenement> evenements =  null;
+		try {
+			evenements =  evenementDAO.findEvenementsByRespName(respname);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return evenements;
+	}
+
+	@Override
+	public List<Evenement> getEvenementsByTypeDos(String typedos)
+			throws Exception {
+		List<Evenement> evenements =  null;
+		try {
+			evenements =  evenementDAO.findEvenementsByTypeDos(typedos);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return evenements;
+	}
+
+	@Override
+	public List<Evenement> getEvenementsByStatus(int status) throws Exception {
+		List<Evenement> evenements =  null;
+		try {
+			evenements =  evenementDAO.findEvenementsByStatus(status);
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return evenements;

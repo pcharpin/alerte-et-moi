@@ -12,6 +12,6 @@ public enum EnumConstante {
 	Heures,
 	Jours,
 	Semaines,
-	Maois,
-	Années
+	Mois,
+	Annees
 }
