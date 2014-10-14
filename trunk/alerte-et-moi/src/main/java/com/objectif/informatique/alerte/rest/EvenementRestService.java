@@ -69,7 +69,7 @@ public class EvenementRestService {
 	 * @return
 	 */
 	@GET
-	@Path("/{id}")
+	@Path("/{id:[0-9]+}")
 	@Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
 	public Evenement getEvenement(@PathParam("id") int id) {
 		return service.getEvenementById(id);
@@ -165,7 +165,7 @@ public class EvenementRestService {
 	 * @throws Exception
 	 */
 	@GET
-	@Path("/Date/{day}-{month}-{year}")
+	@Path("/date/{day}-{month}-{year}")
 	@Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
 	public List<Evenement>  getEventsByDate(@PathParam("day") int day,
 											@PathParam("month") int month,
@@ -254,7 +254,7 @@ public class EvenementRestService {
 	 * @throws Exception
 	 */
 	@GET
-	@Path("/Folder/{typedos}")
+	@Path("/folder/{typedos}")
 	@Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
 	public List<Evenement>  getEventsByDosType(@PathParam("typedos") String typedos) throws Exception {
 				
@@ -269,7 +269,7 @@ public class EvenementRestService {
 	 * @throws Exception
 	 */
 	@GET
-	@Path("/Status/{status}")
+	@Path("/status/{status}")
 	@Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
 	public List<Evenement>  getEventsByStatus(@PathParam("status") int status) throws Exception {
 				

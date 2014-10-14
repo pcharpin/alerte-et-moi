@@ -47,6 +47,8 @@
     $scope.documentNames=[];
     $scope.documentContents=[];
     $scope.status = 0;
+    $scope.allEvents=[];
+    $scope.prevFilteredEvents =[];
 
    
 
@@ -193,6 +195,7 @@
     	    	for(var j=0;j<list.length;j++){
     	    		$scope.events.push(list[j]);
     	    	}
+    	    	$scope.allEvents = $scope.events.slice();
     		});
     	}
     };
@@ -258,7 +261,7 @@
 	        
     	//*********************************suppression*******************************/
     	 $scope.deleteEvent = function(evtId) {
-    		// alert(evtId);
+    		 //alert(evtId);
     		 evenement.deleteEvent({}, {evtId : evtId}).$promise.then(function(result){});  
     		 ngDialog.closeAll(); 
     	    };
@@ -345,9 +348,44 @@
 	 // liste des evenements pour le calendrier, normalement doit disparaitre
     $scope.eventSources = [$scope.events, $scope.eventSource, $scope.eventsF];
 
-    $scope.filterCalendar = function(status) {
-    	$scope.events = filterFilter($scope.events, {status:status});
+    var _updateEventsListWithFilter = function(filteredEvents, status){
+    	    	
+    	if ( $scope.prevFilteredEvents.length != 0 ) {
+        		
+	    	for (var i=0; i<$scope.prevFilteredEvents.length; i++){
+	    		
+				if ( $scope.events.indexOf($scope.prevFilteredEvents[i]) == -1 ){
+					$scope.events.push($scope.prevFilteredEvents[i]);
+				}	
+			}
+        }
+    	
+    	if (status.length != 0) {
+	    	
+    		var indexes= [];
+	    	for(var i=0; i < filteredEvents.length ; i++){
+	    		
+	    		 var index = $scope.events.indexOf(filteredEvents[i]);
+	    		 indexes[i] = index;
+	    	}
+	    	
+	    	for(var j=indexes.length-1; j >=0; j--){
+	    		 $scope.events.splice(indexes[j],1);
+	    	}
+	    	
+	    	$scope.prevFilteredEvents = filteredEvents;  	
+    	}
+    	
     	$('#calendar').fullCalendar('renderEvent', $scope.events, true);
+    	
+
+    };
+    
+    $scope.filterCalendar = function(status) {
+    	
+    		var _filteredEvents = filterFilter($scope.allEvents, {status:status});
+    		_updateEventsListWithFilter(_filteredEvents,status);    	
+    	
     };
     
   //load the file
