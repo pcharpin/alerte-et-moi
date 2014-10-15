@@ -139,7 +139,7 @@ public class EvenementRestService {
 	 * @return
 	 */
 	@DELETE
-	@Path("/{id}")
+	@Path("/{id:[0-9]+}")
 	//@Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
 	@Transactional
 	public Response deleteEvent(@PathParam("id") int id){ 
