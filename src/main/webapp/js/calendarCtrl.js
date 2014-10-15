@@ -46,11 +46,10 @@
     $scope.documents=[];
     $scope.documentNames=[];
     $scope.documentContents=[];
-    $scope.status = 0;
-    $scope.allEvents=[];
-    $scope.prevFilteredEvents =[];
-
-   
+    $scope.achEvents =[];
+    $scope.unAchEvents =[];
+    $scope.prevAchEvents = [];
+    $scope.prevUnAchEvents = [];
 
 		/* event source that pulls from google.com */
 	    $scope.eventSource = {
@@ -112,7 +111,7 @@
 	    		//controller: 'SecondModalCtrl'
 	    	});
 	    };
-	    
+	    console.log("init");
 	    /* config object */	
 	    $scope.uiConfig = {
 	      calendar:{
@@ -190,12 +189,15 @@
     /* add custom event*/
     $scope.addEvent = function() {
     	if($scope.events.length==0){
-    		evenements.findAll().$promise.then(function(result){
+    		evenements.all.findAll().$promise.then(function(result){
     	    	var list = evtToCal.convert(result);
     	    	for(var j=0;j<list.length;j++){
     	    		$scope.events.push(list[j]);
     	    	}
-    	    	$scope.allEvents = $scope.events.slice();
+    	    	$scope.filterEvents(0);
+    	    	$scope.filterEvents(1);
+    	    	$scope.checkTrt = true;
+    	    	$scope.checkNonTrt = true;
     		});
     	}
     };
@@ -231,7 +233,7 @@
 	    	evenement.create($scope.formEvt).$promise.then(function(result){
 	    		
 	    //***************ajout de l'évènement à ceux en cours */
-	    		evenements.findAll().$promise.then(function(serverEvents){
+	    		evenements.all.findAll().$promise.then(function(serverEvents){
 	    			var list = evtToCal.convert(serverEvents);
 	    	    	$scope.events.push(list[list.length-1]);
 	    		});
@@ -294,6 +296,7 @@
     };
     /* Change View */
     $scope.changeView = function(view,calendar) {
+    	console.log("changeView")
       calendar.fullCalendar('changeView',view);
     };
     /* Change View */
@@ -306,7 +309,7 @@
     
     /* bouton ON/OFF de la liste d'evenements, remplit la liste des evenement ci-dessous*/
     $scope.showListEvts = function(){
-		evenements.findAll().$promise.then(function(result){
+		evenements.all.findAll().$promise.then(function(result){
 			//console.log("resultat du REST ##### : ",result);
 			$scope.listeEvt = result;
     	});    	    		
@@ -346,47 +349,76 @@
     /* event sources array*/
     //$scope.eventSources2 = [$scope.calEventsExt, $scope.eventsF, $scope.events];
 	 // liste des evenements pour le calendrier, normalement doit disparaitre
-    $scope.eventSources = [$scope.events, $scope.eventSource, $scope.eventsF];
-
-    var _updateEventsListWithFilter = function(filteredEvents, status){
-    	    	
-    	if ( $scope.prevFilteredEvents.length != 0 ) {
-        		
-	    	for (var i=0; i<$scope.prevFilteredEvents.length; i++){
-	    		
-				if ( $scope.events.indexOf($scope.prevFilteredEvents[i]) == -1 ){
-					$scope.events.push($scope.prevFilteredEvents[i]);
-				}	
-			}
-        }
+    $scope.eventSources = [$scope.achEvents, $scope.unAchEvents, $scope.eventSource, $scope.eventsF];
+    
+    $scope.filterAchEvts = function() {
     	
-    	if (status.length != 0) {
-	    	
-    		var indexes= [];
-	    	for(var i=0; i < filteredEvents.length ; i++){
-	    		
-	    		 var index = $scope.events.indexOf(filteredEvents[i]);
-	    		 indexes[i] = index;
-	    	}
-	    	
-	    	for(var j=indexes.length-1; j >=0; j--){
-	    		 $scope.events.splice(indexes[j],1);
-	    	}
-	    	
-	    	$scope.prevFilteredEvents = filteredEvents;  	
+    	if ( $('#achEvts').is(':checked') ) {
+    		
+    		$('#calendar').fullCalendar('addEventSource', $scope.prevAchEvents);
+    		$('#calendar').fullCalendar('refetchEvents');
+    	}
+    	else{
+    		
+    		$('#calendar').fullCalendar('removeEventSource', $scope.achEvents);
+    		$('#calendar').fullCalendar('refetchEvents');
     	}
     	
-    	$('#calendar').fullCalendar('renderEvent', $scope.events, true);
+    	$scope.prevAchEvents = $scope.achEvents;
     	
-
     };
     
-    $scope.filterCalendar = function(status) {
+ $scope.filterUnAchEvts = function() {
     	
-    		var _filteredEvents = filterFilter($scope.allEvents, {status:status});
-    		_updateEventsListWithFilter(_filteredEvents,status);    	
+    	if ( $('#unAchEvts').is(':checked') ) {
+    		
+    		$('#calendar').fullCalendar('addEventSource', $scope.prevUnAchEvents);
+    		$('#calendar').fullCalendar('refetchEvents');
+    	}
+    	else{
+    		$('#calendar').fullCalendar('removeEventSource', $scope.unAchEvents);
+    		$('#calendar').fullCalendar('refetchEvents');
+    	}
     	
+    	$scope.prevUnAchEvents = $scope.unAchEvents;
+    };   
+    
+    
+
+  //*********************************filtre événements*******************************/
+    $scope.filterEvents = function(status) {
+    	
+    	var _filteredEvents = filterFilter($scope.events, {status:status});
+	    	if (status === 1) {
+	    		for (var i=0; i<_filteredEvents.length; i++)
+	    			$scope.achEvents.push(_filteredEvents[i]);
+	    	}
+		    else if (status === 0){
+		    	for ( var i=0; i<_filteredEvents.length; i++)
+	    			$scope.unAchEvents.push(_filteredEvents[i]);
+		    }
     };
+    
+    
+    
+  //*********************************suppression*******************************/
+	 $scope.filterEvtsStatus = function(status) {
+		 if($scope.events.length==0){
+			 var evtsByfilter = [];
+			 evenements.eventStatus.findByStatus({}, {status : status}).$promise.then(function(result){
+				 var list = evtToCal.convert(result);
+		 	    	for(var j=0;j<list.length;j++){
+		 	    		evtsByfilter.push(list[j]);
+		 	    	}
+		 	    if (status == 1)
+		 	       $scope.achEvents =  evtsByfilter;
+		 	    else if (status == 0)
+		 	    	$scope.unAchEvents = evtsByfilter;
+			 });
+		 }
+	    };
+	    
+	  
     
   //load the file
     $scope.showContent = function($fileContent){    
