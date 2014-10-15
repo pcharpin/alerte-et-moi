@@ -10,10 +10,11 @@
 		<!-- pour le span2 mettre les width � 100px -->
 		<h3>Filtres :</h3>
 		<div class="well">
-			<h4>Status</h4>
-			<input type="radio" ng-model="order" value="0" ng-click="filterCalendar(0)">Trait&eacute;s<br>
-			<input type="radio" ng-model="order" value="1" ng-click="filterCalendar(1)">Non trait&eacute;s<br> 
-			<input type="radio" ng-model="order" value="" ng-click="filterCalendar('')">Tous<br>
+			<h4>Statuts</h4>
+			<input type="checkbox" checked="checked" name="achEvts" id="achEvts" ng-model="checkTrt" ng-change="filterAchEvts()"/>
+    		<label for="achEvts">Trait&eacute;s</label>
+    		<input type="checkbox" checked="checked" name="unAchEvts" id="unAchEvts" ng-model="checkNonTrt" ng-change="filterUnAchEvts()"/>
+    		<label for="unAchEvts">Non trait&eacute;s</label>
 			<hr>
 			</span>
 		</div>
@@ -37,7 +38,6 @@
 			</div>
 		</div>
 		<!-- <div class="calendar" ng-model="eventSources" calendar="myCalendar1" config="uiConfig.calendar" ui-calendar="uiConfig.calendar"></div>-->
-		<!-- {{eventSources}} -->
 		
 		<div id="calendar" class="calendar" ng-model="eventSources" calendar="myCalendar1"
 			config="uiConfig.calendar" ui-calendar="uiConfig.calendar"></div>
