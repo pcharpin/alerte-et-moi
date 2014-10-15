@@ -368,7 +368,7 @@
     	
     };
     
- $scope.filterUnAchEvts = function() {
+    $scope.filterUnAchEvts = function() {
     	
     	if ( $('#unAchEvts').is(':checked') ) {
     		
