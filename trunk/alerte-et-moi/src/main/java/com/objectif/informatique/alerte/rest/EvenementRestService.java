@@ -182,7 +182,7 @@ public class EvenementRestService {
 		
 		
 		if (  year != 0 &&  month != 0 && day != 0){
-			calendar = new GregorianCalendar(year, month-1, day);
+			calendar = new GregorianCalendar(year, month, day);
 		} else {
 			calendar = new GregorianCalendar();
 		}
