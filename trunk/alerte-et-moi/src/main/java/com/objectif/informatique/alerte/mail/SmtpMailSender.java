@@ -27,7 +27,7 @@ public class SmtpMailSender {
 	
 	private final static String MAILER_VERSION = "Java";
 
-	private final static String alertepasswd = "8q3X9ZnEd";
+	private final static String alertepasswd = "";
 	
 	private String adressFrom;
 	
